@@ -39,9 +39,7 @@ Dingen vorherzusagen.
   
 - **Variabilität:** Diese Variabilität ist der Grund, warum Statistik existiert. Sie dient als Brücke zwischen der realen Welt und den mathematischen  Modellen, die diese Welt erklären möchten. Die Statistik bietet eine Methode zur Beurteilung der Unterschiede zwischen Realität und theoretischen  Modellen.
 
-- **Anwendungsgebiete:** Ohne Statistik wären Experimententwenteilungen und Datengewinnung in Anwendungswissenschaften nicht möglich oder erfolglos.
-
-
+- **Evidenzbasierung:** wissenschaftliche *Beweise* (Evidenz) sind mathematische Beweise. Wenn beispielsweise die Überlegenheit von Anwendung A gegenüber Anwendung B gezeigt werden soll, muss dies mathematisch erfolgen. Statistik ist ein Dialekt der Mathematik, der hierfür verwendet werden kann. 
 
 
 ## Population und Stichprobe
