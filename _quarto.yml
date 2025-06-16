@@ -45,7 +45,7 @@ book:
     - index.qmd
     - intro.qmd
     - haufigkeiten.qmd
-    - stichprobenkennwerte.qmd
+    - stichprobenstatistik.qmd
     - regression-korrelation.qmd
     - literatur.qmd
     - credits.qmd
