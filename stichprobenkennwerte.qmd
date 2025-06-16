@@ -1,0 +1,25 @@
+---
+title: Stichprobenstatistik
+---
+
+Die deskriptive Statistik hat zum Ziel, empirische Daten durch Tabellen und
+Grafiken übersichtlich darzustellen und zu ordnen, sowie durch geeignete
+grundlegende Kenngrößen zahlenmäßig zu beschreiben.
+
+Eine Tabelle oder Grafik informiert über die gesamte Verteilung eines Merkmals mit
+seinen Ausprägungen. Demgegenüber sagen statistische Kenngrößen etwas über
+spezielle Eigenschaften der Verteilung aus.  
+
+- **Lagekenngrößen:** beschreiben Stellen, an denen sich die Daten konzentrieren oder die die Verteilung in gleiche Teile unterteilen.  
+- **Streuungskenngrößen:**  messen die Ausbreitung und Variabilität der Daten.  
+- **Formmaße:** messen die Symmetrie und den "Schwanz" der Verteilung.
+
+Diese Werte werden auch genannt **Stichprobenstatistiken** genannt.
+
+Die zahlenmäßige Darstellung durch statistische Kenngrößen beruht auf einer
+Reduktion der Daten. Die Gesamtheit des Datenmaterials wird hierbei durch
+typische Vertreter repräsentiert.
+
+
+## Lagekenngrößen
+

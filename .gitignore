@@ -1,3 +1,6 @@
+.RData
+.Rhistory
+
 ## Core xelatex files
 *.aux
 *.log
@@ -48,3 +51,14 @@
 *.sh
 /tmp/
 
+_src/*
+.Rproj.user
+
+BOOK
+/.quarto/
+_freeze
+haufigkeiten_files
+regression-korrelation_files
+stichprobenkennwerte_files
+intro_files
+credits_files
