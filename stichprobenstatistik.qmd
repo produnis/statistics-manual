@@ -38,19 +38,19 @@ Es werden zwei Gruppen von Lagekenngrößen unterschieden:
 ### Arithmetischer Mittelwert  
 
 ::: {.callout-warning appearance="default"}
-##  Definition "Arithmetisches Mittel $\bar x$"
+##  Definition "Arithmetisches Mittel $\overline x$"
 
-Das arithmetische Mittel (umgangssprachlich *Mittelwert*) einer Variablen $X$ ist die Summe der beobachteten Werte in der Stichprobe geteilt durch die Stichprobengröße $n$ und wird durch das Symbol $\bar x$ (sprich "x quer") dargestellt.  
+Das arithmetische Mittel (umgangssprachlich *Mittelwert*) einer Variablen $X$ ist die Summe der beobachteten Werte in der Stichprobe geteilt durch die Stichprobengröße $n$ und wird durch das Symbol $\overline x$ (sprich "x quer") dargestellt.  
 
 $$
-\bar x = \frac{\sum x_{i}}{n}
+\overline x = \frac{\sum x_{i}}{n}
 $$
 :::
 
 Er kann wie folgt auch aus der Häufigkeitstabelle berechnet werden:  
 
 $$
-\bar x = \frac{\sum x_{i} \cdot h_{i}}{n} = \sum x_{i} \cdot f_{i}
+\overline x = \frac{\sum x_{i} \cdot h_{i}}{n} = \sum x_{i} \cdot f_{i}
 $$
 
 In den meisten Fällen ist der arithmetische Mittelwert derjenige Wert, der die beobachteten Werte in der Stichprobe am besten darstellt. 
@@ -65,13 +65,13 @@ Das arithmetische Mittel kann nur bei metrischen Daten berechnet werden!
 Für das Beispiel der Erhebung von Kindern in Familien lautet das arithmetische Mittel:
 
 $$
-\begin{align*}
-\bar{x} &= \frac{1+2+4+2+2+2+3+2+1+1+0+2+2}{25}+\\
+\begin{aligned}
+\overline{x} &= \frac{1+2+4+2+2+2+3+2+1+1+0+2+2}{25}+\\
 &+\frac{0+2+2+1+2+2+3+1+2+2+1+2}{25} = \frac{44}{25} = 1.76 \mbox{ Kinder}.
-\end{align*}
+\end{aligned}
 $$
 
-Die Berechnung von $\bar x$ über die Häufigkeitstabelle
+Die Berechnung von $\overline x$ über die Häufigkeitstabelle
 
 | $x_{i}$ | $h_{i}$ | $f_{i}$   | $x_{i} \cdot h_{i}$ | $x_{i} \cdot f_{i}$ |
 |----|----|------|--------|--------|
@@ -85,20 +85,20 @@ Die Berechnung von $\bar x$ über die Häufigkeitstabelle
 erfolgt mit:
 
 $$
-\bar{x} = \frac{\sum x_{i} \cdot n_i}{n} = \frac{44}{25}= 1.76\mbox{ Kinder} \qquad \bar{x}=\sum{x_{i} \cdot f_i} = 1.76 \mbox{
+\overline{x} = \frac{\sum x_{i} \cdot n_i}{n} = \frac{44}{25}= 1.76\mbox{ Kinder} \qquad \overline{x}=\sum{x_{i} \cdot f_i} = 1.76 \mbox{
 Kinder}.
 $$
 Dies ist die Anzahl an Kinder, durch welche die Familien in der Stichprobe am besten repräsentiert werden.
 
 
-Verwenden wir die Daten der Körpergröße von Studierenden, berechnet sich $\bar x$ wie folgt:
+Verwenden wir die Daten der Körpergröße von Studierenden, berechnet sich $\overline x$ wie folgt:
 
 
 $$
-\bar{x} = \frac{179+173+\cdots+187}{30} = 175.07 \mbox{ cm}.
+\overline{x} = \frac{179+173+\cdots+187}{30} = 175.07 \mbox{ cm}.
 $$
 
-Über die klassierte Häufigkeitstabelle kann $\bar x$ bestimmt werden, indem jeweils die Klassenmitte als $x_i$ verwendet wird.
+Über die klassierte Häufigkeitstabelle kann $\overline x$ bestimmt werden, indem jeweils die Klassenmitte als $x_i$ verwendet wird.
 
 | X         | $x_i$  | $h_i$ | $f_i$   | $x_i \cdot h_i$ | $x_i \cdot f_i$  |
 |-----------|-----|----|------|--------|---------|
@@ -112,7 +112,7 @@ $$
 
 
 $$
-\bar{x} = \frac{\sum x_i \cdot h_i}{n} = \frac{5240}{30}= 174.67 \mbox{ cm}\qquad \bar{x}=\sum{x_i \cdot f_i} = 174.67 \mbox{ cm}.
+\overline{x} = \frac{\sum x_i \cdot h_i}{n} = \frac{5240}{30}= 174.67 \mbox{ cm}\qquad \overline{x}=\sum{x_i \cdot f_i} = 174.67 \mbox{ cm}.
 $$
 
 Beachten Sie, dass der Mittelwert, der aus der Tabelle berechnet wird, etwas von dem realen Wert abweicht. Da in den Berechnungen jeweils die **Klassenmitten** anstelle der tatsächlichen Werte verwendet werden, ergeben sich dadurch leichte Rundungsfehler.
@@ -125,49 +125,202 @@ Beachten Sie, dass der Mittelwert, der aus der Tabelle berechnet wird, etwas von
 
 ### Gewichtetes Mittel  
 
-In einigen Fällen haben die Werte der Stichprobe unterschiedliche Bedeutung. In diesem Fall muss die Bedeutung oder der Gewicht 
-von jedem Wert der Stichprobe berücksichtigt werden, wenn das Mittel berechnet wird.  
+In einigen Fällen haben die Werte der Stichprobe unterschiedlich starke Bedeutungen. In diesem Fall muss das jeweilige  *Gewicht* der Werte berücksichtigt werden, wenn das Mittel berechnet wird.  
 
-**Definition 10 (Gewichtetes Mittel \(\overline{x}_w\))**. Gegeben eine Stichprobe von Werten $x_1, \ldots, x_n$, wobei jeder  Wert $x_i$ einen Gewicht $w_i$ hat, ist das gewichtete Mittel der Variablen $X$ gegeben durch die Summe der Produkte jedes 
-Wertes mit seinem Gewicht, dividiert durch die Summe der Gewichte:  
+::: {.callout-warning appearance="default"}
+## Definition "Gewichtetes Mittel $\overline{x}_w$ " 
+Das gewichtete Mittel der Werte  $x_1, \ldots, x_n$ - wobei jeder  Wert $x_i$ ein Gewicht $w_i$ hat - berechnet sich durch die Summe der Produkte jedes Wertes mit seinem Gewicht, dividiert durch die Summe der Gewichtwerte:
+
 $$
 \overline{x}_w = \frac{\sum x_i w_i}{\sum w_i}
-
 $$
-Aus der Häufigkeitstabelle kann mit der Formel berechnet werden:  
+:::
+
+
+Aus der Häufigkeitstabelle kann das gewichtete Mittel mit folgender Formel berechnet werden:  
 
 $$
 \overline{x}_w = \frac{\sum x_i w_i n_i}{\sum w_i}
 $$
 
 
-Ein Student möchte einen repräsentativen Maßstab für sein/zwei Leistung in einem Kurs berechnen. Die Note und die Kreditpunkte 
-jeder Fächer sind wie folgt:
+Ein Student möchte den Punktedurchschnitt seiner Studienleistungen in den folgenden drei Kursen berechnen
 
-| Modul   | Credits | Note |
+| Kurs   | Credits | Punkte |
 |-----------|---------|-------|
-| Mathe     | 6       | 2     |
-| Wirtschaft | 4       | 3     |
-| Chemie   | 8       | 1     |
+| Mathe      | 8       | 15     |
+| Wirtschaft | 5       | 10     |
+| Chemie     | 6       | 12     |
 
 
 
-Fächertabelle
-Kreditpunkte
-Note
-Mathematik
-6
-5
-Wirtschaft
-4
-3
-Chemie
-8
-6
+Das arithmetische Mittel der Punkte beträgt 
 
-Die arithmetische Mitte beträgt ∑𝑥𝑖 /𝑛 = (5+3+6)/3 = 4,67 Punkte,
+$$
+\overline x = \frac{\sum x_i}{n}= \frac{15+10+12}{3}=12,\overline 3 \text{ Punkte}.
+$$
 
-Allerdings gibt diese Maßzahl nicht gut den Leistungsumstand des Studenten wieder, da nicht alle Fächer die gleiche Bedeutung 
-haben und dasselbe Bemühen erfordern, um bestanden zu werden. Fächer mit mehr Kreditpunkten erfordern mehr Arbeit und müssen im 
-Berechnung des Durchschnitts ein größeres Gewicht erhalten. In diesem Fall ist es ratsam, den gewichteten Durchschnitt mit den 
-Kreditpunkzen als Gewichten zu verwenden.
+Fächer mit mehr Creditpunkten erfordern mehr Arbeit und sollten bei der Berechnung des Durchschnitts ein größeres Gewicht erhalten. In diesem Fall ist es ratsam, das gewichtete Mittel mit den Creditpunkten als Gewichten zu berechnen.
+
+$$
+\overline{x}_w = \frac{\sum x_i w_i}{\sum w_i} = \frac{15\cdot8 + 10\cdot5 + 12\cdot6}{8+5+6} =\frac{242}{19} = 12,74\ \text{Punkte.}
+$$
+
+
+### Median
+
+::: {.callout-warning appearance="default"}
+## Definition Median
+Der Median einer Variablen $X$ ist der Wert, der in der Mitte der geordneten Stichprobe liegt.  
+:::
+
+Der Median teilt die Stichprobenwerte in zwei gleich große Teile, das heißt, es gibt dieselbe Anzahl von Werten über und unter dem Median.
+
+::: {.callout-important appearance="default"}
+## ACHTUNG! 
+
+Der Median kann **nicht** für nominale Variablen berechnet werden.
+:::
+
+
+
+#### Nicht-gruppierte Daten  
+
+Bei nicht-gruppierten Daten gibt es zwei Möglichkeiten: 
+
+- **Gerade Stichprobengröße:** Der Median ist der Wert an Position $\frac{n}{2}$.  
+- **Ungerade Stichprobengröße:** Der Median ist das arithmetische Mittel der Werte in den Positionen $\frac{n}{2}$ und $\frac{n}{2}+1$.
+
+
+![](images/Stichprobenstatistik_median.jpg)
+
+
+Verwenden wir die Daten des Beispiels mit der Anzahl an Kindern in Familien. Die Stichprobengröße beträgt 25, was ungerade ist. Daher ist der Median der Wert an Position $\frac{25+1}{2} = 13$  der sortierten Stichprobe.
+
+
+$$
+0,0,1,1,1,1,1,1,2,2,2,2,\fbox{2},2,2,2,2,2,2,2,2,2,3,3,4
+$$
+
+Der Median liegt also bei 2 Kindern.
+
+Mithilfe der relativen Häufigkeitstabelle ist der Median der kleinste Wert mit einer kumulativen absoluten Häufigkeit $H_i$ größer oder gleich 13 bzw. einer 
+kumulativen relativen Häufigkeit $F_i$ größer oder gleich 0,5.
+
+
+| $x_i$ | $h_i$ | $f_i$  | $H_i$ | $F_i$  |
+|----|----|------|----|------|
+| 0  | 2  | 0.08 | 2  | 0.08 |
+| 1  | 6  | 0.24 | 8  | 0.32 |
+| **2**  | 14 | 0.56 | **22** | **0.88** |
+| 3  | 2  | 0.08 | 24 | 0.96 |
+| 4  | 1  | 0.04 | 25 | 1.00 |
+| $\sum$  | 25 | 1.00 |    |      |
+
+
+#### Gruppierte Daten
+
+Sind die Werte in Klassen gruppiert, kann die Berechnung des Median geometrisch hergeleitet werden.
+
+Die Werte unseres Beispiels der Körpergrößen liegen als klassierte Häufigkeitstabelle vor:
+
+| X         | $x_i$  | $h_i$ | $f_i$   | $F_i$  |
+|-----------|-----|----|------|--------|---------|
+| (150,160] | 155 | 2  | 0.07 | 0.07  |
+| (160,170] | 165 | 8  | 0.27 | 0.34   |
+| **(170,180]** | 175 | 11 | 0.36 | **0.70**  |
+| (180,190] | 185 | 7  | 0.23 | 0.97  |
+| (190,200] | 195 | 2  | 0.07 | 1 |
+| $\sum$        |     | 30 | 1    |  |
+
+
+Der Median liegt irgendwo zwischen 170 und 180.
+
+Für die graphische Ermittlung des Medians benötigen wir die kumulierten
+Prozentwerte $F_i$, aus denen ein Summenpolygon  angefertigt wird. Zusätzlich zeichnen wir ein paar Hilfslinien ein.
+
+```{r}
+#| label: mediangrafisch1
+x <- seq(160, 200, 10)
+y <- c(0.07, 0.34, 0.7, 0.97, 1)*100
+plot(x, y, 
+     type="b",
+     yaxt = "n",
+     xlab = "",
+     ylab = "kumulierte relative Häufigkeit",
+     lwd = 2
+     )
+axis(2, at = seq(0, 100, 10), 
+     labels = paste0(seq(0, 100, 10), "%"), 
+     cex.axis = 1, 
+     las=2)
+
+# blaue Hilfslinien
+lines(c(170, 170), c(0, 34),  col="skyblue", lty=3)
+lines(c(0, 170),   c(34, 34), col="skyblue", lty=3)
+lines(c(180, 180), c(0, 70),  col="skyblue", lty=3)
+lines(c(0, 180),   c(70, 70), col="skyblue", lty=3)
+
+# Median
+text(177, 48,"Median", col="red")
+points(174.44, 50    , col="red")
+lines(c(0, 174.44),      c(50, 50), col="red")
+lines(c(174.44, 174.44), c(0, 50),  col="red")
+
+axis(1, at = c(160, 170, 174.44, 180, 190, 200),
+     labels = c("160", "170", "???", "180", "190", "200"))
+
+# Strahlensatz1
+lines(c(170, 174.44), c(10, 10), col="darkgreen", lty=4, lwd=1.7)
+lines(c(170, 180),    c(20, 20), col="darkgreen", lty=4, lwd=1.7)
+# Strahlensatz2
+lines(c(162, 162), c(34, 50), col="darkorange", lty=4, lwd=1.7)
+lines(c(164, 164), c(34, 70), col="darkorange", lty=4, lwd=1.7)
+```
+
+Der Median entspricht dem gesuchten Wert "???" auf der $x$-Achse.
+
+Aus der Mathematik (Strahlensätze) wissen wir, dass das Verhältnis der beiden grünen Strecken auf der $x$-Achse dem Verhältnis der orangenen Strecken auf der $y$-Achse entspricht. Setzen wir also die Strecke ins Verhältnis, ergibt sich
+
+$$
+\frac{x_Me - x_u}{x_o - x_u} = \frac{50 - y_u}{y_o - y-u}
+$$
+Dabei entspricht
+
+- $x_Me$ dem Median
+- $x_u$ dem unteren Klassengrenze
+- $x_o$ der oberen Klassengrenz
+- $y_u$ der kumulierten relativen Häufigkeit der darunter liegenden Klasse
+- $y_o$ der kumulierten relativen Häufigkeit der Klasse
+
+
+Die Gleichung kann nun nach $x_Me$ umgestellt werden.
+
+
+$$
+x_{Me} = x_u + (x_o - x_u) \cdot \frac{50 - y_u}{y_o - y_u}
+$$
+
+Jetzt können wir unsere Werte einsetzen. 
+
+
+$$
+\text{Median} = 170 + (180 - 170) \cdot \frac{50 - 34}{70 - 34} = \frac{4}{9} \approx 174,44
+$$
+
+### Modus
+
+Definition 12 (Stichproben-Modus 𝑀𝑜). Der Stichprobenmodus einer Variablen 𝑋 ist derwert mit der höchsten Häufigkeit in der Stichprobe.
+
+Bei gruppierten Daten ist die modale Klasse die Klasse mit der höchsten Häufigkeit.
+
+Er kann für alle Arten von Variablen (qualitativ und quantitativ) berechnet werden.
+
+Verteilungen können mehrere Mode haben. Modusberechnung
+
+Unter Verwendung der Daten der Stichprobe zur Anzahl an Kindern in Familien ist der Wert mit der höchsten Häufigkeit 2, das bedeutet der Modus 𝑀𝑜 = 2 
+Kinder. Unter Verwendung der Daten der Stichprobe zur Höhe von Studenten ist die Klasse mit der höchsten Häufigkeit (170, 180], das bedeutet die 
+modale Klasse 𝑀𝑜 = (170, 180].
+
+
+![](images/Stichprobenstatistik_modus.jpg)
