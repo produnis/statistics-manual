@@ -189,7 +189,7 @@ Der Median kann **nicht** für nominale Variablen berechnet werden.
 Bei nicht-gruppierten Daten gibt es zwei Möglichkeiten: 
 
 - **Gerade Stichprobengröße:** Der Median ist der Wert an Position $\frac{n}{2}$.  
-- **Ungerade Stichprobengröße:** Der Median ist das arithmetische Mittel der Werte in den Positionen $\frac{n}{2}$ und $\frac{n}{2}+1$.
+- **Ungerade Stichprobengröße:** Der Median ist das arithmetische Mittel der Werte an den Positionen $\frac{n}{2}$ und $\frac{n}{2}+1$.
 
 
 ![](images/Stichprobenstatistik_median.jpg)
