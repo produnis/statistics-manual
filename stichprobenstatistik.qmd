@@ -247,7 +247,7 @@ plot(x, y,
      type="b",
      yaxt = "n",
      xlab = "",
-     ylab = "kumulierte relative Häufigkeit",
+     ylab = expression("kumulierte relative Häufigkeit " * F[i]),
      lwd = 2
      )
 axis(2, at = seq(0, 100, 10), 
@@ -454,6 +454,85 @@ verwendeten sind:
 Beachten Sie, dass es Übereinstimmungen zwischen den Quartilen, Dezilen und Perzentilen gibt es. Zum Beispiel stimmt das erste Quartil mit dem 25. Perzentil überein, und das vierte Dezil stimmt mit dem 40. Perzentil überein.  
 
 
-Berechnung der Quantile  
-Quantile werden ähnlich wie die Median berechnet. Der einzige Unterschied liegt in der kumulierenden relativen Häufigkeit, die 
-jedem Quantil zugeordnet ist. 
+#### Bestimmung der Quantile
+
+Quantile werden ähnlich wie die Median berechnet. Der einzige Unterschied liegt in der kumulierenden relativen Häufigkeit $F_i$, die jedem Quantil zugeordnet ist. 
+
+
+
+Die Häufigkeitstabelle der Anzahl an Kindern in Familien ist
+
+
+| $x_i$ | $F_i$   |
+|----|------|
+| 0  | 0.08 |
+| 1  | 0.32 |
+| 2  | 0.88 |
+| 3  | 0.96 |
+| 4  | 1    |
+
+Anhand der Spalte $F_i$ kann das gewünschte Perzentil, Dezentil oder Quartil abgelesen werden.
+
+$$
+\begin{aligned}
+F_{Q_1}=0.25 &\Rightarrow Q_1 = 1 \text{ Kinder},\\
+F_{Q_2}=0.5 &\Rightarrow Q_2 = 2 \text{ Kinder},\\
+F_{Q_3}=0.75 &\Rightarrow Q_3 = 2 \text{ Kinder},\\
+F_{D_4}=0.4 &\Rightarrow D_4 = 2 \text{ Kinder},\\
+F_{P_{92}}=0.92 &\Rightarrow P_{92} = 3 \text{ Kinder}.\\
+\end{aligned}
+$$
+
+
+Die Bestimmung kann ebenfalls (wie beim Median) geometrisch hergeleitet werden.
+
+
+
+```{r}
+#| label: quartile
+x <- seq(150, 200, 10)
+y <- c(0, 0.07, 0.34, 0.7, 0.97, 1)*100
+plot(x, y, 
+     type="b",
+     yaxt = "n",
+     xaxt = "n",
+     xlab = "",
+     ylab = expression("kumulierte relative Häufigkeit " * F[i]),
+     lwd = 2
+     )
+axis(2, at = seq(0, 100, 10), 
+     labels = paste0(seq(0, 100, 10), "%"), 
+     cex.axis = 1, 
+     las=2)
+
+# blaue Hilfslinien
+lines(c(166.66, 166.66), c(0, 25),  col="skyblue", lty=3)
+lines(c(0, 166.66),   c(25, 25), col="skyblue", lty=3)
+
+lines(c(171.67, 171.67), c(0, 40),  col="skyblue", lty=3)
+lines(c(0, 171.67),   c(40, 40), col="skyblue", lty=3)
+
+
+lines(c(174.44, 174.44), c(0, 50),  col="skyblue", lty=3)
+lines(c(0, 174.44),   c(50, 50), col="skyblue", lty=3)
+
+
+lines(c(181.85, 181.85), c(0, 75),  col="skyblue", lty=3)
+lines(c(0, 181.85),   c(75, 75), col="skyblue", lty=3)
+
+lines(c(186.67, 186.67), c(0, 88),  col="skyblue", lty=3)
+lines(c(0, 186.67),   c(88, 88), col="skyblue", lty=3)
+
+axis(1, 
+     at = c(149, 166.66, 171.67, 174.44, 181.85, 186.67, 200),
+     labels = expression(
+       "Min", 
+       Q[1], 
+       D[4], 
+       Q[2], 
+       Q[3], 
+       P[88], 
+       "Max"
+     )
+)
+```
