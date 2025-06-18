@@ -735,6 +735,7 @@ Um einen Boxplot zu erstellen, folgen Sie den nachfolgenden Schritten:
 2. Zeichnen Sie eine Box vom ersten zum dritten Quartil.
 3. Teilen Sie die Box mit dem Median
 4. Die Whiskers berechnen sich über die Hilfsgrößen $f_1$ und $f_2$ wie folgt:
+
 $$
 \begin{aligned}
 f_1&=Q_1-1.5\,\text{IQR}\\
@@ -783,5 +784,301 @@ $$
 SQA = \sum (x_i - \overline x)^2
 $$
 :::
+
+
+### Varianz
+
+::: {.callout-warning appearance="default"}
+## Definition "Varianz"
+
+Die Varianz $s^2$ ist ein Maß für die Streuung oder Variabilität von Datenwerten. Sie gibt an, wie weit die einzelnen Werte eines Datensatzes im Durchschnitt vom Mittelwert (Durchschnitt) entfernt sind.
+
+$$
+s^2 = \frac{SQA}{n-1} = \frac{\sum (x_i - \overline x)^2}{n-1}
+$$
+:::
+
+Die Varianz hat die quadrierte Einheiten der Variablen. Um ihre Deutung zu vereinfachen ist es üblich, ihre Wurzel zu berechnen.
+
+### Standardabweichung
+
+::: {.callout-warning appearance="default"}
+## Definition "Standardabweichung"
+
+Die Standardabweichung $s$ (auch: $\sigma$ oder `sd` (englisch: standard deviation )) ist das wichtigste und bekannteste Maß für die Streuung der Messwerte um den Mittelwert.
+
+$$
+s = \sqrt{s^2} = \sqrt{\frac{\sum (x_i - \overline x)^2}{n-1}}
+$$
+:::
+
+Liegen metrische Messwerte vor, so sind das arithmetische Mittel $\overline x$ und die Standardabweichung $s$ die wichtigsten Maßwerte, um die Eigenschaften der Messreihe ausreichend zu beschreiben.
+
+
+
+
+#### Interpretation
+
+Varianz und Standardabweichung messen die Ausbreitung der Daten um den Mittelwert herum. 
+
+- Wenn die Varianz oder die Standardabweichung klein sind, sind die Werte um den Mittelwert herum konzentriert, und der Mittelwert ist ein gutes  repräsentatives Maß. 
+- Wenn sie groß sind, sind die Stichprobenwerte weit von der Mitte entfernt, und der Mittelwert ist kein guter Repräsentant der Stichprobe.
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Von 2 Studierenden wurden die Modulpunkte von 2 Kursen erhoben.
+
+```{r}
+#| label: studentenSD
+#| engine: tikz
+\definecolor{color1}{RGB}{24,81,145}
+\begin{tikzpicture}
+\draw (0,2) -- (5,2);
+\draw[color=color1] (2.5,1.9) -- (2.5,2.1);
+\node[text=color1] at (2.5,2.3) {$\bar x$};
+\node[text=color1] at (2.5,1.7) {$5$};
+\draw (0.5,1.9) -- (0.5,2.1);
+\node at (0.5,1.7) {$1$}; 
+\draw (4.5,1.9) -- (4.5,2.1);
+\node at (4.5,1.7) {$9$};  
+\node at (-1,2) {Student 1};
+\node at (5.5,2) {$s=4$};
+\draw (0,1) -- (5,1);
+\draw[color=color1] (2.5,0.9) -- (2.5,1.1);
+\node[text=color1] at (2.5,1.3) {$\bar x$};
+\draw (2,0.9) -- (2,1.1);
+\node at (2,0.7) {$4$}; 
+\draw (3,0.9) -- (3,1.1);
+\node at (3,0.7) {$6$};  
+\node[text=color1] at (2.5,0.7) {$5$};
+\node at (-1,1) {Student 2};
+\node at (5.5,1) {$s=1$};
+\end{tikzpicture}
+```
+
+
+Welcher Mittelwert beschreibt die Leistung besser?
+:::
+
+
+
+
+
+### Variationskoeffizient
+
+Um einschätzen zu können, ob die Standardabweichung eher groß oder klein ist, bietet sich der Variationskoeffizient an (englisch coefficient of variance).
+
+::: {.callout-warning appearance="default"}
+## Definition "Variationskoeffizient"
+
+Der Variationskoeffizient setzt die Streuung (Standardabweichung) ins Verhältnis zum Mittelwert ($\overline x$).
+
+$$
+vk =  \frac{s}{|\overline x|}
+$$
+:::
+
+
+Es entsteht ein dezimaler Prozentwert, der den Anteil der Standardabweichung am Mittelwert wiedergibt. Je größer $vk$ ist, umso mehr streuen die Werte um den Mittelwert. Da er keine Einheiten hat, ist der Variationskoeffizient sehr hilfreich, um die Streuung in Verteilungen verschiedener Variablen zu vergleichen (je kleiner der $vk$, desto *besser*).
+
+
+Bei der Anzahl an Kindern in Familien lag der Mittelwert bei $\overline x = 1,76$ Kindern und die Standardabweichung bei $s=0,8616$ Kindern. Der Variationskoeffizient beträgt demnach:
+
+$$
+vk = \frac{1,76\ \text{Kinder}}{0,8616\ \text{Kinder}} = 0,49
+$$
+Bei der Stichprobe zur Körpergröße lag der Mittelwert bei $\overline x = 174,67$ cm und die Standardabweichung bei $s=10,1$ cm. Der Variationskoeffizient beträgt demnach:
+
+$$
+vk = \frac{174,67\ \text{cm}}{10,1\ \text{cm}} = 0,06
+$$
+
+Das bedeutet, dass die Streuung in der Verteilung der Körpergrößen geringer ist als in der Verteilung der Anzahl an Kindern, und 
+dass daher der Mittelwert der Körpergröße *repräsentativer* ist als der Mittelwert der Anzahl an Kindern.
+
+
+
+
+
+
+
+
+
+
+## Formmaße
+
+Formmaße sind Maße, die die Form der Verteilung beschreiben. Besonders wichtige Aspekte sind:  
+
+- **Schiefe** (skewness): misst die Symmetrie der Verteilung hinsichtlich des Mittels.
+- **Wölbung:** (kurtosis) misst die Länge der Verteilungsenden (Schwanz) oder die Spitzigkeit der Verteilung. Das am meisten verwendete 
+
+### Schiefekoeffizient
+
+::: {.callout-warning appearance="default"}
+## Definition "Schiefekoeffizient"
+
+Der Stichproben-Schiefekoeffizient $g_1$ einer Variablen $X$ ist der Durchschnitt der hoch drei genommenen Abweichungen der Werte vom Stichprobenmittel, geteilt durch die hoch drei genommene Standardabweichung.
+
+$$
+g_1 = \frac{\sum (x_i-\bar x)^3 h_i/n}{s^3} = \frac{\sum (x_i-\bar x)^3 f_i}{s^3}
+$$
+:::
+
+Skewness misst die Symmetrie der Verteilung, das heißt, wie viele Werte in der Stichprobe über oder unter dem Mittel liegen und wie weit sie von diesem entfernt sind.
+
+
+
+
+#### Interpretation des Schiefekoeffizienten  
+
+Je nach Vorzeichen von $g_1$ gilt:  
+
+- $g_1 = 0$ bedeutet, dass es dieselbe Anzahl an Werten im Stichprobenmaterial oberhalb und unterhalb des Mittelwerts gibt und diese gleich weit von ihm entfernt sind. Die Verteilung ist symmetrisch.  
+- $g_1 < 0$ bedeutet, dass es mehr Werte oberhalb des Mittelwerts als unterhalb davon gibt, aber die darunter liegenden Werte weiter entfernt sind. Die Verteilung ist links-schiefs (sie hat eine längere Schwanzspitze nach links).  
+- $g_1 > 0$ bedeutet, dass es mehr Werte unterhalb des Mittelwerts als oberhalb davon gibt, aber die darüber liegenden Werte  weiter entfernt sind. Die Verteilung ist rechts-schiefs (sie hat eine längere Schwanzspitze nach rechts).
+
+
+
+
+```{r}
+#| label: skewness1
+x <- rnorm(1000000)
+m <- mean(x)
+layout(matrix(c(1,2), 2, 1), heights=c(3,1))
+par(mai=c(0,1,0.5,0), cex.lab=1.2)
+
+hist(x,
+     xlim=c(-3.5,3.5),
+     breaks=50, 
+     ylim=c(0,0.4), 
+     xaxt="n", 
+     prob=T, 
+     main=expression("Symmetrische Verteilung " * g[1]==0), 
+     xlab ="", 
+     ylab=expression("relative Häufigkeit " * f[i]), 
+     col="skyblue")
+axis(1, at = m, labels = expression(bar(x) == Me))
+par(mai=c(0,1,0,0))
+boxplot(x,
+        horizontal=TRUE,
+        axes=FALSE, 
+        outline=FALSE, 
+        col="skyblue2")
+```
+
+
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: skewness2
+x <- rf(1000000,8,8)
+m <- mean(x)
+me <- median(x)
+layout(matrix(c(1,2),2,1), heights=c(3,1))
+par(mai=c(0,1,0.5,0), cex.lab=1.2)
+hist(-x, 
+     xaxt="n", 
+     breaks=700, 
+     xlim=c(-5,0), 
+     prob=T, 
+     main=expression("links-schiefe Verteilung " * g[1]<0), 
+     ylab=expression("relative Häufigkeit " * f[i]), 
+     col="skyblue")
+axis(1,
+     at=c(-m,-me),
+     labels=c(expression(bar(x)),expression(ME)))
+par(mai=c(0,1,0,0))
+boxplot(-x, 
+        horizontal=TRUE, 
+        ylim=c(-5,0), 
+        axes=FALSE, 
+        outline=FALSE, 
+        col="skyblue2")
+```
+
+
+
+
+```{r}
+#| label: skewness3
+layout(matrix(c(1,2),2,1),heights=c(3,1))
+par(mai=c(0,1,0.5,0),cex.lab=1.2)
+hist(x, 
+     xaxt="n", 
+     breaks=700, 
+     xlim=c(0,5), 
+     prob=T, 
+     main=expression("rechts-schiefe Verteilung " * g[1]>0), 
+     ylab=expression("relative Häufigkeit " * f[i]),  
+     col="skyblue")
+axis(1,
+     at=c(m, me),
+     labels=c(expression(bar(x)),expression(ME)))
+par(mai=c(0,1,0,0))
+boxplot(x, 
+        horizontal=TRUE, 
+        ylim=c(0,5), 
+        axes=FALSE, 
+        outline=FALSE, col="skyblue2")
+```
+
+
+:::
+
+
+Verwenden wir die Daten der Körpergrößen von Studierenden, können wir der Häufigkeitstabelle eine weitere Spalte mit den kubierten Abweichungen vom Mittelwert $\overline x = 174,67$ cm hinzufügen:
+
+$$
+\begin{array}{rrrrr}
+\hline
+{X} & {x_i} & {h_i} & {x_i-\bar x} & {(x_i-\bar x)^3\cdot h_i} \\
+\hline
+(150,160] & 155 & 2 & -19.67 & -15221.00\\
+(160,170] & 165 & 8 & -9.67 & -7233.85\\
+(170,180] & 175 & 11 & 0.33 & 0.40\\
+(180,190] & 185 & 7 & 10.33 & 7716.12\\
+(190,200] & 195 & 2 & 20.33 & 16805.14\\
+\hline
+\sum &  & 30 & & 2066.81 \\
+\hline
+\end{array}
+$$
+
+
+Die Skewness berechnet sich nun wie folgt:
+
+$$
+g_1 = \frac{\sum (x_i-\bar x)^3h_i/n}{s^3} = \frac{2066,81/30}{10,1^3} = 0,07.
+$$
+
+Der Wert liegt nahe bei $0$, was bedeutet, dass die Verteilung nahezu symmetrisch (normalverteilt) ist.
+
+
+
+### Wölbungskoeffizient
+
+::: {.callout-warning appearance="default"}
+## Definition "Wölbungskoeffizient"
+
+Der Wölbungskoeffizient $g_2$ (*coefficient of kurtosis*) einer Variablen $X$ ist der Durchschnitt der zur vierten Potenz erhobenen Abweichungen der Werte vom Stichprobenmittelwert, geteilt durch die Standardabweichung hoch vier, und anschließend minus 3.
+
+$$
+g_2 = \frac{\sum (x_i-\bar x)^4 h_i/n}{s^4}-3 = \frac{\sum (x_i-\bar x)^4 f_i}{s^4}-3
+$$
+:::
+
+Der Koeffizient misst die Konzentration der Werte um die Mitte und die Länge der Schwanzenden der Verteilung. Die Normalverteilung dient als Bezugsgröße.
+
+#### Interpretation des Wölbungskoeffizienten
+
+Je nach Vorzeichen von $g_1$ gilt:  
+
+- $g_2 = 0$ zeigt an, dass die Wölbung *normal* ist, das heißt, die Konzentration der Werte um den Mittelwert wie bei einer gaußschen Glockenkurve (mesokurtisch).  
+- $g_2 < 0$ zeigt an, dass die Wölbung weniger als normal ist, das heißt, die Konzentration der Werte um den Mittelwert ist geringer als bei einer gaußschen Glockenkurve (plattikurtisch).  
+- $g_2 > 0$ zeigt an, dass die Kurtosis größer als normal ist, das heißt, die Konzentration der Werte um den Mittelwert ist größer als bei einer gaußschen Glockenkurve (leptokurtisch).
+
+
 
 
