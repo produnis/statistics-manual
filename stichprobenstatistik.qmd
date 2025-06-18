@@ -1081,4 +1081,148 @@ Je nach Vorzeichen von $g_1$ gilt:
 
 
 
+```{r}
+#| label: kurtosis1
+par(cex.lab=1.2)
+x <- rnorm(1000000)
+m <- mean(x)
+hist(x,
+     xlim=c(-3.5,3.5), 
+     breaks=50, 
+     ylim=c(0,0.4),
+     prob=T, 
+     xlab = " ", 
+     main=expression("mesokurtische Verteilung " * g[2]==0), 
+     ylab=expression("relative Häufigkeit " * f[i]), 
+     col="skyblue", 
+     axes=F)
+axis(1,
+     at=m,
+     labels = expression(bar(x)))
+axis(2)
+curve(dnorm, 
+      from=-3.5, 
+      to=3.5, 
+      add=TRUE, 
+      col="red", 
+      lwd=2) 
+
+```
+
+
+
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: kurtosis2
+x1 <- runif(200000,-3,3)
+x2 <- runif(200000,-3,3)
+x3 <- runif(200000,-3,3)
+x  <- x1+x2+x3
+m <- mean(x)
+par(cex.lab=1.2)
+hist(x, 
+     prob=T, 
+     breaks=50, 
+     ylim=c(0,0.2), 
+     xlab ="", 
+     main=expression("platykurtische Verteilung " * g[2]<0), 
+     ylab=expression("relative Häufigkeit " * f[i]), 
+     col="skyblue", 
+     axes=F)
+axis(1,
+     at=m,
+     labels = expression(bar(x))
+     )
+axis(2)
+f <- function (z){return(dnorm(z,mean=0,sd=2.5))}
+curve(f, 
+      add=TRUE, 
+      col="red", 
+      lwd=2)
+
+```
+
+
+
+```{r}
+#| label: kurtosis3
+x <- rt(1000000,4)
+m <- mean(x)
+par(cex.lab=1.2)
+hist(x, 
+     prob=T, 
+     breaks=seq(-100,100,by=0.2), 
+     xlim=c(-4.1,4.1), 
+     ylim=c(0,0.4), 
+     xlab ="", 
+     main=expression("leptokurtische Verteilung " * g[2]>0), 
+     ylab=expression("relative Häufigkeit " * f[i]), 
+     col="skyblue", 
+     axes=F)
+axis(1,
+     at=m,
+     labels = expression(bar(x))
+     )
+axis(2)
+f <- function (z){
+          return(dnorm(z,
+                       mean=0,
+                       sd=sqrt(2)))
+  }
+curve(f, 
+      add=TRUE, 
+      col="red", 
+      lwd=2)
+```
+
+
+:::
+
+Verwenden wir die die Häufigkeitstabelle der Körpergrößen von Studierenden, können wir eine neue Spalte mit den Abweichungen vom Mittelwert $\overline x = 174,67$ cm zur vierten Potenz hinzufügen.
+
+
+$$
+\begin{array}{rrrrr}
+\hline
+{X} & {x_i} & {h_i} & {x_i-\bar x} & {(x_i-\bar x)^4 h_i} \\
+\hline
+(150,160] & 155 & 2 & -19.67 & 299396.99\\
+(160,170] & 165 & 8 & -9.67 & 69951.31\\
+(170,180] & 175 & 11 & 0.33 & 0.13\\
+(180,190] & 185 & 7 & 10.33 & 79707.53\\
+(190,200] & 195 & 2 & 20.33 & 341648.49\\
+\hline
+\sum &  & 30 & & 790704.45 \\
+\hline
+\end{array}
+$$
+Nun kann die Kurtosis wie folgt berechnet werden:
+
+$$
+g_2 = \frac{\sum (x_i-\bar x)^4n_i/n}{s^4} - 3 = \frac{790704.45/30}{10.1^4}-3 = -0.47.
+$$
+
+Der Wert ist negativ, aber nahe bei $0$. Das bedeutet, dass die Kurve leicht platykurtisch (niedriger als normalverteilt) ist.
+
+
+
+Wie wir im Kapitel zur schließenden Statistik sehen werden, können viele statistische Tests nur auf normalverteilte (glockenförmigen) Verteilungen angewendet werden.  
+
+Normalverteilungen sind symmetrisch und mesokurtisch, weshalb ihre Symmetriekoeffizienten und Kurtosiskoeffizienten den Wert 0 haben. 
+Daher ist eine Möglichkeit, eine Variable auf Normalverteilung zu testen, die Abweichungen 
+der Skewness- und Kurtosis-Koeffizienten von 0 zu betrachten.  
+
+Im Allgemeinen wird die Normaverteilung abgelehnt, wenn $g_1$ oder $g_2$ außerhalb des Intervalls $[−2, 2]$ liegen. In diesem Fallist es üblich, eine Transformation anzuwenden, um diese Abweichung zu korrigieren.
+
+
+
+## Transformationen
+
+
+
+
+
+
 
