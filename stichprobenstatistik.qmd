@@ -1220,7 +1220,316 @@ Im Allgemeinen wird die Normaverteilung abgelehnt, wenn $g_1$ oder $g_2$ außerh
 
 ## Transformationen
 
+In vielen Fällen werden die rohen Stichprobendaten *transformiert*, um eine passendere Skala zu erhalten, oder um Daten zu korrigieren, die nicht normalverteilt sind.
 
+Nehmen wir z.B. folgende Werte zur Körpergröße
+
+$$
+$1.75$ m, $1.65$ m, $1.80$ m,
+$$
+
+Wenn die Werte mit $100$ multipliziert werden, ändert sich die Einheit von Meter in Zentimeter, und aus den Dezimalzahlen werden ganze Zahlen.
+
+$$
+175 cm, 165 cm, 180 cm,
+$$
+
+Darüber hinaus ist es möglich, die Größen der Werte durch Subtraktion des kleinsten Wertes in der Stichprobe zu verringern. In unserem Beispiel würden wir von jedem Wert $165$ cm abziehen: 
+
+$$
+10 cm, 0 cm, 15 cm
+$$
+
+Es ist offensichtlich, dass diese Daten leichter zu handhaben sind als die ursprünglichen. Im Grunde haben wir folgende Transformation auf die Daten angewendet:  
+
+$$
+Y= 100\cdot X-165
+$$
+
+
+### lineare Transformation
+
+Eine der am häufigsten verwendeten Transformationen ist die lineare Transformation:
+
+$$
+Y=a+b\cdot X
+$$
+
+Bei der linearen Transformation veränderen sich das arithmetische Mittel und die Standardabweichung der transformierten Variablen wie folgt:  
+
+$$
+\begin{aligned}
+\bar y &= a+ b\bar x,\\
+s_{y} &= |b|s_{x}
+\end{aligned}
+$$
+
+Zudem bleibt der Wölbungskoeffizient (Kurtosis) unverändert, während der Koeffizient der Schieflage (Skewness) nur das Vorzeichen ändert, falls $b$ negativ ist. 
+
+
+#### Standardisierung und z-Transformation
+
+::: {.callout-warning appearance="default"}
+## Definition "Standardisierung"
+Die standardisierte Variable $Z$ einer Variablen $X$ ist die Variable, die durch Abzug des Mittelwertes von $X$ und anschließendes Dividieren durch die Standardabweichung entsteht:
+
+$$
+Z = \frac{X − \bar{x}}{s_x}
+$$
+:::
+
+
+
+Für jeden Wert $x_i$ der Stichprobe ist der Standardiserungsscore ($z$-Wert) der Wert, der durch Anwendung der Standardisierungstransformation entsteht:  
+
+$$
+z_i = \frac{x_i − \bar{x}}{s_x}
+$$
+
+Der Standardiserungsscore gibt die Anzahl an Standardabweichungen an, um welche ein Wert über oder unter dem Mittelwert liegt, und ist nützlich, um die Abhängigkeit der Variablen von ihren Maßeinheiten zu vermeiden. Die standardisierte Variable hat immer einen Mittelwert von $0$ und eine Standardabweichung von $1$.
+
+
+$$
+\bar z = 0 \qquad s_{z} = 1
+$$
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Die Leistungspunkte von 5 Studierenden in 2 Fächern sind
+
+$$
+\begin{array}{rccccccccc}
+\mbox{Student:} &  Hans & Tina & Kim & Flo & Karl\\\hline
+Mathe: & 2 & 5 & 4 & \cellcolor{coral} \color{white}\mathbf{8} & 6 & \qquad & \bar x = 5 & \quad s_x = 2\\
+Musik: & 1 & 9 &\cellcolor{coral} \color{white} \mathbf{8} & 5 & 2 & \qquad & \bar y = 5 & \quad s_y = 3.16\\
+\end{array}
+$$
+Hat Student Flo im Fach Mathe mit 8 Punkten eine *bessere* Leistung erbracht als Studentin Kim im Fach Musik (ebenfalls 8 Punkte)?
+:::
+
+Es mag den Anschein haben, dass Kim und Flo die gleiche Leistung in den Fächern erbracht haben, da sie die 
+gleichen Leistungspunkte erzielen. 
+Aber um die Leistung der Studierenden zum Rest der Gruppe zu bestimmen, müssen wir die Abweichungen der Leitungspunkte in jedem Fach betrachten. Aus diesem Grund ist es besser, die $z$-Werte als Maßstab für die
+Leistungsfähigkeit zu verwenden.
+
+
+
+$$
+\begin{array}{cccccc}
+Mathe: & -1.5 & 0 & -0.5 & \cellcolor{coral} \color{white}\mathbf{1.5} & 0.5 \\
+Musik: & -1.26 & 1.26 &\cellcolor{coral} \color{white} \mathbf{0.95} & 0 & -0.95\\
+\end{array}
+$$
+
+Nun ist erkennbar, dass Flo mit 8 Punkten im Fach Mathe um 1,5 Standardabweichungen über dem Leistungsdurchschnitt liegt, während Kim mit 8 Punkten im Fach Musik nur um 0,95 Standardabweichungen über dem Leistungsmittelwert liegt. In Relation zu allen Studierenden hat Flo eine *bessere* Leistung erbracht als Kim.
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Fragen wir uns nun, wer der beste Studierende ist.
+
+$$
+\begin{array}{rccccc}
+\mbox{Student:} &  Hans & Tina & Kim & Flo & Karl\\\hline
+Mathe: & 2 & 5 & 4 & 8 & 6 \\
+Musik: & 1 & 9 & 8 & 5 & 2 \\ \hline
+\sum & 3 &\cellcolor{coral} \color{white} \mathbf{14} & 12 & 13 & 8
+\end{array}
+$$
+
+:::
+
+Wenn wir nur den Leistungspunktsummen folgen, ist dies Studentin Tina mit insgesamt 14 Punkten.
+
+Wenn wir allerdings die relative Leistung betrachten und die $z$-transformierten Werte aufsummieren...
+
+$$
+\begin{array}{rccccc}
+\mbox{Student:} &  Hans & Tina & Kim & Flo & Karl\\\hline
+Mathe: & -1.5 & 0 & -0.5 & 1.5 & 0.5 \\
+Musik: & -1.26 & 1.26 & 0.95 & 0 & -0.95\\ \hline
+\sum & -2.76 & 1.26 & 0.45 &\cellcolor{coral} \color{white} \mathbf{1.5} & -0.45
+\end{array}
+$$
+...ist Student Flo der beste.
+
+
+### nicht-lineare Transformation
+
+Nicht-lineare Transformationen werde verwendet, um die Nicht-Normalität der Verteilungen zu korrigieren. 
+
+Die Quadrat-Transformation $Y = X^2$ verringert kleine Werte und verstärkt große Werte. Daher wird sie verwendet, um links-schiefe Verteilungen zu korrigieren.  
+
+
+```{r}
+#| label: transformx2
+#| fig-height: 3
+
+par(mfrow = c(1, 3), mar=c(1,1,1,1))  # kleiner Rand für alle
+
+# 1. Linkes Histogramm
+x1 <- rf(1000000,8,8)
+hist(-x1, 
+     breaks = 700, 
+     xlim = c(-5, 0), 
+     prob = TRUE,
+     xaxt = "n", 
+     yaxt = "n",  
+     main = "", 
+     ylab = "", 
+     xlab = "", 
+     col = "steelblue")
+
+# 2. Mittelpanel mit Pfeil
+plot.new()
+plot.window(xlim = c(0, 1), ylim = c(0, 1))
+arrows(0.1, 0.5, 0.9, 0.5, length = 0.1, lwd = 2)
+text(0.5, 0.6, expression(Y == X^2), cex = 2)
+
+# 3. Rechtes Histogramm
+x2 <- rnorm(1000000)
+hist(x2,
+     xlim = c(-3.5, 3.5), 
+     breaks = 50, 
+     ylim = c(0, 0.4),
+     prob = TRUE, 
+     xaxt = "n", 
+     yaxt = "n",  
+     main = "", 
+     ylab = "", 
+     xlab = "", 
+     col = "skyblue")
+
+```
+
+
+
+
+
+
+
+
+
+
+Die Wurzeltransformation $Y = \sqrt{X}$, die logarithmische Transformation $Y = \log(X)$ und die inverse Transformation $Y = \frac{1}{X}$ verringern große Werte und verstärken kleine Werte. Daher werden sie verwendet, um rechts-schiefe Verteilungen zu korrigieren.
+
+
+```{r}
+#| label: transformlogx
+#| fig-height: 3
+# Set up plot area with 3 panels side by side
+par(mfrow = c(1, 3), mar=c(1,1,1,1))  # kleiner Rand für alle
+
+# 1. Linkes Histogramm
+x1 <- rf(1000000, 8, 8)
+hist(x1, 
+     breaks = 700, 
+     xlim = c(0, 5), 
+     prob = TRUE,
+     xaxt = "n", 
+     yaxt = "n",  
+     main = "", 
+     ylab = "", 
+     xlab = "", 
+     col = "steelblue")
+
+# 2. Mittelpanel mit Pfeil
+plot.new()
+plot.window(xlim = c(0, 1), ylim = c(0, 1))
+arrows(0.1, 0.5, 0.9, 0.5, length = 0.1, lwd = 2)
+text(0.5, 0.6, expression(Y == log(X)), cex = 2)
+
+# 3. Rechtes Histogramm
+x2 <- rnorm(1000000)
+hist(x2,
+     xlim = c(-3.5, 3.5), 
+     breaks = 50, 
+     ylim = c(0, 0.4),
+     prob = TRUE, 
+     xaxt = "n", 
+     yaxt = "n",  
+     main = "", 
+     ylab = "", 
+     xlab = "", 
+     col = "skyblue")
+
+```
+
+
+#### Faktoren
+
+Manchmal ist es interessant, die Häufigkeitsverteilung der Stichprobe für verschiedene Teilproben zu beschreiben, die den Kategorien einer anderen Variablen entsprechen (z.B Geschlecht oder Beruf). Solche Klassifikationsvariablen werden als **Faktor** bezeichnet.  
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Das Aufteilen der Stichprobe "Körpergrößen" nach der Variable "Geschlecht" ergibt zwei Teilproben.
+
+$$
+\begin{array}{lll}
+\hline
+{Frauen} &
+173, 158, 174, 166, 162, 177, 165, 154, 166, 182, \\
+& 169, 172, 170, 168. \\
+\hline
+{Männer} &
+179, 181, 172, 194, 185, 187, 198, 178, 188, 171,\\
+& 175, 167, 186, 172, 176, 187. \\
+\hline
+\end{array}
+$$
+:::
+
+
+
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: factorHistogram
+data <- read.table("data/height_weight_data.csv", 
+                   header=TRUE, 
+                   sep="\t", 
+                   na.strings="NA", 
+                   dec=".", 
+                   strip.white=TRUE)
+library(Hmisc)
+options(digits=1)
+par(cex.lab=1.2)
+out <- histbackback(split(data$height, data$sex), 
+                    xlim=c(-10,10),
+                    main = 'Histogram der Körpergröße nach Geschlecht', 
+                    xlab=c("Männer", "Frauen"), 
+                    ylab="Körpergröße")
+abline(v= (-8:8)*2 , col ="gray" , lty =3) 
+barplot(-out$left, col="skyblue" , horiz=TRUE, space=0, add=TRUE, axes=FALSE) 
+barplot(out$right, col="salmon", horiz=TRUE, space=0, add=TRUE, axes=FALSE) 
+
+```
+
+
+```{r}
+#| label: factorBoxplot
+data <- read.table("data/height_weight_data.csv", 
+                   header=TRUE, 
+                   sep="\t", 
+                   na.strings="NA", 
+                   dec=".", 
+                   strip.white=TRUE)
+
+par(cex.lab=1.2)
+boxplot(height~sex, 
+        main="Häufigkeitsverteilung Körpergröße nach Geschlecht", 
+        ylab="Körpergröße", 
+        xlab="Geschlecht", 
+        ylim=c(150,200), 
+        labels=c("Männer","Frauen"), 
+        col=c("skyblue","salmon"), data=data)
+
+```
+
+:::
 
 
 
