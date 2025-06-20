@@ -1148,6 +1148,7 @@ curve(f,
 
 ```{r}
 #| label: kurtosis3
+set.seed(123)
 x <- rt(1000000,4)
 m <- mean(x)
 par(cex.lab=1.2)
@@ -1225,13 +1226,13 @@ In vielen Fällen werden die rohen Stichprobendaten *transformiert*, um eine pas
 Nehmen wir z.B. folgende Werte zur Körpergröße
 
 $$
-$1.75$ m, $1.65$ m, $1.80$ m,
+1.75m, 1.65m, 1.80m,
 $$
 
 Wenn die Werte mit $100$ multipliziert werden, ändert sich die Einheit von Meter in Zentimeter, und aus den Dezimalzahlen werden ganze Zahlen.
 
 $$
-175 cm, 165 cm, 180 cm,
+175cm, 165cm, 180cm,
 $$
 
 Darüber hinaus ist es möglich, die Größen der Werte durch Subtraktion des kleinsten Wertes in der Stichprobe zu verringern. In unserem Beispiel würden wir von jedem Wert $165$ cm abziehen: 
