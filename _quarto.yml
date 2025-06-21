@@ -47,6 +47,9 @@ book:
     - haufigkeiten.qmd
     - stichprobenstatistik.qmd
     - regression-korrelation.qmd
+    - wahrscheinlichkeit.qmd
+    - diskret.qmd
+    - kontinuierlich.qmd
     - literatur.qmd
     - credits.qmd
   page-footer:

@@ -539,3 +539,331 @@ Sigmoidal & y= e^{a+\frac{b}{x}}\\
 \end{array}
 $$
 
+Die Wahl des Modells hängt von der Form der Punktwolke in der Streudiagramm ab.
+
+### Vorhersagefehler
+
+Sobald der Typ des Regressionsmodells gewählt wurde, müssen wir entscheiden, welche Funktion dieser Familie die Beziehung zwischen der abhängigen und  unabhängigen Variablen am besten erklärt, d.h. welche Funktion die abhängige Variable am besten vorhersagt.
+
+Diese Funktion ist diejenige, die die Abstände von den beobachteten Werten für $Y$ in der Stichprobe zu den vorhergesagten Werten der Regressionsfunktion minimiert. Diese Abstände werden als *Restterme*, *Residuen* oder *Vorhersagefehler* bezeichnet.
+
+::: {.callout-warning appearance="default"}
+## Definition Vorhersagefehler: 
+
+Gegeben ein Regressionsmodell $y = f(x)$ für eine zweidimensionale Variable $(X, Y)$, ist der  Vorhersagefehler für jedes Paar $(x_i, y_j)$ der Stichprobe die Differenz zwischen dem beobachteten Wert der abhängigen Variablen $y_j$ und dem  vorhergesagten Wert der Regressionsfunktion für $x_i$,
+
+$$
+e_{i,j} = y_j - f(x_i).
+$$
+:::
+
+
+
+```{r}
+#| label: residuen
+par(mar=c(2.9,2.9,2,1), 
+    mgp=c(1.8,0.4,0), 
+    cex.lab=1, 
+    cex.axis=1, 
+    las=1, 
+    tck=-0.02)
+plot(weight~height, 
+     col="steelblue", 
+     main="", 
+     xlab="X", 
+     ylab="Y", 
+     xlim=c(150,200), 
+     pch=16, 
+     data=data, 
+     axes=F)
+box()
+model <- lm(data$weight~data$height)
+abline(model, lwd=2)
+prediction <- model[["coefficients"]][1]+model[["coefficients"]][2]*183
+axis(1, at=c(183), labels=expression(x[i]))
+axis(2, at = c(93, prediction), labels = expression(y[j], f(x[i])), las = 2)
+
+# Pfeil von f(x_i) zu y_j
+Arrows(183, prediction, 183, 93,
+       arr.length = 0.2,
+       arr.width = 0.15,
+       code = 3,
+       arr.type = "triangle",
+       arr.adj = 1,
+       col = "darkred")
+
+# Hilfslinien
+segments(183, 0, 183, prediction, col = "grey", lty = 2)
+segments(0, prediction, 183, prediction, col = "grey", lty = 2)
+segments(0, 93, 183, 93, col = "grey", lty = 2)
+
+# Fehlerbezeichnung
+text(179, 82, expression(e[ij] == y[j] - f(x[i])), col = "darkred")
+
+# Punktbeschriftung
+text(186, 95, expression("(" * x[i] * "," * y[j] * ")"))
+
+```
+
+
+
+#### Methode der kleinsten Quadrate
+
+Um die Regressionsfunktion zu erhalten, kann die Methode der kleinsten Quadrate angewendet werde. Mit ihr wird die Funktion bestimmt, welche die quadrierten Residuen minimiert.
+
+$$
+\sum e_{ij}^2.
+$$
+
+Für ein lineares Modell $f(x) = a + bx$ hängt die Summe von zwei Parametern ab, dem Schnittpunkt durch die Y-Achse $a$ und der Steigung der Geraden $b$,
+
+$$
+\theta(a,b) = \sum e_{ij}^2 =\sum (y_j - f(x_i))^2 =\sum (y_j-a-bx_i)^2.
+$$
+
+Dies reduziert das Problem darauf, geeignete Werte für $a$ und $b$ zu bestimmen.
+
+
+## Regressionsgerade
+
+Um das Minimierungsproblem zu lösen, müssen wir die partiellen Ableitungen bezüglich $a$ und $b$ auf Null setzen.
+
+$$
+\begin{aligned}
+\frac{\partial \theta(a,b)}{\partial a} &=  \frac{\partial \sum (y_j-a-bx_i)^2 }{\partial a} =0\\
+\frac{\partial \theta(a,b)}{\partial b} &=  \frac{\partial \sum (y_j-a-bx_i)^2 }{\partial b} =0
+\end{aligned}
+$$
+
+Jetzt können wir das Gleichungssystem lösen zu:
+
+$$
+a= \bar y - \frac{s_{xy}}{s_x^2}\bar x \qquad b=\frac{s_{xy}}{s_x^2}
+$$
+Diese Formeln minimieren die Residuen von $Y$ und ergeben das optimale lineare Modell.
+
+
+
+::: {.callout-warning appearance="default"}
+## Definition "Regressiongerade" 
+
+Für eine Stichprobe mit den zweidimensionalen Variablen $(X, Y)$ ist die Regressionsgerade von $Y$ auf $X$:
+
+$$
+y = \bar y +\frac{s_{xy}}{s_x^2}(x-\bar x)
+$$
+
+:::
+
+Die Regressionsgerade von $Y$ auf $X$ ist die Gerade, die die Vorhersagefehler von $Y$ minimiert und daher das lineare Regressionsmodell mit den besten Vorhersagen für $Y$ darstellt.
+
+### Regressionlinienberechnung
+
+Wir verwenden die Daten der Körpergrößen ($X$) und Körpergewichten ($Y$) mit den folgenden Kennwerten
+
+$$
+\begin{array}{lllll}
+\bar x = 174.67 \text{ cm} & \quad & s^2_x = 102.06 \text{ cm}^2 & \quad & s_x = 10.1 \text{ cm}\\
+\bar y = 69.67 \text{ Kg} & & s^2_y = 164.42 \text{ Kg}^2 & & s_y = 12.82 \text{ Kg}\\
+& & s_{xy} = 104.07 \text{ cm}\cdot \text{ Kg} & &
+\end{array}
+$$
+
+ergibt sich die Regressionsgerade für *Körpergröße erklärt durch Gewicht* (Größe gegen Gewicht, $Größe = f(Gewicht)$) wie folgt:
+
+$$
+y = \bar y +\frac{s_{xy}}{s_x^2}(x-\bar x) = 69.67+\frac{104.07}{102.06}(x-174.67) = -108.49 +1.02 x
+$$
+
+Die Regressionsgerade für *Gewicht erklärt durch Körpergröße* (Gewicht gegen Größe, $Gewicht = f(Größe)$) ist
+
+$$
+x = \bar x +\frac{s_{xy}}{s_y^2}(y-\bar y) = 174.67+\frac{104.07}{164.42}(y-69.67) = 130.78 + 0.63 y
+$$
+
+::: {.callout-important appearance="simple"}
+Beachten Sie, dass die Regressionslinien unterschiedlich sind!
+:::
+
+
+```{r}
+#| label: regressionslinien1
+par(mar=c(2.9,2.9,2,1), 
+    mgp=c(1.8,0.4,0), 
+    cex.lab=1, 
+    cex.axis=0.8, 
+    las=1, 
+    tck=-0.02)
+plot(weight~height, 
+     col="steelblue", 
+     main="Regressionsgeraden von Größe und Gewicht", 
+     xlab="Größe (cm)", 
+     ylab="Gewicht (Kg)", 
+     xlim=c(150,200), 
+     pch=16, 
+     data=data)
+abline(-108.49,1.02, lwd=2, col="darkgreen")
+abline(-207.5873,1.5873, lwd=2, col="hotpink1")
+points(174.67,69.67, pch=16, col="darkred")
+text(173,72,expression(bar(x) * "," * bar(y)))
+text(195,80,"Gewicht gegen Größe", col="darkgreen")
+text(185,100,"Größe gegen Gewicht", col="hotpink1")
+
+```
+
+Üblicherweise sind die Regressionsgeraden von $Y$ gegen $X$ und $X$ gegen $Y$ **nicht** gleich, aber sie schneiden sich immer im Mittelpunkt $(\overline x, \overline y)$.
+
+Wenn es eine perfekte lineare Beziehung zwischen den Variablen gibt, dann sind beide Regressionsgeraden gleich, da diese Linie sowohl $X$-Residuen als auch $Y$-Residuen auf null setzt.
+
+
+```{r}
+#| label: perfekteRegression
+x=runif(100)
+y = 0.7*x +0.15
+par(mai=c(0.3,0.3,0.4,0.2), 
+    mgp=c(0.5,0,0))
+plot(x,y, 
+     ylim=c(0,1), 
+     col="steelblue", 
+     main="Perfekte lineare Regression", 
+     xlab="X", 
+     ylab="Y", 
+     pch=16, 
+     axes=F)
+box()
+modelo = lm(y~x)
+abline(modelo, lwd=2)
+text(0.7,0.4, "Y gegen X = X gegen Y")
+
+```
+
+
+Wenn es keine lineare Beziehung zwischen den Variablen gibt, dann sind beide Regressionsgeraden konstant und gleich den jeweiligen  Mittelwerten 
+$$
+y = \bar y, \qquad x = \bar x.
+$$
+
+
+Daher schneiden sie sich senkrecht.
+
+```{r}
+#| label: nichtlineareRegression
+x=runif(100)
+y=runif(100)
+par(mai=c(0.3,0.3,0.4,0.2), 
+    mgp=c(0.5,0,0))
+plot(x,y, 
+     ylim=c(0,1), 
+     col="skyblue", 
+     main="Nicht-lineare Regression", 
+     xlab="X", 
+     ylab="Y", 
+     pch=16, 
+     axes=F)
+box()
+abline(h=mean(y), lwd=2, col="darkgreen")
+abline(v=mean(x), lwd=2, col="hotpink3")
+text(mean(x)+0.08,0.12, "X gegen Y", col="hotpink3")
+text(0.9,mean(y)-0.07, "Y gegen X", col="darkgreen")
+
+```
+
+
+### Regressionskoeffizient
+
+
+Der wichtigste Parameter einer Regressionsgeraden  ist die Steigung.
+
+::: {.callout-note appearance="default"}
+## Definition Regressionskoeffizient  $b_{xy}$
+
+Für eine zweidimensionale Variable $(X, Y)$ gibt der Regressionskoeffizient der 
+Regressionsgeraden von $Y$ gegen $X$ deren Steigung an,
+
+$$
+b_{yx} = \frac{s_{xy}}{s_x^2}
+$$
+:::
+
+
+Der Regressionskoeffizient hat immer das gleiche Vorzeichen wie die Kovarianz. Er misst, wie sich die abhängige Variable $Y$ in Bezug auf die unabhängige Variable $X$ gemäß der Regressionsgerade verändert. Insbesondere gibt er an, um wie viele Einheiten die abhängige Variable pro Einheit, die die unabhängige Variable zunimmt, steigt oder fällt.
+
+::: {.callout-tip appearance="default"}
+## Beispiel: Körpergrößen und Gewichte
+
+In unserer Stichprobe mit den Variablen Körpergröße und Gewicht war die Regressionsgerade für das Gewicht in Bezug auf die Körpergröße
+
+$$
+y=-108.49 +1.02 x.
+$$
+
+Daher ist der Regressionskoeffizient für das Gewicht in Bezug auf die Körpergröße
+
+$$
+b_{yx}= 1.02 \text{ Kg/cm.}
+$$
+
+
+Das bedeutet, dass das Gewicht gemäß der Regressionsgerade in Bezug auf die Körpergröße um 1.02 kg pro Zentimeter zunimmt, wenn die Körpergröße steigt.
+
+
+```{r}
+#| label: slope1
+#| engine: tikz
+#| fig-pos: h
+\definecolor{color2}{rgb}{0.75, 0.1, 0.1}
+\begin{tikzpicture}
+\draw[color=color2] (0,0) -- (2,2.04);
+\draw (0,0) -- (2,0) -- (2,2.04);
+\node[align=center] at (-0.7,1.2) {Regressionsgerade\\ Gewicht gegen Größe};
+\node[anchor=north] at (1,0) {1 cm};
+\node at (1,-0.7){Größe};
+\node[anchor=west] at (2,1.02) {1.02 Kg  Gewicht};
+\end{tikzpicture}
+```
+
+:::
+
+
+
+### Modellvorhersage
+
+Üblicherweise werden Regressionsmodelle verwendet, um die abhängige Variable $Y$ für bestimmte Werte der unabhängigen Variablen  $X$ vorherzusagen.
+
+::: {.callout-caution appearance="default"}
+## Denken Sie daran! 
+
+Um die besten Vorhersagen einer Variablen zu erhalten, müssen Sie die Regressionsgerade verwenden, bei der diese Variable die abhängige Rolle $Y$ spielt.
+:::
+
+::: {.callout-tip appearance="simple"}
+
+Möchten wir das Gewicht einer Person mit einer Körpergröße von 180cm vorhersagen, müssen wir die Regressionsgerade für das Gewicht in Bezug auf die Körpergröße verwenden.
+
+$$
+y = -108.49 + 1.02 \cdot 180  = 75.11 \text{ Kg}.
+$$
+
+
+Um hingegen die Körpergröße einer Person mit einem Gewicht von 79kg vorherzusagen, müssen wir die Regressionsgerade für die Körpergröße in Bezug auf das Gewicht verwenden,
+
+$$
+x = 130.78 + 0.63\cdot 79 = 180.55 \text{ cm}.
+$$
+:::
+
+
+Aber wie zuverlässig sind diese Vorhersagen?
+
+
+
+
+
+## Korrelation
+
+
+
+
+
+
+
