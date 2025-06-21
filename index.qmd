@@ -9,6 +9,7 @@ library(tidyverse)
 Dies ist ein grundlegender Leitfaden der Statistik, der die deskriptive Statistik, Regression, Wahrscheinlichkeit und die Grundlagen der Inferenz abdeckt (Konfidenzintervalle und parametrische Hypothesentests). Grundlage bildet dabei das Werk von
  @alberca_2023^[siehe <https://github.com/asalber/statistics-manual>], dessen Kapitel in der vorliegenden Version umfangreich ergänzt wurden.
 
+Der Quelltext des Buches steht unter <https://github.com/produnis/statistics-manual> zur Verfügung.
 
 \smallskip\ 
 
