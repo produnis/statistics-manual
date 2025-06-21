@@ -50,7 +50,7 @@ $$
 Er kann wie folgt auch aus der Häufigkeitstabelle berechnet werden:  
 
 $$
-\overline x = \frac{\sum x_{i} \cdot h_{i}}{n} = \sum x_{i} \cdot f_{i}
+\overline x = \frac{\sum x_{i} \cdot n_{i}}{n} = \sum x_{i} \cdot f_{i}
 $$
 
 In den meisten Fällen ist der arithmetische Mittelwert derjenige Wert, der die beobachteten Werte in der Stichprobe am besten darstellt. 
@@ -74,7 +74,7 @@ $$
 Die Berechnung von $\overline x$ über die Häufigkeitstabelle
 
 
-| $x_{i}$ | $h_{i}$ | $f_{i}$   | $x_{i} \cdot h_{i}$ | $x_{i} \cdot f_{i}$ |
+| $x_{i}$ | $n_{i}$ | $f_{i}$   | $x_{i} \cdot n_{i}$ | $x_{i} \cdot f_{i}$ |
 |----|----|------|--------|--------|
 | 0  | 2  | 0.08 | 0      | 0      |
 | 1  | 6  | 0.24 | 6      | 0.24   |
@@ -101,7 +101,7 @@ $$
 
 Über die klassierte Häufigkeitstabelle kann $\overline x$ bestimmt werden, indem jeweils die Klassenmitte als $x_i$ verwendet wird.
 
-| X         | $x_i$  | $h_i$ | $f_i$   | $x_i \cdot h_i$ | $x_i \cdot f_i$  |
+| X         | $x_i$  | $n_i$ | $f_i$   | $x_i \cdot n_i$ | $x_i \cdot f_i$  |
 |-----------|-----|----|------|--------|---------|
 | (150,160] | 155 | 2  | 0.07 | 310    | 10.33   |
 | (160,170] | 165 | 8  | 0.27 | 1320   | 44.00   |
@@ -113,7 +113,7 @@ $$
 
 
 $$
-\overline{x} = \frac{\sum x_i \cdot h_i}{n} = \frac{5240}{30}= 174.67 \mbox{ cm}\qquad \overline{x}=\sum{x_i \cdot f_i} = 174.67 \mbox{ cm}.
+\overline{x} = \frac{\sum x_i \cdot n_i}{n} = \frac{5240}{30}= 174.67 \mbox{ cm}\qquad \overline{x}=\sum{x_i \cdot f_i} = 174.67 \mbox{ cm}.
 $$
 
 Beachten Sie, dass der Mittelwert, der aus der Tabelle berechnet wird, etwas von dem realen Wert abweicht. Da in den Berechnungen jeweils die **Klassenmitten** anstelle der tatsächlichen Werte verwendet werden, ergeben sich dadurch leichte Rundungsfehler.
@@ -205,14 +205,14 @@ $$
 
 Der Median liegt also bei 2 Kindern.
 
-Mithilfe der relativen Häufigkeitstabelle ist der Median der kleinste Wert mit einer kumulativen absoluten Häufigkeit $H_i$ größer oder gleich 13 bzw. einer 
+Mithilfe der relativen Häufigkeitstabelle ist der Median der kleinste Wert mit einer kumulativen absoluten Häufigkeit $N_i$ größer oder gleich 13 bzw. einer 
 kumulativen relativen Häufigkeit $F_i$ größer oder gleich 0,5.
 
 $$
 \definecolor{color1}{RGB}{24,81,145}
 \begin{array}{rrrrr}
 \hline
-x_i & h_i & f_i & H_i & F_i\\
+x_i & n_i & f_i & N_i & F_i\\
 \hline
 0 & 2 & 0.08 & 2 & 0.08\\
 1 & 6 & 0.24 & 8 & 0.32\\
@@ -232,7 +232,7 @@ Sind die Werte in Klassen gruppiert, kann die Berechnung des Median geometrisch 
 
 Die Werte unseres Beispiels der Körpergrößen liegen als klassierte Häufigkeitstabelle vor:
 
-| X         | $x_i$  | $h_i$ | $f_i$   | $F_i$  |
+| X         | $x_i$  | $n_i$ | $f_i$   | $F_i$  |
 |-----------|-----|----|------|--------|---------|
 | (150,160] | 155 | 2  | 0.07 | 0.07  |
 | (160,170] | 165 | 8  | 0.27 | 0.34   |
@@ -338,7 +338,7 @@ Unter Verwendung der Daten der Stichprobe zur Anzahl an Kindern in Familien ist 
 $$
 \begin{array}{rr}
 \hline
-x_i & h_i \\
+x_i & n_i \\
 \hline
 0 & 2 \\
 1 & 6 \\
@@ -359,7 +359,7 @@ Unter Verwendung der Daten der Stichprobe zur Körpergröße von Studenten ist d
 $$
 \begin{array}{rr}
 \hline
-X & h_i \\
+X & n_i \\
 \hline
 (150,160] & 2 \\
 (160,170] & 8 \\
@@ -921,7 +921,7 @@ Formmaße sind Maße, die die Form der Verteilung beschreiben. Besonders wichtig
 Der Stichproben-Schiefekoeffizient $g_1$ einer Variablen $X$ ist der Durchschnitt der hoch drei genommenen Abweichungen der Werte vom Stichprobenmittel, geteilt durch die hoch drei genommene Standardabweichung.
 
 $$
-g_1 = \frac{\sum (x_i-\bar x)^3 h_i/n}{s^3} = \frac{\sum (x_i-\bar x)^3 f_i}{s^3}
+g_1 = \frac{\sum (x_i-\bar x)^3 n_i/n}{s^3} = \frac{\sum (x_i-\bar x)^3 f_i}{s^3}
 $$
 :::
 
@@ -1033,7 +1033,7 @@ Verwenden wir die Daten der Körpergrößen von Studierenden, können wir der H�
 $$
 \begin{array}{rrrrr}
 \hline
-{X} & {x_i} & {h_i} & {x_i-\bar x} & {(x_i-\bar x)^3\cdot h_i} \\
+{X} & {x_i} & {n_i} & {x_i-\bar x} & {(x_i-\bar x)^3\cdot n_i} \\
 \hline
 (150,160] & 155 & 2 & -19.67 & -15221.00\\
 (160,170] & 165 & 8 & -9.67 & -7233.85\\
@@ -1050,7 +1050,7 @@ $$
 Die Skewness berechnet sich nun wie folgt:
 
 $$
-g_1 = \frac{\sum (x_i-\bar x)^3h_i/n}{s^3} = \frac{2066,81/30}{10,1^3} = 0,07.
+g_1 = \frac{\sum (x_i-\bar x)^3n_i/n}{s^3} = \frac{2066,81/30}{10,1^3} = 0,07.
 $$
 
 Der Wert liegt nahe bei $0$, was bedeutet, dass die Verteilung nahezu symmetrisch (normalverteilt) ist.
@@ -1065,7 +1065,7 @@ Der Wert liegt nahe bei $0$, was bedeutet, dass die Verteilung nahezu symmetrisc
 Der Wölbungskoeffizient $g_2$ (*coefficient of kurtosis*) einer Variablen $X$ ist der Durchschnitt der zur vierten Potenz erhobenen Abweichungen der Werte vom Stichprobenmittelwert, geteilt durch die Standardabweichung hoch vier, und anschließend minus 3.
 
 $$
-g_2 = \frac{\sum (x_i-\bar x)^4 h_i/n}{s^4}-3 = \frac{\sum (x_i-\bar x)^4 f_i}{s^4}-3
+g_2 = \frac{\sum (x_i-\bar x)^4 n_i/n}{s^4}-3 = \frac{\sum (x_i-\bar x)^4 f_i}{s^4}-3
 $$
 :::
 
@@ -1187,7 +1187,7 @@ Verwenden wir die die Häufigkeitstabelle der Körpergrößen von Studierenden, 
 $$
 \begin{array}{rrrrr}
 \hline
-{X} & {x_i} & {h_i} & {x_i-\bar x} & {(x_i-\bar x)^4 h_i} \\
+{X} & {x_i} & {n_i} & {x_i-\bar x} & {(x_i-\bar x)^4 n_i} \\
 \hline
 (150,160] & 155 & 2 & -19.67 & 299396.99\\
 (160,170] & 165 & 8 & -9.67 & 69951.31\\

@@ -61,21 +61,21 @@ Das Studium einer statistischen Variablen beginnt mit der Messung der Variable b
 
 Bei einer Stichprobe mit $n$ Werten der Variable $X$ können wir für jedes $x_{i}$ bestimmen:
 
-1. **Absolute Häufigkeit ($h_{i}$):**  ist die Anzahl, mit der ein bestimmter Wert $x_{i}$ in der Stichprobe auftritt.
+1. **Absolute Häufigkeit ($n_{i}$):**  ist die Anzahl, mit der ein bestimmter Wert $x_{i}$ in der Stichprobe auftritt.
 2. **Relative Häufigkeit ($f_{i}$):** ist das Verhältnis der Anzahl eines bestimmten Wertes $x_{i}$ zur Gesamtanzahl der Beobachtungen in der Stichprobe.  
 $$
-f_{i} = \frac{h_{i}}{n}
+f_{i} = \frac{n_{i}}{n}
 $$
-3. **Kumulative absolute Häufigkeit ($H_{i}$):** ist die Gesamtanzahl der Werte in der Stichprobe, die kleiner oder gleich $x_{i}$ sind
+3. **Kumulative absolute Häufigkeit ($N_{i}$):** ist die Gesamtanzahl der Werte in der Stichprobe, die kleiner oder gleich $x_{i}$ sind
 
 $$
-H_{i} = n_{1} + \dots + n_{i}
+N_{i} = n_{1} + \dots + n_{i}
 $$
 
 4. **Kumulative relativeHäufigkeit ($F_{i}$):**  ist das Verhältnis der kumulativen absoluten Häufigkeit zur Gesamtanzahl der Beobachtungen in der Stichprobe.  
    
 $$
-F_{i} = \frac{H_{i}}{n}
+F_{i} = \frac{N_{i}}{n}
 $$
 
 :::
@@ -90,11 +90,11 @@ Die Menge der Werte einer Variablen mit ihren jeweiligen Häufigkeiten nennt man
 
 | **Variable X** | **absolute Häufigkeit** | **relative Häufigkeit** | **kumulierte absolute Häufigkeit** | **kumulierte relative Häufigkeit** |
 |:---:|:---:|:---:|:---:|:---:|
-| $x_{1}$| $h_{1}$| $f_{1}$| $H_{1}$| $F_{1}$ |
+| $x_{1}$| $n_{1}$| $f_{1}$| $N_{1}$| $F_{1}$ |
 | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ |
-| $x_{i}$| $h_{i}$| $f_{i}$| $H_{i}$| $F_{i}$ |
+| $x_{i}$| $n_{i}$| $f_{i}$| $N_{i}$| $F_{i}$ |
 | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ |
-| $x_{k}$| $h_{k}$| $f_{k}$| $H_{k}$| $F_{k}$ |
+| $x_{k}$| $n_{k}$| $f_{k}$| $N_{k}$| $F_{k}$ |
 
 : Häufigkeitstabelle {#tbl-haufigkeitstabelle}
 
@@ -110,7 +110,7 @@ Die Anzahl an Kindern wurde bei 25 Familien wie folgt erhoben:
 
 Die Häufigkeitstabelle für die Anzahl an Kindern in der Stichprobe ist
 
-| $x_{i}$ | $h_{i}$ | $f_{i}$ | $H_{i}$ | $F_{i}$ |
+| $x_{i}$ | $n_{i}$ | $f_{i}$ | $N_{i}$ | $F_{i}$ |
 |--------:|--------:|--------:|--------:|--------:|
 | 0       | 2       | 0.08    | 2       | 0.08    |
 | 1       | 6       | 0.24    | 8       | 0.32    |
@@ -160,7 +160,7 @@ Bei der Klassierung sollten grundsätzlich folgende Regeln beachtet werden:
 
 Eine Häufigkeitstabelle der klassierten Körpergrößen mit 5 Klassen sieht so aus:
 
-| $x_{i}$ | $h_{i}$ | $f_{i}$ | $H_{i}$ | $F_{i}$ |
+| $x_{i}$ | $n_{i}$ | $f_{i}$ | $N_{i}$ | $F_{i}$ |
 |--------:|--------:|--------:|--------:|--------:|
 | (150,160]      | 2       | 0.07    | 2       | 0.07    |
 | (160,170]      | 8       | 0.27    | 10      | 0.34    |
@@ -182,7 +182,7 @@ Bei 30 Studierenden wurden die Blutgruppen wie folgt bestimmt:
 
 Die Häufigkeitstabelle der Blutgruppen ist:
 
-| $x_{i}$  | $h_{i}$ | $f_{i}$   |
+| $x_{i}$  | $n_{i}$ | $f_{i}$   |
 |:----:|----:|----:|
 | 0   | 5  | 0.16 |
 | A   | 14 | 0.47 |
