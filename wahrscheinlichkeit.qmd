@@ -190,6 +190,7 @@ $$
 
 ```{r}
 #| engine: tikz
+#| label: vereinigungsereignis
 \begin{tikzpicture}
 \def\firstcircle{(1.5,1.5) circle (1cm)}
 \def\secondcircle{(2.5,1.5) circle (1cm)}
@@ -504,8 +505,452 @@ Chancen, dass $A$ eintritt.
 Im Gegensatz dazu, wenn $P(A)$ näher bei $1$ als bei $0$ liegt, sind die Chancen, dass $A$ eintritt, größer als die Chancen, dass $A$ nicht eintritt.
 
 
+
+
+
+
+
+
+
 ## bedingte Wahrscheinlichkeit 
 
+Gelegentlich können wir bereits vor der Durchführung eines Experiments einige Informationen darüber erhalten. Üblicherweise wird diese Information als Ereignis $B$ des gleichen Ereignisraums gegeben, von dem wir wissen, dass es wahr ist, bevor wir das Experiment durchführen.
+
+In einem solchen Fall werden wir sagen, dass $B$ ein *konditionierendes Ereignis* ist und die Wahrscheinlichkeit eines anderen Ereignisses $A$ als *bedingte Wahrscheinlichkeit* bezeichnen. Diese wird  als $P(A|B)$ ausgedrückt.
+
+Dies muss als "Wahrscheinlichkeit von $A$ unter der Bedingung $B$" oder "Wahrscheinlichkeit von $A$ gegeben $B$" gelesen werden.
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Konditionierende Ereignisse ändern normalerweise den Ereignisraum und damit die Wahrscheinlichkeiten der Ereignisse. Angenommen, wir haben eine Stichprobe von 100 Frauen und 100 Männern mit den folgenden Häufigkeiten:
+
+$$
+\begin{array}{|c|c|c|}
+ & \mbox{Nichtraucher} & \mbox{Raucher} \\ \hline
+ \rowcolor{coral}\color{white} \mbox{Frauen} & \color{white}80 & \color{white}20 \\ \hline
+ \mbox{Männer} & 60 & 40 \\ \hline
+\end{array}
+$$
+
+Dann beträgt die Wahrscheinlichkeit, ein Raucher zu sein, basierend auf der gesamten Probe:
+
+$$
+P(\mbox{Raucher})= \frac{60}{200}=0.3.
+$$
+
+Wenn wir jedoch wissen, dass die Person eine Frau ist, wird die Stichprobe auf die erste Zeile reduziert und die Wahrscheinlichkeit, eine Raucherin zu sein, beträgt:
+
+$$
+P(\mbox{Raucherin}|\mbox{Frau})=\frac{20}{100}=0.2.
+$$
+
+:::
+
+
+
+
+::: {.callout-warning appearance="default"}
+## Definition "bedingte Wahrscheinlichkeit"
+Gegeben ist ein Ereignisraum $\Omega$ eines zufälligen Experiments und zwei Ereignisse $A,B\subseteq \Omega$, so ist die Wahrscheinlichkeit von $A$ unter der Bedingung, dass $B$ eintritt:
+$$
+P(A|B) = \frac{P(A\cap B)}{P(B)},
+$$
+solange $P(B)\neq 0$.
+:::
+
+Diese Definition ermöglicht es, bedingte Wahrscheinlichkeiten zu berechnen, ohne den ursprünglichen Ereignisraum zu ändern.
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+In dem vorherigen Beispiel ist die bedingte Wahrscheinlichkeit, dass eine Person Raucher und weiblich ist:
+
+$$
+P(\mbox{Raucher}|\mbox{weiblich})= \frac{P(\mbox{Raucher}\cap \mbox{weiblich})}{P(\mbox{weiblich})} = \frac{20/200}{100/200}=\frac{20}{100}=0.2.
+$$
+:::
+
+
+
+
+### Wahrscheinlichkeit des Schnittmengen-Ereignisses:
+
+Aus der Definition der bedingten Wahrscheinlichkeit kann die Formel für die Wahrscheinlichkeit der Schnittmenge zweier Ereignisse abgeleitet werden:
+
+$$
+P(A\cap B) = P(A)P(B|A) = P(B)P(A|B).
+$$
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel: Brustkrebs 
+In einer Bevölkerung gibt es 30 % Raucherinnen und wir wissen, dass 40 % dieser Raucher Krebs haben. Die Wahrscheinlichkeit, dass eine zufällig ausgewählte Person raucht und Krebs hat, beträgt:
+
+$$
+P(\mbox{Raucher}\cap \mbox{Krebs})= P(\mbox{raucher})P(\mbox{Krebs}|\mbox{Raucher}) =
+0.3\times 0.4 = 0.12.
+$$
+:::
+
+
+
+
+
+### Unabhängigkeit der Ereignisse
+
+Manchmal ändert das bedingende Ereignis die ursprüngliche Wahrscheinlichkeit des Hauptereignisses nicht.
+
+::: {.callout-warning appearance="default"}
+## Definition "Unabhängige Ereignisse"
+Gegeben einen Ereignisraum $\Omega$ eines zufälligen Experiments, sind zwei Ereignisse $A,B\subseteq \Omega$ *unabhängig*, wenn die Wahrscheinlichkeit von $A$ sich nicht ändert, wenn sie durch $B$ bedingt ist, und umgekehrt, d.h.,
+
+$$
+P(A|B) = P(A) \quad \mbox{und} \quad P(B|A)=P(B),
+$$
+wenn $P(A)\neq 0\ $ und $\ P(B)\neq 0$.
+:::
+
+
+Das bedeutet, dass das Eintreten eines Ereignisses keine relevante Information liefert, um die Unsicherheit des anderen Ereignisses zu ändern.
+
+Wenn zwei Ereignisse unabhängig sind, ist die Wahrscheinlichkeit ihrer Schnittmenge gleich dem Produkt ihrer Wahrscheinlichkeiten,
+
+$$
+P(A\cap B) = P(A)\cdot P(B)
+$$
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel: Münzwurf
+
+Der Ereignisraum für den doppelten Wurf einer Münze ist $\Omega=\{(K,K),(K,Z),(Z,K),(Z,Z)\}$ und alle Elemente sind gleich wahrscheinlich, wenn die Münze fair ist. Daher haben wir durch die klassische Definition der Wahrscheinlichkeit
+
+$$
+P((K,K)) = \frac{1}{4} = 0.25.
+$$
+Wenn wir $K_1=\{(K,K),(K,Z)\}$, d.h., Kopf beim ersten Wurf, und $H_2=\{(K,K),(Z,K)\}$ nennen, d.h., Kopf beim zweiten Wurf, können wir das gleiche Ergebnis erhalten, indem wir davon ausgehen, dass diese Ereignisse unabhängig sind,
+
+$$
+P(K,K)= P(K_1\cap K_2) = P(K_1)\cdot P(K_2) = \frac{2}{4}\cdot\frac{2}{4}=\frac{1}{4}=0.25.
+$$
+:::
+
+
+
+
+
+
+
+## Wahrscheinlichkeitsraum
+
+::: {.callout-warning appearance="default"}
+## Definition "Wahrscheinlichkeitsraum"
+
+Ein Wahrscheinlichkeitsraum eines zufälligen Experiments ist ein Tripel $(\Omega,\mathcal{F},P)$ 
+wobei
+
+- $\mathbf{\Omega}\ $ der Ereignisraum des Experiments ist.
+- $\mathbf{\mathcal{F}}\ $  eine Menge von Ereignissen des Experiments ist.
+- $\mathbf{P}\ $  eine Wahrscheinlichkeitsfunktion ist.
+
+:::
+
+Wenn wir die Wahrscheinlichkeiten aller Elemente von $\Omega$ kennen, können wir leicht den Wahrscheinlichkeitsraum konstruieren und die Wahrscheinlichkeit jedes Ereignisses in $\mathcal{F}$ berechnen.
+
+
+
+
+
+### Konstruktion des Wahrscheinlichkeitsraums
+
+Um die Wahrscheinlichkeit jedes möglichen (elementaren) Ereignisses zu berechnen, können wir ein Baumdiagramm verwenden. Dabei gelten folgende Regeln:
+
+1. Jede Kante im Baum erhält eine Wahrscheinlichkeit. Diese gibt an, wie wahrscheinlich der jeweilige Wert unter der Bedingung der vorherigen Knoten ist.
+2.  Die Wahrscheinlichkeit eines vollständigen Pfads (also eines Ereignisses ganz am Ende des Baums) ergibt sich, indem man die Wahrscheinlichkeiten aller Kanten entlang dieses Pfads miteinander multipliziert – vom Start (Wurzel) bis zum Ende (Blatt).
+
+```{r}
+#| engine: tikz
+#| label: probTree1
+\begin{tikzpicture}[
+  grow'=right,
+  level 1/.style ={level distance=2cm, sibling distance=1.6cm, parent anchor=east, child anchor=west},
+  level 2/.style ={level distance=2.5cm, sibling distance=0.8cm},
+  level 3/.style ={level distance=1.5cm, sibling distance=0.8cm, dashed},
+  level 4/.style ={level distance=3.5cm, sibling distance=0.8cm, dashed},
+  prob/.style={font=\footnotesize,above}
+]
+
+% Baumstruktur
+\node (root) {}
+  child {node (x1) {$x_1$}
+    child {node (y1x1) {$y_1$}
+      child {node (xy1x1) {$(x_1,y_1)$} 
+        child {node (pxy1x1) {$P(x_1\cap y_1)$} edge from parent node[prob] {$P(x_1)P(y_1|x_1)$}}
+      }
+      edge from parent node[prob] {$P(y_1|x_1)$}
+    }
+    child {node (y2x1) {$y_2$}
+      child {node (xy2x1) {$(x_1,y_2)$} 
+        child {node (pxy2x1) {$P(x_1\cap y_2)$} edge from parent node[prob] {$P(x_1)P(y_2|x_1)$}}
+      }
+      edge from parent node[prob,below] {$P(y_2|x_1)$}
+    }
+    edge from parent node[prob] {$P(x_1)$}
+  }
+  child {node (x2) {$x_2$}
+    child {node (y1x2) {$y_1$}
+      child {node (xy1x2) {$(x_2,y_1)$} 
+        child {node (pxy1x2) {$P(x_2\cap y_1)$} edge from parent node[prob] {$P(x_2)P(y_1|x_2)$}}
+      }
+      edge from parent node[prob] {$P(y_1|x_2)$}
+    }
+    child {node (y2x2) {$y_2$}
+      child {node (xy2x2) {$(x_2,y_2)$}
+        child {node (pxy2x2) {$P(x_2\cap y_2)$} edge from parent node[prob] {$P(x_2)P(y_2|x_2)$}}
+      }
+      edge from parent node[prob,below] {$P(y_2|x_2)$}
+    }
+    edge from parent node[prob,below] {$P(x_2)$}
+  };
+
+% Beschriftung über den Ebenen (ohne scope)
+\node[text width=3.5cm, align=center] at ([yshift=1cm]pxy1x1.north) {Wahrscheinlichkeit};
+\node[font=\bfseries, text width=2cm, align=center] at ([yshift=1cm]xy1x1.north) {$\Omega$};
+\node[font=\bfseries, text width=2cm, align=center] at ([yshift=1cm]y1x1.north) {$Y$};
+\node[font=\bfseries, text width=2cm, align=center] at ([yshift=1cm]x1.north) {$X$};
+
+\end{tikzpicture}
+
+```
+
+
+
+### Wahrscheinlichkeitsbaum mit abhängigen Variablen
+
+::: {.callout-tip appearance="default"}
+## Beispiel:  Rauchen und Krebs:
+
+In einer Population gibt es 30 % Raucher und wir wissen, dass 40 % der Raucher Krebs haben, während nur 10 % der Nichtraucher an Krebs erkrankt sind. Der Wahrscheinlichkeitsbaum des Wahrscheinlichkeitsraums des zufälligen Experiments, das darin besteht, eine zufällig ausgewählte Person auszuwählen und die Variablen Rauchen und Brustkrebs zu messen, ist unten dargestellt.
+
+```{r}
+#| label: probTreeRauchen
+#| engine: tikz
+\begin{tikzpicture}[
+  grow'=right,
+  level 1/.style ={level distance=2cm, sibling distance=1.6cm, parent anchor=east, child anchor=west},
+  level 2/.style ={level distance=2cm, sibling distance=0.8cm},
+  level 3/.style ={level distance=1.5cm, sibling distance=0.8cm, dashed},
+  level 4/.style ={level distance=3cm, sibling distance=0.8cm, dashed},
+  prob/.style={font=\footnotesize,above}
+]
+
+\node (root) {}
+  child {node (S) {R}
+    child {node (C1) {K}
+      child {node (SC) {(R,K)}
+        child {node (PSC) {$0.12$} edge from parent node[prob] {$0.3\cdot 0.4$}}
+      }
+      edge from parent node[prob] {$0.4$}
+    }
+    child {node (nC1) {$\overline{\mbox{K}}$}
+      child {node (SnC) {(R,$\overline{\mbox{K}}$)}
+        child {node (PSnC) {$0.18$} edge from parent node[prob] {$0.3\cdot 0.6$}}
+      }
+      edge from parent node[prob,below] {$0.6$}
+    }
+    edge from parent node[prob] {$0.3$}
+  }
+  child {node (nS) {$\overline{\mbox{R}}$}
+    child {node (C2) {K}
+      child {node (nSC) {($\overline{\mbox{R}}$,K)}
+        child {node (PnSC) {$0.07$} edge from parent node[prob] {$0.7\cdot 0.1$}}
+      }
+      edge from parent node[prob] {$0.1$}
+    }
+    child {node (nC2) {$\overline{\mbox{K}}$}
+      child {node (nSnC) {($\overline{\mbox{R}}$,$\overline{\mbox{K}}$)}
+        child {node (PnSnC) {$0.63$} edge from parent node[prob] {$0.7\cdot 0.9$}}
+      }
+      edge from parent node[prob,below] {$0.9$}
+    }
+    edge from parent node[prob,below] {$0.7$}
+  };
+
+% Beschriftung ohne scope
+\node[text width=3.5cm, align=center] at ([yshift=1cm]PSC.north) {Wahrscheinlichkeit};
+\node[font=\bfseries, text width=2.5cm, align=center] at ([yshift=1cm]SC.north) {$\Omega$};
+\node[text width=2.5cm, align=center] at ([yshift=1cm]C1.north) {Krebs};
+\node[text width=2.5cm, align=center] at ([yshift=1cm]S.north) {Rauchen};
+
+\end{tikzpicture}
+
+```
+
+
+:::
+
+
+### Wahrscheinlichkeitsbaum mit unabhängigen Variablen
+
+::: {.callout-tip appearance="default"}
+## Beispiel Münzwurf
+Der Wahrscheinlichkeitsbaum für das Zufallsexperiment zwei Münzen zu werfen ist:
+
+```{r}
+#| label: probZreeMuenz
+#| engine: tikz
+\begin{tikzpicture}[
+  grow'=right,
+  level 1/.style ={level distance=2cm, sibling distance=1.6cm, parent anchor=east, child anchor=west},
+  level 2/.style ={level distance=2cm, sibling distance=0.8cm},
+  level 3/.style ={level distance=1.5cm, sibling distance=0.8cm, dashed},
+  level 4/.style ={level distance=3cm, sibling distance=0.8cm, dashed},
+  prob/.style={font=\footnotesize,above}
+]
+
+% Baumstruktur
+\node (root) {}
+  child {node (K1) {K}
+    child {node (K2) {K}
+      child {node (KK) {(K,K)}
+        child {node (PKK) {$0.25$} edge from parent node[prob] {$0.5\cdot 0.5$}}
+      }
+      edge from parent node[prob] {$0.5$}
+    }
+    child {node (KZ) {Z}
+      child {node (KZZ) {(K,Z)}
+        child {node (PKZ) {$0.25$} edge from parent node[prob] {$0.5\cdot 0.5$}}
+      }
+      edge from parent node[prob,below] {$0.5$}
+    }
+    edge from parent node[prob,above] {$0.5$}
+  }
+  child {node (Z1) {Z}
+    child {node (ZK) {K}
+      child {node (ZKK) {(Z,K)}
+        child {node (PZK) {$0.25$} edge from parent node[prob] {$0.5\cdot 0.5$}}
+      }
+      edge from parent node[prob] {$0.5$}
+    }
+    child {node (ZZ) {Z}
+      child {node (ZZZ) {(Z,Z)}
+        child {node (PZZ) {$0.25$} edge from parent node[prob] {$0.5\cdot 0.5$}}
+      }
+      edge from parent node[prob,below] {$0.5$}
+    }
+    edge from parent node[prob,below] {$0.5$}
+  };
+
+% Beschriftung ohne scope
+\node[text width=3.5cm, align=center] at ([yshift=1cm]PKK.north) {Wahrscheinlichkeit};
+\node[font=\bfseries, text width=2.5cm, align=center] at ([yshift=1cm]KK.north) {$\Omega$};
+\node[text width=2.5cm, align=center] at ([yshift=1cm]K2.north) {Münze 2};
+\node[text width=2.5cm, align=center] at ([yshift=1cm]K1.north) {Münze 1};
+
+\end{tikzpicture}
+
+```
+
+:::
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel mit 3 Variablen
+In einer Population gibt es 40% Männer und 60% Frauen. Der Wahrscheinlichkeitsbaum für das Ziehen einer zufälligen Stichprobe von drei Personen ist unten dargestellt.
+
+```{r}
+#| engine: tikz
+#| label: probTree3Vars
+\begin{tikzpicture}[
+  grow'=right,
+  level 1/.style ={level distance=2cm, sibling distance=3.2cm, parent anchor=east, child anchor=west},
+  level 2/.style ={level distance=2cm, sibling distance=1.6cm},
+  level 3/.style ={level distance=2cm, sibling distance=0.8cm},
+  level 4/.style ={level distance=1.5cm, sibling distance=0.8cm, dashed},
+  level 5/.style ={level distance=3cm, sibling distance=0.8cm, dashed},
+  prob/.style={font=\footnotesize,above}
+]
+
+\node (root) {}
+  child {node (P1w) {w}
+    child {node (P2w1) {w}
+      child {node (P3w1) {w}
+        child {node (www) {(w,w,w)}
+          child {node (Pwww) {$0{,}216$} edge from parent node[prob] {$0{,}6\cdot 0{,}6\cdot 0{,}6$}}
+        }
+        edge from parent node[prob] {$0{,}6$}
+      }
+      child {node (P3m1) {m}
+        child {node (wwm) {(w,w,m)}
+          child {node (Pwwm) {$0{,}144$} edge from parent node[prob] {$0{,}6\cdot 0{,}6\cdot 0{,}4$}}
+        }
+        edge from parent node[prob,below] {$0{,}4$}
+      }
+      edge from parent node[prob] {$0{,}6$}
+    }
+    child {node (P2m1) {m}
+      child {node (P3w2) {w}
+        child {node (wmw) {(w,m,w)}
+          child {node (Pwmw) {$0{,}144$} edge from parent node[prob] {$0{,}6\cdot 0{,}4\cdot 0{,}6$}}
+        }
+        edge from parent node[prob] {$0{,}6$}
+      }
+      child {node (P3m2) {m}
+        child {node (wmm) {(w,m,m)}
+          child {node (Pwmm) {$0{,}096$} edge from parent node[prob] {$0{,}6\cdot 0{,}4\cdot 0{,}4$}}
+        }
+        edge from parent node[prob,below] {$0{,}4$}
+      }
+      edge from parent node[prob,below] {$0{,}4$}
+    }
+    edge from parent node[prob,left] {$0{,}6$}
+  }
+  child {node (P1m) {m}
+    child {node (P2w2) {w}
+      child {node (P3w3) {w}
+        child {node (mww) {(m,w,w)}
+          child {node (Pmww) {$0{,}144$} edge from parent node[prob] {$0{,}4\cdot 0{,}6\cdot 0{,}6$}}
+        }
+        edge from parent node[prob] {$0{,}6$}
+      }
+      child {node (P3m3) {m}
+        child {node (mwm) {(m,w,m)}
+          child {node (Pmwm) {$0{,}096$} edge from parent node[prob] {$0{,}4\cdot 0{,}6\cdot 0{,}4$}}
+        }
+        edge from parent node[prob,below] {$0{,}4$}
+      }
+      edge from parent node[prob] {$0{,}6$}
+    }
+    child {node (P2m2) {m}
+      child {node (P3w4) {w}
+        child {node (mmw) {(m,m,w)}
+          child {node (Pmmw) {$0{,}096$} edge from parent node[prob] {$0{,}4\cdot 0{,}4\cdot 0{,}6$}}
+        }
+        edge from parent node[prob] {$0{,}6$}
+      }
+      child {node (P3m4) {m}
+        child {node (mmm) {(m,m,m)}
+          child {node (Pmmm) {$0{,}064$} edge from parent node[prob] {$0{,}4\cdot 0{,}4\cdot 0{,}4$}}
+        }
+        edge from parent node[prob,below] {$0{,}4$}
+      }
+      edge from parent node[prob,below] {$0{,}4$}
+    }
+    edge from parent node[prob,left] {$0{,}4$}
+  };
+
+% Beschriftungen oben ohne scope
+\node[text width=3.5cm, align=center] at ([yshift=1cm]Pwww.north) {Wahrscheinlichkeit};
+\node[font=\bfseries, text width=2.5cm, align=center] at ([yshift=1cm]www.north) {$\Omega$};
+\node[text width=2.5cm, align=center] at ([yshift=1cm]P3w1.north) {Person 3};
+\node[text width=2.5cm, align=center] at ([yshift=1cm]P2w1.north) {Person 2};
+\node[text width=2.5cm, align=center] at ([yshift=1cm]P1w.north) {Person 1};
+
+\end{tikzpicture}
+
+```
+
+:::
 
 
 
@@ -519,6 +964,220 @@ Im Gegensatz dazu, wenn $P(A)$ näher bei $1$ als bei $0$ liegt, sind die Chance
 
 
 
+## Satz von der vollständigen Wahrscheinlichkeit:
+
+::: {.callout-warning appearance="default"}
+##  Definition "Aufteilung des Wahrscheinlichkeitsraums"
+
+Eine Menge von Ereignissen $A_1,A_2,\ldots,A_n$ aus demselben Ereignisraum $\Omega$
+heißt eine *Aufteilung des Wahrscheinlichkeitsraums*, wenn sie die folgenden Bedingungen erfüllt:
+
+1. Die Vereinigung der Ereignisse ist der Ereignisraum, das heißt, $A_1\cup \cdots\cup A_n =\Omega$
+2. Alle Ereignisse sind paarweise ausschließend, das heißt  $A_i\cap A_j = \emptyset$ $\forall i\neq j$.
+
+```{r}
+#| label: fullProps
+#| engine: tikz
+\begin{tikzpicture}
+\draw (0,3) node[anchor=north east] {$\Omega$} rectangle (4,0);
+\foreach \x in {1,2,3} {
+	\draw (\x,0) -- (\x,3);
+} 
+\node at (0.5,1.5) {$A_1$};
+\node at (1.5,1.5) {$A_2$};
+\node at (2.5,1.5) {$\cdots$};
+\node at (3.5,1.5) {$A_n$};
+\end{tikzpicture}
+```
+
+:::
+
+
+Üblicherweise ist es einfach, eine Aufteilung des Wahrscheinlichkeitsraums zu erhalten, indem man eine Population entsprechend einer kategorischen Variable aufteilt, wie beispielsweise Geschlecht oder Blutgruppe usw.
+
+
+
+
+ Wenn wir eine Aufteilung des Ereignisraums haben, können wir sie verwenden, um die Wahrscheinlichkeiten anderer Ereignisse in demselben Wahrscheinlichkeitsraum zu berechnen.
+
+::: {.callout-warning appearance="default"}
+## Definition "Gesamtwahrscheinlichkeit"
+Gegeben eine Aufteilung $A_1,\ldots,A_n$  eines Wahrscheinlichkeitsraums $\Omega$, kann die Wahrscheinlichkeit jedes anderen Ereignisses $B$ des selben Wahrscheinlichkeitsraums mit der folgenden Formel berechnet werden:
+
+$$
+P(B) = \sum_{i=1}^n P(A_i\cap B) = \sum_{i=1}^n P(A_i)P(B|A_i).
+$$
+
+:::
+
+
+
+::: {.callout-caution appearance="default"}
+## Beweis
+
+Der Beweis dieses Satzes ist recht einfach. Da  $A_1,\ldots,A_n$ eine Aufteilung von $\Omega$ ist, haben wir:
+
+$$
+B = B\cap \Omega = B\cap (A_1\cup \cdots \cup A_n) = (B\cap A_1)\cup \cdots \cup (B\cap A_n).
+$$
+
+Und alle Ereignisse dieser Vereinigung sind paarweise ausschließend, da $A_1,\ldots,A_n$. 
+Daher gilt:
+
+$$
+\begin{aligned}
+P(B) &= P((B\cap A_1)\cup \cdots \cup (B\cap A_n)) = P(B\cap A_1)+\cdots + P(B\cap A_n) =\\
+&= P(A_1)P(B|A_1)+\cdots + P(A_n)P(B|A_n) = \sum_{i=1}^n P(A_i)P(B|A_i).
+\end{aligned}
+$$
+
+
+
+```{r}
+#| label: plotgesamtprob
+# Basis-Plot vorbereiten
+plot(NULL, xlim = c(0, 4), ylim = c(0, 3), type = "n", xlab = "", ylab = "", axes = FALSE, asp = 1)
+
+# Rechteck für Omega
+rect(0, 0, 4, 3, border = "black")
+text(0, 3, expression(Omega), pos = 2)
+
+
+# A_i Beschriftungen
+text(0.5, 0.2, expression(A[1]))
+text(1.5, 0.2, expression(A[2]))
+text(2.5, 0.2, expression(cdots))
+text(3.5, 0.2, expression(A[n]))
+
+# Funktion zum Zeichnen einer gefüllten Ellipse
+draw_filled_ellipse <- function(center.x, center.y, a, b, col = "skyblue", border = "black", n = 200) {
+  t <- seq(0, 2*pi, length.out = n)
+  x <- center.x + a * cos(t)
+  y <- center.y + b * sin(t)
+  polygon(x, y, col = col, border = border)
+}
+
+# Ellipse B (gefüllt mit Skyblue)
+draw_filled_ellipse(2, 1.5, 1.9, 1, col = "skyblue")
+
+# B-Beschriftung
+text(2.5, 2.3, expression(B), cex=1.5)
+
+# Funktion zum Füllen der Schnittbereiche A_i ∩ B
+fill_intersection <- function(xmin, xmax, center.x, center.y, a, b, col = rgb(0.4, 0.6, 1, 0.3)) {
+  t <- seq(0, 2*pi, length.out = 500)
+  x <- center.x + a*cos(t)
+  y <- center.y + b*sin(t)
+  idx <- which(x >= xmin & x <= xmax)
+  polygon(c(x[idx], rev(x[idx])), c(y[idx], rev(y[idx])), col = col, border = NA)
+}
+
+# Schnittbereiche füllen
+fill_intersection(0, 1, 2, 1.5, 1.9, 1)
+fill_intersection(1, 2, 2, 1.5, 1.9, 1)
+fill_intersection(2, 3, 2, 1.5, 1.9, 1)
+fill_intersection(3, 4, 2, 1.5, 1.9, 1)
+
+# Beschriftungen der Schnittbereiche
+text(0.6, 1.5, expression(A[1] %*% B), cex = 0.8)
+text(1.5, 1.5, expression(A[2] %*% B), cex = 0.8)
+text(2.5, 1.5, expression(cdots), cex = 0.8)
+text(3.4, 1.5, expression(A[n] %*% B), cex = 0.8)
+
+# Vertikale Trennlinien
+abline(v = 1:3, col = "black")
+```
+
+:::
+
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel: Diagnose
+
+Ein Symptom $S$ kann durch eine Krankheit $K$ verursacht werden, kann aber auch bei Personen ohne die Krankheit auftreten. In einer Population beträgt der Anteil der Menschen mit der Krankheit 0,2. Es ist bekannt, dass 90 % der Personen mit der Krankheit das Symptom aufweisen, während nur 40 % der Personen ohne die Krankheit es haben.
+
+Wie groß ist die Wahrscheinlichkeit, dass eine zufällig ausgewählte Person aus der Bevölkerung das Symptom hat?
+:::
+
+Um diese Frage zu beantworten, können wir den Satz von der vollständigen Wahrscheinlichkeit unter Verwendung der Aufteilung $\{K,\overline K\}$ anwenden:
+
+$$
+P(S) = P(K)P(S|K)+P(\overline K)P(S|\overline K) = 0.2\cdot 0.9 + 0.8\cdot 0.4 = 0.5.
+$$
+Das heißt, die Hälfte der Bevölkerung hat das Symptom. 
+
+*Tatsächlich handelt es sich um einen gewichteten Mittelwert der Wahrscheinlichkeiten!*
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel Wahrscheinlichkeitsbaum
+Das Ergebnis der vorherigen Frage wird durch den Wahrscheinlichkeitsbaum des Wahrscheinlichkeitsraums noch klarer:
+
+```{r}
+#| label: krankheitsbaum
+#| engine: tikz
+\begin{tikzpicture}[
+  grow'=right,
+  level 1/.style ={level distance=2cm, sibling distance=1.6cm, parent anchor=east, child anchor=west},
+  level 2/.style ={level distance=2cm, sibling distance=0.8cm},
+  level 3/.style ={level distance=1.5cm, sibling distance=0.8cm, dashed},
+  level 4/.style ={level distance=3cm, sibling distance=0.8cm, dashed},
+  prob/.style={font=\footnotesize,above}
+]
+
+% Baumstruktur
+\node (root) {}
+  child {node (krank) {K}
+    child {node (symptom_krank) {S}
+      child {node[red] (ks) {$\text{K}, \text{S}$}
+        child {node[red] (ksval) {$0{,}18$} edge from parent node[prob] {$0{,}2 \cdot 0{,}9$}}
+      }
+      edge from parent node[prob] {$0{,}9$}
+    }
+    child {node (kein_symptom_krank) {$\overline S$}
+      child {node (kns) {$\text{K}, \overline{\text{S}}$}
+        child {node (knsval) {$0{,}02$} edge from parent node[prob] {$0{,}2 \cdot 0{,}1$}}
+      }
+      edge from parent node[prob,below] {$0{,}1$}
+    }
+    edge from parent node[prob] {$0{,}2$}
+  }
+  child {node (nicht_krank) {$\overline K$}
+    child {node (symptom_gesund) {S}
+      child {node[red] (nks) {$\overline{\text{K}}, \text{S}$}
+        child {node[red] (nksval) {$0{,}32$} edge from parent node[prob] {$0{,}8 \cdot 0{,}4$}}
+      }
+      edge from parent node[prob] {$0{,}4$}
+    }
+    child {node (kein_symptom_gesund) {$\overline S$}
+      child {node (nk_ns) {$\overline{\text{K}}, \overline{\text{S}}$}
+        child {node (nk_ns_val) {$0{,}48$} edge from parent node[prob] {$0{,}8 \cdot 0{,}6$}}
+      }
+      edge from parent node[prob,below] {$0{,}6$}
+    }
+    edge from parent node[prob,below] {$0{,}8$}
+  };
+
+% Beschriftung oberhalb der Ebenen, ohne scope
+\node[text width=3.5cm, align=center] at ([yshift=1cm]ksval.north) {Wahrscheinlichkeit};
+\node[font=\bfseries, text width=2.5cm, align=center] at ([yshift=1cm]ks.north) {$\Omega$};
+\node[text width=2.5cm, align=center] at ([yshift=1cm]symptom_krank.north) {Symptom};
+\node[text width=2.5cm, align=center] at ([yshift=1cm]krank.north) {Krankheit};
+
+\end{tikzpicture}
+
+```
+
+$$
+\begin{aligned}
+P(S) &= P(K\cap S) + P(\overline K\cap S) = P(K)\cdot P(S|K)+P(\overline K)\cdot P(S|\overline K)\\
+& = 0.2\cdot 0.9+ 0.8\cdot 0.4 = 0.18 + 0.32 = 0.5.
+\end{aligned}
+$$
+:::
 
 
 
@@ -528,7 +1187,7 @@ Im Gegensatz dazu, wenn $P(A)$ näher bei $1$ als bei $0$ liegt, sind die Chance
 
 
 
-
+## Satz von Bayes
 
 
 
