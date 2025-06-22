@@ -378,8 +378,22 @@ text(x=3, y=3, labels="+", cex=3, col="darkred")
 text(x=1, y=3, labels="-", cex=3, col="darkred")
 ```
 
+
+
+
 ::: {.callout-note appearance="minimal"}
 Wenn zwischen den Variablen eine *aufsteigende* lineare Beziehung besteht, werden die meisten Punkte in den Quadranten 1 und 3 liegen und die Summe der Produkte der Abweichungen vom Mittelwert wird *positiv* sein.
+
+
+$$
+\sum(x_i-\bar x)(y_j-\bar y) >0
+$$
+:::
+
+
+
+
+:::{layout-ncol=2}
 
 ```{r}
 #| label: quadranten2
@@ -400,20 +414,6 @@ abline(h=my, lty=2,col="grey")
 abline(v=mx, lty=2,col="grey")
 
 ```
-
-$$
-\sum(x_i-\bar x)(y_j-\bar y) >0
-$$
-:::
-
-
-
-
-
-::: {.callout-note appearance="minimal"}
-
-Wenn zwischen den Variablen eine *abnehmende* lineare Beziehung besteht, werden die meisten Punkte in den Quadranten 2 und 4 liegen und die Summe der Produkte der Abweichungen vom Mittelwert wird *negativ* sein.
-
 
 ```{r}
 #| label: quadranten3
@@ -436,6 +436,18 @@ abline(v=mx, lty=2,col="grey")
 
 ```
 
+
+:::
+
+
+
+
+
+
+
+::: {.callout-note appearance="minimal"}
+
+Wenn zwischen den Variablen eine *abnehmende* lineare Beziehung besteht, werden die meisten Punkte in den Quadranten 2 und 4 liegen und die Summe der Produkte der Abweichungen vom Mittelwert wird *negativ* sein.
 
 $$
 \sum(x_i-\bar x)(y_j-\bar y) <0
@@ -669,21 +681,22 @@ $$
 \end{array}
 $$
 
-ergibt sich die Regressionsgerade für *Körpergröße erklärt durch Gewicht* (Größe gegen Gewicht, $Größe = f(Gewicht)$) wie folgt:
+ergibt sich die Regressionsgerade für *Körpergröße erklärt durch Gewicht* (Größe gegen Gewicht, $\text{Größe} = f(\text{Gewicht})$) wie folgt:
 
 $$
 y = \bar y +\frac{s_{xy}}{s_x^2}(x-\bar x) = 69.67+\frac{104.07}{102.06}(x-174.67) = -108.49 +1.02 x
 $$
 
-Die Regressionsgerade für *Gewicht erklärt durch Körpergröße* (Gewicht gegen Größe, $Gewicht = f(Größe)$) ist
+Die Regressionsgerade für *Gewicht erklärt durch Körpergröße* (Gewicht gegen Größe, $\text{Gewicht} = f(\text{Größe})$) ist
 
 $$
 x = \bar x +\frac{s_{xy}}{s_y^2}(y-\bar y) = 174.67+\frac{104.07}{164.42}(y-69.67) = 130.78 + 0.63 y
 $$
 
 ::: {.callout-important appearance="simple"}
-Beachten Sie, dass die Regressionslinien unterschiedlich sind!
+Beachten Sie, dass die Regressionsgeraden unterschiedlich sind!
 :::
+
 
 
 ```{r}
@@ -711,10 +724,15 @@ text(185,100,"Größe gegen Gewicht", col="hotpink1")
 
 ```
 
+
 Üblicherweise sind die Regressionsgeraden von $Y$ gegen $X$ und $X$ gegen $Y$ **nicht** gleich, aber sie schneiden sich immer im Mittelpunkt $(\overline x, \overline y)$.
 
 Wenn es eine perfekte lineare Beziehung zwischen den Variablen gibt, dann sind beide Regressionsgeraden gleich, da diese Linie sowohl $X$-Residuen als auch $Y$-Residuen auf null setzt.
 
+
+
+
+:::{layout-ncol=2}
 
 ```{r}
 #| label: perfekteRegression
@@ -738,14 +756,6 @@ text(0.7,0.4, "Y gegen X = X gegen Y")
 ```
 
 
-Wenn es keine lineare Beziehung zwischen den Variablen gibt, dann sind beide Regressionsgeraden konstant und gleich den jeweiligen  Mittelwerten 
-$$
-y = \bar y, \qquad x = \bar x.
-$$
-
-
-Daher schneiden sie sich senkrecht.
-
 ```{r}
 #| label: nichtlineareRegression
 x=runif(100)
@@ -755,7 +765,7 @@ par(mai=c(0.3,0.3,0.4,0.2),
 plot(x,y, 
      ylim=c(0,1), 
      col="skyblue", 
-     main="Nicht-lineare Regression", 
+     main="keine lineare Regression", 
      xlab="X", 
      ylab="Y", 
      pch=16, 
@@ -768,6 +778,16 @@ text(0.9,mean(y)-0.07, "Y gegen X", col="darkgreen")
 
 ```
 
+
+:::
+
+Wenn es keine lineare Beziehung zwischen den Variablen gibt, dann sind beide Regressionsgeraden konstant und gleich den jeweiligen  Mittelwerten 
+$$
+y = \bar y, \qquad x = \bar x.
+$$
+
+
+Daher schneiden sie sich senkrecht.
 
 ### Regressionskoeffizient
 
@@ -859,7 +879,786 @@ Aber wie zuverlässig sind diese Vorhersagen?
 
 
 
+
+
+
+
+
 ## Korrelation
+
+Sobald wir ein Regressionsmodell haben, müssen wir seine Vorhersagefähigkeit bewerten, indem wir die Anpassungsgüte des Modells und die Stärke der Beziehung, die es aufbaut, untersuchen. Dieser Teil der Statistik wird als **Korrelation** bezeichnet.
+
+Die Korrelationsanalyse untersucht die Residuen eines Regressionsmodells: Je kleiner die Residuen, desto besser passt das Modell und desto stärker ist die Beziehung, die es aufbaut. Um die Anpassungsgüte eines Regressionsmodells zu messen, wird häufig die *residuale Varianz* verwendet.
+
+::: {.callout-warning appearance="default"}
+## Definition "Residuale Varianz $s_{ry}^2$
+
+Bei einem Regressionsmodell $y = f(x)$ für eine zweidimensionale Variable $(X, Y)$ ist die 
+residuale Varianz die durchschnittliche quadratische Abweichung der Residuen,
+
+$$
+s_{ry}^2 = \frac{\sum e_{ij}^2n_{ij}}{n} = \frac{\sum (y_j - f(x_i))^2n_{ij}}{n}.
+$$
+:::
+
+Je größer die Residuen, desto größer die residuale Varianz und desto kleiner die Anpassungsgüte. Wenn die lineare Beziehung perfekt ist, sind die Residuen Null und die residuale Varianz ist ebenfalls Null. 
+Umgekehrt gilt, dass wenn es keine Beziehung gibt, die Residuen mit den Abweichungen vom Mittelwert übereinstimmen und die residuale Varianz gleich der Varianz der abhängigen Variable ist.
+
+$$
+0\leq s_{ry}^2\leq s_y^2
+$$
+
+
+```{r}
+#| label: RauschenSETUP
+#| include: false
+model <- lm(data$weight ~ data$height)
+prediction < -model[["coefficients"]][1] + model[["coefficients"]][2] * 183
+mean <- mean(data[["weight"]])
+```
+
+
+```{r}
+#| label: Rauschen
+par(mar = c(2.9, 2.9, 2,1), 
+    mgp = c(1.8, 0.4, 0), 
+    cex.lab = 1, 
+    cex.axis = 1, 
+    las = 1, 
+    tck = -0.02)
+plot(weight~height,
+     col="skyblue", 
+     main="", xlab="X", 
+     ylab="Y", 
+     xlim=c(150, 205), 
+     pch=16, 
+     data=data, 
+     axes=F)
+box()
+axis(1, at=c(183), 
+     labels= expression(x[i]))
+axis(2, at=c(mean, 93, prediction), 
+     labels=c(expression(bar(y)),
+              expression(y[j]),
+              expression(f(x[i]))),
+     las=2)
+#--------------------------------------------
+text(186, 96, expression("(" * x[i] * ", " * y[j] * ")"))
+#--------------------------------------------
+segments(0, 93, 183, 93, 
+         col="grey", 
+         lty=2)
+segments(183, 0, 183, 93, 
+         col="grey", 
+         lty=2)
+abline(h=mean, 
+       lty=2, 
+       col="grey")
+#--------------------------------------------
+Arrows(149,mean, 149, 93, 
+       arr.length = 0.2, 
+       arr.width = 0.15, 
+       code = 3, 
+       arr.type = "triangle", 
+       arr.adj=1, 
+       col = "darkred")
+text(149, 82, "Totale Variation", pos=4, col="darkred")
+text(149,79, expression(y[j]-bar(y)), pos=4, col="darkred")
+#--------------------------------------------
+abline(model, lwd=2, col="steelblue")
+text(195,102, "Regressionsgerade von", col="steelblue")
+text(195,99, "Y gegen X", col="steelblue")
+#--------------------------------------------
+segments(0,
+         coefficients(model)[2]*183+coefficients(model)[1],183,
+         coefficients(model)[2]*183+coefficients(model)[1], 
+         col="grey", 
+         lty=2)
+#--------------------------------------------
+Arrows(183, mean, 183, 
+       coefficients(model)[2]*183 + coefficients(model)[1], 
+       arr.length = 0.2, 
+       arr.width = 0.15, 
+       code = 3, 
+       arr.type = "triangle", 
+       arr.adj=1, 
+       col="darkgreen")
+text(184, 74, "Erklärte Variation", pos=4, offset=1, col="darkgreen")
+text(184, 71, expression(f(x[i])-bar(y)), pos=4, offset=1, col="darkgreen")
+#--------------------------------------------
+Arrows(183,
+       coefficients(model)[2] * 183+coefficients(model)[1],
+       183, 93, 
+       arr.length = 0.2, 
+       arr.width = 0.15, 
+       code = 3, 
+       arr.type = "triangle", 
+       arr.adj=1, 
+       col="red")
+text(184, 88, "nicht erklärte", 
+     pos=2, offset=1, col="red")
+text(184, 85, "Variation", 
+     pos=2, offset=1, col="red")
+text(184, 82, 
+     expression(e[ij]==y[j]-f(x[i])), 
+     pos=2, offset=1, col="red")
+#--------------------------------------------
+```
+
+
+
+
+## Korrelationskoeffizienten
+
+### Bestimmheitsmaß
+
+Es ist möglich, aus der Reststreuung eine andere Korrelationsstatistik zu definieren, die leichter interpretierbar ist.
+
+::: {.callout-note appearance="default"}
+## Definition Bestimmtheitsmaß $R^2$). 
+
+Für ein Regressionsmodell $y=f(x)$ einer zweidimensionalen Variablen $(X, Y)$, ist 
+sein Bestimmtheitsmaß 
+
+$$
+R^2 = 1- \frac{s_{ry}^2}{s_y^2}
+$$
+
+:::
+
+Da die Reststreuung von 0 bis $s_{y}^2$ reicht, gilt:
+
+$$
+0\leq R^2\leq 1
+$$
+
+Je größe r $R^2$ ist, desto besser passt das Regressionsmodell und desto zuverlässiger werden seine Vorhersagen sein. 
+
+- Wenn $R^2 = 0$, gibt es keine Beziehung gemäß dem Regressionsmodell.
+- Wenn $R^2 = 1$, ist die Beziehung gemäß dem Modell perfekt.
+
+### Lineares Bestimmtheitsmaß
+
+Wenn das Regressionsmodell linear ist, beträgt die Reststreuung 
+
+$$
+\begin{aligned}
+s_{ry}^2 & = \sum e_{ij}^2f_{ij} = \sum (y_j - f(x_i))^2f_{ij} = \sum \left(y_j - \bar y -\frac{s_{xy}}{s_x^2}(x_i-\bar x) \right)^2f_{ij}\\
+& = \sum \left((y_j - \bar y)^2 +\frac{s_{xy}^2}{s_x^4}(x_i-\bar x)^2 - 2\frac{s_{xy}}{s_x^2}(x_i-\bar x)(y_j -\bar y)\right)f_{ij} \\
+& = \sum (y_j - \bar y)^2f_{ij} +\frac{s_{xy}^2}{s_x^4}\sum (x_i-\bar x)^2f_{ij}- 2\frac{s_{xy}}{s_x^2}\sum (x_i-\bar x)(y_j -\bar y)f_{ij}\\
+& = s_y^2 + \frac{s_{xy}^2}{s_x^4}s_x^2 - 2 \frac{s_{xy}}{s_x^2}s_{xy} = s_y^2 - \frac{s_{xy}^2}{s_x^2}.
+\end{aligned}
+$$
+
+... und das Bestimmtheitsmaß ist ....
+
+$$
+\begin{aligned}
+R^2 &= 1- \frac{s_{ry}^2}{s_y^2} = 1- \frac{s_y^2 - \frac{s_{xy}^2}{s_x^2}}{s_y^2} = 1 - 1 + \frac{s_{xy}^2}{s_x^2s_y^2} = \frac{s_{xy}^2}{s_x^2s_y^2}.
+\end{aligned}
+$$
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+In der Stichprobe zu Körpergröße und Gewicht gelten folgende Kennwerte:
+
+$$
+\begin{array}{lll}
+\bar x = 174.67 \text{ cm} & \quad & s^2_x = 102.06 \text{ cm}^2\\
+\bar y = 69.67 \text{ Kg} & & s^2_y = 164.42 \text{ Kg}^2\\
+s_{xy} = 104.07 \text{ cm}\cdot\text{ Kg}
+\end{array}
+$$
+
+Das Bestimmtheitsmaß errechnet sich also per
+
+$$
+R^2 = \frac{s_{xy}^2}{s_x^2s_y^2} = \frac{(104.07 \text{ cm}\cdot\text{Kg})^2}{102.06 \text{ cm}^2 \cdot 164.42 \text{ Kg}^2} = 0.65.
+$$
+
+:::
+
+Das bedeutet, dass das lineare Modell *Gewicht erklärt durch Größe* 65% der Variation des Gewichts erklärt und das lineare Modell *Körpergröße erklärt durch Gewicht* ebenfalls 65% der Variation der Körpergröße erklärt.
+
+
+### Korrelationskoeffizient
+
+::: {.callout-warning appearance="default"}
+## Definition Korrelationskoeffizient $r^2$
+Gegeben eine Stichprobe zweidimensionaler Variablen (X, Y), ist der Korrelationskoeffizient der Stichprobe die Wurzel des linearen  Bestimmtheitsmaßes mit dem Vorzeichen der Kovarianz:
+
+$$
+r = \dfrac{s_{xy}}{s_xs_y}.
+$$
+
+:::
+
+
+Das Bestimmheitsmaß $R^2$ reicht von 0 bis 1, und $r$ reicht von -1 bis 1, 
+
+$$
+-1\leq r\leq 1
+$$
+
+Der Korrelationskoeffizient misst nicht nur die Stärke, sondern auch die Richtung (steigend oder fallend) der linearen Beziehung:
+
+- Wenn $r = 0$, gibt es keine lineare Beziehung.
+- Wenn $r = 1$, gibt es eine perfekte steigende lineare Beziehung.
+- Wenn $r = -1$, gibt es eine perfekte fallende lineare Beziehung.
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+In der Stichprobe zu Körpergröße und Gewicht gelten folgende Kennwerte:
+
+$$
+\begin{array}{lll}
+\bar x = 174.67 \text{ cm} & \quad & s^2_x = 102.06 \text{ cm}^2\\
+\bar y = 69.67 \text{ Kg} & & s^2_y = 164.42 \text{ Kg}^2\\
+s_{xy} = 104.07 \text{ cm}\cdot\text{ Kg}
+\end{array}
+$$
+
+Der Korrelationskoeffizient kann nun berechnet werden mit:
+
+$$
+r = \frac{s_{xy}}{s_xs_y} = \frac{104.07 \text{ cm}\cdot\text{Kg}}{10.1 \text{ cm} \cdot 12.82 \text{ Kg}} = +0.8.
+$$
+:::
+
+Dies bedeutet, dass es eine relativ starke steigende lineare Beziehung zwischen Körpergröße und Gewicht gibt.
+
+```{r}
+#| label: diffCorrelation
+n = 100
+par(mfrow=c(3,3))
+
+for (i in seq(-1, 1, by=0.25)){
+  r = i
+  x1 = rnorm(n)
+  x2 = rnorm(n)
+  y = scale(x2) * r  +  scale(residuals(lm(x1~x2))) * sqrt(1-r*r)
+  par(mar = c(1, 1, 1.4, 1))
+  plot(y~x2, 
+       col = "steelblue", 
+       main = paste("r=",i, sep=""), 
+       xlab = "X", 
+       ylab = "Y", 
+       pch = 16, 
+       axes = F)
+  model <- lm(y~x2)
+  abline(model, lwd=2)
+  box()
+}
+
+```
+
+
+### Zuverlässigkeit von Regressionsvorhersagen
+
+Das Bestimmtheitsmaß erklärt, wie gut ein Regressionsmodell passt, aber andere Faktoren beeinflussen auch die Zuverlässigkeit von Regressionsvorhersagen:
+
+- Ein höheres $R^2$ bedeutet eine bessere Passung und zuverlässigere Vorhersagen.
+- Eine höhere Variabilität der Grundgesamtheit macht Vorhersagen schwieriger und weniger zuverlässig.
+- Eine größere Stichprobengröße bietet mehr Informationen und ermöglicht zuverlässigere Vorhersagen.
+
+Darüber hinaus muss man beachten, dass ein Regressionsmodell nur für den in der Stichprobe beobachteten Wertebereich gültig ist. Daher sollten keine Vorhersagen für Werte weit außerhalb dieses Bereichs gemacht werden, da wir für diese keine Informationen haben.
+
+
+
+
+
+## nicht-lineare Regression
+
+Eine nichtlineare Regression kann auch mit der Methode der kleinsten Quadrate durchgeführt werden.
+Allerdings kann in einigen Fällen die Anpassung eines nichtlinearen Modells durch eine einfache Transformation seiner Variablen auf die Anpassung eines linearen Modells reduziert werden.
+
+### Transformationen von nichtlinearen Regressionsmodellen
+
+- Logarithmisches Modell: Ein logarithmisches Modell $y = a+b \log x$ kann durch den Wechsel $t=\log x$ in ein lineares Modell überführt werden:
+
+$$
+y=a+b\log x = a+bt
+$$
+
+- Exponentielles Modell: Ein exponentielles Modell $y = e^{a+bx}$ kann durch den Wechsel $z = \log y$ in ein lineares Modell überführt werden:
+
+$$
+z = \log y = \log(e^{a+bx}) =  a+bx
+$$
+
+- Potenzialmodell: Ein Potenzialmodell $y = ax^b$ kann durch die Wechsel $t=\log x$ und $z=\log y$ in ein lineares Modell überführt werden:
+
+$$
+z = \log y = \log(ax^b) = \log a + b \log x = a^\prime+bt.
+$$
+
+- Inversmodell: Ein Inversmodell $y = a+b/x$ kann durch den Wechsel $t=1/x$ in ein lineares Modell überführt werden:
+
+$$
+y = a + b(1/x) = a+bt
+$$
+
+- Sigmoidales Modell: Ein sigmoidales Modell $y = e^{a+b/x}$ kann durch die Wechsel $t=1/x$ und $z=\log y$ in ein lineares Modell überführt werden:
+
+$$
+z = \log y = \log (e^{a+b/x}) = a+b(1/x) = a+bt
+$$
+
+
+
+### exponentieller Zusammenhang
+
+Die nachfolgende Tabelle zeigt die Anzahl an Bakterien in einer Kultur über mehrere Stunden.
+
+$$
+\begin{array}{c|c}
+\text{Hours} & \text{Bacteria}\\
+\hline
+0 &  25 \\
+1 & 28 \\
+2 &  47\\
+3 & 65 \\
+4 & 86\\
+5 & 121\\
+6 & 190\\
+7 & 290\\
+8 & 362
+\end{array}
+$$
+
+Das dazugehörige Streudiagramm sieht so aus:
+
+```{r}
+#| label: bakterienStreu1
+data <- read.table("data/hours_bacteria.csv", 
+                   header=TRUE, 
+                   sep="\t", 
+                   na.strings="NA", 
+                   dec=".", 
+                   strip.white=TRUE)
+par(mar=c(2.9,2.9,2,1), 
+    mgp=c(1.8,0.4,0), 
+    cex.lab=1, 
+    cex.axis=0.8, 
+    las=1, 
+    tck=-0.02)
+plot(bacteria~hours, 
+     col="steelblue", 
+     main="Bakterienwachstum", 
+     xlab="Stunden", 
+     ylab="Bakterien", 
+     pch=16, 
+     data=data)
+
+```
+
+
+Wenn wir ein lineares Modell erstellen (engl: *to fit*, auch *fitten* genannt), erhalten wir
+
+$$
+\text{Bakterien} = -30,18+41,27\,\text{Stunden, mit } R^2=0,85. 
+$$
+Die Regressionsgerade sieht so aus:
+
+
+
+```{r}
+#| label: bakterienStreu2
+data <- read.table("data/hours_bacteria.csv", 
+                   header=TRUE, 
+                   sep="\t", 
+                   na.strings="NA", 
+                   dec=".", 
+                   strip.white=TRUE)
+par(mar=c(2.9,2.9,2,1), 
+    mgp=c(1.8,0.4,0), 
+    cex.lab=1, 
+    cex.axis=0.8, 
+    las=1, 
+    tck=-0.02)
+plot(bacteria~hours, 
+     col="steelblue", 
+     main="lineare Regression des Bakterienwachstums", 
+     xlab="Stunden", 
+     ylab="Bakterien", 
+     pch=16, 
+     data=data)
+model <- lm(data$bacteria~data$hours)
+abline(model, lwd=2)
+text(4,300, expression(R^2 == 0.85))
+
+```
+
+Ist dies ein *gutes* Modell?
+
+
+
+#### exponentielles Modell
+
+Obwohl das lineare Modell nicht schlecht ist, erscheint ein exponentielles Modell aufgrund der Form des Punktwolken-Clouds des Streuplots 
+geeigneter zu sein.
+
+Um ein exponentielles Modell $y = e^{a+bx}$ zu konstruieren, können wir die Transformation $z=\log y$ anwenden, indem wir also eine logarithmische Transformation der abhängigen Variablen durchführen.
+
+$$
+\begin{array}{c|c|c}
+\text{Stunden} & \text{Bakterien} & \log(Bakterien)\\
+\hline
+0 &  25 & 3.22\\
+1 & 28 & 3.33\\
+2 &  47 & 3.85\\
+3 & 65  & 4.17\\
+4 & 86 & 4.45\\
+5 & 121 & 4.80\\
+6 & 190 & 5.25\\
+7 & 290 & 5.67\\
+8 & 362 & 5.89
+\end{array}
+$$
+
+
+```{r}
+#| label: logBakterien
+par(mar=c(2.9,2.9,2,1), 
+    mgp=c(1.8,0.4,0), 
+    cex.lab=1, 
+    cex.axis=0.8, 
+    las=1, 
+    tck=-0.02)
+plot(log(bacteria)~hours, 
+     col="steelblue", 
+     main="Logarithmus des Bakterienwachstums", 
+     xlab="Stunde", 
+     ylab="log(Bakterien)", 
+     pch=16, 
+     data=data)
+
+```
+
+
+Jetzt bleibt nur noch, die Regressionslinie des Logarithmus der Bakterien über die Stunden zu berechnen:
+
+$$
+\log(Bakterien) = 3.107 + 0.352 \text{ Stunden},
+$$
+
+und die Variable abschließend zurückzutransformieren,
+
+$$
+\text{Bakterien} =  e^{3.107+0.352 \text{ Stunden}}
+$$
+errechnet sich  $R^2 = 0,99$.
+
+Daher passt das exponentielle Modell deutlich besser als das lineare Modell.
+
+```{r}
+#| label: exponentielleBakterien
+par(mar=c(2.9,2.9,2,1), 
+    mgp=c(1.8,0.4,0), 
+    cex.lab=1, 
+    cex.axis=0.8, 
+    las=1, 
+    tck=-0.02)
+plot(bacteria~hours, 
+     col="skyblue", 
+     main="Exponentielle Regression des Bakterienwachstums", 
+     xlab="Stunden", 
+     ylab="Bakterien", 
+     pch=16, 
+     data=data)
+model <- lm(log(data$bacteria)~data$hours)
+curve(exp(coefficients(model)[1])*exp(coefficients(model)[2]*x), add=T, lwd=2)
+text(4,300, expression(R^2 == 0.99))
+
+```
+
+
+
+### Regressionsrisiken
+
+Es ist wichtig zu beachten, dass jedes Regressionsmodell seinen eigenen Bestimmtheitskoeffizienten hat. Daher bedeutet ein nah an Null liegender Bestimmtheitskoeffizient, dass es keine vom Modell festgelegte Beziehung gibt. Aber das bedeutet **nicht**, dass die Variablen *unabhängig* sind, da es eine andere Art von Beziehung geben könnte. 
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: typeOfZusammenhang
+x=runif(100,0,10)
+z=x+rnorm(100,0,0.1)
+y=0.25*z^2-2.5*z+8+rnorm(100,0,0.2)
+par(mar=c(2.9,2.9,2,1), 
+    mgp=c(1.8,0.4,0), 
+    cex.lab=1, 
+    cex.axis=0.8, 
+    las=1, 
+    tck=-0.02)
+plot(y~x, 
+     col ="steelblue", 
+     xlab="X", ylab="Y", pch=16)
+model <- lm(y~x)
+abline(model, lwd=2, col="darkred")
+coeffs <- floor(model$coeff*100)/100
+plusorminus <- c("+")
+if (coeffs[1] < 0 ) plusorminus <- c("")
+text(5, 7, bquote(y == .(coeffs[2]) * x ~ .(plusorminus) ~ .(abs(coeffs[1]))))
+text(5, 6.3, bquote(R^2 == .(floor(summary(model)$r.squared * 100) / 100)))
+
+```
+
+
+```{r}
+#| label: typeOfZusammenhangb
+par(mar=c(2.9,2.9,2,1), 
+    mgp=c(1.8,0.4,0), 
+    cex.lab=1, 
+    cex.axis=0.8, 
+    las=1, 
+    tck=-0.02)
+plot(y~x, 
+     col ="steelblue", 
+     xlab="X", 
+     ylab="Y", 
+     pch=16)
+model <- lm(y~x+I(x^2))
+curve(coefficients(model)[1]+coefficients(model)[2]*x+coefficients(model)[3]*x^2, 
+      add=T, 
+      lwd=2,
+      col="darkgreen")
+coeffs <- floor(model$coeff*100)/100
+plusorminus <- c("+")
+if (coeffs[1] < 0 ) plusorminus <- c("")
+text(5, 7, 
+     bquote(
+       y == .(coeffs[3]) * x^2 +
+       .(coeffs[2]) * x ~
+       .(plusorminus) ~ .(abs(coeffs[1]))
+       )
+     )
+
+text(5, 6.3, bquote(
+  R^2 == .(floor(summary(model)$r.squared * 100) / 100)
+))
+
+```
+
+:::
+
+
+
+
+### Ausreißer in Regressionsmodellen
+
+In Regressionsstudien sind Ausreißer Punkte, die nicht der Tendenz der restlichen Punkte folgen, auch wenn die Werte des Paares für jede Variable separat keine Ausreißer sind. 
+
+```{r}
+#| label: regOutlier1
+x=runif(9,0,10)
+y=-0.5*x+5+rnorm(9,0,0.2)
+par(mar=c(2.9,2.9,2,1), 
+    mgp=c(1.8,0.4,0), 
+    cex.lab=1, 
+    cex.axis=0.8, 
+    las=1, 
+    tck=-0.02)
+plot(y~x, 
+     col ="steelblue", 
+     main="Punktwolke mit Ausreisser", 
+     xlim=c(0,10), 
+     ylim=c(0,10), 
+     xlab="X", 
+     ylab="Y", 
+     pch=16)
+points(8,8,pch=16,col="darkred")
+text(7,8,"Ausreisser", col="darkred")
+
+```
+
+
+Ausreißer in Regressionsstudien können drastische Veränderungen in den Regressionsmodellen hervorrufen.
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: regOutlier2
+par(mar=c(2.9,2.9,2,1), 
+    mgp=c(1.8,0.4,0), 
+    cex.lab=1, 
+    cex.axis=0.8, 
+    las=1, 
+    tck=-0.02)
+plot(y~x, 
+     col ="steelblue", 
+     main="Lineare Regression ohne Ausreisser", 
+     xlim=c(0,10), 
+     ylim=c(0,10), 
+     xlab="X", 
+     ylab="Y", 
+     pch=16)
+points(8,8,pch=16,col="steelblue")
+model <- lm(y~x)
+abline(model, lwd=2)
+coeffs <- floor(model$coeff*100)/100
+plusorminus <- c("+")
+if (coeffs[1] < 0 ) plusorminus <- c("")
+text(5, 7, bquote(
+  y == .(coeffs[2]) * x ~ .(plusorminus) ~ .(abs(coeffs[1]))
+))
+
+text(5, 6.1, bquote(
+  R^2 == .(floor(summary(model)$r.squared * 100) / 100)
+))
+```
+
+
+```{r}
+#| label: regOutlier3
+x=c(x,8)
+y=c(y,8)
+par(mar=c(2.9,2.9,2,1), 
+    mgp=c(1.8,0.4,0), 
+    cex.lab=1, 
+    cex.axis=0.8, 
+    las=1, 
+    tck=-0.02)
+plot(y~x, 
+     col ="steelblue", 
+     main="Lineare Regression mit Ausreisser", 
+     xlim=c(0,10), ylim=c(0,10), 
+     xlab="X", ylab="Y", pch=16)
+model <- lm(y~x)
+abline(model, lwd=2)
+coeffs <- floor(model$coeff*100)/100
+plusorminus <- c("+")
+if (coeffs[1] < 0 ) plusorminus <- c("")
+text(5, 7, bquote(
+  y == .(coeffs[2]) * x ~
+  .(if (coeffs[1] < 0) "-" else "+") ~
+  .(abs(coeffs[1]))
+))
+
+text(5, 6.1, bquote(
+  R^2 == .(floor(summary(model)$r.squared * 100) / 100)
+))
+```
+
+
+:::
+
+
+
+### Simpsons Paradox
+
+Manchmal verschwindet ein Trend oder kehrt sich sogar um, wenn man die Probe nach einer qualitativen Variable aufteilt, die mit der abhängigen Variablen zusammenhängt. Dies wird als Simpsons Paradox bezeichnet.
+
+
+
+:::{layout-ncol=2}
+
+```{r}
+#| lable: simpsonParadox1
+set.seed(1234)
+hours1 <- runif(50, 0, 9)
+score1 <- 0.4 * hours1 + 4 + rnorm(50, mean = 0, sd = 1)
+hours2 <- runif(50, 5, 15)
+score2 <-  0.2 * hours2 + 1 + rnorm(50, mean = 0, sd = 1)
+score <- c(score1, score2)
+hours <- c(hours1, hours2)
+par(mar = c(2.9, 2.9, 2, 1), 
+    mgp = c(1.8, 0.6, 0), 
+    cex.lab = 1, 
+    cex.axis = 0.8, 
+    las = 1, 
+    tck = -0.02)
+plot(score ~ hours, 
+     col ="steelblue", 
+     main="Lineare Regression Punkte gegen Lernzeit", 
+     xlim=c(0,16), 
+     ylim=c(0,10), 
+     xlab="wöchentliche Lernzeit in Stunden", 
+     ylab="Punkte", 
+     pch=16)
+model <- lm(score ~ hours)
+abline(model, lwd=2)
+coeffs <- floor(model$coeff*100)/100
+plusorminus <- c("+")
+if (coeffs[1] < 0 ) plusorminus <- c("")
+text(10, 9, bquote(
+  y == .(coeffs[2]) * x ~ .(plusorminus) ~ .(abs(coeffs[1]))
+), pos = 4)
+
+text(10, 8.2, bquote(
+  r == .(round(cor(hours, score), 2))
+), pos = 4)
+
+
+```
+
+
+```{r}
+#| lable: simpsonParadox2
+par(mar = c(2.9, 2.9 , 2, 1), 
+    mgp = c(1.8, 0.6, 0), 
+    cex.lab = 1, 
+    cex.axis = 0.8, 
+    las = 1, 
+    tck = -0.02)
+plot(score1 ~ hours1, 
+     col ="steelblue", 
+     main="Lineare Regression Punkte gegen Lernzeit", 
+     xlim=c(0,16), ylim=c(0,10), 
+     xlab="wöchentliche Lernzeit in Stunden", 
+     ylab="Punkte", 
+     pch=16)
+points(score2 ~ hours2, col ="darkred", pch=16)
+model1 <- lm(score1 ~ hours1)
+abline(model1, lwd=2, col = "steelblue")
+coeffs1 <- floor(model1$coeff*100)/100
+plusorminus <- c("+")
+if (coeffs1[1] < 0 ) plusorminus <- c("")
+text(0, 8.5, bquote(
+  y == .(coeffs1[2]) * x ~ .(plusorminus) ~ .(abs(coeffs1[1]))
+), pos = 4)
+
+text(0, 7.7, bquote(
+  r == .(round(cor(hours1, score1), 2))
+), pos = 4)
+model2 <- lm(score2 ~ hours2)
+abline(model2, lwd=2, col = "darkred")
+coeffs2 <- floor(model2$coeff*100)/100
+plusorminus <- c("+")
+if (coeffs2[1] < 0 ) plusorminus <- c("")
+text(10, 0.8, bquote(
+  y == .(coeffs2[2]) * x ~ .(plusorminus) ~ .(abs(coeffs2[1]))
+), pos = 4)
+
+text(10, 0, bquote(
+  r == .(round(cor(hours2, score2), 2))
+), pos = 4)
+legend("top", 
+       legend=c("gute Studierende", "schlechte Studierende"), 
+       fill=c("steelblue", "darkred"), 
+       cex = 0.8, 
+       horiz = T)
+
+
+```
+
+
+:::
+
+
+
+
+
+
+
+
+
+
 
 
 
