@@ -1,3 +1,534 @@
 ---
 title: Wahrscheinlichkeit
 ---
+
+Die deskriptive Statistik bietet Methoden zur Beschreibung der in der Probe gemessenen Variablen und ihrer Beziehungen, ermöglicht jedoch  keine Schlüsse aus dieser Probe auf die Grundgesamtheit.
+
+Jetzt ist es Zeit, von der Stichprobe zur Grundgesamtheit zu gelangen, und die Brücke dafür ist die **Wahrscheinlichkeitstheorie**.
+
+Bitte beachten Sie, dass die Stichprobe nur begrenzte Informationen über die Grundgesamtheit hat, und um gültige Schlüsse für diese zu ziehen, muss die Probe *repräsentativ* sein. Dies ist strenggenommen nur bei Zufallsstichproben gegeben.
+
+Die Wahrscheinlichkeitstheorie wird uns Werkzeuge bieten, um den Zufall in der Stichprobenziehung zu kontrollieren und das Vertrauensniveau der aus der Stichprobe gezogenen Schlüsse zu bestimmen.
+
+## Experiment mit zufälligem Ergebnis
+
+Die Untersuchung einer Eigenschaft der Grundgesamtheit erfolgt durch Experimente mit zufälligem Ergebnis.
+
+::: {.callout-warning appearance="default"}
+## Definition  "Zufallsexperiment"
+
+Ein Zufallsexperiment ist ein Experiment, das zwei Bedingungen erfüllt:
+
+1. Alle möglichen Ergebnisse sind bekannt.
+2. Es ist unmöglich, das Ergebnis mit absoluter Sicherheit vorherzusagen.
+
+:::
+
+::: {.callout-tip appearance="default"}
+## Beispiel: Glücksspiele
+
+Glücksspiele sind typische Beispiele für Experimente mit zufälligem Ergebnis. Zum Beispiel ist das Werfen eines Würfels ein  solches Experiment, weil:
+
+1. Der Satz der möglichen Ergebnisse bekannt ist: $\{1, 2, 3, 4, 5, 6\}$.
+2. Bevor der Würfel geworfen wird ist es unmöglich das Ergebnis mit absoluter Sicherheit vorherzusagen.
+
+:::
+
+
+Ein weiteres Beispiel, das nichts mit Glücksspielen zu tun hat, ist die zufällige Auswahl einer Person aus einer menschlichen Grundgesamtheit und die Bestimmung ihrer Blutgruppe.
+
+Grundsätzlich ist die Ziehung einer Stichprobe mittels einer Zufallsmethode ein Zufallsexperiment.
+
+### Wahrscheinlichkeitsraum
+
+::: {.callout-warning appearance="default"}
+## Definition "Wahrscheinlichkeitsraum $\Omega$" 
+Der Satz $\Omega$ der möglichen Ergebnisse eines Zufallsexperiments wird als Wahrscheinlichkeitsraum (Probabilitätsraum) bezeichnet.
+:::
+
+::: {.callout-tip appearance="default"}
+## Beispiele für Probabilitätsräume:
+
+- Beim Werfen einer Münze ist $\Omega =  \{Kopf, Zahl\}$.
+- Beim Werfen eines Würfels ist $\Omega =  \{1, 2, 3, 4, 5, 6 \}$.
+- Beim Blutgruppentest einer zufällig ausgewählten Person ist $\Omega =  \{0, A, B, AB \}$.
+- Bei der Körpergröße einer zufällig ausgewählten Person ist $\Omega=\mathbb{R}^+$.
+
+:::
+
+### Baumdiagramme
+
+In Experimenten, bei denen mehr als eine Variable gemessen wird, kann die Bestimmung des Wahrscheinlichkeitsraums schwierig sein. In solchen Fällen ist es ratsam, ein Baumdiagramm zur Konstruktion des Probabilitätsraums zu verwenden.
+
+In einem Baumdiagramm wird jede Variable auf einer Ebene des Baums dargestellt und jeder mögliche Wert der Variablen als Zweig.
+
+```{dot}
+//| label: baumdiagramm
+digraph bloodtype_tree {
+    node [shape=box];
+
+    root -> weiblich;
+    root -> männlich;
+
+    weiblich -> weiblich_0;
+    weiblich -> weiblich_A;
+    weiblich -> weiblich_B;
+    weiblich -> weiblich_AB;
+
+    weiblich_0 -> F0;
+    weiblich_A -> FA;
+    weiblich_B -> FB;
+    weiblich_AB -> FAB;
+
+    männlich -> männlich_0;
+    männlich -> männlich_A;
+    männlich -> männlich_B;
+    männlich -> männlich_AB;
+
+    männlich_0 -> M0;
+    männlich_A -> MA;
+    männlich_B -> MB;
+    männlich_AB -> MAB;
+
+    // leaf labels
+    root [label=" "];
+    weiblich_0 [label="0"];
+    weiblich_A [label="A"];
+    weiblich_B [label="B"];
+    weiblich_AB [label="AB"];
+    männlich_0 [label="0"];
+    männlich_A [label="A"];
+    männlich_B [label="B"];
+    männlich_AB [label="AB"];
+    
+    
+    
+    F0 [label="(weiblich, 0)"];
+    FA [label="(weiblich, A)"];
+    FB [label="(weiblich, B)"];
+    FAB [label="(weiblich, AB)"];
+    
+    M0 [label="(männlich, 0)"];
+    MA [label="(männlich, A)"];
+    MB [label="(männlich, B)"];
+    MAB [label="(männlich, AB)"];
+
+    // optional: rank same level nodes
+    { rank=same; weiblich männlich }
+    { rank=same; weiblich_0 weiblich_A weiblich_B weiblich_AB männlich_0 männlich_A männlich_B männlich_AB }
+    { rank=same; F0 FA FB FAB M0 MA MB MAB }
+
+    // optional: labels for levels (simulated)
+    labelloc="t";
+    label="Geschlecht → Blutgruppe → Paar (Ω)";
+    fontsize=26;
+}
+
+```
+
+
+
+### Zufallsereignis
+
+::: {.callout-warning appearance="default"}
+## Definition Zufallsereignis
+
+Ein zufälliges Ereignis ist jede Teilmenge des Probabilitätsraums $\Omega$ eines Zufallsexperimentes.
+
+:::
+
+
+Es gibt verschiedene Arten von Ereignissen:
+
+- unmögliches Ereignis: Dies ist das Ereignis ohne Elemente  $\emptyset$. Es hat keine Chance einzutreten.
+- elementare Ereignisse: Dies sind Ereignisse mit nur einem Element.
+- zusammengesetzte Ereignisse: Dies sind Ereignisse mit zwei oder mehr Elementen.
+- sicheres Ereignis: Dies ist das Ereignis, das den gesamten Probabilitätsraum $\Omega$ enthält. Es tritt immer ein.
+
+## Mengentheorie
+
+### Ereignisraum
+
+::: {.callout-warning appearance="default"}
+##  Definition 32 Ereignisraum
+
+Gegeben einen Wahrscheinlichkeitsraum $\Omega$ eines Zufallsexperimentes, ist die Ereignismenge von $\Omega$ die Menge aller möglichen Ereignisse von $\Omega$ und wird mit $\mathcal{P}(\Omega)$ bezeichnet.
+:::
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Für den Probabilitätsraum $\Omega=\{a,b,c\}$ ist dessen Ereignismenge:
+
+$$
+\mathcal{P}(\Omega)=\left\{\emptyset, \{a\},\{b\},\{c\},\{a,b\},\{a,c\},\{b,c\},\{a,b,c\}\right\}
+$$
+:::
+
+
+### Ereignisoperationen
+
+Da Ereignisse Teilmengen des Wahrscheinlichkeitsraums sind, haben wir mittels der Mengentheorie folgende Operationen an Ereignissen:
+
+- Vereinigung
+- Schnittmenge
+- Komplementärmenge
+- Differenzmenge
+
+#### Vereinigung von Ereignissen
+
+::: {.callout-warning appearance="default"}
+## Definition "Vereinigungsereignis"
+
+Gegeben zwei Ereignisse $A,B\subseteq \Omega$, ist die Vereinigung von $A$ und $B$, bezeichnet mit $A\cup B$, das Ereignis aller Elemente, die Mitglieder von $A$ oder $B$ oder beiden sind.
+
+$$
+A\cup B = \{x\,|\, x\in A\textrm{ oder }x\in B\}.
+$$
+:::
+
+
+```{r}
+#| engine: tikz
+\begin{tikzpicture}
+\def\firstcircle{(1.5,1.5) circle (1cm)}
+\def\secondcircle{(2.5,1.5) circle (1cm)}
+
+\fill[blue!30] \firstcircle;
+\fill[blue!30] \secondcircle;
+\draw (0,3) node[anchor=north east] {$\Omega$} rectangle (4,0);
+\draw \firstcircle node[xshift=-0.9cm, yshift=0.9cm] {$A$};
+\draw \secondcircle node[xshift=0.9cm, yshift=0.9cm] {$B$};
+
+\node at (2,0.3) {$A\cup B$};
+\end{tikzpicture}
+```
+
+Das Vereinigungsereignis  $A,B\subseteq \Omega$  tritt ein, wenn $A$ oder $B$ eintreten.
+
+
+
+#### Schnittereignis
+
+::: {.callout-warning appearance="default"}
+## Definition "Schnittereignis"
+
+Angenommen, wir haben zwei Ereignisse $A$ und $B$, die Teilmengen von $\Omega$ sind. Das Schnittereignis (*Intersection*) von $A$ und $B$, bezeichnet mit $A\cap B$, ist das Ereignis aller Elemente, die sowohl zu $A$ als auch zu $B$ gehören.
+
+$$
+A\cap B = \{x\,|\, x\in A\mbox{ und }x\in B\}.
+$$
+:::
+
+```{r}
+#| engine: tikz
+#| label: schnittereignis
+\begin{tikzpicture}
+\def\firstcircle{(1.5,1.5) circle (1cm)}
+\def\secondcircle{(2.5,1.5) circle (1cm)}
+
+\begin{scope}
+\clip \firstcircle;
+\fill[blue!30] \secondcircle;
+\end{scope}
+
+\draw (0,3) node[anchor=north east] {$\Omega$} rectangle (4,0);
+\draw \firstcircle node[xshift=-0.9cm, yshift=0.9cm] {$A$};
+\draw \secondcircle node[xshift=0.9cm, yshift=0.9cm] {$B$};
+
+\node at (2,1.5) {$A\cap B$};
+\end{tikzpicture}
+```
+
+
+Das Ereignis $A\cap B$ tritt ein, wenn sowohl $A$ als auch $B$ eintreten.
+Zwei Ereignisse sind **unmöglich**, wenn ihr Schnitt leer ist.
+
+
+#### Komplementärereignis
+
+::: {.callout-warning appearance="default"}
+## Definition "Komplementärereignis"
+
+Angenommen, wir haben ein Ereignis $A$, das eine Teilmenge von $\Omega$ ist. Das komplementäre oder gegensätzliche Ereignis zu $A$, bezeichnet mit $\overline A$, ist das Ereignis aller Elemente in $\Omega$ außer denjenigen, die zu $A$ gehören.
+
+$$
+\overline A = \{x\,|\, x\not\in A\}.
+$$
+:::
+
+```{r}
+#| engine: tikz
+#| label: komplementaer
+\begin{tikzpicture}
+\def\circle{(1.5,1.5) circle (1cm)}
+\def\rectangle{(4,0) rectangle (0,3)}
+
+\begin{scope}[even odd rule]
+\clip \circle (0,0) rectangle (4,3);
+\fill[blue!30] \rectangle;
+\end{scope}
+
+\draw \rectangle node[anchor=north east] {$\Omega$};
+\draw \circle node {$A$};
+\node at (3,1.5) {$\overline A$};
+\end{tikzpicture}
+```
+
+Das komplementäre Ereignis $\overline A$ tritt ein, wenn $A$ nicht eintritt.
+
+
+#### Differenzereignis
+
+::: {.callout-warning appearance="default"}
+## Definition "Differenzereignis"
+
+Gegeben sind zwei Ereignisse $A$ und $B$ als Teilmengen von $\Omega$. Die Differenz von $A$ und $B$, bezeichnet mit $A-B$, ist das Ereignis aller  Elemente, die zu $A$ gehören, aber nicht zu $B$.
+
+
+$$
+A-B = \{x\,|\, x\in A\mbox{ und }x\not\in B\} = A \cap \overline B.
+$$
+:::
+
+```{r}
+#| label: differenzereignis
+#| engine: tikz
+\begin{tikzpicture}
+\def\firstcircle{(1.5,1.5) circle (1cm)}
+\def\secondcircle{(2.5,1.5) circle (1cm)}
+
+\begin{scope}[even odd rule]
+\clip \secondcircle (0,0) rectangle (4,3);
+\fill[blue!30] \firstcircle;
+\end{scope}
+
+\draw (0,3) node[anchor=north east] {$\Omega$} rectangle (4,0);
+\draw \firstcircle node[xshift=-0.9cm, yshift=0.9cm] {$A$};
+\draw \secondcircle node[xshift=0.9cm, yshift=0.9cm] {$B$};
+
+\node[anchor=east] at (1.5,1.5) {$A-B$};
+\end{tikzpicture}
+```
+
+
+Das Differenzereignis $A-B$ tritt ein, wenn $A$ eintritt, aber $B$ nicht.
+
+
+#### Beispiel
+
+::: {.callout-tip appearance="default"}
+## Beispiel 
+
+Der Ereignisraum beim Würfeln ist $\Omega=\{1,2,3,4,5,6\}$ und die Ereignisse sind 
+
+- $A=\{2,4,6\}$ und 
+- $B=\{1,2,3,4\}$, 
+
+dann gilt:
+
+- Die Vereinigungsmenge von $A$ und $B$ ist $A\cup B=\{1,2,3,4,6\}$.
+- Die Schnittmenge von  $A$ und $B$ ist $A\cap B=\{2,4\}$.
+- Das Komplement von $A$ ist $\overline A=\{1,3,5\}$
+- Die Ereignisse $A$ und $\overline A$ schließen sich gegenseitig aus.
+- Die Differenz von $A$ und $B$ ist $A-B=\{6\}$ und die Differenz von $B$ und $A$ ist $B-A=\{1,3\}$
+:::
+
+
+### Algebra
+
+Sind die Ereignisse $A,B,C\subseteq \Omega$ gegeben, treffen die folgenden algebra'schen Eigenschaften zu:
+
+- **Idempotenz:** $A\cup A=A,\quad A\cap A=A$ 
+- **Kommutativität:**  $A\cup B=B\cup A,\quad A\cap B = B\cap A$
+- **Assoziativität:**  $(A\cup B)\cup C = A\cup (B\cup C),\quad (A\cap B)\cap C = A\cap (B\cap C)$
+- **Distributivität:** $(A\cup B)\cap C = (A\cap C)\cup (B\cap C),\quad (A\cap B)\cup C = (A\cup C)\cap (B\cup C)$
+- **Neutrales Element:**  $A\cup \emptyset=A,\quad A\cap \Omega=A$
+- **absorbierendes Element:**  $A\cup \Omega=\Omega,\quad A\cap \emptyset=\emptyset$
+- **komplementäres symmetrisches Element** $A\cup \overline A = \Omega,\quad A\cap \overline A= \emptyset$ 
+- **doppelte Negation:**  $\overline{\overline A} = A$
+- **De Morgansche Gesetze:** $\overline{A\cup B} = \overline A\cap \overline B,\quad \overline{A\cap B} = \overline A\cup \overline B$
+
+
+
+
+
+
+## Wahrscheinlichkeit
+
+::: {.callout-warning appearance="default"}
+## Defintion "Wahrscheinlichkeit" (nach Laplace)
+Für ein Zufallsexperiment mit einem Ereignisraum $\Omega$, dessen Elemente alle gleich wahrscheinlich 
+sind, ist die Wahrscheinlichkeit eines Ereignisses $A\subseteq \Omega$ der Quotient zwischen der Anzahl der Elemente von $A$ und der Anzahl der Elemente von $\Omega$
+
+$$
+P(A) = \frac{|A|}{|\Omega|} = \frac{\mbox{Anzahl gewünschter Ergebnisse}}{\mbox{Anzahl aller möglichen Ergebnisse}}
+$$
+:::
+
+Diese Definition ist gut bekannt, hat aber wichtige Einschränkungen:
+
+- Es wird verlangt, dass alle Elemente des Ereignisraums gleich wahrscheinlich sind (Gleichwahrscheinlichkeit).
+- Sie kann nicht bei unendlichen großen Ereignisräumen angewendet werden.
+
+::: {.callout-important appearance="default"}
+## Vorsicht! 
+Diese Bedingungen werden in vielen echten Experimenten nicht erfüllt.
+:::
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Angenommen, der Ereignisraum beim Werfen eines Würfels ist $\Omega=\{1,2,3,4,5,6\}$ und das Ereignis $A=\{2,4,6\}$, dann beträgt die Wahrscheinlichkeit von $A$
+
+$$
+P(A) = \frac{|A|}{|\Omega|} = \frac{3}{6} = 0.5.
+$$
+
+Allerdings ist es beim Ereignisraum der Blutgruppe einer zufällig ausgewählten Person $\Omega=\{O,A,B,AB\}$ nicht möglich, die klassische Definition zu verwenden, um die Wahrscheinlichkeit für Gruppe $A$ zu berechnen,
+
+$$
+P(A) \neq \frac{|A|}{|\Omega|} = \frac{1}{4} = 0.25,
+$$
+
+...weil Blutgruppen in der menschlichen Bevölkerung nicht *gleich* wahrscheinlich sind.
+
+:::
+
+
+
+### Häufigkeitswahrscheinlichkeit
+
+::: {.callout-warning appearance="default"}
+## Definition "Gesetz der großen Zahlen"
+Wenn ein zufälliges Experiment eine große Anzahl von Malen wiederholt wird, nähert sich die relative 
+Häufigkeit eines Ereignisses der Wahrscheinlichkeit des Ereignisses an.
+
+:::
+
+Die folgende Definition der Wahrscheinlichkeit basiert auf diesem Satz.
+
+::: {.callout-warning appearance="default"}
+## Definition "Frequenzwahrscheinlichkeit"
+Gegeben ein Ereignisraum $\Omega$ eines reproduzierbaren zufälligen Experiments, beträgt die 
+Wahrscheinlichkeit eines Ereignisses $A\subseteq \Omega$ die relative Häufigkeit des Ereignisses $A$ bei einer unbegrenzten Anzahl von Wiederholungen des Experiments.
+
+$$
+P(A) = lim_{n\rightarrow \infty}\frac{n_A}{n}
+$$
+:::
+
+
+
+Auch diese Definition hat einige Nachteile:
+
+- Sie berechnet eine *Schätzung* der realen Wahrscheinlichkeit.
+- Die Wiederholung des Experiments muss unter identischen Bedingungen stattfinden.
+
+::: {.callout-tip appearance="default"}
+## Beispiel Münzwurf
+Gegeben ist der Ereignisraum beim Werfen einer Münze $\Omega=\{Kopf, Zahl\}$. 
+Wenn nach $100$ Würfen 54mal Kopf herauskam, beträgt die Wahrscheinlichkeit von $Kopf$
+$$
+P(Kopf) = \frac{n_{Kopf}}{n} = \frac{54}{100} = 0.54.
+$$
+
+:::
+
+::: {.callout-tip appearance="default"}
+## Beispiel Blutgruppen
+Gegeben ist der Ereignisraum der Blutgruppe einer zufällig ausgewählten Person $\Omega=\{O,A,B,AB\}$. Wenn nach einer Zufallsstichprobe von 1.000  Personen 412 mit der Blutgruppe $A$ dabei waren, beträgt die Wahrscheinlichkeit von $A$
+
+$$
+P(A) = \frac{n_A}{n} = \frac{412}{1000} = 0.412.
+$$
+:::
+
+
+
+
+### Axiomatische Wahrscheinlichkeit
+
+::: {.callout-warning appearance="default"}
+## Definition "Wahrscheinlichkeit" (nach Kolmogórov)
+Gegeben ein Ereignisraum $\Omega$ eines zufälligen Experiments, ist eine  Wahrscheinlichkeitsfunktion eine Funktion, die jeden Ereigniswert $A\subseteq \Omega$ auf eine reelle Zahl $P(A)$ (bekannt als Wahrscheinlichkeit von $A$), abbildet und folgende Axiome erfüllt:
+
+1. Die Wahrscheinlichkeit jedes Ereignisses ist nicht negativ, 
+$$
+P(A)\geq 0.
+$$
+2. Die Wahrscheinlichkeit des Ereignisraums beträgt 1,
+$$
+P(\Omega)=1
+$$
+3. Die Wahrscheinlichkeit der Vereinigung zweier inkompatibler Ereignisse ($A\cap B=\emptyset$) ist die Summe ihrer Wahrscheinlichkeiten
+$$
+P(A\cup B) = P(A)+P(B).
+$$
+:::
+
+
+#### Eigenschaften der axiomatischen Wahrscheinlichkeit
+
+Aus diesen Axiomen lassen sich einige wichtige Eigenschaften einer Wahrscheinlichkeitsfunktion ableiten.
+Gegeben ein Ereignisruam $\Omega$ eines zufälligen Experiments und die Ereignisse $A,B\subseteq \Omega$, gelten folgende Eigenschaften:
+
+1. $P(\overline A) = 1-P(A)$.
+2. $P(\emptyset)= 0$.
+3. Wenn $\ A\subseteq B\ $ dann $\ P(A)\leq P(B)$.
+4. $P(A) \leq 1\ $. Das bedeutet $\ P(A)\in [0,1]$.
+5. $P(A-B)=P(A)-P(A\cap B)$. 
+6. $P(A\cup B)= P(A) + P(B) - P(A\cap B)$.
+7. Wenn $\ A=\{e_1,\ldots,e_n\}\ $, und $\ e_i$ $i=1,\ldots,n\ $ Elementarereignisse sind, dann gilt
+$$
+P(A)=\sum_{i=1}^n P(e_i).
+$$
+
+
+
+
+
+### Wahrscheinlichkeitsinterpretation
+
+Gemäß den vorherigen Axiomen ist die Wahrscheinlichkeit eines Ereignisses $A$ eine reelle Zahl $P(A)$, die stets im Bereich von 0 bis 1  liegt.
+
+Auf gewisse Weise drückt diese Zahl die Glaubwürdigkeit des Ereignisses aus, d.h. die Chancen, dass das Ereignis $A$ in dem Experiment  eintritt. Daher gibt sie auch ein Maß für die *Unsicherheit* bezüglich des Ereignisses an.
+
+- Die maximale Unsicherheit entspricht der Wahrscheinlichkeit $P(A) = 0,5\quad$ ($A$ und $\overline A$ haben die gleiche Chance, einzutreten).
+- Die minimale Unsicherheit entspricht der Wahrscheinlichkeit $P(A) = 1\quad$ ($A$ wird mit absoluter Sicherheit eintreten) und $P(A) = 0\quad$ ($A$ wird  mit absoluter Sicherheit nicht eintreten). 
+
+Wenn $P(A)$ näher bei $0$ als bei $1$ liegt, sind die Chancen, dass $A$ nicht eintritt, größer als die 
+Chancen, dass $A$ eintritt. 
+
+Im Gegensatz dazu, wenn $P(A)$ näher bei $1$ als bei $0$ liegt, sind die Chancen, dass $A$ eintritt, größer als die Chancen, dass $A$ nicht eintritt.
+
+
+## bedingte Wahrscheinlichkeit 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
