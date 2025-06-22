@@ -1619,6 +1619,7 @@ abline(model1, lwd=2, col = "steelblue")
 coeffs1 <- floor(model1$coeff*100)/100
 plusorminus <- c("+")
 if (coeffs1[1] < 0 ) plusorminus <- c("")
+
 text(0, 8.5, bquote(
   y == .(coeffs1[2]) * x ~ .(plusorminus) ~ .(abs(coeffs1[1]))
 ), pos = 4)
@@ -1626,11 +1627,13 @@ text(0, 8.5, bquote(
 text(0, 7.7, bquote(
   r == .(round(cor(hours1, score1), 2))
 ), pos = 4)
+
 model2 <- lm(score2 ~ hours2)
 abline(model2, lwd=2, col = "darkred")
 coeffs2 <- floor(model2$coeff*100)/100
 plusorminus <- c("+")
 if (coeffs2[1] < 0 ) plusorminus <- c("")
+
 text(10, 0.8, bquote(
   y == .(coeffs2[2]) * x ~ .(plusorminus) ~ .(abs(coeffs2[1]))
 ), pos = 4)
@@ -1638,6 +1641,7 @@ text(10, 0.8, bquote(
 text(10, 0, bquote(
   r == .(round(cor(hours2, score2), 2))
 ), pos = 4)
+
 legend("top", 
        legend=c("gute Studierende", "schlechte Studierende"), 
        fill=c("steelblue", "darkred"), 
