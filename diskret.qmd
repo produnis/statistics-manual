@@ -162,12 +162,14 @@ F(x) & 0.25 & 0.75 & 1 \\
 \end{array}
 \qquad
 F(x) =
+\left\{
 \begin{array}{ll}
 0 & \text{wenn } x < 0 \\
 0{,}25 & \text{wenn } 0 \leq x < 1 \\
 0{,}75 & \text{wenn } 1 \leq x < 2 \\
 1 & \text{wenn } x \geq 2
 \end{array}
+\right.
 $$
 
 
