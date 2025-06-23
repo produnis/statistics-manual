@@ -1343,14 +1343,14 @@ Gruppe von Menschen, die dem Faktor ausgesetzt sind, wird als *Interventionsgrup
 In der Regel werden die beobachteten Fälle für jede Gruppe in einer 2x2-Tabelle wie der folgenden dargestellt.
 
 $$
-  \begin{array}{|m{3cm}|m{3cm}<{\centering}|m{3cm}<{\centering}|}
-  & \text{erkrankt}\  K & \text{gesund}\  \overline{K}\\ 
-  \hline
-  \text{Interventionsgruppe}\newline (exponiert) & a & b\\ 
-  \hline 
-  \text{Kontrollgruppe}\newline (nicht\ exponiert) & c & d\\ 
-  \hline
-  \end{array}
+\begin{array}{|c|c|c|}
+ & \text{erkrankt}\  K & \text{gesund}\  \overline{K}\\ 
+\hline
+\text{Interventionsgruppe}\newline (exponiert) & a & b\\ 
+\hline 
+\text{Kontrollgruppe}\newline (nicht\ exponiert) & c & d\\ 
+\hline
+\end{array}
 $$
 
 
@@ -1376,7 +1376,7 @@ Um die Wirksamkeit eines Impfstoffs gegen Grippe zu bestimmen, wurde zu Beginn d
 folgende Tabelle fasst die Ergebnisse am Ende des Jahres zusammen.
 
 $$
-  \begin{array}{|m{3cm}|m{3cm}<{\centering}|m{3cm}<{\centering}|}
+  \begin{array}{|c|c|c|}
   & \text{Grippe}\  K & \text{keine Grippe}\  \overline{K}\\ 
   \hline
   \text{Interventionsgruppe}\newline (geimpft) & 20 & 480\\ 
@@ -1426,14 +1426,14 @@ Um die Wirksamkeit eines Impfstoffs gegen Grippe zu bestimmen, wurde zu Beginn d
 folgende Tabelle fasst die Ergebnisse am Ende des Jahres zusammen.
 
 $$
-  \begin{array}{|m{3cm}|m{3cm}<{\centering}|m{3cm}<{\centering}|}
+\begin{array}{|c|c|c|}
   & \text{Grippe}\  K & \text{keine Grippe}\  \overline{K}\\ 
-  \hline
-  \text{Interventionsgruppe}\newline (geimpft) & 20 & 480\\ 
-  \hline 
-  \text{Kontrollgruppe}\newline (nicht\ geimpft) & 80 & 420\\ 
-  \hline
-  \end{array}
+\hline
+\text{Interventionsgruppe}\newline (geimpft) & 20 & 480\\ 
+\hline 
+\text{Kontrollgruppe}\newline (nicht\ geimpft) & 80 & 420\\ 
+\hline
+\end{array}
 $$
 
 
@@ -1509,14 +1509,14 @@ Um die Wirksamkeit eines Impfstoffs gegen Grippe zu bestimmen, wurde zu Beginn d
 folgende Tabelle fasst die Ergebnisse am Ende des Jahres zusammen.
 
 $$
-  \begin{array}{|m{3cm}|m{3cm}<{\centering}|m{3cm}<{\centering}|}
-  & \text{Grippe}\  K & \text{keine Grippe}\  \overline{K}\\ 
-  \hline
-  \text{Interventionsgruppe}\newline (geimpft) & 20 & 480\\ 
-  \hline 
-  \text{Kontrollgruppe}\newline (nicht\ geimpft) & 80 & 420\\ 
-  \hline
-  \end{array}
+\begin{array}{|c|c|c|}
+ & \text{Grippe}\  K & \text{keine Grippe}\  \overline{K}\\ 
+\hline
+\text{Interventionsgruppe}\newline (geimpft) & 20 & 480\\ 
+\hline 
+\text{Kontrollgruppe}\newline (nicht\ geimpft) & 80 & 420\\ 
+\hline
+\end{array}
 $$
 
 Die Odds Ratio der Grippe für geimpfte Personen ist:
@@ -1551,7 +1551,7 @@ ausgewählt wird, wie z.B. bei Fall-Kontroll-Studien.
 Um die Assoziation zwischen Lungenkrebs und Rauchen zu bestimmen, wurden zwei Proben ausgewählt (die zweite mit der doppelten Anzahl von Nicht-Krebs-Individuen), wobei folgende Ergebnisse erzielt wurden:
 
 $$
-\begin{array}{|m{1.9cm}|m{1.2cm}<{\centering}|m{1.5cm}<{\centering}|}
+\begin{array}{|c|c|c|}
  & \text{Krebs} & \text{kein Krebs}\\ 
 \hline
 \text{Raucher} & 60 & 80\\ 
@@ -1576,7 +1576,7 @@ $$
 
 
 $$
-\begin{array}{|m{1.9cm}|m{1.2cm}<{\centering}|m{1.5cm}<{\centering}|}
+\begin{array}{|c|c|c|}
  & \text{Krebs} & \text{kein Krebs}\\ 
 \hline
 \text{Raucher} & 60 & 160\\ 
@@ -1585,6 +1585,7 @@ $$
 \hline
 \end{array}
 $$
+
 $$
 \begin{aligned}
 RR(K) &= \frac{60/(60+160)}{40/(40+640)} = 4.64.\\
@@ -1653,11 +1654,10 @@ In der Epidemiologie ist es üblich, diagnostische Tests zur Diagnose von Krankh
 $$
 \begin{array}{|c|c|c|}
  & \text{krank}\ K & \text{gesund}\ \overline K\\ \hline
-\text{Testergebnis} & \textcolor{green}{\text{richtig positiv}} & \textcolor{red}{\text{falsch positiv}} \newline
-positiv + & (RP) & (FP) \\ \hline 
-\text{Testergebnis}  & \textcolor{red}{\text{falsch negativ}} &
-\textcolor{green}{\text{richtig negativ}} \\ 
-negativ - &  (FN) &  (RN)\\\hline
+\text{Testergebnis} & \textcolor{green}{\text{richtig positiv}} & \textcolor{red}{\text{falsch positiv}} \\
+positiv \mathbf{+} & (RP) & (FP) \\ \hline 
+\text{Testergebnis}  & \textcolor{red}{\text{falsch negativ}} & \textcolor{green}{\text{richtig negativ}} \\ 
+negativ \mathbf{-} &  (FN) &  (RN)\\\hline
 \end{array}
 $$
 
