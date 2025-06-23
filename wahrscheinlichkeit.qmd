@@ -1189,5 +1189,686 @@ $$
 
 ## Satz von Bayes
 
+Eine Teilmenge eines Ereignisraums $A_1,\cdots,A_n$ kann auch als eine Menge von möglichen Hypothesen für ein Ereignis $B$ interpretiert werden.
+In solchen Fällen kann es hilfreich sein, die posteriori Wahrscheinlichkeit $P(A_i|B)$  jeder Hypothese zu berechnen.
+
+::: {.callout-warning appearance="default"}
+## Satz von Bayes
+Gegeben eine Partition $A_1,\cdots,A_n$ eines Ereignisraums $\Omega$ und ein weiteres Ereignis $B$ desselben Mengenraums, kann die bedingte Wahrscheinlichkeit jedes Ereignisses $A_i$ $i=1,\ldots,n$ unter $B$ mit der folgenden Formel berechnet werden:
+
+$$
+P(A_i|B) = \frac{P(A_i\cap B)}{P(B)} = \frac{P(A_i)P(B|A_i)}{\sum_{i=1}^n P(A_i)P(B|A_i)}.
+$$
+:::
+
+
+In dem vorherigen Beispiel sollte die Diagnose für eine Person mit Symptomen gestellt werden.
+
+In diesem Fall können wir $K$ und $\overline K$ als die beiden möglichen Hypothesen für das Symptom $S$ interpretieren. Die vorab Wahrscheinlichkeiten dafür sind $P(K)=0.2$  und $P(\overline{K})=0.8$. Das bedeutet, dass wenn wir keine Informationen über das Symptom haben, die Diagnose nicht gestellt werden kann.
+
+Allerdings ändert sich diese Unsicherheit bezüglich der Hypothese, wenn wir das Symptom beobachten. Dann müssen wir die posteriori Wahrscheinlichkeiten berechnen, um zu diagnostizieren, d.h.
+
+$$
+P(K|S) \mbox{ und } P(\overline{K}|S)
+$$
+Zur Berechnung nutzen wir den Satz von Bayes:
+
+$$
+\begin{aligned}
+P(D|S) &= \frac{P(D)P(S|D)}{P(D)P(S|D)+P(\overline{D})P(S|\overline{D})} = \frac{0.2\cdot 0.9}{0.2\cdot 0.9 + 0.8\cdot 0.4} = \frac{0.18}{0.5}=0.36,\\
+P(\overline{D}|S) &= \frac{P(\overline{D})P(S|\overline{D})}{P(D)P(S|D)+P(\overline{D})P(S|\overline{D})} = \frac{0.8\cdot 0.4}{0.2\cdot 0.9 + 0.8\cdot 0.4} = \frac{0.32}{0.5}=0.64.
+\end{aligned}
+$$
+Wie wir sehen können, hat sich die Wahrscheinlichkeit, die Krankheit zu haben, erhöht. Trotzdem ist die Wahrscheinlichkeit, sie nicht zu haben, immer noch größer als die Wahrscheinlichkeit, sie zu haben. Aus diesem Grund lautet die Diagnose, dass die Person die Krankheit nicht hat.
+
+In diesem Fall wird gesagt, dass das Symptom $S$ nicht entscheidend ist, um die Krankheit zu diagnostizieren.
+
+
+
+
+
+
+
+## Epidemiologie
+
+Einzelne Zweige der Medizin, die eine intensive Nutzung von Wahrscheinlichkeiten vornehmen, sind Epidemiologie und Präventionsmedizin.
+
+Die Epidemiologie untersucht die Häufigkeit und Ursachen von Krankheiten in Populationen, indem sie Risikofaktoren für Krankheiten und Ziele zur präventiven Gesundheitsversorgung identifiziert.
+
+In der Epidemiologie ist man daran interessiert, wie häufig ein medizinisches Ereignis 𝐷 (typischerweise eine Krankheit wie Grippe, ein Risikofaktor wie Rauchen oder ein Schutzfaktor wie eine Impfung) auftritt, das als nominale Variable mit zwei 
+Kategorien (das Eintreten oder Nicht-Eintreten des Ereignisses) gemessen wird.
+
+Es gibt verschiedene Messgrößen zur Häufigkeit eines medizinischen Ereignisses. Die wichtigsten sind:
+
+- Prävalenz
+- Inzidenz
+- Relatives Risiko
+- Odds Ratio
+
+
+### Prävalenz
+
+::: {.callout-warning appearance="default"}
+## Definition "Prävalenz"
+Die Prävalenz eines medizinischen Ereignisses $K$ ist der Anteil einer bestimmten Bevölkerung, der von diesem medizinischen Ereignis betroffen ist.
+
+$$
+  \mbox{Prävalenz}(K) = \frac{\mbox{Anzahl von } K \text{ betroffener}}{\mbox{Größe der Bevölkerung}}
+$$
+
+:::
+
+Die Prävalenz wird häufig anhand einer Stichprobe geschätzt, indem man den relativen Anteil der Menschen berechnet, die in der Stichprobe von dem Ereignis betroffen sind. Es ist auch üblich, diesen Anteil als Prozentangabe auszudrücken.
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Um die Prävalenz von Grippe zu schätzen, wurde eine Stichprobe von 1.000 Personen untersucht und 150 davon hatten Grippe. 
+Daher beträgt die Prävalenz der Grippe etwa $150/1000 = 0,15\ $ oder 15%.
+:::
+
+
+
+### Inzidenz
+
+Die **Inzidenz** misst die Wahrscheinlichkeit des Auftretens eines medizinischen Ereignisses in einer Bevölkerung innerhalb eines bestimmten Zeitraums. Die Inzidenz kann als kumulative Anteilszahl oder als Rate gemessen werden.
+
+::: {.callout-warning appearance="default"}
+## Definition "kumulative Inzidenz"
+Die kumulative Inzidenz eines medizinischen Ereignisses $K$ ist der Anteil der Menschen, die das Ereignis in einem bestimmten Zeitraum erlitten haben, d.h. die Anzahl der neuen Fälle mit dem Ereignis in diesem Zeitraum geteilt durch die Größe der Risikobevölkerung.
+Anzahl neuer Fälle mit $K$
+
+$$
+  R(K)=\frac{\mbox{Anzahl Neuerkrankungen}}{\mbox{Größe der Risikobevölkerung}}
+$$
+:::
+
+::: {.callout-tip appearance="default"}
+## Beispiel 
+Eine Bevölkerung enthält zu Beginn 1.000 Personen ohne Grippe und nach zweijähriger Beobachtungszeit hatten 160 davon die Grippe. Die Anteilszahl der Grippe-Inzidenz berechnet sich mit
+
+$$
+R(K) = \frac{160}{1.000} = 0,16
+$$
+
+Die kumulative Inzidenz liegt also beo 16% für zwei Jahre.
+:::
+
+::: {.callout-warning appearance="default"}
+## Definition "Inzidenzrate" (Absolutes Risiko)
+
+Die Inzidenz*rate* oder das absolute Risiko eines medizinischen Ereignisse $K$ ist die Anzahl neuer Erkrankungen geteilt durch die Größe der Risikobevölkerung und die Anzahl der Zeiteinheiten in einem bestimmten Zeitraum.
+
+$$
+  R(K)=\frac{\mbox{Anzahl Neuerkrankungen}}{\mbox{Größe der Risikobevölkerung}\times \mbox{Anzahl Zeiteinheiten}}
+$$
+
+:::
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Eine Bevölkerung enthält zu Beginn 1.000 Personen ohne Grippe und nach zweijähriger Beobachtungszeit hatten 160 davon die Grippe. 
+Wenn man das Jahr als Zeiteinheit betrachtet, beträgt die Inzidenzrate der Grippe
+
+$$
+R(K) = \frac{160}{1.000 \cdot 2} =0,08 
+$$
+Die Inzidenzrate liegt also bei 8% Personen pro Jahr.
+
+:::
+
+
+### Prävelenz oder Inzidenz
+
+ Die Prävalenz zeigt an, wie verbreitet ein medizinisches Ereignis ist und 
+ist eher ein Maß für die Belastung des Ereignisses für die Gesellschaft ohne Berücksichtigung der gefährdeten Zeit oder wann Personen möglicherweise einem möglichen Risikofaktor ausgesetzt waren
+
+Die Inzidenz liefert Informationen über das Risiko, von dem Ereignis betroffen zu sein.
+
+Die Prävalenz kann in Querschnittsstudien zu einem bestimmten Zeitpunkt gemessen werden, während zur Messung der Inzidenz eine Längsschnittstudie erforderlich ist, bei der die Individuen über einen bestimmten Zeitraum beobachtet werden.
+
+Beim Verständnis der Ereignis-Ätiologie ist die Inzidenz nützlicher als die Prävalenz: wenn sich beispielsweise die  Inzidenz einer Krankheit in einer Bevölkerung erhöht, dann gibt es einen Risikofaktor, der dies fördert.
+
+Wenn die Inzidenz für die Dauer des Ereignisses ungefähr konstant ist, ist die Prävalenz ungefähr das Produkt aus Ereignis-Inzidenz und durchschnittlicher Ereignisdauer.
+
+$$
+\text{Prävalenz} = \text{Inzidenz} \cdot \text{Dauer}
+$$
+
+### Risiko-Vergleich
+
+Um zu bestimmen, ob ein Faktor oder eine Eigenschaft mit dem medizinischen Ereignis verbunden ist, müssen wir das Risiko des medizinischen Ereignisses in zwei Populationen vergleichen, von denen die eine dem Faktor ausgesetzt ist und die andere nicht. Die 
+Gruppe von Menschen, die dem Faktor ausgesetzt sind, wird als *Interventionsgruppe* oder *experimentelle Gruppe* bezeichnet und die Gruppe von Menschen, die nicht ausgesetzt sind, als *Kontrollgruppe*.
+
+In der Regel werden die beobachteten Fälle für jede Gruppe in einer 2x2-Tabelle wie der folgenden dargestellt.
+
+$$
+  \begin{array}{|m{3cm}|m{3cm}<{\centering}|m{3cm}<{\centering}|}
+  & \text{erkrankt}\  K & \text{gesund}\  \overline{K}\\ 
+  \hline
+  \text{Interventionsgruppe}\newline (exponiert) & a & b\\ 
+  \hline 
+  \text{Kontrollgruppe}\newline (nicht\ exponiert) & c & d\\ 
+  \hline
+  \end{array}
+$$
+
+
+### Zurechenbares Risiko
+
+::: {.callout-warning appearance="default"}
+## Definition "zurechendbares Risiko" (Risikodifferenz)
+Das zurechenbare Risiko (*attributales Risiko* oder *Risikodifferenz*) eines medizinischen Ereignisses $K$ für Personen, die einem Faktor (Exposition) ausgesetzt sind, ist der Unterschied zwischen den absoluten Risiken der Interventionsgruppe und der 
+Kontrollgruppe.
+
+$$
+  AR(K)=R_{Intervention}(K)-R_{Kontrolle}(K)=\frac{a}{a+b}-\frac{c}{c+d}.
+$$
+
+:::
+
+Das zurechenbare Risiko ist das Risiko eines Ereignisses, das spezifisch auf den Einflussfaktor von Interesse zurückzuführen ist. Beachten Sie, dass das zurechenbare Risiko *positiv* sein kann, wenn das Risiko der Interventionsgruppe *größer* als das Risiko der Kontrollgruppe ist, und umgekehrt.
+
+::: {.callout-tip appearance="default"}
+## Beispiel Impfung
+
+Um die Wirksamkeit eines Impfstoffs gegen Grippe zu bestimmen, wurde zu Beginn des Jahres eine Stichprobe von 1.000 Personen ohne Grippe ausgewählt. Die Hälfte von ihnen wurde geimpft (Interventionsgruppe) und der Rest erhielt ein Placebo (Kontrollgruppe). Die 
+folgende Tabelle fasst die Ergebnisse am Ende des Jahres zusammen.
+
+$$
+  \begin{array}{|m{3cm}|m{3cm}<{\centering}|m{3cm}<{\centering}|}
+  & \text{Grippe}\  K & \text{keine Grippe}\  \overline{K}\\ 
+  \hline
+  \text{Interventionsgruppe}\newline (geimpft) & 20 & 480\\ 
+  \hline 
+  \text{Kontrollgruppe}\newline (nicht\ geimpft) & 80 & 420\\ 
+  \hline
+  \end{array}
+$$
+
+
+
+
+Für geimpfte Personen liegt das zurechenbare Risiko an Grippe zu erkranken bei
+
+$$
+AR(K) = \frac{20}{20+480}-\frac{80}{80+420} = -0.12.
+$$
+Das bedeutet, dass das Risiko an Grippe zu erkranken in der Gruppe der Geimpften 12% geringer ist als in der Gruppe der Ungeimpften.
+:::
+
+
+
+
+### Relatives Risiko
+
+::: {.callout-warning appearance="default"}
+## Definition "relatives Risiko"
+Das relative Risiko eines medizinischen Ereignisses $K$ für Personen, die einer Exposition ausgesetzt sind, ist es der Quotient zwischen den Inzidenzen der Behandlungs- und Kontrollgruppe.
+
+$$
+  RR(K)=\frac{\mbox{Risiko der Interventionsgruppe}}{\mbox{Risiko der Kontrollgruppe}}=\frac{R_I(K)}{R_K(K)}=\frac{a/(a+b)}{c/(c+d)}
+$$
+:::
+
+Das relative Risiko vergleicht das Risiko eines medizinischen Ereignisses zwischen der Behandlungs- und Kontrollgruppe.
+
+-  $RR = 1\ \ \rightarrow$ Es gibt keine Verbindung zwischen dem Ereignis und der Exposition.
+-  $RR < 1\ \ \rightarrow$ Die Exposition verringert das Risiko des Ereignisses.
+-  $RR > 1\ \ \rightarrow$ Die Exposition erhöht das Risiko des Ereignisses.
+
+Je weiter entfern $RR$ von 1 ist, desto stärker die Verbindung.
+
+::: {.callout-tip appearance="default"}
+## Beispiel Impfung
+
+Um die Wirksamkeit eines Impfstoffs gegen Grippe zu bestimmen, wurde zu Beginn des Jahres eine Stichprobe von 1.000 Personen ohne  Grippe ausgewählt. Die Hälfte von ihnen wurde geimpft (Behandlungsgruppe) und der Rest erhielt ein Placebo (Kontrollgruppe). Die 
+folgende Tabelle fasst die Ergebnisse am Ende des Jahres zusammen.
+
+$$
+  \begin{array}{|m{3cm}|m{3cm}<{\centering}|m{3cm}<{\centering}|}
+  & \text{Grippe}\  K & \text{keine Grippe}\  \overline{K}\\ 
+  \hline
+  \text{Interventionsgruppe}\newline (geimpft) & 20 & 480\\ 
+  \hline 
+  \text{Kontrollgruppe}\newline (nicht\ geimpft) & 80 & 420\\ 
+  \hline
+  \end{array}
+$$
+
+
+Das relative Risiko für geimpfte Personen an Grippe zu erkranken ist:
+
+$$
+  RR(K) = \frac{20/(20+480)}{80/(80+420)} = 0,25.
+$$
+
+Das bedeutet, dass geimpfte Personen im Vergleich zu ungeimpften nur ein Viertel des Risikos haben die Grippe bekommen. Das bedeutet, der Impfstoff verringerte das Risiko einer Grippe um 75%.
+:::
+
+
+
+
+
+
+### Odds
+
+::: {.callout-warning appearance="default"}
+## efinition "Odds"
+Die Odds eines medizinischen Ereignisses $K$ in einer Bevölkerung ist der Quotient zwischen den Personen, die das Ereignis erlitten haben und den Personen, die es nicht in einem bestimmten Zeitraum erlitten haben.
+
+$$
+	ODDS(K)=\frac{\mbox{Neue Fälle mit}\ K}{\mbox{Fälle ohne}\ K}=\frac{P(K)}{P(\overline K)}
+$$
+
+:::
+
+Im Gegensatz zur Inzidenz, die ein Anteil von weniger als oder gleich 1 ist, kann das Odds größer als 1 sein. Es ist jedoch möglich, das Odds in eine Wahrscheinlichkeit umzuwandeln, indem man folgende Formel verwendet:
+
+$$
+  P(K) = \frac{ODDS(K)}{ODDS(K)+1}
+$$
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Eine Bevölkerung enthält initial 1.000 Personen ohne Grippe und nach einem Jahr haben 160 von ihnen die Grippe bekommen. 
+Das Odds der Grippe ist somit 
+$$
+ODDS(\text{Grippe}) = \frac{160}{840} = 0,1905.
+$$
+:::
+
+Beachten Sie, dass die Inzidenz $160/1000 =0,16 $ beträgt.
+
+
+
+
+### Odds Ratio
+
+::: {.callout-warning appearance="default"}
+## Definition "Odds Ratio"
+Die Odds Ratio eines medizinischen Ereignisses $K$ für Personen, die einer Exposition ausgesetzt sind, ist der Quotient zwischen dem Odds des Ereignisses in der Behandlungs- und Kontrollgruppe.
+
+$$
+  OR(K)=\frac{\mbox{Odds in Interventionsgruppe}}{\mbox{Odds in Kontrollgruppe}}=\frac{a/b}{c/d}=\frac{ad}{bc}
+$$
+
+:::
+
+Die Odds Ratio vergleicht die Odds eines medizinischen Ereignisses zwischen der Behandlungs- und Kontrollgruppe. Die Interpretation ist ähnlich wie beim relativen Risiko.
+
+- $OR=1$ $\Rightarrow$ Es gibt keine Verbindung zwischen dem Ereignis und der Exposition.
+- $OR<1$ $\Rightarrow$ Die Exposition verringert das Risiko des Ereignisses.
+- $OR>1$ $\Rightarrow$  Die Exposition erhöht das Risiko des Ereignisses.
+
+Je weiter $OR$ weg von 1 ist, desto stärker ist die Verbindung.
+
+::: {.callout-tip appearance="default"}
+## Beispiel Impfung
+Um die Wirksamkeit eines Impfstoffs gegen Grippe zu bestimmen, wurde zu Beginn des Jahres eine Stichprobe von 1.000 Personen ohne Grippe ausgewählt. Die Hälfte von ihnen wurde geimpft (Interventionsgruppe) und der Rest erhielt ein Placebo (Kontrollgruppe). Die 
+folgende Tabelle fasst die Ergebnisse am Ende des Jahres zusammen.
+
+$$
+  \begin{array}{|m{3cm}|m{3cm}<{\centering}|m{3cm}<{\centering}|}
+  & \text{Grippe}\  K & \text{keine Grippe}\  \overline{K}\\ 
+  \hline
+  \text{Interventionsgruppe}\newline (geimpft) & 20 & 480\\ 
+  \hline 
+  \text{Kontrollgruppe}\newline (nicht\ geimpft) & 80 & 420\\ 
+  \hline
+  \end{array}
+$$
+
+Die Odds Ratio der Grippe für geimpfte Personen ist:
+
+$$
+  OR(K) = \frac{20/480}{80/420} = 0,21875.
+$$
+
+:::
+
+Das bedeutet, dass die Chancen, an Grippe zu erkranken (im Vergleich dazu, nicht zu erkranken), bei geimpften Personen fast ein Fünftel derer bei ungeimpften Personen betragen. Das heißt: Auf etwa 22 geimpfte Personen mit Grippe kommen etwa 100 ungeimpfte Personen mit Grippe.
+
+
+
+
+### Relatives Risiko vs Odds ratio
+Relatives Risiko und Odds Ratio sind zwei Kennzahlen, aber ihre Interpretation unterscheidet sich leicht. Während 
+das Relative Risiko einen Vergleich der Risiken zwischen den Behandlungs- und Kontrollgruppen ausdrückt, beschreibt die Odds Ratio 
+einen Vergleich der *Chancen*, was nicht dasselbe wie das *Risiko* ist. Daher bedeutet ein Odds Ratio von 2 nicht, dass die 
+Behandlungsgruppe das doppelte Risiko hat, das medizinische Ereignis zu erwerben.
+
+Die Interpretation des Odds Ratio ist komplizierter, da sie kontrarfaktisch ist und uns angibt, wie viele Male das Ereignis in der Behandlungsgruppe häufiger ist im Vergleich zur Kontrollgruppe unter der Annahme, dass in der Kontrollgruppe das Ereignis so 
+häufig wie das Nicht-Ereignis ist.
+
+Der Vorteil des Odds Ratio besteht darin, dass sie nicht von der Prävalenz oder der Inzidenz des Ereignisses abhängt und notwendigerweise verwendet werden muss, wenn die Anzahl der Menschen mit dem medizinischen Ereignis in beiden Gruppen willkürlich 
+ausgewählt wird, wie z.B. bei Fall-Kontroll-Studien.
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel Rauchen und Lungenkrebs
+
+Um die Assoziation zwischen Lungenkrebs und Rauchen zu bestimmen, wurden zwei Proben ausgewählt (die zweite mit der doppelten Anzahl von Nicht-Krebs-Individuen), wobei folgende Ergebnisse erzielt wurden:
+
+$$
+\begin{array}{|m{1.9cm}|m{1.2cm}<{\centering}|m{1.5cm}<{\centering}|}
+ & \text{Krebs} & \text{kein Krebs}\\ 
+\hline
+\text{Raucher} & 60 & 80\\ 
+\hline 
+\text{Nichtraucher} & 40 & 320\\ 
+\hline
+\end{array}
+$$
+
+$$
+\begin{aligned}
+RR(K) &= \frac{60/(60+80)}{40/(40+320)} = 3.86.\\
+OR(K) &= \frac{60/80}{40/320} = 6. 
+\end{aligned}
+$$
+
+
+
+
+
+
+
+
+$$
+\begin{array}{|m{1.9cm}|m{1.2cm}<{\centering}|m{1.5cm}<{\centering}|}
+ & \text{Krebs} & \text{kein Krebs}\\ 
+\hline
+\text{Raucher} & 60 & 160\\ 
+\hline 
+\text{Nichtraucher} & 40 & 640\\ 
+\hline
+\end{array}
+$$
+$$
+\begin{aligned}
+RR(K) &= \frac{60/(60+160)}{40/(40+640)} = 4.64.\\
+OR(K) &= \frac{60/160}{40/640} = 6. 
+\end{aligned}
+$$
+
+Das Relative Risiko verändert sich, wenn wir die Inzidenz oder Prävalenz des Ereignisses (Lungenkrebs) ändern, während sich die Odds Ratio nicht verändert.
+
+:::
+
+
+
+Die Beziehung zwischen dem Relative Risiko und dem Odds Ratio wird durch die folgende Formel gegeben:
+
+
+$$
+  RR = \frac{OR}{1-R_{Kontrolle}+R_{Kontrolle}\cdot OR}=OR \cdot \frac{1-R_{Intervention}}{1-R_{Kontrolle}}
+$$
+Die Odds Ratio überschätzt stets das Relative Risiko, wenn es größer als 1 ist, und unterschätzt es, wenn es kleiner als 1 ist. Allerdings sind Relatives Risiko und Odds Ratio für seltene medizinische Ereignisse (mit sehr kleiner Prävalenz oder Inzidenz) fast gleich.
+
+```{r}
+#| label: ORvsRR
+r <- c(0.01, 0.05, 0.1, 0.2, 0.3, 0.5)
+# odds ratio
+or <- seq(0,10,0.1)
+# empty plot
+plot(1, 
+     type="n", 
+     xlim=c(0,9), 
+     ylim=c(0,10), 
+     xlab="Relatives Risiko", 
+     ylab="Odds Ratio",  
+     xaxt="n", 
+     yaxt="n")
+axis(2, at=0:10, las=2)
+axis(1, at=0:9)
+abline(h=0:10, v=0:9, col="gray", lty=3)
+title("Relatives Risiko vs Odds Ratio", line=3)
+# color scale
+library(RColorBrewer) 
+cols <- brewer.pal(n=9,name="Blues")
+# Relative risk computation and plot
+for(i in 1:length(r)){
+  rr <- or/(1-r[i]+r[i]*or)
+  lines(rr,or, col=cols[i+3], )
+  mtext(r[i],3, at=tail(rr,1))
+}
+mtext("Risiko in Kontrollgruppe",3,1)
+
+```
+
+
+
+
+
+
+
+
+
+## Diagnosetests
+
+In der Epidemiologie ist es üblich, diagnostische Tests zur Diagnose von Krankheiten zu verwenden. Im Allgemeinen sind diese jedoch nicht vollständig zuverlässig und haben ein gewisses Risiko einer Fehldiagnose, wie in der folgenden Tabelle dargestellt:
+
+
+$$
+\begin{array}{|c|c|c|}
+ & \text{krank}\ K & \text{gesund}\ \overline K\\ \hline
+\text{Testergebnis} & \textcolor{green}{\text{richtig positiv}} & \textcolor{red}{\text{falsch positiv}} \newline
+positiv + & (RP) & (FP) \\ \hline 
+\text{Testergebnis}  & \textcolor{red}{\text{falsch negativ}} &
+\textcolor{green}{\text{richtig negativ}} \\ 
+negativ - &  (FN) &  (RN)\\\hline
+\end{array}
+$$
+
+Die Leistung eines diagnostischen Tests hängt von den folgenden beiden Wahrscheinlichkeiten ab:
+
+- Sensitivität und
+- Spezifität
+
+
+
+### Sensitivität und Spezifität
+
+::: {.callout-warning appearance="default"}
+## Definition "Sensitivität"
+
+Die Sensitivität eines diagnostischen Tests ist der Anteil positiver Ergebnisse bei erkrankten Personen.
+
+$$
+P(+|K)=\frac{RP}{RP+FN}
+$$
+:::
+
+
+::: {.callout-warning appearance="default"}
+## Definition "Spezifität"
+Die Spezifität eines diagnostischen Tests ist der Anteil negativer Ergebnisse bei gesunden Personen.
+
+$$
+P(-|\overline{K})=\frac{RN}{RN+FP}
+$$
+:::
+
+
+
+Ein Test mit hoher 
+Sensitivität wird die Krankheit bei den meisten erkrankten Personen erkennen, jedoch auch mehr falsche Positive produzieren als ein weniger empfindlicher Test. Daher ist ein positives Ergebnis eines Tests mit hoher Sensitivität nicht nützlich zur Bestätigung der Krankheit, aber ein negatives Ergebnis ist nützlich zum Ausschluss der Krankheit, da es selten bei erkrankten Personen zu falsch-negativen Ergebnissen kommt.
+
+Andererseits wird ein Test mit hoher Spezifität die Krankheit bei den meisten gesunden Personen ausschließen, jedoch auch mehr falsche Negative produzieren als ein weniger spezifischer Test. Daher ist ein negatives Ergebnis eines Tests mit hoher Spezifität nicht nützlich zum Ausschluss der Krankheit. Aber ein positives Ergebnis ist nützlich zur Bestätigung der Krankheit, da es selten bei gesunden Personen zu falsch-positiven Ergebnissen kommt.
+
+Die Entscheidung für einen Test mit größerer Sensitivität oder einen Test mit größerer Spezifität hängt von Art der Krankheit und dem Ziel des Tests ab. Im Allgemeinen werden wir einen sensitiven Test verwenden, wenn:
+
+- die Krankheit ernst ist und es wichtig ist, sie zu erkennen.
+- die Krankheit behandelbar ist.
+- Falsch-positive Ergebnisse keine schweren Schäden verursachen.
+
+Und wir werden einen spezifischen Test verwenden, wenn:
+
+- die Krankheit ernst ist, aber schwierig oder unmöglich zu behandeln ist.
+- falsch-positive Ergebnisse schwerwiegende Schäden verursachen.
+- die Behandlung von falsch-positiven Fällen gefährliche Folgen haben kann.
+
+
+
+### prädiktive Werte
+
+Der wichtigste Aspekt eines diagnostischen Tests ist jedoch seine Vorhersagekraft, die mit den folgenden beiden posterioren Wahrscheinlichkeiten gemessen wird:
+
+- positiv prädiktiver Wert und
+- negativ prädiktiver Wert
+
+::: {.callout-warning appearance="default"}
+## Definition "positiv prädiktiver Wert
+Der positiv prädiktive Wert eines diagnostischen Tests ist der Anteil von Personen 
+mit der Krankheit unter allen Personen mit einem positiven Ergebnis.
+
+$$
+P(K|+) = \frac{RP}{RP+FP}
+$$
+:::
+
+
+
+::: {.callout-warning appearance="default"}
+## Definition "Negativ prädiktiver Wert"
+Der negativ prädiktive Wert eines diagnostischen Tests ist der Anteil von Personen 
+ohne die Krankheit unter allen Personen mit einem negativen Ergebnis.
+
+$$
+P(\overline{K}|-) = \frac{RN}{RN+FN}
+$$
+
+:::
+
+
+
+Positiv und negativ prädiktive Werte ermöglichen es, die Krankheit zu bestätigen oder auszuschließen, besonders,  wenn sie mindestens einen Schwellenwert von 0,5 erreichen.
+
+$PPW>0.5 \ \Rightarrow\ $ Hinweis auf das Vorliegen der Krankheit
+
+$PPV<0.5 \ \Rightarrow\ $ Hinweis auf das Nichtvorliegen der Krankheit
+
+Diese Wahrscheinlichkeiten hängen jedoch von der Häufigkeit der Krankheit $P(K)$ ab und können aus der Sensitivität und Spezifität des  diagnostischen Tests unter Verwendung des Satzes von Bayes berechnet werden. 
+
+$$
+\begin{aligned}
+PPW=P(K|+) &= \frac{P(K)P(+|K)}{P(K)P(+|K)+P(\overline{K})P(+|\overline{K})}\\
+NPW=P(\overline{K}|-) &= \frac{P(\overline{K})P(-|\overline{K})}{P(K)P(-|K)+P(\overline{K})P(-|\overline{K})}
+\end{aligned}
+$$
+
+
+Daher steigt der positiv prädiktive Wert bei häufigen Krankheiten und der negativ prädiktive Wert bei seltenen Krankheiten.
+
+
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel 
+Bei 1.000 Personen wurde ein Grippetest durchgeführt. Die Ergebnisse sind in der Tabelle dargestellt.
+
+
+$$
+\begin{array}{|c|c|c|}
+ & \text{Grippe}\ K & \text{keine Grippe}\ \overline K\\ \hline
+\text{Testergebnis} + & 95 & 90 \\ \hline 
+\text{Testergebnis} - & 5 & 810\\\hline
+\end{array}
+$$
+
+
+
+- Die Prävalenz der Grippe ist $P(K) = \frac{95+5}{1000} = 0,1$.
+- Die Sensitivität des Tests ist $P(+|K) = \frac{95}{95+5}= 0,95$. 
+- Die Spezifität des Tests ist $P(-|\overline{K}) = \frac{810}{90+810}=0,9$.
+- Der positiv prädiktive Wert ist $PPW = P(K|+) = \frac{95}{95+90} = 0,5135$. Da dieser Wert über 0,5 liegt, bedeutet dies, dass wir bei einem positiven Testergebnis wahrscheinlich wirklich Grippe gefunden haben. Allerdings wird das Vertrauen in diesesehr gering, da der Wert sehr nahe an 0,5 liegt.
+- Der negativ prädiktive Wert ist $NPW = P(\overline{K}|-) = \frac{810}{5+810} = 0,9939$. Da dieser Wert fast 1 ist, bedeutet dies, dass es fast sicher ist, dass eine Person keine Grippe hat, wenn sie ein negatives Testergebnis erhält.
+
+Daher ist dieser Test sehr leistungsfähig, um die Grippe auszuschließen, aber nicht so leistungsfähig, um sie zu bestätigen.
+:::
+
+
+
+
+### Likelihood Ratio
+
+Die folgenden Maße werden normalerweise aus Sensitivität und Spezifität abgeleitet.
+
+::: {.callout-warning appearance="default"}
+## Definition "Positive Likelihood Ratio"
+Die positive Likelihood Ratio eines diagnostischen Tests ist das Verhältnis zwischen der Wahrscheinlichkeit positiver Ergebnisse bei Personen mit der Krankheit und gesunden Personen.
+
+$$
+LR+=\frac{P(+|K)}{P(+|\overline{K})} = \frac{\mbox{Sensitivität}}{1-\mbox{Spezifität}}
+$$
+:::
+
+
+::: {.callout-warning appearance="default"}
+## Definition "Negative Likelihood Ratio"
+Die negative Likelihood Ratio eines diagnostischen Tests ist das Verhältnis zwischen der Wahrscheinlichkeit negativer Ergebnisse bei Personen mit der Krankheit und gesunden Personen.
+
+$$
+LR-=\frac{P(-|K)}{P(-|\overline{K})} = \frac{1-\mbox{Sensitivität}}{\mbox{Spezifität}}
+$$
+:::
+
+
+Die positive Likelihood Ratio kann als die Anzahl interpretiert werden, wie oft ein positives Ergebnis bei Personen mit der Krankheit gegenüber Personen ohne sie wahrscheinlicher ist.
+
+Andererseits kann die negative Likelihood Ratio als die Anzahl interpretiert werden, wie oft ein negatives Ergebnis bei Personen mit der Krankheit gegenüber Personen ohne sie wahrscheinlicher ist.
+
+Post-Test-Wahrscheinlichkeiten können durch Likelihood Ratio aus Pre-Test-Wahrscheinlichkeiten berechnet werden.
+
+$$
+P(K|+) = \frac{P(K)P(+|K)}{P(K)P(+|K)+P(\overline{K})P(+|\overline{K})} = \frac{P(K)LR+}{1-P(K)+P(K)LR+}
+$$
+
+Daher gilt:
+
+- Eine Likelihood Ratio größer als 1 erhöht die Wahrscheinlichkeit der Erkrankung.
+- Eine Likelihood Ratio kleiner als 1 verringert die Wahrscheinlichkeit der Erkrankung.
+- Eine Likelihood Ratio von 1 ändert die Pre-Test-Wahrscheinlichkeit nicht.
+
+
+```{r}
+#| label: likelihoodRatio
+
+pe=seq(0,1, 0.01)
+lr=c(0.01, 0.05, 0.1, 0.2, 0.5, 2, 5, 10, 20, 100)
+color=hcl(h=seq(0,240,24),
+          c=80,l=60)
+par(mar=c(3.8, 3.8, 3, 11),
+    mgp=c(1.8, 0.4, 0), 
+    cex.lab=1, cex.axis=0.8, 
+    las=1, 
+    tck=-0.02)
+plot(pe, pe, type="l", 
+     main="Beziehung zwischen Pretest, Posttest\n Wahrscheinlichkeiten und der Likelihood Ratio",
+     xlab="Pretest Wahrscheinlichkeit", 
+     ylab="Posttest Wahrscheinlichkeit")
+for (i in lr) {
+  lines(pe,pe*i/(1-pe+pe*i),col=color[which(lr == i)])
+}  
+abline(h=seq(0, 1, 0.2),
+       v=seq(0, 1, 0.2),
+       col="gray",
+       lty=3)
+legend("topright", 
+       c("LR-=0.01", "LR-=0.05", "LR-=0.1", "LR-=0.2", "LR-=0.5", "LR+=1",
+         "LR+=2", "LR+=5", "LR+=10", "LR+=20", "LR+=100"),
+       col=c(color[1:5],"black",
+             color[6:10]),
+       inset=c(-0.5,0), 
+       bty = "n", 
+       lty=1, 
+       xpd=TRUE,
+       title="Likelihood Ratios")
+
+```
+
+
 
 

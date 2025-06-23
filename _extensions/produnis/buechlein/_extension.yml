@@ -38,6 +38,7 @@ contributes:
     html:
       lang: de
       rights: "Creative Commons BY-NC-SA 4.0"
+      toc-depth: 4
       code-line-numbers: false
       execute:
         error: true

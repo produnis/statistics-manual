@@ -30,7 +30,7 @@ book:
   cover-image: images/Titelbild.jpg
   output-file: manual
   sidebar:
-    collapse-level: 4
+    collapse-level: 5
     background: "#f2ebe1"
   downloads:
     - pdf
