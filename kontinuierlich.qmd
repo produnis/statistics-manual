@@ -549,9 +549,11 @@ box()
 :::
 
 $$
+\begin{aligned}
 P(\mu-\sigma \leq X \leq \mu+\sigma) = 0.68\\
 P(\mu-2\sigma \leq X \leq \mu+2\sigma) = 0.95\\
 P(\mu-3\sigma \leq X \leq \mu+3\sigma) = 0.99
+\end{aligned}
 $$
 
 
@@ -612,7 +614,7 @@ plot(x, dnorm(x, mean=0, sd=1),
 ```
 
 
-## Berechnung von Wahrscheinlichkeiten
+### Berechnung von Wahrscheinlichkeiten
 
 Um die Integration der normalen Dichtefunktion zu vermeiden, ist es üblich, die Verteilungsfunktion zu verwenden, die in Tabellenform wie unten angegeben ist.
 
@@ -762,6 +764,208 @@ $$
 Demnach haben 25,14% der Schüler das Examen nicht bestanden.
 
 :::
+
+
+
+
+
+## Chi-Quadrat-Verteilung
+
+::: {.callout-warning appearance="default"}
+## Definition "Chi-Quadrat-Verteilung $\Chi^2(n)$ 
+
+Gegeben $n$ unabhängige Zufallsvariablen $Z_1,\ldots,Z_n$, die alle einer Standardnormalverteilung folgen, folgt die Variable
+
+$$
+\chi^2(n) = Z_1^2+\cdots +Z_n^2,
+$$
+
+einer Chi-Quadrat-Verteilung mit $n$ Freiheitsgraden. Ihr Bereich ist $\mathbb{R}^+$, und ihr Mittelwert und ihre Varianz sind:
+
+$$
+\mu = n, \qquad \sigma^2 = 2n.
+$$
+:::
+
+Die Chi-Quadrat-Verteilung spielt eine wichtige Rolle bei der Schätzung der Populationsvarianz und beim Studium von Beziehungen 
+zwischen qualitativen Variablen.
+
+```{r}
+#| label: ChiQuadrat
+
+par(mar=c(3.5,3.5,3,1), 
+    mgp=c(2.2,0.6,0), 
+    las=1)
+x = seq(0, 50, by=0.05)
+y1 = dchisq(x, df=3)
+y2 = dchisq(x, df=10)
+y3 = dchisq(x, df=30)
+plot(x, y1, 
+     xlab="X", 
+     ylab = expression(paste("Dichtefunktion ", f(x))), 
+     main="Chi-Quadrat-Verteilung", type="l", 
+     col="steelblue", 
+     lwd=2, 
+     yaxs="i")
+lines(x, y2, type="l", col="darkgreen", lwd=2)
+lines(x, y3, type="l", col="hotpink", lwd=2)
+legend("topright", 
+       lty=1, 
+       lwd=2, 
+       col=c("steelblue", "darkgreen", "hotpink"), 
+       legend = expression(chi^2 * "(3)", chi^2 * "(10)", chi^2 * "(30)"), 
+       bty="n") 
+box()
+
+```
+
+
+
+Eigenschaften der Chi-Quadrat-Verteilung
+
+- Die Spannweite ist nicht-negativ.
+- Wenn $X\sim \chi^2(n)$ and $Y\sim \chi^2(m)$, dann gilt $X+Y \sim \chi^2(n+m)$.
+- Sie nähert sich asymptotisch einer normalen Verteilung an, wenn die Anzahl an Freiheitsgraden zunimmt.
+
+
+
+
+
+## Student's t-Verteilung
+
+::: {.callout-note appearance="default"}
+## Definition "Student's t-Verteilung" $T(n)$
+Gegeben eine Variable $Z$, die einer Standardnormalverteilung folgt,  $Z\sim N(0,1)$, und eine Variable $X$, die einer Chi-Quadrat-Verteilung mit $n$ Freiheitsgraden folgt, $$X\sim \chi^2(n)$$, dann folgt die Variable
+
+$$
+T = \frac{Z}{\sqrt{X/n}},
+$$
+
+einer Student's t-Verteilung mit $n$ Freiheitsgraden. Ihr Bereich ist $\mathbb{R}$ , und ihr Mittelwert und ihre Varianz sind:
+
+$$
+\mu = 0, \qquad \sigma^2 = \frac{n}{n-2}\ \mbox{ wenn } n>2.
+$$
+:::
+
+Die t-Verteilung spielt eine wichtige Rolle bei der Schätzung des Populationsmittelwerts.
+
+
+```{r}
+#| label: tverteilung
+par(mar=c(3.5,3.5,3,1), 
+    mgp=c(2.2,0.6,0), 
+    las=1)
+x = seq(-3.3, 3.3, by=0.05)
+y1 = dt(x, df=3)
+y2 = dt(x, df=10)
+y3 = dt(x, df=30)
+plot(x, dnorm(x, mean=0, sd=1), 
+     ylim=c(0,0.45), 
+     xlab="X", 
+     ylab = expression(paste("Dichtefunktion ", f(x))),
+     main="Student's T Verteilung", 
+     type="l", 
+     col=gray(0.5), 
+     lty=2, 
+     lwd=2, 
+     yaxs="i")
+lines(x, y1, type="l", col="steelblue", lwd=2)
+lines(x, y2, type="l", col="darkgreen", lwd=2)
+lines(x, y3, type="l", col="hotpink", lwd=2)
+legend("topright", 
+       lty=c(1,1,1,2), 
+       lwd=2, 
+       col=c("steelblue", "darkgreen", "hotpink", gray(0.5)), 
+       legend=c("T(3)", "T(10)", "T(30)", "N(0,1)"), bty="n") 
+box()
+
+```
+
+
+Eigenschaften der Student's t-Verteilung:
+
+- Der Mittelwert, der Median und der Modus sind gleich, $\mu=Me=Mo$.
+- Sie ist symmetrisch, $g_1=0$.
+- Sie nähert sich asymptotisch einer Standardnormalverteilung an, wenn die Anzahl der Freiheitsgrade abnimmt. In der Praxis gilt für n ≥ 30, dass beide Verteilungen annähernd gleich sind.
+
+$$
+T(n)\stackrel{n\rightarrow \infty}{\approx}N(0,1).
+$$
+
+
+## Fisher-Snedecor-Verteilung
+
+::: {.callout-warning appearance="default"}
+## Definition "Fisher-Snedecor-Verteilung" $F(m,n)$
+Gegeben zwei unabhängige Variablen $X$ und $Y$, die jeweils einer Chi-Quadrat-Verteilung  mit $m$ bzw. $n$ Freiheitsgraden folgen, 
+$X\sim \chi^2(m)$ and $Y\sim \chi^2(n)$, folgt die Variable
+
+$$
+F = \frac{X/m}{Y/n},
+$$
+
+einer Fisher-Snedecor-Verteilung mit $m$ und $n$ Freiheitsgraden. Ihr Bereich ist $\mathbb{R}^+$, und ihr Mittelwert und ihre Varianz sind:
+
+$$
+\mu = \frac{n}{n-2}, \qquad \sigma^2 =\frac{2n^2(m+n−2)}{m(n-2)^2(n-4)}\ \mbox{ wenn } n>4.
+$$
+:::
+
+Die Fisher-Snedecor-Verteilung spielt eine wichtige Rolle beim Vergleich von Populationsvarianzen und bei der ANOVA-Analyse (Analysis of Variance).
+
+```{r}
+#| label: fischerF
+par(mar=c(3.5, 3.5, 3,1), 
+    mgp=c(2.2, 0.6, 0), 
+    las=1)
+x = seq(0, 5, by=0.05)
+y1 = df(x, df1=3, df2=3)
+y2 = df(x, df1=20, df2=10)
+y3 = df(x, df1=30, df2=30)
+plot(x, y3, 
+     xlab="X", 
+     ylab = expression(paste("Dichtefunktion ", f(x))),
+     main="Fisher's F-Verteilung", 
+     type="l", 
+     col="salmon", 
+     lwd=2, 
+     yaxs="i")
+lines(x, y1, type="l", col="steelblue", lwd=2)
+lines(x, y2, type="l", col="darkgreen", lwd=2)
+legend("topright", 
+       lty=1, 
+       lwd=2, 
+       col=c("steelblue", "darkgreen", "salmon"), 
+       legend=c("F(3,3)","F(20,10)","F(30,30)"), 
+       bty="n") 
+box()
+
+```
+
+
+Eigenschaften der Fisher-Snedecor-Verteilung:
+
+- Der Bereich ist nicht-negativ.
+- Sie erfüllt die Beziehung
+$$
+F(m,n) =\frac{1}{F(n,m)}.
+$$
+
+
+Dies bedeutet, dass wenn wir den Wert $f(m,n)_p$ definieren als den Wert, der die Gleichung  $P(F(m,n)\leq f(m,n)_p)=p$ erfüllt, dann gilt:
+
+$$
+f(m,n)_p =\frac{1}{f(n,m)_{1-p}}
+$$
+
+Dies ist hilfreich beim Berechnen von Wahrscheinlichkeiten mithilfe der Verteilungsfunktionstabelle.
+
+
+
+
+
+
 
 
 
