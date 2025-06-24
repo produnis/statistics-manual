@@ -302,3 +302,471 @@ text(7.5, 0.03, expression(integral(frac(1,15) * dx, 5, 10)))
 
 Die erwarete (durchschnittliche) Wartezeit ist $\mu=\frac{0+15}{2}=7.5$ Minuten.
 :::
+
+
+
+
+
+
+
+
+## Normalverteilung
+
+Das Normalverteilungsmodell ist ohne Zweifel das wichtigste Modell für kontinuierliche Verteilungen und das häufigste in der Natur.
+
+::: {.callout-warning appearance="default"}
+## Definition "Normalverteilung" $N(\mu, \sigma)$
+
+Eine stetige Zufallsvariable $X$ folgt dem Normalverteilungsmodell $N(\mu, \sigma)$, wenn  ihr Wertebereich $\mbox{Ran}(X) = (-\infty,\infty)$ ist und ihre Dichtefunktion
+
+$$
+f(x)= \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}.
+$$
+:::
+
+Die beiden Parameter $\mu$ und $\sigma$ sind der Mittelwert (Erwartungswert) bzw. die Standardabweichung der Population.
+
+
+
+### Dichtefunktion der Normalverteilung
+
+Der Graph der Wahrscheinlichkeitsdichtefunktion einer Normalverteilung $N(\mu, \sigma)$ ist glockenförmig und wird auch als *Gauß-Glocke* bezeichnet.
+
+```{r}
+#| label: normalverteilung1
+par(mar=c(3.5, 3.5, 3, 1), 
+    mgp=c(2.2, 0.6, 0), las=1)
+x <- seq(-3.3, 3.3, by=0.05)
+plot(x, dnorm(x, mean=0, sd=1), 
+     ylim=c(0,0.45), xlab="X", 
+     ylab = expression(paste("Dichtefunktion ", f(x))),
+     main = expression(paste("Normalverteilung ", N(mu, sigma))),
+     type="l", 
+     col="steelblue", 
+     lwd=2, 
+     yaxs="i",
+     axes=FALSE)
+axis(side = 1, at = c(-1, 0, 1), labels = expression(mu - sigma, mu, mu + sigma))
+box()
+
+```
+
+
+
+Die Glockenform hängt vom Mittelwert $\mu$ und der Standardabweichung $\sigma$ ab.
+
+- Der Mittelwert $\mu$ legt die Mitte der Glocke fest.
+- Die Standardabweichung $\sigma$ legt die Breite der Glocke fest.
+
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: normalverteilung2
+par(mar=c(3.5,3.5,3,1), mgp=c(2.2,0.6,0), las=1)
+x <- seq(-3.3, 3.3, by=0.05)
+plot(x, dnorm(x, mean=0, sd=1), 
+     xlim=c(-3.2,5.2), 
+     ylim=c(0,0.45), 
+     xlab="X", 
+     ylab=expression("Wahrscheinlichkeitsdichte " * f(x)), 
+     main="Normalverteilung\n unterschiedliche Mittelwerte, gleiche Varianz", 
+     type="l", 
+     col="steelblue", 
+     lwd=2, 
+     yaxs="i")
+lines(x+2, dnorm(x, mean=0, sd=1), 
+      type="l", 
+      col="darkgreen", 
+      lwd=2)
+legend("topright", 
+       lty=1, col=c("steelblue", "darkgreen"), 
+       legend=c("N(0,1)", "N(2,1)"), 
+       bty="n") 
+
+```
+
+
+
+```{r}
+#| label: normalverteilung3
+par(mar=c(3.5,3.5,3,1), 
+    mgp=c(2.2,0.6,0), 
+    las=1)
+x = seq(-3.3, 3.3, by=0.05)
+y = seq(-6.581, 6.581, length=100)
+plot(x, dnorm(x, mean=0, sd=1), 
+     xlim=c(-6.5,6.5), 
+     ylim=c(0,0.45), 
+     xlab="X", 
+     ylab=expression("Wahrscheinlichkeitsdichte " * f(x)), 
+     main="Normalverteilung\n gleiche Mittelwerte, unterschiedliche Varianz", 
+     type="l", 
+     col="steelblue", 
+     lwd=2, 
+     yaxs="i")
+lines(y, dnorm(y, mean=0, sd=2), 
+      type="l", 
+      col="darkgreen", 
+      lwd=2)
+legend("topright", 
+       lty=1, 
+       col=c("steelblue", "darkgreen"), 
+       legend=c("N(0,1)", "N(0,2)"), 
+       bty="n") 
+
+```
+
+
+:::
+
+
+
+### Verteilungsfunktion
+
+Die Verteilungsfunktion der Normalverteilung ist S-förmig
+
+```{r}
+#| label: normalSform
+par(mar=c(3.5,3.5,3,1), 
+    mgp=c(2.2,0.6,0), 
+    las=1)
+x <- seq(-3.3, 3.3, by=0.05)
+plot(x, pnorm(x, mean=0, sd=1), 
+     xlab="X", 
+     ylab = expression(paste("kumulierte Wahrscheinlichkeit ", F(x))),
+     main = expression(paste("Normalverteilung ", N(mu, sigma))),
+     type="l", 
+     col="steelblue", 
+     lwd=2, 
+     yaxs="i",
+     axes=FALSE)
+axis(side=1, at=c(0), 
+     labels=expression(mu))
+box()
+
+```
+
+
+
+### Eigenschaften der Normalverteilung
+
+- Sie ist symmetrisch bezüglich der Mitte, sodass Schiefe null ist: $g_1=0$.
+- Sie ist mesokurtisch, da die Dichtefunktion glockenförmig ist und der Kurtosiskoeffizient daher null beträgt: $g_2=0$.
+- Mittelwert, Median und Modalwert sind gleich: $\mu = Me = Mo$.
+- Sie nähert sich asymptotisch Null an, wenn $x$  gegen $\pm \infty$ geht.
+
+
+
+:::{layout-ncol=3}
+
+```{r}
+#| label: normaleigenschaft1
+par(mar=c(3.5,3.5,3,1), 
+    mgp=c(2.2,0.6,0), 
+    las=1)
+x <- seq(-3.3, 3.3, by=0.05)
+y <- dnorm(x, mean=0, sd=1)
+x1 <- seq(-1, 1, by=0.05)
+y1 <- dnorm(x1, mean=0, sd=1)
+plot(x, y, 
+     ylim=c(0,0.45), 
+     xlab="X", 
+     ylab = expression(paste("Dichtefunktion ", f(x))),
+     main = expression(paste("Normalverteilung ", N(mu, sigma))),
+     type="n", col="steelblue", 
+     lwd=2, 
+     yaxs="i",
+     axes=FALSE)
+axis(side=1, at=c(0), labels=expression(mu))
+axis(side=1, at=c(-1,1), 
+     labels=expression(mu-sigma, mu+sigma))
+polygon(c(x1[1],x1,x1[40]), c(0,y1,0), 
+        col="salmon", lty=0)
+text(0,0.15, "68%")
+lines(x, y, col="steelblue", lwd=2)
+box()
+
+```
+
+
+```{r}
+#| label: normaleigenschaft2
+par(mar=c(3.5,3.5,3,1), 
+    mgp=c(2.2,0.6,0), las=1)
+x <- seq(-3.3, 3.3, by=0.05)
+y <- dnorm(x, mean=0, sd=1)
+x2 <- seq(-2, 2, by=0.05)
+y2 <- dnorm(x2, mean=0, sd=1)
+plot(x, y, 
+     ylim=c(0,0.45), 
+     xlab="X", 
+     ylab = expression(paste("Dichtefunktion ", f(x))),
+     main = expression(paste("Normalverteilung ", N(mu, sigma))),
+     type="n", col="steelblue", 
+     lwd=2, 
+     yaxs="i",
+     axes=FALSE)
+axis(side=1, at=c(0), labels=expression(mu))
+axis(side=1, at=c(-2,2), 
+     labels=expression(mu-2*sigma, mu+2*sigma))
+polygon(c(x2, rev(x2)), c(rep(0, length(y2)), rev(y2)), col="salmon", border=NA)
+text(0,0.15,"95%")
+lines(x, y, col="steelblue", lwd=2)
+box()
+
+```
+
+
+```{r}
+#| label: normaleigenschaft3
+par(mar=c(3.5,3.5,3,1), 
+    mgp=c(2.2,0.6,0), 
+    las=1)
+x <- seq(-3.3, 3.3, by=0.05)
+y <- dnorm(x, mean=0, sd=1)
+x3 <- seq(-3, 3, by=0.05)
+y3 <- dnorm(x3, mean=0, sd=1)
+plot(x, y, ylim=c(0,0.45), 
+     xlab="X", 
+     ylab = expression(paste("Dichtefunktion ", f(x))),
+     main = expression(paste("Normalverteilung ", N(mu, sigma))),
+     type="n", 
+     col="steelblue", 
+     lwd=2, 
+     yaxs="i",
+     axes=FALSE)
+axis(side=1, at=c(0), labels=expression(mu))
+axis(side=1, at=c(-3,3), 
+     labels=expression(mu-3*sigma, mu+3*sigma))
+polygon(c(x3, rev(x3)), c(rep(0, length(y3)), rev(y3)), col="salmon", border=NA)
+text(0,0.15,"99%")
+lines(x, y, col="steelblue", lwd=2)
+box()
+
+```
+
+:::
+
+$$
+P(\mu-\sigma \leq X \leq \mu+\sigma) = 0.68\\
+P(\mu-2\sigma \leq X \leq \mu+2\sigma) = 0.95\\
+P(\mu-3\sigma \leq X \leq \mu+3\sigma) = 0.99
+$$
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel Cholesterin
+
+Es ist bekannt, dass die Cholesterinwerte von Frauen im Alter zwischen 40 und 50 Jahren einer Normalverteilung mit $\mu=210$mg/dl und $\sigma=20$mg/dl folgen.
+
+Durch die Eigenschaften der Glockenkurve wissen wir, dass
+
+- 68% der Frauen einen Cholesterinwert von $210\pm 20$ mg/dl aufweisen, also Werte zwischen 190 und 230 mg/dl.
+- 95% der Frauen einen Cholesterinwert von $210\pm 2\cdot20$ mg/dl aufweisen, also Werte zwischen 170 und 250 mg/dl.
+- 99% der Frauen einen Cholesterinwert von $210\pm 3\cdot20$ mg/dl aufweisen, also Werte zwischen 150 und 270 mg/dl.
+:::
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel Blutanalyse
+
+Bei der Blutanalyse wird häufig das Intervall $\mu\pm 2\sigma verwendet, um mögliche Pathologien zu erkennen. Im Fall des Cholesterins liegt dieses Intervall bei $[170\text{ mg/dl}, 250\text{ mg/dl}]$.
+
+Somit wird eine Frau im Alter zwischen 40 und 50 Jahren mit einem Cholesteringehalt außerhalb dieses Intervalls häufig auf eine 
+mögliche Erkrankung untersucht. Allerdings könnte diese Person gesund sein, obwohl die Wahrscheinlichkeit dafür nur 5 % beträgt.
+:::
+
+
+
+### Der Zentrale Grenzwertsatz
+
+Dieses Verhalten ist bei vielen physikalischen und biologischen Variablen in der Natur zu beobachten.
+
+Wenn man zum Beispiel an die Verteilung der Körpergröße denkt, kann man feststellen, dass die meisten Menschen in der Bevölkerung eine Körpergröße um den Mittelwert haben. Allerdings gibt es immer weniger Menschen mit Körpergrößen, je weiter sie vom Mittelwert entfernt sind - sowohl darunter als auch darüber.
+Die Erklärung für dieses Verhalten ist der *Zentrale Grenzwertsatz*, auf den wir im nächsten Kapitel zurückkommen werden. Er besagt, dass eine stetige Zufallsvariable, deren Werte von einer großen Anzahl unabhängiger Faktoren abhängen, die ihre Effekte addieren, immer einer Normalverteilung folgt.
+
+
+### Standardnormalverteilung
+
+Die wichtigste Normalverteilung hat einen Mittelwert $\mu=0$ und eine Standardabweichung  $\sigma=1$.
+
+Sie wird als **Standardnormalverteilung** bezeichnet und üblicherweise mit $Z\sim N(0,1)$ dargestellt.
+
+```{r}
+#| label: standardnormalverteilung1
+par(mar=c(3.5, 3.5, 3, 1), 
+    mgp=c(2.2, 0.6, 0), 
+    las=1)
+x <- seq(-3.3, 3.3, by=0.05)
+plot(x, dnorm(x, mean=0, sd=1), 
+     ylim=c(0,0.45), 
+     xlab="X", 
+     ylab = expression(paste("Dichtefunktion ", f(x))),
+     main = expression(paste("Standardnormalverteilung ", N(0, 1))),
+     type="l", 
+     col="steelblue", 
+     lwd=2, 
+     yaxs="i")
+
+```
+
+
+## Berechnung von Wahrscheinlichkeiten
+
+Um die Integration der normalen Dichtefunktion zu vermeiden, ist es üblich, die Verteilungsfunktion zu verwenden, die in Tabellenform wie unten angegeben ist.
+
+::: {.callout-tip appearance="default"}
+## Beispiel: 
+
+Berechnung von $P(Z\leq 0.52)$
+
+$\rightarrow$ Reihe $0.5$ + Spalte $0.02$
+
+$$
+\begin{array}{|r||r|r|r|r|}
+\hline
+\mathbf{z} & \mathbf{0.00} & \mathbf{0.01} & \color{red}{\mathbf{0.02}} & \mathbf{\cdots} \\
+\hline\hline
+\mathbf{0.0} & 0.5000 & 0.5040 & 0.5080 & \cdots \\
+\hline
+\mathbf{0.1} & 0.5398 & 0.5438 & 0.5478 & \cdots \\
+\hline
+\mathbf{0.2} & 0.5793 & 0.5832 & 0.5871 & \cdots \\
+\hline
+\mathbf{0.3} & 0.6179 & 0.6217 & 0.6255 & \cdots \\
+\hline
+\mathbf{0.4} & 0.6554 & 0.6591 & 0.6628 & \cdots \\
+\hline
+\color{red}{\mathbf{0.5}} & 0.6915 & 0.6950 & \color{blue}{\color{red}{\mathbf{0.6985}}} & \cdots \\
+\hline
+\mathbf{\vdots} & \vdots & \vdots & \vdots & \ddots \\
+\hline
+\end{array}
+$$
+
+
+```{r}
+#| label: normalLeftTail
+par(mar=c(3.5,3.5,3,1), 
+    mgp=c(2.2,0.6,0), 
+    las=1)
+x = seq(-3.32, 3.32, by=0.04)
+y = dnorm(x,mean=0,sd=1)
+x0 = x[97]
+p0 = floor(pnorm(x0, mean=0, sd=1, lower.tail=TRUE)*10000)/10000
+plot(x, y, 
+     ylim=c(0,0.45), 
+     xlab="X", 
+     ylab = expression(paste("Dichtefunktion ", f(x))),
+     main = expression(paste("Standardnormalverteilung ", N(0, 1))),
+     type="n", yaxs="i",axes=FALSE)
+axis(side=1, at=x0)
+polygon(c(x[1],x[1:97],x[97]), c(0,y[1:97],0), col="salmon", lty=0)
+lines (x, y, type="l", col="steelblue", lwd=2)
+text(-0.7,0.06,paste("F(",x0,")=",p0))
+box()
+
+```
+
+:::
+
+
+
+
+
+Um kumulative Wahrscheinlichkeiten für Werte rechts von einem Wert zu berechnen, kann die Regel für komplementäre Ereignisse angewendet werden, beispielsweise:
+
+$$
+P(Z>0.52) =1-P(Z\leq 0.52) = 1-F(0.52) = 1 - 0.6985 = 0.3015.
+$$
+
+
+```{r}
+#| label: normalRightTail
+par(mar=c(3.5,3.5,3,1), 
+    mgp=c(2.2,0.6,0), 
+    las=1)
+x = seq(-3.32, 3.32, by=0.04)
+y = dnorm(x,mean=0,sd=1)
+x0 = x[97]
+p0 = floor(pnorm(x0, mean=0, sd=1, lower.tail=TRUE)*10000)/10000
+plot(x, y, 
+     ylim=c(0,0.45), 
+     xlab="X", 
+     ylab = expression(paste("Dichtefunktion ", f(x))),
+     main = expression(paste("Standardnormalverteilung ", N(0, 1))),
+     type="n", 
+     yaxs="i",
+     axes=FALSE)
+axis(side=1, at=x0)
+polygon(c(x[97],
+          x[97:length(x)],
+          x[length(x)]), 
+        c(0,y[97:length(x)],0), 
+        col="salmon", lty=0)
+lines (x, y, type="l", col="steelblue", lwd=2)
+text(-0.7,0.06,paste("F(",x0,")=",p0))
+text(1.2,0.06,paste("1-F(",x0,")"))
+text(1.2,0.04,"=0.3015")
+box()
+
+```
+
+
+
+
+### Standardisierung
+
+Wir haben gelernt, wie wir die Tabelle der Standardnormalverteilungsfunktion verwenden können, um Wahrscheinlichkeiten zu berechnen. Aber was tun wir, wenn es sich nicht um die Standardnormalverteilung handelt?
+
+In diesem Fall können wir *Standardisierung* anwenden, um jede Normalverteilung in eine Standardnormalverteilung umzuwandeln.
+
+::: {.callout-warning appearance="default"}
+## Definition "Standardisierung"
+Wenn $X$ eine stetige Zufallsvariable ist, die einer Normalverteilungsfunktion mit 
+Mittelwert $\mu$ und Standardabweichung $\sigma$ folgt, $X\sim N(\mu,\sigma)$, dann folgt die Variable, die durch Subtrahieren von $\mu$ und Dividieren durch $\sigma$ erhalten wird, einer Standardnormalverteilung:
+
+$$
+X\sim N(\mu,\sigma) \Rightarrow Z=\frac{X-\mu}{\sigma}\sim N(0,1).
+$$
+
+Um daher Wahrscheinlichkeiten mit einer nicht-standardmäßigen Normalverteilung zu berechnen, müssen wir die Variable zuerst 
+standardisieren, bevor wir die Tabelle der Standardnormalverteilungsfunktion verwenden.
+
+:::
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Angenommen, die Note $X$ eines Examens folgt einer normalen Wahrscheinlichkeitsverteilungsfunktion $N(\mu=6,\sigma=1.5)$. Welcher Prozentsatz  der Schüler hat das Examen nicht bestanden?
+
+Da $X$ einer nicht-standardmäßigen Normalverteilung folgt, müssen wir zuerst standardisieren, 
+
+$$
+Z=\displaystyle \frac{X-\mu}{\sigma} = \frac{X-6}{1.5}
+$$
+
+
+$$
+P(X<5) = P\left(\frac{X-6}{1.5}<\frac{5-6}{1.5}\right) = P(Z<-0.67).
+$$
+Jetzt können wir die Tabelle der Standardnormalverteilungsfunktion verwenden:
+
+$$
+P(Z<-0.67) = F(-0.67) = 0.2514.
+$$
+
+Demnach haben 25,14% der Schüler das Examen nicht bestanden.
+
+:::
+
+
+
+
+
+
+
+
