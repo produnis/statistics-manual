@@ -40,8 +40,8 @@ die Stichprobenstatistik hat kein Inferenzpotential, weshalb keine Verallgemeine
 ### Stichprobenklassifizierung
 Das Studium einer statistischen Variablen beginnt mit der Messung der Variable bei den Individuen der Stichprobe und der Klassifizierung der Werte. Es gibt zwei Weisen, Daten zu klassifizieren:  
 
-- **Klassifizierung ohne Gruppieren**: Sortieren der Werte vom kleinsten zum größten (wenn eine Reihenfolge existiert). Diese Methode wird bei qualitativen Variablen und diskreten Variablen mit wenigen eindeutigen Werten verwendet.  
-- **Klassifizierung mit Gruppieren**: Gruppieren der Werte in Intervalle (Klassen) und Sortieren dieser Intervalle vom kleinsten  zum größsten. Diese Methode wird bei kontinuierlichen Variablen und diskreten Variablen mit vielen eindeutigen Werten verwendet.
+- **Klassifizierung ohne Klassierung**: Sortieren der Werte vom kleinsten zum größten (wenn eine Reihenfolge existiert). Diese Methode wird bei qualitativen Variablen und diskreten Variablen mit wenigen eindeutigen Werten verwendet.  
+- **Klassifizierung mit Klassierung**: Gruppieren der Werte in Intervalle (Klassen) und Sortieren dieser Intervalle vom kleinsten  zum größsten. Diese Methode wird bei kontinuierlichen Variablen und diskreten Variablen mit vielen eindeutigen Werten verwendet.
 
 <center>
 
@@ -204,7 +204,7 @@ Da es sich um nominale Werte handelt, gibt es keine natürliche Reihenfolge. The
 
 ## Diagramme  
 
-Häufigkeitsverteilungen werden üblicherweise auch grafisch dargestellt. Abhängig von dem Typ der Variablen und ob die Daten gruppiert wurden, gibt es verschiedene Arten von Diagrammen:  
+Häufigkeitsverteilungen werden üblicherweise auch grafisch dargestellt. Abhängig von dem Typ der Variablen und ob die Daten klassiert wurden, gibt es verschiedene Arten von Diagrammen:  
 
 - Säulendiagramm  
 - Histogramm  

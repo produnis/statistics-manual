@@ -1032,7 +1032,7 @@ $$
 0\leq R^2\leq 1
 $$
 
-Je größe r $R^2$ ist, desto besser passt das Regressionsmodell und desto zuverlässiger werden seine Vorhersagen sein. 
+Je größer $R^2$ ist, desto besser passt das Regressionsmodell und desto zuverlässiger werden seine Vorhersagen sein. 
 
 - Wenn $R^2 = 0$, gibt es keine Beziehung gemäß dem Regressionsmodell.
 - Wenn $R^2 = 1$, ist die Beziehung gemäß dem Modell perfekt.
@@ -1217,7 +1217,7 @@ Die nachfolgende Tabelle zeigt die Anzahl an Bakterien in einer Kultur über meh
 
 $$
 \begin{array}{c|c}
-\text{Hours} & \text{Bacteria}\\
+\text{Stunden} & \text{Bakterien}\\
 \hline
 0 &  25 \\
 1 & 28 \\

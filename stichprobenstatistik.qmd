@@ -185,9 +185,9 @@ Der Median kann **nicht** für nominale Variablen berechnet werden.
 
 
 
-#### Nicht-gruppierte Daten  
+#### Nicht-klassierte Daten  
 
-Bei nicht-gruppierten Daten gibt es zwei Möglichkeiten: 
+Bei nicht-klassierten Daten gibt es zwei Möglichkeiten: 
 
 - **Gerade Stichprobengröße:** Der Median ist der Wert an Position $\frac{n}{2}$.  
 - **Ungerade Stichprobengröße:** Der Median ist das arithmetische Mittel der Werte an den Positionen $\frac{n}{2}$ und $\frac{n}{2}+1$.
@@ -226,7 +226,7 @@ x_i & n_i & f_i & N_i & F_i\\
 $$
 
 
-#### Gruppierte Daten
+#### klassierte Daten
 
 Sind die Werte in Klassen gruppiert, kann die Berechnung des Median geometrisch hergeleitet werden.
 
@@ -916,7 +916,7 @@ Formmaße sind Maße, die die Form der Verteilung beschreiben. Besonders wichtig
 ### Schiefekoeffizient
 
 ::: {.callout-warning appearance="default"}
-## Definition "Schiefekoeffizient"
+## Definition "Schiefekoeffizient" (coefficient of skewness)
 
 Der Stichproben-Schiefekoeffizient $g_1$ einer Variablen $X$ ist der Durchschnitt der hoch drei genommenen Abweichungen der Werte vom Stichprobenmittel, geteilt durch die hoch drei genommene Standardabweichung.
 

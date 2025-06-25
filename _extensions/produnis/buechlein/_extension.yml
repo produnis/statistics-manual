@@ -22,6 +22,9 @@ contributes:
       bookmarks: true
       plainpages: false
       hypertexnames: true
+      fig-width: 4
+      fig-align: center
+      fig-pos: "H"
       toc: false # alles auf false, damit die Seitennummerierung roman/arabic passt
       lof: false # die verzeichnisse werden in der before-body.tex von hand
       lot: false # eingefügt

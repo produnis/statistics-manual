@@ -62,69 +62,58 @@ In Experimenten, bei denen mehr als eine Variable gemessen wird, kann die Bestim
 
 In einem Baumdiagramm wird jede Variable auf einer Ebene des Baums dargestellt und jeder mögliche Wert der Variablen als Zweig.
 
-```{dot}
-//| label: baumdiagramm
-digraph bloodtype_tree {
-    node [shape=box];
+```{r}
+#| label: baumdiagrammtik
+#| engine: tikz
+\begin{tikzpicture}[
+grow'=right,
+level 1/.style ={level distance=2cm, sibling distance=3.2cm, parent anchor=east, child anchor=west},
+level 2/.style ={level distance=4cm, sibling distance=0.8cm},
+level 3/.style ={level distance=2cm, sibling distance=0.8cm, dashed}
+]
 
-    root -> weiblich;
-    root -> männlich;
+% Hauptbaum
+\node (root) {}
+	child {
+		node (weiblich) {weiblich}
+    	child {node (f0) {0}
+				child {node{(weiblich,0)}}
+			}
+ 			child {node (fA) {A}
+				child {node{(weiblich,A)}}
+			}
+			child {node (fB) {B}
+				child {node{(weiblich,B)}}
+			}
+			child {node (fAB) {AB}
+				child {node{(weiblich,AB)}}
+			}
+    }
+	child {
+		node (männlich) {männlich}
+    	child {node (m0) {0}
+				child {node{(männlich,0)}}
+			}
+ 			child {node (mA) {A}
+				child {node{(männlich,A)}}
+			}
+			child {node (mB) {B}
+				child {node{(männlich,B)}}
+			}
+			child {node (mAB) {AB}
+				child {node{(männlich,AB)}}
+			}
+    };
 
-    weiblich -> weiblich_0;
-    weiblich -> weiblich_A;
-    weiblich -> weiblich_B;
-    weiblich -> weiblich_AB;
+% Manuelle Labels (ohne scope)
+\node[font=\bfseries, text width=2cm, align=center] at ([yshift=1cm]root) {$\Omega$};
+\node[text width=2cm, align=center] at ([yshift=1cm]weiblich) {Geschlecht};
+\node[text width=2cm, align=center] at ([yshift=1cm]f0) {Blutgruppe};
 
-    weiblich_0 -> F0;
-    weiblich_A -> FA;
-    weiblich_B -> FB;
-    weiblich_AB -> FAB;
-
-    männlich -> männlich_0;
-    männlich -> männlich_A;
-    männlich -> männlich_B;
-    männlich -> männlich_AB;
-
-    männlich_0 -> M0;
-    männlich_A -> MA;
-    männlich_B -> MB;
-    männlich_AB -> MAB;
-
-    // leaf labels
-    root [label=" "];
-    weiblich_0 [label="0"];
-    weiblich_A [label="A"];
-    weiblich_B [label="B"];
-    weiblich_AB [label="AB"];
-    männlich_0 [label="0"];
-    männlich_A [label="A"];
-    männlich_B [label="B"];
-    männlich_AB [label="AB"];
-    
-    
-    
-    F0 [label="(weiblich, 0)"];
-    FA [label="(weiblich, A)"];
-    FB [label="(weiblich, B)"];
-    FAB [label="(weiblich, AB)"];
-    
-    M0 [label="(männlich, 0)"];
-    MA [label="(männlich, A)"];
-    MB [label="(männlich, B)"];
-    MAB [label="(männlich, AB)"];
-
-    // optional: rank same level nodes
-    { rank=same; weiblich männlich }
-    { rank=same; weiblich_0 weiblich_A weiblich_B weiblich_AB männlich_0 männlich_A männlich_B männlich_AB }
-    { rank=same; F0 FA FB FAB M0 MA MB MAB }
-
-    // optional: labels for levels (simulated)
-    labelloc="t";
-    label="Geschlecht → Blutgruppe → Paar (Ω)";
-    fontsize=26;
-}
+\end{tikzpicture}
 
 ```
+
 
 
 
@@ -649,9 +638,9 @@ $$
 Ein Wahrscheinlichkeitsraum eines zufälligen Experiments ist ein Tripel $(\Omega,\mathcal{F},P)$ 
 wobei
 
-- $\mathbf{\Omega}\ $ der Ereignisraum des Experiments ist.
-- $\mathbf{\mathcal{F}}\ $  eine Menge von Ereignissen des Experiments ist.
-- $\mathbf{P}\ $  eine Wahrscheinlichkeitsfunktion ist.
+- $\Omega\ $ der Ereignisraum des Experiments ist.
+- $\mathcal{F}\ $  eine Menge von Ereignissen des Experiments ist.
+- $P\ $  eine Wahrscheinlichkeitsfunktion ist.
 
 :::
 
@@ -1036,7 +1025,13 @@ $$
 ```{r}
 #| label: plotgesamtprob
 # Basis-Plot vorbereiten
-plot(NULL, xlim = c(0, 4), ylim = c(0, 3), type = "n", xlab = "", ylab = "", axes = FALSE, asp = 1)
+plot(NULL, 
+     xlim = c(-0.5, 4), 
+     ylim = c(0, 3), 
+     type = "n", 
+     xlab = "", ylab = "", 
+     axes = FALSE, 
+     asp = 1)
 
 # Rechteck für Omega
 rect(0, 0, 4, 3, border = "black")
@@ -1219,6 +1214,7 @@ P(D|S) &= \frac{P(D)P(S|D)}{P(D)P(S|D)+P(\overline{D})P(S|\overline{D})} = \frac
 P(\overline{D}|S) &= \frac{P(\overline{D})P(S|\overline{D})}{P(D)P(S|D)+P(\overline{D})P(S|\overline{D})} = \frac{0.8\cdot 0.4}{0.2\cdot 0.9 + 0.8\cdot 0.4} = \frac{0.32}{0.5}=0.64.
 \end{aligned}
 $$
+
 Wie wir sehen können, hat sich die Wahrscheinlichkeit, die Krankheit zu haben, erhöht. Trotzdem ist die Wahrscheinlichkeit, sie nicht zu haben, immer noch größer als die Wahrscheinlichkeit, sie zu haben. Aus diesem Grund lautet die Diagnose, dass die Person die Krankheit nicht hat.
 
 In diesem Fall wird gesagt, dass das Symptom $S$ nicht entscheidend ist, um die Krankheit zu diagnostizieren.
@@ -1318,7 +1314,7 @@ Die Inzidenzrate liegt also bei 8% Personen pro Jahr.
 :::
 
 
-### Prävelenz oder Inzidenz
+### Prävlenz oder Inzidenz
 
  Die Prävalenz zeigt an, wie verbreitet ein medizinisches Ereignis ist und 
 ist eher ein Maß für die Belastung des Ereignisses für die Gesellschaft ohne Berücksichtigung der gefährdeten Zeit oder wann Personen möglicherweise einem möglichen Risikofaktor ausgesetzt waren
@@ -1344,6 +1340,7 @@ In der Regel werden die beobachteten Fälle für jede Gruppe in einer 2x2-Tabell
 
 $$
 \begin{array}{|c|c|c|}
+\hline
  & \text{erkrankt}\  K & \text{gesund}\  \overline{K}\\ 
 \hline
 \text{Interventionsgruppe}\newline (exponiert) & a & b\\ 
@@ -1377,6 +1374,7 @@ folgende Tabelle fasst die Ergebnisse am Ende des Jahres zusammen.
 
 $$
   \begin{array}{|c|c|c|}
+  \hline
   & \text{Grippe}\  K & \text{keine Grippe}\  \overline{K}\\ 
   \hline
   \text{Interventionsgruppe}\newline (geimpft) & 20 & 480\\ 
@@ -1427,6 +1425,7 @@ folgende Tabelle fasst die Ergebnisse am Ende des Jahres zusammen.
 
 $$
 \begin{array}{|c|c|c|}
+\hline
   & \text{Grippe}\  K & \text{keine Grippe}\  \overline{K}\\ 
 \hline
 \text{Interventionsgruppe}\newline (geimpft) & 20 & 480\\ 
@@ -1510,6 +1509,7 @@ folgende Tabelle fasst die Ergebnisse am Ende des Jahres zusammen.
 
 $$
 \begin{array}{|c|c|c|}
+\hline
  & \text{Grippe}\  K & \text{keine Grippe}\  \overline{K}\\ 
 \hline
 \text{Interventionsgruppe}\newline (geimpft) & 20 & 480\\ 
@@ -1552,6 +1552,7 @@ Um die Assoziation zwischen Lungenkrebs und Rauchen zu bestimmen, wurden zwei Pr
 
 $$
 \begin{array}{|c|c|c|}
+\hline
  & \text{Krebs} & \text{kein Krebs}\\ 
 \hline
 \text{Raucher} & 60 & 80\\ 
@@ -1577,6 +1578,7 @@ $$
 
 $$
 \begin{array}{|c|c|c|}
+\hline
  & \text{Krebs} & \text{kein Krebs}\\ 
 \hline
 \text{Raucher} & 60 & 160\\ 
@@ -1653,6 +1655,7 @@ In der Epidemiologie ist es üblich, diagnostische Tests zur Diagnose von Krankh
 
 $$
 \begin{array}{|c|c|c|}
+\hline
  & \text{krank}\ K & \text{gesund}\ \overline K\\ \hline
 \text{Testergebnis} & \textcolor{green}{\text{richtig positiv}} & \textcolor{red}{\text{falsch positiv}} \\
 positiv \mathbf{+} & (RP) & (FP) \\ \hline 
@@ -1772,6 +1775,7 @@ Bei 1.000 Personen wurde ein Grippetest durchgeführt. Die Ergebnisse sind in de
 
 $$
 \begin{array}{|c|c|c|}
+\hline
  & \text{Grippe}\ K & \text{keine Grippe}\ \overline K\\ \hline
 \text{Testergebnis} + & 95 & 90 \\ \hline 
 \text{Testergebnis} - & 5 & 810\\\hline

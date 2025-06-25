@@ -246,7 +246,7 @@ plot(c(-0.2,x,1.2), c(0,y,1),
      yaxs="i", 
      col="steelblue", 
      lwd=2,
-     cex.lab = 1.5)
+     cex.lab = 1.3)
 ```
 
 :::
@@ -619,11 +619,11 @@ plot(x, dnorm(x, mean=0, sd=1),
 Um die Integration der normalen Dichtefunktion zu vermeiden, ist es üblich, die Verteilungsfunktion zu verwenden, die in Tabellenform wie unten angegeben ist.
 
 ::: {.callout-tip appearance="default"}
-## Beispiel: 
+## Beispiel: Werte aus Tabellen ablesen
 
-Berechnung von $P(Z\leq 0.52)$
+Bestimmung von $P(Z\leq 0.52)$
 
-$\rightarrow$ Reihe $0.5$ + Spalte $0.02$
+$\rightarrow$ Reihe $0.5$ + Spalte $0.02$ $\rightarrow$ **0,6985** ist der gesuchte Wert.
 
 $$
 \begin{array}{|r||r|r|r|r|}
