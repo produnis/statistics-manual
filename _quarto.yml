@@ -50,6 +50,7 @@ book:
     - wahrscheinlichkeit.qmd
     - diskret.qmd
     - kontinuierlich.qmd
+    - schaetzen.qmd
     - literatur.qmd
     - credits.qmd
   page-footer:
