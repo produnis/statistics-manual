@@ -2097,12 +2097,91 @@ Das bedeutet, das Varianzverhältnis $\frac{\sigma_1^2}{\sigma_2^2}$ liegt mit 9
 Da das Intervall sowohl Werte unter als auch über $1$ enthält, kann keine signifikante Unterschiedlichkeit der Varianzen angenommen werden. Für den Mittelwertvergleich wäre daher das Verfahren mit der Annahme gleicher Varianzen zu verwenden - genau die Methode, die wir bereits zuvor angewendet haben.
 
 
-### f
+### Konfidenzintervall für die Differenz von Proportionen
+
+Um die Proportionen $p_1$ und $p_2$ von Individuen, die eine bestimmte Eigenschaft in zwei unabhängigen Populationen aufweisen, zu vergleichen, wird ihre Differenz $p_1-p_2$ geschätzt.
+
+Wenn aus jeder Population eine Stichprobe mit den Umfängen $n_1$ und $n_2$ gezogen wird, folgen die Variablen, die die Anzahl der Individuen mit der Eigenschaft in jeder Stichprobe messen, den Verteilungen
+
+$$
+X_1\sim B(n_1,p_1)\quad \mbox{y}\quad X_2\sim B(n_2,p_2)
+$$
+
+Wenn die Stichprobenumfänge groß sind (tatsächlich reicht es aus, dass $n_1p_1\geq 5$, $n_1(1-p_1)\geq 5$, $n_2p_2\geq 5$ und $n_2(1-p_2)\geq 5$ erfüllt sind), sichert der zentrale Grenzwertsatz, dass $X_1$ und $X_2$ Normalverteilungen folgen
+
+$$
+X_1\sim N(n_1p_1,\sqrt{n_1p_1(1-p_1)}) \quad \mbox{und}\quad X_2\sim N(n_2p_2,\sqrt{n_2p_2(1-p_2)}),
+$$
+
+
+und die Stichprobenproportionen
+
+$$
+\hat{p}_1=\frac{X_1}{n_1} \sim N\left(p_1,\sqrt{\frac{p_1(1-p_1)}{n_1}}\right) \quad \mbox{und}\quad
+\hat{p}_2=\frac{X_2}{n_2} \sim N\left(p_2,\sqrt{\frac{p_2(1-p_2)}{n_2}}\right)
+$$
+
+Aus den Stichprobenproportionen wird der Referenzschätzer konstruiert
+
+$$
+\hat{p}_1-\hat{p}_2\sim  N\left(p_1-p_2,\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}\right).
+$$
+
+Durch Standardisierung werden Werte $-z_{\alpha/2}$ und $z_{\alpha/2}$ gesucht, die erfüllen
+
+$$
+P\left(-z_{\alpha/2}\leq \frac{(\hat{p}_1-\hat{p_2})-(p_1-p_2)}{\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}}\leq z_{\alpha/2} \right) = 1-\alpha.
+$$
+
+Und durch Rückgängigmachen der Standardisierung ergibt sich
+
+$$
+\begin{aligned}
+1-\alpha 
+&= P\left(-z_{\alpha/2}\leq \frac{(\hat{p}_1-\hat{p_2})-(p_1-p_2)}{\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}}\leq z_{\alpha/2} \right) \\
+&= P\left(-z_{\alpha/2}\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}\leq (\hat{p}_1-\hat{p_2})-(p_1-p_2)\leq z_{\alpha/2}\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}} \right) \\
+&= P\left(\hat{p}_1-\hat{p_2} -z_{\alpha/2}\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}\leq \hat{p}_1-\hat{p_2} + p_1-p_2\leq z_{\alpha/2}\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}} \right)
+\end{aligned}
+$$
+
+
+Somit ist das Konfidenzintervall für die Differenz der Proportionen
+
+::: {.callout-warning appearance="default"}
+## Konfidenzintervall für die Differenz von Proportionen
+
+Wenn $X_1\sim B(n_1,p_1)$ und $X_2\sim B(n_2,p_2)$, mit $n_1p_1\geq 5$, $n_1(1-p_1)\geq 5$, $n_2p_2\geq 5$ und $n_2(1-p_2)\geq 5$, dann ist das Konfidenzintervall für die Differenz der Proportionen $p_1-p_2$ mit dem Konfidenzniveau $1-\alpha$
+
+$$
+\hat{p}_1-\hat{p}_2\pm z_{\alpha/2}\sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n_1}+\frac{\hat{p}_2(1-\hat{p}_2)}{n_2}}
+$$
+:::
 
 
 
+::: {.callout-tip appearance="default"}
+## Beispiel
+Angenommen, es sollen die Proportionen oder Prozentsätze der bestandenen Prüfungen in zwei Gruppen verglichen werden, die unterschiedliche Methoden verfolgt haben.
+In der ersten Gruppe haben 24 von 40 Schülern bestanden, während in der zweiten Gruppe 48 von 60 Schülern bestanden haben.
 
+Um das Konfidenzintervall für die Differenz der Proportionen mit einem Konfidenzniveau von 95% zu berechnen, gilt:
 
+- $\hat{p}_1=24/40= 0.6\ $ und 
+- $\hat{p}_2=48/60=0.8$, sodass die Hypothesen 
+  - $n_1\hat{p}_1=40\cdot 0.6=24\geq 5$, 
+  - $n_1(1-\hat{p}_1)=40(1-0.6)=26\geq 5$, 
+  - $n_2\hat{p}_2=60\cdot 0.8 =48\geq 5$ und 
+  - $n_2(1-\hat{p}_2)=60(1-0.8)=12\geq 5$ erfüllt sind.
+- $z_{\alpha/2}=z_{0.025}= 1.96$.
 
+Durch Einsetzen in die Formel des Intervalls ergibt sich
+
+$$
+0.6-0.8\pm 1.96 \sqrt{\frac{0.6(1-0.6)}{40}+\frac{0.8(1-0.8)}{60}} = -0.2\pm 0.17 = [-0.37,\, -0.03].
+$$
+
+Da das Intervall negativ ist, gilt $p_1-p_2<0\Rightarrow p_1<p_2$, und es kann geschlossen werden, dass es signifikante Unterschiede in den Bestehensquoten gibt.
+
+:::
 
 
