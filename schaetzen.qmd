@@ -2,4 +2,1226 @@
 title: Schätzen der Populationsparameter
 ---
 
+Die Wahrscheinlichkeitsverteilungsmodelle, die im vorherigen Abschnitt behandelt wurden, erklären das Verhalten von Zufallsvariablen. Hierfür muss bekannt sein,  welchem Verteilungsmodell eine bestimmte Variable folgt. Dies ist der erste Schritt der 
+*inferenziellen Statistik*.
+
+Um das Verteilungsmodell einer Variable genau zu bestimmen, müssen die charakteristischen Merkmale aller Individuen in der Population bekannt sein, was in den meisten Fällen nicht möglich ist (wirtschaftliche, körperliche, zeitliche Unmöglichkeit usw.).
+
+Um diese Nachteile zu vermeiden, wird auf die Untersuchung einer Stichprobe zurückgegriffen, mit dem Ziel, das Verteilungsmodell der Variable in der Population ungefähr zu bestimmen.
+
+Die Untersuchung einer kleineren Anzahl von Individuen aus einer Stichprobe statt der gesamten Population (Vollerhebung) hat eindeutige Vorteile:
+
+-  geringere Kosten.
+-  größere Schnelligkeit.
+-  größere Leichtigkeit.
+
+Es hat jedoch auch einige Nachteile:
+
+- Notwendigkeit, eine *repräsentative* (siehe hierzu von der Lippe [-@vonderlippe4; -@vonderlippe1; -@vonderlippe3; -@vonderlippe2]) Stichprobe zu erhalten.
+- Gefahr, Verzerrungen zu erhalten.
+
+Im Idealfall können diese Nachteile überwunden werden: 
+
+- Die Repräsentativität der Stichprobe wird durch angemessene Samplingmethoden erreicht (Zufallsstichprobe); 
+- Fehler können nicht vermieden werden, aber es wird versucht, sie so weit wie möglich zu reduzieren und einzuschränken.
+
+
+## Stichprobenverteilungen
+
+Eine Stichprobe der Größe $n$ aus einer Zufallsvariable $X$ kann als Realisation einer $n$-dimensionalen Zufallsvariablen $X=(X_1, \dots, X_n)$ aufgefasst werden.
+
+
+::: {.callout-warning appearance="default"}
+## Definition "Stichprobe unabhängiger identisch verteilter Zufallsvariablen"  (i.i.d.)
+
+Eine *Stichprobe unabhängiger identisch verteilter Zufallsvariablen*  (abgekürzt **i.i.d.**, von *independent and identically distributed*) einer Zufallsvariable  $X$, die in einer Population untersucht wird, ist eine Sammlung von $n$ Zufallsvariablen $X_1,\ldots,X_n$, die folgende Eigenschaften erfüllen:
+
+- Jede der Zufallsvariablen $X_i$  folgt derselben Wahrscheinlichkeitsverteilung wie die Variable $X$ in der Population.
+- Alle Zufallsvariablen  $X_i$ sind voneinander unabhängig.
+
+:::
+
+Die möglichen Werte dieser $n$-dimensionalen Zufallsvariablen entsprechen allen denkbaren Stichproben der Größe $n$, die aus der Population gezogen werden können.
+
+
+
+
+```{r}
+#| engine: tikz
+\begin{tikzpicture}
+\tikzstyle{node} = [align=center, node distance=1cm, text=blue]; 
+\tikzstyle{arrow} = [-latex, blue, line width=2pt];
+
+\node (x) [label=90:$X$] at (0,5) {\includegraphics[height=1.5cm]{images/poblacion.png}}; 
+\node [anchor=west, align=left] at (6,5) {Population};
+
+\node (x1) [label=90:$X_1$] at (-5,2.5) {\includegraphics[height=1.5cm]{images/poblacion.png}};
+\draw [arrow] (x) -- (x1); 
+
+\node (x2) [label=90:$X_2$] at (-2,2.5) {\includegraphics[height=1.5cm]{images/poblacion.png}};
+\draw [arrow] (x) -- (x2); 
+
+\node [align=center] at (1,3.1) {$n$ i.i.d. \\ Stichproben};
+\node at (1,2.5) {\LARGE\ldots};
+
+
+\node (xn) [label=90:$X_n$] at (4,2.5) {\includegraphics[height=1.5cm]{images/poblacion.png}};
+\draw [arrow] (x) -- (xn); 
+\node [anchor=west, align=left] at (6,2.5) {Zufalls-\\variablen der\\ Stichproben};
+
+\node (i1) [label=-90:$x_1$, scale=1] at (-5,0) {\includegraphics[height=1.5cm]{images/individuo1.png}};
+\draw [arrow] (x1) -- (i1);
+ 
+\node (i2) [label=-90:$x_2$] at (-2,0) {\includegraphics[height=1.5cm]{images/individuo2.png}};
+\draw [arrow] (x2) -- (i2); 
+
+\node at (1,2.5) {\LARGE\ldots};
+\node (in) [label=-90:$x_n$] at (4,0) {\includegraphics[height=1.5cm]{images/individuo3.png}};
+\draw [arrow] (xn) -- (in); 
+\node [anchor=west, align=left] at (6,0) {Stichprobenwert};
+\end{tikzpicture} 
+```
+
+
+
+
+Die drei grundlegenden Merkmale der Stichproben-Zufallsvariable sind:
+
+1. Homogenität: Die Variablen, die die Stichproben-Zufallsvariable bilden, folgen der gleichen Verteilung.
+2. Unabhängigkeit: Die Variablen sind voneinander unabhängig.
+3. Verteilungsmodell: Das Verteilungsmodell, dem die $n$ Variablen folgen.
+
+Die ersten beiden Punkte können gelöst werden, wenn eine einfache Zufallsstichprobe zur Erhebung der Daten verwendet wird. Beim dritten Punkt müssen wiederum zwei Fragen beantwortet werden:
+
+1. Welches Verteilungsmodell passt am besten zu unserem Datensatz? Dies wird teilweise durch den Einsatz nichtparametrischer Methoden geklärt.
+2. Sobald das passendste Verteilungsmodell ausgewählt wurde: Welcher Parameter des Modells ist von Interesse, und wie kann sein Wert bestimmt werden? Damit befasst sich der Teil der statistischen Inferenz, der als Parameterschätzung bekannt ist.
+
+In diesem Abschnitt wird die zweite Frage behandelt, d. h., unter der Annahme, dass das Verteilungsmodell einer Grundgesamtheit bekannt ist, werden die wichtigsten Parameter geschätzt, die es beschreiben. Zum Beispiel sind die zentralen Parameter, die die im vorherigen Thema behandelten Verteilungen definieren:
+
+
+| Verteilung   | Parameter    |
+|--------------|--------------|
+| Binomial     | $n,p$        |
+| Poisson      | $\lambda$    |
+| Uniform      | $a,b$        |
+| Normal       | $\mu,\sigma$ |
+| Chi-Quadrat  | $n$          |
+| T-Student    | $n$          |
+| F-Fisher     | $m,n$        |
+
+
+
+Die Wahrscheinlichkeitsverteilung der Werte der Stichprobenvariablen hängt eindeutig von der Wahrscheinlichkeitsverteilung der Werte in der Grundgesamtheit ab.
+
+::: {.callout-tip appearance="default"}
+## Beispiel: Kinder in Familien
+
+Betrachten wir eine Grundgesamtheit, in der ein Viertel der Familien keine Kinder hat, die Hälfte der Familien ein Kind besitzt und der Rest zwei Kinder hat.
+
+$$
+\begin{array}{ccc}
+\text{Verteilung in der Population} & & \text{Verteilung in den Stichproben} \\
+\begin{array}{|c|c|}\hline
+X & P(x) \\\hline
+0 & 0,25 \\\hline
+1 & 0,50 \\\hline
+2 & 0,25 \\\hline
+\end{array}
+& 
+\xrightarrow{\text{Stichproben vom Umfang 2}}
+&
+\begin{array}{|c|c|}\hline
+(X_1, X_2) & P(x_1, x_2) \\\hline
+(0,0) & 0,0625 \\\hline
+(0,1) & 0,1250 \\\hline
+(0,2) & 0,0625 \\\hline
+(1,0) & 0,1250 \\\hline
+(1,1) & 0,2500 \\\hline
+(1,2) & 0,1250 \\\hline
+(2,0) & 0,0625 \\\hline
+(2,1) & 0,1250 \\\hline
+(2,2) & 0,0625 \\\hline
+\end{array}
+\end{array}
+$$
+
+Da ein Statistikergebnis eine Funktion einer Zufallsvariable ist, stellt es selbst ebenfalls eine Zufallsvariable dar.
+Somit hängt seine Wahrscheinlichkeitsverteilung ebenfalls von der Verteilung der Grundgesamtheit und den sie bestimmenden Parametern ab ($\mu$, $\sigma$, $p$, ...).
+
+:::
+
+
+
+:::: {.callout-tip appearance="default"}
+## Beispiel: Mittelwert
+
+Wird der Stichprobenmittelwert $\bar X$ aus Stichproben der Größe 2 (gemäß vorherigem Beispiel) berechnet, ergibt sich folgende Wahrscheinlichkeitsverteilung:
+
+
+\begin{array}{ccc}
+\text{Verteilung in den Stichproben} & & \text{Verteilung von}\ \overline x \\
+\begin{array}{|c|c|}\hline
+(X_1, X_2) & P(x_1, x_2) \\\hline
+(0,0) & 0,0625 \\\hline
+(0,1) & 0,1250 \\\hline
+(0,2) & 0,0625 \\\hline
+(1,0) & 0,1225 \\\hline
+(1,1) & 0,2500 \\\hline
+(1,2) & 0,1225 \\\hline
+(2,0) & 0,0625 \\\hline
+(2,1) & 0,1250 \\\hline
+(2,2) & 0,0625 \\\hline
+\end{array}
+
+& 
+\Large\xrightarrow{\overline x = \frac{X_1+X_2}{2}}
+&
+\begin{array}{|c|c|}\hline
+\overline{X} & P(x) \\\hline
+0   & 0,0625 \\\hline
+0,5 & 0,2500 \\\hline
+1   & 0,3750 \\\hline
+1,5 & 0,2500 \\\hline
+2   & 0,0625 \\\hline
+\end{array}
+
+\end{array}
+
+
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: anzahlKinder1
+x = 0:2
+y = c(0.25, 0.5, 0.25)
+plot(x, y, 
+     ylim=c(0,0.55), 
+     xlab="Anzahl Kinder", 
+     ylab="Wahrscheinlichkeit", 
+     main="Verteilung Anzahl Kinder", 
+     type="h", 
+     lwd=10, 
+     col="steelblue", 
+     yaxs="i")
+
+```
+
+
+
+```{r}
+#| label: anzahlKinder2
+x = 0:4*0.5
+y = c(0.0625, 0.25, 0.375, 0.25, 0.0625)
+plot(x, y, 
+     ylim=c(0, 0.55), 
+     xlab=expression(bar(x)), 
+     ylab="Wahrscheinlichkeit", 
+     main=expression("Verteilung von " * bar(x)), 
+     type="h", 
+     lwd=10, 
+     col="steelblue", 
+     yaxs="i")
+
+```
+
+
+:::
+
+Wie hoch ist die Wahrscheinlichkeit, einen Stichprobenmittelwert zu erhalten, der den wahren Populationsmittelwert mit einem maximalen Fehler von 0,5 approximiert?
+::::
+
+
+Wie wir gesehen haben, ist für die Bestimmung der Verteilung einer Stichprobenkennfunktion die Kenntnis der Populationsverteilung erforderlich, was jedoch nicht immer möglich ist. Glücklicherweise lässt sich für große Stichproben die Verteilung bestimmter Kennfunktionen wie des Mittelwerts näherungsweise bestimmen, dank des folgenden Theorems:
+
+::: {.callout-warning appearance="default"}
+## Zentraler Grenzwertsatz
+Wenn $X_1,\ldots, X_n$ unabhängige Zufallsvariablen ($n\geq 30$) mit Erwartungswerten $\mu_i=E(X_i)$ und Varianzen $\sigma^2_i=Var(X_i)$ (für $i=1,\ldots,n$) sind, dann folgt die Zufallsvariable $X=X_1+\cdots+X_n$ annähernd einer Normalverteilung.
+
+$$
+X=X_1+\cdots+X_n\stackrel{n\geq 30} \sim N\left(\sum_{i=1}^n \mu_i, \sqrt{\sum_{i=1}^n \sigma^2_i}\right)
+$$
+:::
+
+
+Der zentrale Grenzwertsatz erklärt auch, warum die meisten biologischen Variablen einer Normalverteilung folgen: Sie entstehen typischerweise durch das Zusammenspiel zahlreicher Faktoren, deren Effekte sich unabhängig voneinander addieren.
+
+
+
+
+### Verteilung des Stichprobenmittels für große Stichproben ($n\geq 30$)
+
+Das Stichprobenmittel einer Zufallsstichprobe vom Umfang $n$ ist die Summe von $n$ unabhängigen, identisch verteilten Zufallsvariablen:
+
+$$
+\bar X = \frac{X_1+\cdots+X_n}{n} = \frac{X_1}{n}+\cdots+\frac{X_n}{n}
+$$
+
+
+Gemäß den Eigenschaften linearer Transformationen sind Erwartungswert und Varianz jeder dieser Variablen:
+
+$$
+E\left(\frac{X_i}{n}\right) =\frac{\mu}{n} \quad  \mbox{und} \quad Var\left(\frac{X_i}{n}\right) = \frac{\sigma^2}{n^2}
+$$
+
+wobei $\mu$ und $\sigma^2$ den Erwartungswert und die Varianz der zugrundeliegenden Population darstellen.
+
+Somit folgt für große Stichprobenumfänge ($n\geq 30$) nach dem zentralen Grenzwertsatz, dass die Verteilung des Stichprobenmittels normal ist:
+
+$$
+\bar X \sim N\left(\sum_{i=1}^n \frac{\mu}{n},\sqrt{\sum_{i=1}^n \frac{\sigma^2}{n^2}} \right) = N\left(\mu,\frac{\sigma}{\sqrt{n}} \right).
+$$
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel für große Stichproben (n ≥ 30)
+
+Angenommen, man möchte die durchschnittliche Kinderzahl in einer Population schätzen, wobei der wahre Mittelwert $\mu=2$ Kinder und die Standardabweichung $\sigma=1$ Kind beträgt.
+
+*Wie hoch ist die Wahrscheinlichkeit, $\mu$ mittels $\bar x$̅ mit einem Fehler von weniger als 0,2 zu schätzen?*
+
+Gemäß dem zentralen Grenzwertsatz gilt:
+
+1. Für $n=30$ ist  $\bar x\sim N(2,1/\sqrt{30})$ und
+
+$$
+P(1.8<\bar x<2.2) = 0.7267.
+$$
+
+
+2. Für $n=100$ ist $\bar x\sim N(2,1/\sqrt{100})$ und
+
+$$
+P(1.8<\bar x<2.2) = 0.9545.
+$$
+
+```{r}
+#| label: anzahlkinder3
+par(cex.lab=1, 
+    mar=c(3,3,3,1),
+    mgp=c(2,0.5,0))
+
+x = seq(1, 3, length=150)
+
+plot(x, dnorm(x, mean=2, sd=1/sqrt(100)), 
+     xlim=c(1, 3), 
+     ylim=c(0, 4.2), 
+     xlab=expression(bar(x)),
+     ylab=expression("Dichtefunktion " * f(x)), 
+     main="Verteilung des Stichprobenmittels der Kinderzahl\n für Stichprobenumfänge n=30 und n=100",
+     type="l", 
+     col="steelblue", 
+     yaxs="i")
+lines(x, dnorm(x, mean=2, sd=1/sqrt(30)), 
+      type="l", col="darkred")
+legend("topright", 
+       col=c("steelblue", "darkred"), 
+       legend=c("n=100", "n=30"), 
+       lty="solid", 
+       bty="n") 
+
+```
+
+
+:::
+
+
+
+### Verteilung einer Stichprobenproportion für große Stichproben (n ≥ 30)
+
+Eine Populationsproportion $p$ kann als Mittelwert einer dichotomen $(0,1)$-Variable berechnet werden. Diese Variable wird als *Bernoulli-Variable* $B(p)$ bezeichnet, ein Spezialfall der Binomialverteilung für $n=1$.
+
+Für eine Zufallsstichprobe vom Umfang $n$ lässt sich die Stichprobenproportion $\hat p$ somit als Summe von $n$ unabhängigen, identisch verteilten Zufallsvariablen darstellen:
+
+$$
+\hat p = \bar X = \frac{X_1+\cdots+X_n}{n} = \frac{X_1}{n}+\cdots+\frac{X_n}{n}, \mbox{ mit } X_i\sim B(p)
+$$
+
+
+mit Erwartungswert und Varianz
+
+$$
+E\left(\frac{X_i}{n}\right) =\frac{p}{n} \quad  \mbox{und} \quad Var\left(\frac{X_i}{n}\right) = \frac{p(1-p)}{n^2}
+$$
+
+Für große Stichprobenumfänge ($n\geq 30$) folgt nach dem zentralen Grenzwertsatz, dass die Verteilung der Stichprobenproportion ebenfalls normalverteilt ist:
+
+$$
+\hat p \sim N\left(\sum_{i=1}^n \frac{p}{n},\sqrt{\sum_{i=1}^n \frac{p(1-p)}{n^2}} \right) = N\left(p,\sqrt{\frac{p(1-p)}{n}} \right).
+$$
+
+
+
+
+
+
+
+## Schätzer
+
+Stichprobenstatistiken können zur Approximation von Populationsparametern verwendet werden. Wenn ein Kennwert zu diesem Zweck eingesetzt wird, bezeichnet man ihn als *Schätzer* für den Parameter.
+
+
+::: {.callout-warning appearance="default"}
+## Definition "Schätzer und Schätzwert"
+
+Ein Schätzer ist eine Funktion der Stichproben-Zufallsvariablen:
+
+$$
+\hat \theta = F(X_1,\ldots,X_n).
+$$
+
+Für eine konkrete Stichprobe $(x_1,\ldots,x_n)$ wird der Wert des Schätzers, angewendet auf diese Stichprobe, als *Schätzwert* bezeichnet:
+
+$$
+\hat \theta_0 = F(x_1,\ldots,x_n).
+$$
+
+:::
+
+
+Da es sich um eine Funktion der Stichproben-Zufallsvariablen handelt, ist ein Schätzer selbst wieder eine Zufallsvariable, deren Verteilung von der zugrundeliegenden Population abhängt.
+
+Während der *Schätzer* als Funktion eindeutig ist, ist der *Schätzwert* nicht eindeutig, sondern hängt von der gezogenen Stichprobe ab.
+
+```{r}
+#| label: kreis2
+#| engine: tikz
+\begin{tikzpicture}[
+    node distance=0.8cm,
+    every node/.style={align=center},
+    arrow/.style={-latex, blue!70!black, line width=1.2pt},
+    labelbox/.style={draw=blue!70!black, fill=blue!10, 
+                    rounded corners=3pt, 
+                    minimum width=2.2cm, minimum height=0.8cm,
+                    font=\small}
+]
+
+% Populationsebene
+\node (pop) at (0,4) {Verteilung in der Population};
+\node (popX) at (0,3.4) {$X$};
+
+% Pfeil zum Parameter
+\node (paramlabel) at (3.5,3.4) [labelbox] {Populationsparameter};
+\node (param) at (6.5,3.4) {$\theta$?};
+\draw[arrow] (popX) -- (paramlabel);
+\draw[arrow] (paramlabel) -- (param);
+
+% Stichprobenvariable
+\draw[arrow] (0,3) -- (0,2.2);
+\node (svar) at (0,1.6) {Stichproben-Zufallsvariable};
+\node (svarX) at (0,1) {$(X_1,\ldots,X_n)$};
+
+% Pfeil zum Schätzer
+\node (estlabel) at (3.5,1) [labelbox] {Schätzer};
+\node (estimator) at (6.5,1) {$\hat\theta=F(X_1,\ldots,X_n)$};
+\draw[arrow] (svarX) -- (estlabel);
+\draw[arrow] (estlabel) -- (estimator);
+
+% Stichprobe
+\draw[arrow] (0,0.6) -- (0,-0.2);
+\node (sample) at (0,-0.8) {Stichprobe mit Umfang $n$};
+\node (sampleX) at (0,-1.4) {$(x_1,\ldots,x_n)$};
+
+% Pfeil zum Schätzwert
+\node (estvlabel) at (3.5,-1.4) [labelbox] {Schätzwert};
+\node (estimate) at (6.5,-1.4) {$\hat\theta_0=F(x_1,\ldots,x_n)$};
+\draw[arrow] (sampleX) -- (estvlabel);
+\draw[arrow] (estvlabel) -- (estimate);
+
+% Rückkopplungspfeil
+\draw [arrow, bend right=30] (estimate.north east) to (param.south east);
+\end{tikzpicture}
+```
+
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel Raucher
+Angenommen, man möchte den Anteil $p$ der Raucher in einer Stadt ermitteln.
+In diesem Fall folgt die dichotome Variable, die misst, ob eine Person raucht $(1)$ oder nicht $(0)$, einer Bernoulli-Verteilung $B(p)$.
+
+Wenn eine Zufallsstichprobe vom Umfang 5, $(X_1,X_2,X_3,X_4,X_5)$, aus dieser Grundgesamtheit gezogen wird, kann der Anteil der Raucher in der Stichprobe als Schätzer für den Anteil der Raucher in der Grundgesamtheit verwendet werden:
+
+$$
+\hat p = \frac{\sum_{i=1}^5 X_i}{5}
+$$
+
+Dieser Schätzer ist eine Zufallsvariable, die folgendermaßen verteilt ist:
+
+$$
+\hat p\sim \frac{1}{n}B\left(p,\sqrt{\frac{p(1-p)}{n}}\right).
+$$
+
+Wenn verschiedene Stichproben gezogen werden, erhält man unterschiedliche Schätzwerte:
+
+$$
+\begin{array}{|c|c|}
+\hline
+\mbox{Stichprobe} & \mbox{Schätzwert}\\
+\hline\hline
+(1, 0, 0, 1, 1) & 3/5\\
+\hline
+(1, 0, 0, 0, 0) & 1/5\\
+\hline
+(0, 1, 0, 0, 1) & 2/5\\
+\hline
+\cdots & \cdots\\
+\hline
+\end{array}
+$$
+:::
+
+
+
+
+Die Parameterschätzung kann auf zwei Arten durchgeführt werden:
+
+1.  **Punktschätzung:** Es wird ein einzelner Schätzer verwendet, der einen Wert oder eine Näherung für den Parameter liefert. Der Hauptnachteil dieser Schätzmethode besteht darin, dass die Genauigkeit der Schätzung nicht angegeben wird.
+2. **Intervallschätzung:**  Hier werden zwei Schätzer verwendet, die die Grenzen eines Intervalls liefern, in dem der wahre Wert des Parameters mit einer bestimmten Sicherheit vermutet wird. Diese Schätzmethode ermöglicht es, den Schätzfehler zu kontrollieren.
+
+:::{layout-ncol=2}
+
+```{r}
+#| engine: tikz
+#| label: punktschätzwert
+\begin{tikzpicture}
+  % Zeichne horizontale Linie
+  \draw[thick] (0,0) -- (6,0);
+  \node at (3,1.5) {\textbf{Punkt-Schätzwert}};
+  % Wahre Größe \theta
+  \draw[thick] (3,-0.15) -- (3,0.15);
+  \node[below] at (3,-0.15) {$\theta$};
+  
+  % Punktschätzer \tau_0 (in rot)
+  \draw[thick, red] (4.5,-0.15) -- (4.5,0.15);
+  \node[below, red] at (4.5,-0.15) {$\hat \theta_0$};
+\end{tikzpicture}
+
+```
+
+
+
+```{r}
+#| engine: tikz
+#| label: intervallschätzwert
+\begin{tikzpicture}
+  % Titel
+  \node at (3,1.5) {\textbf{Intervallschätzung}};
+
+  % Horizontale Linie
+  \draw[thick] (0,0) -- (6,0);
+  
+  % Wahre Größe \theta
+  \draw[thick] (3,-0.15) -- (3,0.15);
+  \node[below] at (3,-0.15) {$\theta$};
+  
+  % Linke Klammer (rotes '[')
+  \draw[red, thick] (1.5,-0.3) -- (1.5,0.3); % senkrechter Teil
+  \draw[red, thick] (1.5,0.3) -- (1.7,0.3);  % oberer horizontaler Teil
+  \draw[red, thick] (1.5,-0.3) -- (1.7,-0.3); % unterer horizontaler Teil
+  
+  % Rechte Klammer (rotes ']')
+  \draw[red, thick] (4.5,-0.3) -- (4.5,0.3);
+  \draw[red, thick] (4.3,0.3) -- (4.5,0.3);
+  \draw[red, thick] (4.3,-0.3) -- (4.5,-0.3);
+
+  % Beschriftung der Grenzen
+  \node[below, red] at (1.6,-0.3) {$\ell_1$};
+  \node[below, red] at (4.4,-0.3) {$\ell_2$};
+  
+\end{tikzpicture}
+```
+
+:::
+
+
+
+
+
+## Punktschätzung
+
+Die Punktschätzung verwendet einen einzelnen Schätzer, um den Wert eines unbekannten Parameters der Grundgesamtheit zu schätzen.
+
+Theoretisch können verschiedene Schätzer für denselben Parameter verwendet werden. Zum Beispiel hätte man zur Schätzung des Raucheranteils in einer Stadt neben dem Stichprobenanteil auch andere mögliche Schätzer verwenden können, wie:
+
+$$
+\begin{aligned}
+\hat \theta_1 &= \sqrt[5]{X_1X_2X_3X_4X_5} \
+\hat \theta_2 &= \frac{X_1 + X_5}{2} \
+\hat \theta_3 &= X_1 \cdots
+\end{aligned}
+$$
+
+
+*Welcher Schätzer ist der beste?*
+
+Die Antwort hängt von den Eigenschaften der einzelnen Schätzer ab.
+
+Obwohl die Punktschätzung keine direkte Aussage über die Genauigkeit der Schätzung liefert, gibt es verschiedene Eigenschaften, die diese Qualität sicherstellen.
+
+Die wünschenswertesten Eigenschaften eines Schätzers sind:
+
+- Erwartungstreue (Unverzerrtheit)
+- Effizienz
+- Konsistenz
+- Asymptotische Normalverteilung
+- Vollständigkeit
+
+
+::: {.callout-warning appearance="default"}
+## Definition "Erwartungstreuer Schätzer" (unverzerrter Schätzer)
+Ein Schätzer $\hat \theta$ heißt erwartungstreu (oder unverzerrt) für einen Parameter $\theta$, wenn sein Erwartungswert genau $\theta$ entspricht, d. h.,
+
+$$
+E(\hat \theta)=\theta.
+$$
+
+:::
+
+
+
+
+```{r}
+#| label: theta0
+x = seq(-3.291, 3.291, length=100)
+par(cex.lab=1, 
+    mar=c(3,3,3,1),
+    mgp=c(2,0.5,0))
+plot(x, dnorm(x, mean=0, sd=1), 
+     xlim=c(-4,4), 
+     ylim=c(0,0.42), 
+     xlab="Schätzerwerte", 
+     ylab=expression("Dichtefunktion " * f(x)), 
+     main="Verteilungen von verzerrten und unverzerrten Schätzern", 
+     type="l", 
+     col="skyblue", 
+     xaxt="n", 
+     yaxs="i")
+lines(x-1, dnorm(x, mean=0, sd=1), type="l", lty="dashed", col="darkgreen")
+lines(x+1, dnorm(x, mean=0, sd=1), type="l", lty="dashed", col="darkred")
+abline(v=0,col="gray")
+abline(v=-1,col="gray")
+abline(v=1,col="gray")
+axis(side=1,c(0), labels= expression(theta))
+legend("topright", 
+       col=c("skyblue", "darkgreen", "darkred"), 
+       legend=c("unverzerrt", "verzerrt -", "verzerrt +"), 
+       lty=c("solid", "dashed", "dashed"), 
+       bty="n") 
+
+```
+
+Wenn ein Schätzer nicht erwartungstreu ist, wird die Differenz zwischen seinem Erwartungswert und dem wahren Parameterwert $\theta$ als Verzerrung (Bias) bezeichnet:
+
+
+$$
+\text{Bias}(\hat \theta) = E(\hat \theta)-\theta.
+$$
+
+Je kleiner die Verzerrung eines Schätzers ist, desto näher liegen seine Schätzwerte am tatsächlichen Parameterwert.
+
+
+::: {.callout-warning appearance="default"}
+## Definition "Konsistenter Schätzer"
+Ein Schätzer $\hat \theta_n$ für Stichproben des Umfangs $n$ heißt **konsistent** für einen Parameter $\theta$, wenn für jedes beliebige $\epsilon > 0$ gilt:
+
+$$
+\lim_{n\rightarrow \infty} P(|\hat \theta_n-\theta|<\epsilon)=1.
+$$
+:::
+
+
+
+:::{layout-ncol=2}
+
+```{r}
+#|label: bias1
+x = seq(-8, 8, length=150)
+par(cex.lab=1, 
+    mar=c(3,3,3,1),
+    mgp=c(2,0.5,0))
+plot(x, dnorm(x, mean=0, sd=10/sqrt(10)), 
+     xlim=c(-8, 8), 
+     ylim=c(0, 0.42), 
+     xlab="Schätzerwerte", 
+     ylab=expression("Dichtefunktion " * f(x)), 
+     main="Verteilungen konsistenter Schätzer", 
+     type="l", 
+     col="steelblue", 
+     xaxt="n", yaxs="i")
+lines(x, dnorm(x, mean=0, sd=10/sqrt(50)), type="l", col="darkgreen")
+lines(x, dnorm(x, mean=0, sd=10/sqrt(100)), type="l", col="darkred")
+axis(side=1,c(0), labels= expression(theta))
+legend("topright", 
+       col=c("steelblue", "darkgreen", "darkred"), 
+       legend=c("n=10","n=50","n=100"), 
+       lty="solid", bty="n") 
+
+```
+
+
+
+```{r}
+#|label: bias2
+x = seq(-8, 8, length=150)
+par(cex.lab=1, 
+    mar=c(3, 3, 3, 1),
+    mgp=c(2, 0.5, 0))
+plot(x, dnorm(x, mean=1, sd=10/sqrt(10)), 
+     xlim=c(-8, 8), 
+     ylim=c(0, 0.42), 
+     xlab="Schätzerwerte", 
+     ylab=expression("Dichtefunktion " * f(x)), 
+     main="Verteilungen verzerrter, aber konsistenter Schätzer", 
+     type="l", 
+     col="steelblue", 
+     xaxt="n", yaxs="i")
+lines(x, dnorm(x, mean=0.5, sd=10/sqrt(50)), type="l", col="darkgreen")
+lines(x, dnorm(x, mean=0.1, sd=10/sqrt(100)), type="l", col="darkred")
+axis(side=1,c(0), labels= expression(theta))
+legend("topright", 
+       col=c("steelblue", "darkgreen", "darkred"),
+       legend=c("n=10","n=50","n=100"), 
+       lty="solid", bty="n") 
+
+```
+
+:::
+
+
+
+Ein Schätzer ist konsistent, wenn folgende Bedingungen erfüllt sind:
+
+-  $\text{Bias}(\hat \theta_n) = 0$ oder $\lim_{n\rightarrow \infty}\text{Bias}(\hat \theta_n) = 0$
+-  $\lim_{n\rightarrow \infty}\text{Var}(\hat \theta_n) = 0$
+
+Wenn also sowohl die Varianz als auch die Verzerrung mit wachsendem Stichprobenumfang abnehmen, ist der Schätzer konsistent.
+
+
+
+
+::: {.callout-warning appearance="default"}
+## Definition "Effizienter Schätzer"
+
+Ein Schätzer $\hat \theta$ für einen Parameter $\theta$ heißt *effizient*, wenn er den mittleren quadratischen Fehler (MSE) minimiert:
+
+$$
+\text{MSE}(\hat \theta) = \text{Bias}(\hat \theta)^2+Var(\theta).
+$$
+
+:::
+
+```{r}
+#| label: effizient1
+x = seq(-8, 8, length=150)
+par(cex.lab=1, 
+    mar=c(3,3,3,1),
+    mgp=c(2,0.5,0))
+plot(x, dnorm(x, mean=0, sd=10/sqrt(10)), 
+     xlim=c(-8, 8), 
+     ylim=c(0, 0.42), 
+     xlab="Schätzerwerte", 
+     ylab=expression("Dichtefunktion " * f(x)), 
+     main="Verteilungen eines unverzerrten und \n eines effizienten, aber verzerrten Schätzers", 
+     type="l", 
+     col="steelblue", 
+     xaxt="n", yaxs="i")
+lines(x, dnorm(x, mean=1, sd=10/sqrt(100)), type="l", col="darkred")
+axis(side=1,c(0), labels= expression(theta))
+legend("topright", 
+       col=c("steelblue", "darkred"), 
+       legend=c("unverzerrt", "effizient"), 
+       lty="solid", bty="n") 
+
+```
+
+
+
+
+
+::: {.callout-warning appearance="default"}
+## Definition "Asymptotisch normalverteilter Schätzer"
+
+Ein Schätzer $\hat \theta$ heißt asymptotisch normalverteilt, wenn – unabhängig von der Verteilung der Zufallsvariablen in der Stichprobe – seine Verteilung bei hinreichend großem Stichprobenumfang einer Normalverteilung folgt.
+:::
+
+Wie wir später sehen werden, ist diese Eigenschaft besonders wichtig für die Parameterschätzung mittels Konfidenzintervallen.
+
+```{r}
+#| label: asymptotischnormal
+x = seq(0, 50, length=100)
+par(cex.lab=1, 
+    mar=c(3,3,3,1),
+    mgp=c(2,0.5,0))
+plot(x, dchisq(x, df=10), 
+     xlim=c(0,50), 
+     xlab="Schätzerwerte", 
+     ylab=expression("Dichtefunktion " * f(x)), 
+     main="Verteilungen asymptotisch normalverteilter Schätzer", 
+     type="l", 
+     col="steelblue", 
+     xaxt="n", yaxs="i")
+lines(x, dchisq(x, df=20), col="darkgreen", type="l", lty=1)
+lines(x, dnorm(x, mean=25, sd=sqrt(50)), col="darkred", type="l", lty=1)
+legend("topright", 
+       col=c("steelblue", "darkgreen", "darkred"),
+       legend=c("n=10","n=50","n=100"), 
+       lty="solid", bty="n") 
+axis(side=1,c(25),  labels= expression(theta))
+
+```
+
+
+
+
+::: {.callout-warning appearance="default"}
+## Definition "Suffizienter Schätzer"
+
+Ein Schätzer $\hat \theta$ heißt suffizient (erschöpfend) für einen Parameter $\theta$, wenn die bedingte Verteilung der Stichprobenvariablen gegeben den Schätzwert $\hat \theta = \hat \theta_0$ nicht mehr von $\theta$ abhängt.
+:::
+
+
+Dies bedeutet, dass nach Erhalt der Schätzung alle weiteren Informationen über die Stichprobe für $\theta$ irrelevant werden.
+
+
+Der übliche Schätzer für den Erwartungswert ist das Stichprobenmittel:
+
+Für Stichproben vom Umfang $n$ ergibt sich die Zufallsvariable:
+
+$$
+\bar X = \frac{X_1+\cdots+X_n}{n}
+$$
+Wenn die Grundgesamtheit den Mittelwert $\mu$ und Varianz $\sigma^2$ besitzt, gilt:
+
+
+$$
+E(\bar X) = \mu \quad \mbox{und} \quad Var(\bar X)=\frac{\sigma^2}{n}
+$$
+
+Somit ist das Stichprobenmittel:
+
+- ein erwartungstreuer Schätzer
+- konsistent (da die Varianz mit wachsendem $n$ gegen $0$ geht)
+- effizient
+
+
+
+
+Die Stichprobenvarianz:
+
+$$
+S^2 = \frac{\sum_{i=1}^n (X_i-\bar X)^2}{n}
+$$
+
+ist jedoch ein *verzerrter* Schätzer für die Populationsvarianz, denn:
+
+$$
+E(S^2)= \frac{n-1}{n}\sigma^2.
+$$
+
+
+
+Diese Verzerrung lässt sich leicht korrigieren, um einen erwartungstreuen Schätzer zu erhalten.
+
+
+
+::: {.callout-warning appearance="default"}
+## Definition "Stichproben-Quasivarianz"
+
+Für eine Stichprobe vom Umfang $n$ einer Zufallsvariablen $X$ wird die Stichproben-Quasivarianz definiert als:
+
+$$
+\hat{S}^2 = \frac{\sum_{i=1}^n (X_i-\bar X)^2}{n-1} = \frac{n}{n-1}S^2.
+$$
+:::
+
+
+
+## Intervallschätzer
+
+Das Hauptproblem der Punktschätzung besteht darin, dass nach Auswahl der Stichprobe und Berechnung der Schätzung der tatsächliche Fehler unbekannt bleibt.
+
+Um den Schätzfehler kontrollieren zu können, ist die Intervallschätzung die bessere Methode.
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: punktfehler
+#| engine: tikz
+\begin{tikzpicture}
+  % Titel
+  \node at (3,1.8) {\textbf{Punkt-Schätzwert}};
+  
+  % Horizontale Linie
+  \draw[thick] (0,0) -- (6,0);
+
+  % Wahre Größe \theta
+  \draw[thick] (3,-0.15) -- (3,0.15);
+  \node[below] at (3,-0.15) {$\theta$};
+
+  % Punktschätzer \hat\theta_0 (in rot)
+  \draw[thick, red] (4.5,-0.15) -- (4.5,0.15);
+  \node[below, red] at (4.5,-0.15) {$\hat \theta_0$};
+  
+  % Über den beiden Ticks: overbrace mit Text
+  \node at (3.75, 0.6) {$\displaystyle \overbrace{\hspace{1.8cm}}^{\text{Fehler}}$};
+\end{tikzpicture}
+```
+
+
+
+```{r}
+#| label: intervallfehler
+#| engine: tikz
+\begin{tikzpicture}
+  % Titel
+  \node at (3,1.5) {\textbf{Intervallschätzung}};
+
+  % Horizontale Linie
+  \draw[thick] (0,0) -- (6,0);
+  
+  % Wahre Größe \theta
+  \draw[thick] (3,-0.15) -- (3,0.15);
+  \node[below] at (3,-0.15) {$\theta$};
+  
+  % Linke Klammer (rotes '[')
+  \draw[red, thick] (1.5,-0.3) -- (1.5,0.3); % senkrechter Teil
+  \draw[red, thick] (1.5,0.3) -- (1.7,0.3);  % oberer horizontaler Teil
+  \draw[red, thick] (1.5,-0.3) -- (1.7,-0.3); % unterer horizontaler Teil
+  
+  % Rechte Klammer (rotes ']')
+  \draw[red, thick] (4.5,-0.3) -- (4.5,0.3);
+  \draw[red, thick] (4.3,0.3) -- (4.5,0.3);
+  \draw[red, thick] (4.3,-0.3) -- (4.5,-0.3);
+
+  % Beschriftung der Grenzen
+  \node[below, red] at (1.6,-0.3) {$\ell_1$};
+  \node[below, red] at (4.4,-0.3) {$\ell_2$};
+  
+  \node at (3, 0.6) {$\displaystyle \overbrace{\hspace{3.2cm}}^{\text{Fehler}}$};
+
+\end{tikzpicture}
+
+```
+
+:::
+
+
+Bei der Intervallschätzung wird versucht, ausgehend von der Stichprobe ein Intervall zu konstruieren, in dem der zu schätzende Parameter mit einer bestimmten Konfidenzwahrscheinlichkeit vermutet wird. Hierzu werden zwei Schätzer verwendet - einer für die untere und einer für die obere Intervallgrenze.
+
+::: {.callout-warning appearance="default"}
+## Definition "Konfidenzintervall"
+
+Gegeben zwei Schätzer $\hat l_i(X_1,\ldots,X_n)$ und $\hat l_s(X_1,\ldots,X_n)$ sowie deren jeweilige Schätzwerte $l_1$ und $l_2$ für eine konkrete Stichprobe, heißt das Intervall $I=[l_1,l_2]$ Konfidenzintervall für einen Populationsparameter $\theta$ zum Konfidenzniveau $1-\alpha$ (oder Signifikanzniveau $\alpha$), wenn gilt:
+
+$$
+P(\hat l_i(X_1,\ldots,X_n)\leq \theta \leq \hat l_s(X_1,\ldots,X_n))= 1-\alpha.
+$$
+:::
+
+
+Wichtige Anmerkungen zu Konfidenzintervallen:
+
+- Ein Konfidenzintervall garantiert niemals mit absoluter Sicherheit, dass der Parameter darin enthalten ist.
+- Man kann nicht sagen, die Wahrscheinlichkeit, dass der Parameter im Intervall liegt, betrage $1-\alpha$ - denn nach Berechnung des Intervalls haben die Zufallsvariablen feste Werte angenommen.
+- Die korrekte Interpretation ist: $(1-\alpha)%$ aller möglichen Stichprobenintervalle enthalten den wahren Parameter.
+- Daher spricht man von Konfidenz (Vertrauen), nicht von Wahrscheinlichkeit.
+
+
+Typische Konfidenzniveaus in der Praxis:
+
+$$
+\begin{aligned}
+1-\alpha &= 0.90 \quad (\alpha=0.10) \
+1-\alpha &= 0.95 \quad (\alpha=0.05) \quad \text{(am häufigsten verwendet)} \
+1-\alpha &= 0.99 \quad (\alpha=0.01) \quad \text{(für kritische Anwendungen)}
+\end{aligned}
+$$
+
+Theoretisch enthalten bei einem Konfidenzniveau von $1-\alpha = 0,95\ $ etwa 95 von 100 berechneten Intervallen den wahren Parameter $\theta$, während etwa 5 Intervalle ihn nicht enthalten.
+
+
+
+```{r}
+set.seed(12)
+N <- 100
+n <- 5
+v <- matrix(c(0,0),nrow=2)
+for (i in 1:N) {
+  x <- rnorm(n)
+  v <- cbind(v, t.test(x)$conf.int)
+}
+v <- v[,2:(N+1)]
+par(cex.lab=1, 
+    mar=c(3,3,3,1),
+    mgp=c(2,0.5,0))
+plot(apply(v,2,mean), 
+     ylim=c(min(v),max(v)), 
+     ylab='Konfidenzintervall', 
+     xlab='Anzahl Stichproben', 
+     pch=20, 
+     col="steelblue", yaxt="n")
+abline(0,0)
+c <- apply(v,2,min)>0 | apply(v,2,max)<0
+segments(1:N,v[1,],
+         1:N,v[2,], 
+         col=c("gray",'red')[c+1], 
+         lwd=2)
+title(main= expression("50 Konfidenzintervalle mit 95% Vertrauensniveau für " * theta))
+axis(side=2, 0, labels= expression(theta))
+```
+
+
+### Schätzfehler
+
+Ein weiterer zentraler Aspekt von Konfidenzintervallen ist ihre Fehlerspanne.
+
+::: {.callout-warning appearance="default"}
+## Definition "Fehlerspanne"
+Die Fehlerspanne oder Ungenauigkeit eines Konfidenzintervalls $[l_i,l_s]$ wird durch seine Breite bestimmt:
+
+$$
+A=l_s-l_i.
+$$
+:::
+
+
+```{r}
+#| label: intervallfehler2
+#| engine: tikz
+\begin{tikzpicture}
+  % Titel
+  \node at (3,1.5) {\textbf{Intervallschätzung}};
+
+  % Horizontale Linie
+  \draw[thick] (0,0) -- (6,0);
+  
+  % Wahre Größe \theta
+  \draw[thick] (3,-0.15) -- (3,0.15);
+  \node[below] at (3,-0.15) {$\theta$};
+  
+  % Linke Klammer (rotes '[')
+  \draw[red, thick] (1.5,-0.3) -- (1.5,0.3); % senkrechter Teil
+  \draw[red, thick] (1.5,0.3) -- (1.7,0.3);  % oberer horizontaler Teil
+  \draw[red, thick] (1.5,-0.3) -- (1.7,-0.3); % unterer horizontaler Teil
+  
+  % Rechte Klammer (rotes ']')
+  \draw[red, thick] (4.5,-0.3) -- (4.5,0.3);
+  \draw[red, thick] (4.3,0.3) -- (4.5,0.3);
+  \draw[red, thick] (4.3,-0.3) -- (4.5,-0.3);
+
+  % Beschriftung der Grenzen
+  \node[below, red] at (1.6,-0.3) {$\ell_1$};
+  \node[below, red] at (4.4,-0.3) {$\ell_2$};
+  
+  \node at (3, 0.6) {$\displaystyle \overbrace{\hspace{3.2cm}}^{\text{Fehler}}$};
+
+\end{tikzpicture}
+
+```
+
+
+
+
+Damit ein Intervall praktisch nutzbar ist, darf diese Ungenauigkeit nicht zu groß sein.
+
+Grundsätzlich hängt die Präzision eines Intervalls von drei Faktoren ab:
+
+1. Streuung der Grundgesamtheit: Je größer die Streuung, desto ungenauer das Intervall.
+2. Konfidenzniveau: Höhere Konfidenzniveaus führen zu weniger präzisen Intervallen.
+3. Stichprobenumfang: Größere Stichproben erhöhen die Präzision.
+
+>    Wenn Konfidenz und Präzision im Konflikt stehen - wie kann man dann Präzision gewinnen ohne Konfidenz zu verlieren?
+
+In der Praxis geht man typischerweise wie folgt vor:
+
+- Man beginnt mit einem Punktschätzer, dessen Stichprobenverteilung bekannt ist.
+- Auf Basis dieser Verteilung bestimmt man die Intervallgrenzen so, dass sie eine Wahrscheinlichkeit von $1-\alpha$ einschließen.
+- Üblicherweise wählt man die Grenzen symmetrisch:
+  - Die untere Grenze schließt $\alpha/2$ der Wahrscheinlichkeit aus
+  - Die obere Grenze schließt ebenfalls $\alpha/2$ aus
+
+
+```{r}
+#| label: intervallbereiche1
+x = seq(-3.48, 3.49, by=0.05)
+y = dnorm(x,mean=0,sd=1)
+par(cex.lab=1.2)
+plot(x, y, 
+     xlab=expression(italic(X)), 
+     ylab=expression(paste("Dichtefunktion ",italic(f(x)))), 
+     main="Verteilung des Referenzschätzers", 
+     type="l", xaxt="n", yaxt="n")
+abline(h=0, col="gray")
+polygon(c(x[33], 
+          x[33:108], 
+          x[108]), 
+        c(0, y[33:108], 0), 
+        col="skyblue", lty=0)
+polygon(c(x[1],
+          x[1:33],
+          x[33]), 
+        c(0,y[1:33],0), 
+        col="coral", 
+        lty=0)
+lines (x, y, type="l")
+text(-2.15, 0.02, expression(alpha/2))
+axis(side=1, x[33], labels=(expression(italic(l[i]))))
+polygon(c(x[108],
+          x[108:139],
+          x[139]), 
+        c(0,
+          y[108:139],
+          0), 
+        col="coral", 
+        lty=0)
+lines (x, y, type="l")
+text(2.15, 0.02, expression(alpha/2))
+axis(side=1, x[108], labels=(expression(italic(l[s]))))
+text(0, 0.2, expression(1-alpha))
+
+```
+
+
+
+## Konfidenzintervalle für eine Grundgesamtheit
+
+Im Folgenden werden Konfidenzintervalle zur Schätzung von Parametern einer Grundgesamtheit dargestellt:
+
+- Konfidenzintervall für den Mittelwert einer normalverteilten Grundgesamtheit mit bekannter Varianz
+- Konfidenzintervall für den Mittelwert einer normalverteilten Grundgesamtheit mit unbekannter Varianz
+- Konfidenzintervall für den Mittelwert einer Grundgesamtheit mit unbekannter Varianz bei großen Stichproben
+- Konfidenzintervall für die Varianz einer normalverteilten Grundgesamtheit
+- Konfidenzintervall für einen Anteilswert einer Grundgesamtheit
+
+### Konfidenzintervall für den Mittelwert einer normalverteilten Grundgesamtheit mit bekannter Varianz
+
+Sei $X$ eine Zufallsvariable, die folgende Annahmen erfüllt:
+
+-  Sie ist normalverteilt:  $X\sim N(\mu,\sigma)$
+- Der Mittelwert $\mu$ ist unbekannt, aber die Varianz $\sigma^2$ ist bekannt
+
+Unter diesen Annahmen folgt der Stichprobenmittelwert für Stichproben des Umfangs $n$ ebenfalls einer Normalverteilung:
+
+$$
+\bar X \sim N\left(\mu,\frac{\sigma}{\sqrt n}\right)
+$$
+
+Durch Standardisierung der Variable erhält man:
+
+$$
+Z=\frac{\bar X-\mu}{\sigma/\sqrt n} \sim N(0,1)
+$$
+
+Auf dieser Verteilung lassen sich einfach die Werte $z_i$ und $z_s$ berechnen, so dass gilt:
+
+$$
+P(z_i\leq Z \leq z_s) = 1-\alpha.
+$$
+
+Da die Standardnormalverteilung symmetrisch um $0$ ist, wählt man am besten entgegengesetzte Werte $-z_{\alpha/2}$ und $z_{\alpha/2}$ , die jeweils $\alpha/2$ der Wahrscheinlichkeit in den Rändern lassen.
+
+
+```{r}
+#| label: intervallbereiche2
+x = seq(-3.48, 3.49, by=0.05)
+y = dnorm(x,mean=0,sd=1)
+par(cex.lab=1.2)
+plot(x, y, 
+     xlab=expression(italic(Z)), 
+     ylab=expression(paste("Dichtefunktion ",italic(f(x)))), 
+     main="Verteilung N(0,1)", 
+     type="l", xaxt="n")
+abline(h=0, col="gray")
+polygon(c(x[33], 
+          x[33:108], 
+          x[108]), 
+        c(0, y[33:108], 0), 
+        col="skyblue", lty=0)
+polygon(c(x[1],
+          x[1:33],
+          x[33]), 
+        c(0,y[1:33],0), 
+        col="coral", 
+        lty=0)
+lines (x, y, type="l")
+text(-2.15, 0.02, expression(alpha/2))
+axis(side = 1, at = x[33], labels = expression(-z[alpha/2]))
+
+polygon(c(x[108],
+          x[108:139],
+          x[139]), 
+        c(0,
+          y[108:139],
+          0), 
+        col="coral", 
+        lty=0)
+lines (x, y, type="l")
+text(2.15, 0.02, expression(alpha/2))
+axis(side=1, x[108], labels= expression(z[alpha/2]))
+text(0, 0.2, expression(1-alpha))
+
+```
+
+Ausgehend von der Standardisierung lässt sich durch Umformung einfach zu den Schätzern für die Grenzen des Konfidenzintervalls gelangen:
+
+
+$$
+\begin{aligned}
+1-\alpha &= P(-z_{\alpha/2}\leq Z \leq z_{\alpha/2}) = P\left(-z_{\alpha/2}\leq \frac{\bar X -\mu}{\sigma/\sqrt{n}} \leq z_{\alpha/2}\right) =\\
+&= P\left(-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\leq \bar X -\mu \leq z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right)=\\
+&= P\left(-\bar{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\leq -\mu \leq -\bar{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right)= \\
+&= P\left(\bar{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\leq \mu \leq \bar{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right).
+\end{aligned}
+$$
+
+
+
+::: {.callout-warning appearance="default"}
+## Konfidenzintervall für den Mittelwert einer Normalverteilung mit bekannter Varianz
+
+Falls $X\sim N(\mu, \sigma)$ mit bekannter Standardabweichung $\sigma$, dann lautet das Konfidenzintervall für den Mittelwert $\mu$ zum Konfidenzniveau $1-\alpha$:
+
+$$
+\left[\bar{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}},\bar{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right]
+$$
+
+alternativ geschrieben als:
+
+$$
+\bar{X}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}
+$$
+:::
+
+
+
+
+Aus der Intervallformel
+
+$$
+\bar{X}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}
+$$
+
+ergeben sich folgende Charakteristika:
+
+1. Das Intervall ist zentriert um den Stichprobenmittelwert $\bar X$, den besten Schätzer für den Populationsmittelwert.
+2. Die Breite (Ungenauigkeit) des Intervalls beträgt:
+$$
+A= 2 z_{\alpha/2}\frac{\sigma}{\sqrt{n}}
+$$
+
+Diese hängt ab von:
+
+- $\sigma:\quad$ Je größer die Populationsvarianz, desto ungenauer das Intervall
+- $z_{\alpha/2 :\quad}$ Abhängig vom Konfidenzniveau - höhere Konfidenzniveaus ($1-\alpha$) führen zu größeren Intervallen
+- $n:\quad$ Größere Stichproben verringern die Ungenauigkeit
+
+Die einzige Möglichkeit, die Intervallgenauigkeit bei gleichbleibendem Konfidenzniveau zu verbessern, besteht folglich in der Erhöhung des Stichprobenumfangs.
+
+
+
+
+
+
 
