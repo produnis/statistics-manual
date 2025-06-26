@@ -1222,4 +1222,887 @@ Die einzige Möglichkeit, die Intervallgenauigkeit bei gleichbleibendem Konfiden
 
 
 
+#### Berechnung des Stichprobenumfangs zur Schätzung des Mittelwerts einer Normalverteilung mit bekannter Varianz
+
+Unter Berücksichtigung der Breite (Ungenauigkeit) des Konfidenzintervalls für den Mittelwert einer Normalverteilung mit bekannter Varianz:
+
+$$
+A= 2 z_{\alpha/2}\frac{\sigma}{\sqrt{n}}
+$$
+
+kann der erforderliche Stichprobenumfang zur Erzielung einer Intervallbreite $A$ mit Konfidenzniveau $1-\alpha$ leicht berechnet werden:
+
+$$
+A= 2 z_{\alpha/2}\frac{\sigma}{\sqrt{n}} \Leftrightarrow \sqrt{n}= 2 z_{\alpha/2}\frac{\sigma}{A},
+$$
+
+woraus folgt:
+
+$$
+{n = 4 z_{\alpha/2}^2\frac{\sigma^2}{A^2}}
+$$
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Betrachten wir eine Studentenpopulation, deren Prüfungsergebnisse einer Normalverteilung $X\sim N(\mu,\sigma=1.5)$ folgen.
+
+Zur Schätzung der Durchschnittsnote $\mu$ wird eine Stichprobe von 10 Studenten gezogen:
+
+$$
+4 - 6 - 8 - 7 - 7 - 6 - 5 - 2 - 5 - 3
+$$
+
+Daraus berechnen wir das 95%-Konfidenzintervall ($\alpha=0.05$) für $\mu$:
+
+- $\bar X = \frac{4+\cdots+3}{10}= \frac{53}{10} = 5.3$ Punkte
+
+- $z_{\alpha/2}=z_{0.025} \approx 1.96$ (Standardnormalverteilung)
+
+Einsetzen in die Intervallformel ergibt:
+
+$$
+\bar{X}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}} = 5.3\pm 1.96\frac{1.5}{\sqrt{10}} = 5.3\pm 0.93 = \left[4.37,\,6.23\right].
+$$
+
+Mit 95%iger Sicherheit liegt $\mu$ somit zwischen 4.37 und 6.23 Punkten.
+
+:::
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Die Ungenauigkeit dieses Intervalls beträgt $\pm 0.93$ Punkte.
+
+Für eine höhere Präzision von $\pm 0.5$ Punkten berechnet sich der erforderliche Stichprobenumfang zu:
+
+$$
+n = 4 z_{\alpha/2}^2\frac{\sigma^2}{A^2} = 4\cdot 1.96^2\frac{1.5^2}{(2\cdot 0.5)^2} = 34.57.
+$$
+
+Es wird daher eine Stichprobe von mindestens 35 Studenten benötigt, um ein 95%-Konfidenzintervall mit $\pm 0,5$ Punkten Genauigkeit zu erhalten.
+
+:::
+
+
+
+
+### Konfidenzintervall für den Mittelwert einer Normalverteilung mit unbekannter Varianz
+
+Gegeben sei eine Zufallsvariable $X$, die folgende Annahmen erfüllt:
+
+- Normalverteilung:$X\sim N(\mu,\sigma)$
+- Sowohl der Mittelwert  $\mu$ als auch die Varianz  $\sigma^2$ sind unbekannt  
+
+Wenn die Populationsvarianz unbekannt ist, wird sie typischerweise durch die korrigierte Stichprobenvarianz $\hat{S}^2$ geschätzt. Dadurch folgt der Referenzschätzer nicht mehr einer Normalverteilung (wie bei bekannter Varianz), sondern einer $t$-Verteilung mit $n-1$ Freiheitsgraden:
+
+$$
+\left.
+\begin{array}{l}
+\bar X \sim N\left(\mu,\frac{\sigma}{\sqrt{n}}\right)\\
+\displaystyle\frac{(n-1)\hat{S}^2}{\sigma^2}\sim \chi^2(n-1)
+\end{array}
+\right\}
+\Rightarrow
+\frac{\bar X -\mu}{\hat{S}/\sqrt{n}}\sim T(n-1),
+$$
+
+Da die t-Verteilung (wie die Normalverteilung) symmetrisch um $0$ ist, können zwei entgegengesetzte Werte $-t^{n-1}_{\alpha/2}$ und $t^{n-1}_{\alpha/2}$ gewählt werden, sodass gilt:
+
+
+$$
+\begin{aligned}
+1-\alpha 
+&= P\left(-t^{n-1}_{\alpha/2}\leq \frac{\bar X -\mu}{\hat{S}/\sqrt{n}} \leq t^{n-1}_{\alpha/2}\right)\\
+&= P\left(-t^{n-1}_{\alpha/2}\frac{\hat{S}}{\sqrt{n}}\leq \bar X -\mu \leq t^{n-1}_{\alpha/2}\frac{\hat{S}}{\sqrt{n}}\right)\\
+&= P\left(\bar X-t^{n-1}_{\alpha/2}\frac{\hat{S}}{\sqrt{n}}\leq \mu \leq \bar X t^{n-1}_{\alpha/2}\frac{\hat{S}}{\sqrt{n}}\right)
+\end{aligned}
+$$
+
+::: {.callout-warning appearance="default"}
+## Konfidenzintervall für den Mittelwert einer Normalverteilung mit unbekannter Varianz
+Falls $X\sim N(\mu, \sigma)$  mit unbekannter Standardabweichung $\sigma$, dann lautet das Konfidenzintervall für den Mittelwert $\mu$ zum Konfidenzniveau $1-\alpha$:
+
+$$
+\left[\bar{X}-t^{n-1}_{\alpha/2}\frac{\hat{S}}{\sqrt{n}},\bar{X}+t^{n-1}_{\alpha/2}\frac{\hat{S}}{\sqrt{n}}\right]
+$$
+
+alternativ geschrieben als:
+
+$$
+\bar{X}\pm t^{n-1}_{\alpha/2}\frac{\hat{S}}{\sqrt{n}}
+$$
+:::
+
+
+
+
+
+#### Berechnung des Stichprobenumfangs zur Schätzung des Mittelwerts einer Normalverteilung mit unbekannter Varianz
+
+Analog zum vorherigen Fall ergibt sich die Breite (Ungenauigkeit) des Konfidenzintervalls für den Mittelwert bei unbekannter Varianz zu:
+
+$$
+A= 2 t^{n-1}_{\alpha/2}\frac{\hat{S}}{\sqrt{n}}
+$$
+
+Daraus lässt sich der benötigte Stichprobenumfang für eine gewünschte Intervallbreite $A$ mit Konfidenzniveau $1-\alpha$ ableiten:
+
+$$
+A= 2 t^{n-1}_{\alpha/2}\frac{\hat{S}}{\sqrt{n}} \Leftrightarrow \sqrt{n}= 2 t^{n-1}_{\alpha/2}\frac{\hat{S}}{A},
+$$
+
+was zu folgender Formel führt:
+
+$$
+{n = 4 (t^{n-1}_{\alpha/2})^2\frac{\hat{S}^2}{A^2}}
+$$
+
+Der entscheidende Unterschied zum Fall mit bekannter Varianz besteht darin, dass $\hat{S}$ bekannt sein muss. Daher wird typischerweise wie folgt vorgegangen:
+
+- Eine kleine Vorstichprobe wird gezogen, um $\hat{S}$ zu schätzen
+- Der $t$-Wert kann für größere Stichproben durch den $z$-Wert der Normalverteilung approximiert werden: $t^{n-1}_{\alpha/2}\approx z_{\alpha/2}$
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Angenommen, im vorherigen Beispiel sei die Populationsvarianz der Prüfungsergebnisse unbekannt.
+
+Mit derselben Stichprobe von 10 Studenten:
+
+$$
+4 - 6 - 8 - 7 - 7 - 6 - 5 - 2 - 5 - 3
+$$
+
+ergibt sich das 95%-Konfidenzintervall ($\alpha=0.05$) für $\mu$ wie folgt:
+
+- $\bar X = \frac{53}{10} = 5.3$ Punkte
+- $\hat{S}^2= \frac{\sum(x_i-\bar x)^2}{9} = 3.5667$ und $\hat{S}=1.8886$ Punkte
+- $t^{n-1}_{\alpha/2}=t^9_{0.025} = 2.2622$ ($t$-Verteilung mit 9 Freiheitsgraden)
+    
+Das Konfidenzintervall berechnet sich zu:
+
+$$
+\bar{X}\pm t^{n-1}_{\alpha/2}\frac{\hat{S}}{\sqrt{n}} = 5.3\pm 2.2622\frac{1.8886}{\sqrt{10}} = 5.3\pm 1.351 = \left[3.949,\,6.651\right].
+$$
+
+:::
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Die Ungenauigkeit des Intervalls ($\pm 1,8886$ Punkte) ist deutlich größer als bei bekannter Varianz - dies erklärt sich durch die zusätzliche Unsicherheit bei der Schätzung der Populationsvarianz.
+
+Der benötigte Stichprobenumfang für eine Genauigkeit von $\pm 0,5$ Punkten beträgt:
+
+$$
+n = 4 (z_{\alpha/2})^2\frac{\hat{S}^2}{A^2} = 4\cdot 1.96^2\frac{3.5667}{(2\cdot 0.5)^2} = 54.81.
+$$
+
+Somit sind mindestens 55 Studenten nötig, um bei unbekannter Varianz ein 95%-Konfidenzintervall mit $\pm 0,5$ Punkten Genauigkeit zu erhalten.
+:::
+
+
+
+
+
+###  Konfidenzintervall für den Mittelwert einer nicht-normalverteilten Grundgesamtheit
+
+Gegeben sei eine Zufallsvariable $X$ mit folgenden Eigenschaften:
+
+-  Ihre Verteilung ist nicht normal
+- Sowohl der Mittelwert $\mu$ als auch die Varianz $\sigma^2$ sind unbekannt
+
+Bei nicht-normalverteilten Grundgesamtheiten ändern sich die Verteilungen der Referenzschätzer, sodass die bisherigen Intervalle nicht anwendbar sind.
+
+Für große Stichproben ($n\geq 30$) gilt jedoch nach dem zentralen Grenzwertsatz, dass sich die Verteilung des Stichprobenmittelwerts einer Normalverteilung annähert:
+
+$$
+\bar X \sim N\left(\mu,\frac{\sigma}{\sqrt{n}}\right)
+$$
+
+Somit bleibt das zuvor beschriebene Intervall gültig.
+
+
+::: {.callout-warning appearance="default"}
+## Konfidenzintervall für den Mittelwert einer nicht-normalverteilten Grundgesamtheit bei großen Stichproben
+
+Für eine nicht-normalverteilte Variable $X$ mit $n\geq 30$ lautet das ($1-\alpha$)-Konfidenzintervall für $\mu$:
+
+$$
+\bar{X}\pm t^{n-1}_{\alpha/2}\frac{\hat{S}}{\sqrt{n}}
+$$
+:::
+
+
+
+
+
+### Konfidenzintervall für die Varianz einer normalverteilten Grundgesamtheit
+
+Voraussetzungen:
+
+- $X$ ist normalverteilt: $X\sim N(\mu,\sigma)$
+- Sowohl $\mu$ als auch $\sigma^2$ sind unbekannt
+
+Als Ausgangspunkt dient der Referenzschätzer:
+
+$$
+\frac{nS^2}{\sigma^2} = \frac{(n-1)\hat{S}^2}{\sigma^2}\sim \chi^2(n-1),
+$$
+
+der einer Chi-Quadrat-Verteilung mit $n-1$ Freiheitsgraden folgt.
+
+Es müssen die Werte $\chi_i$ und $\chi_s$ bestimmt werden, für die gilt:
+
+$$
+P(\chi_i\leq \chi^2(n-1) \leq \chi_s) = 1-\alpha.
+$$
+
+Da die Chi-Quadrat-Verteilung nicht symmetrisch ist, werden die Quantile $\chi^{n-1}_{\alpha/2}$ und $\chi^{n-1}_{1-\alpha/2}$ verwendet.
+
+
+
+```{r}
+#| label: chi2grenzen1
+
+x = seq(0, 30, length = 100)
+y = dchisq(x, df = 9)
+
+par(cex.lab = 1.2)
+
+plot(x, y, 
+     xlim = c(0, 30), 
+     type = "l", 
+     xlab = expression(chi^2), 
+     ylab = expression(paste("Dichtefunktion ", italic(f(x)))), 
+     main = expression(paste("Chiquadratverteilung ", chi^2, "(", n - 1, ")")), 
+     xaxt = "n", 
+     yaxt = "n")
+
+abline(h = 0, col = "gray")
+axis(side = 1, at = 0)
+axis(side = 2, at = 0)
+
+# Grenzen bestimmen
+li_index <- 10
+re_index <- 64
+
+# Linker Ablehnungsbereich
+polygon(c(x[1], x[1:li_index], x[li_index]), 
+        c(0, y[1:li_index], 0), 
+        col = "coral", 
+        lty = 0)
+text(2, 0.003, expression(alpha/2))
+axis(side = 1, at = x[li_index], 
+     labels = expression(chi[alpha/2]^2))
+
+# Mittlerer Bereich (Akzeptanzbereich)
+polygon(c(x[li_index], x[li_index:re_index], x[re_index]), 
+        c(0, y[li_index:re_index], 0), 
+        col = "skyblue", 
+        lty = 0)
+text(9, 0.03, expression(1 - alpha))
+
+# Rechter Ablehnungsbereich
+polygon(c(x[re_index], x[re_index:100], x[100]), 
+        c(0, y[re_index:100], 0), 
+        col = "coral", 
+        lty = 0)
+text(22, 0.003, expression(alpha/2))
+axis(side = 1, at = x[re_index], 
+     labels = expression(chi[1 - alpha/2]^2))
+
+# Dichtekurve erneut zeichnen
+lines(x, y, type = "l")
+
+
+```
+
+
+Somit ergibt sich
+
+$$
+\begin{aligned}
+1-\alpha &= P\left(\chi^{n-1}_{\alpha/2}\leq \frac{nS^2}{\sigma^2}  \leq \chi^{n-1}_{1-\alpha/2}\right) =
+P\left(\frac{1}{\chi^{n-1}_{\alpha/2}}\geq \frac{\sigma^2}{nS^2}  \geq \frac{1}{\chi^{n-1}_{1-\alpha/2}}\right)=\\
+&= P\left(\frac{1}{\chi^{n-1}_{1-\alpha/2}}\leq \frac{\sigma^2}{nS^2}  \leq \frac{1}{\chi^{n-1}_{\alpha/2}}\right)
+= P\left(\frac{nS^2}{\chi^{n-1}_{1-\alpha/2}}\leq \sigma^2  \leq \frac{nS^2}{\chi^{n-1}_{\alpha/2}}\right).
+\end{aligned}
+$$
+
+Daher lautet das Konfidenzintervall für die Varianz einer normalverteilten Population:
+
+::: {.callout-warning appearance="default"}
+## Konfidenzintervall für die Varianz einer normalverteilten Grundgesamtheit
+
+Für $X\sim N(\mu, \sigma)$  lautet das ($1-\alpha$)-Konfidenzintervall für $\sigma$ :
+
+$$
+\left[\frac{nS^2}{\chi^{n-1}_{1-\alpha/2}},\frac{nS^2}{\chi^{n-1}_{\alpha/2}}\right]
+$$
+:::
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Fortsetzung des Prüfungsbeispiels mit der Stichprobe:
+
+$$
+4 - 6 - 8 - 7 - 7 - 6 - 5 - 2 - 5 - 3
+$$
+
+Das Konfidenzintervall für $\sigma^2$ bei einem Vertrauensniveau von 95% ($\alpha=0,05$) lautet:
+
+- $S^2= \frac{(4-5.3)^2+\cdots+(3-5.3)^2}{10} = 3.21$ Punkte$^2$.
+- $\chi^{n-1}_{\alpha/2}=\chi^9_{0.025}$ ist der Wert der Chi-Quadrat-Verteilung mit $9$ Freiheitsgraden, der eine kumulative Wahrscheinlichkeit von $0,025$ unterschreitet, und beträgt $2,7$.
+- $\chi^{n-1}_{1-\alpha/2}=\chi^9_{0.975}$ ist der Wert der Chi-Quadrat-Verteilung mit $9$ Freiheitsgraden, der eine kumulative Wahrscheinlichkeit von $0,975$ unterschreitet, und beträgt $19$.
+
+Das Intervall berechnet sich zu:
+
+$$
+\left[\frac{nS^2}{\chi^{n-1}_{1-\alpha/2}},\frac{nS^2}{\chi^{n-1}_{\alpha/2}}\right] =
+\left[\frac{10\cdot 3.21}{19},\frac{10\cdot 3.21}{2.7}\right] = [1.69,\,11.89] \text{ Punkte}^2.
+$$
+
+:::
+
+
+
+
+### Konfidenzintervall für einen Anteilswert
+
+Zur Schätzung des Anteils p einer Grundgesamtheit mit einer bestimmten Eigenschaft geht man von der Zufallsvariablen X aus, die die Anzahl der Individuen mit dieser Eigenschaft in einer Stichprobe vom Umfang n zählt. Diese Variable folgt einer Binomialverteilung:
+
+$$
+X\sim B(n,p)
+$$
+
+Für ausreichend große Stichproben (genauer: wenn $np\geq 5$ und $n(1-p)\geq 5$) gilt) besagt der zentrale Grenzwertsatz, dass $X$ approximativ normalverteilt ist:
+
+$$
+X\sim N(np,\sqrt{np(1-p)}).
+$$
+
+
+Folglich ist auch der Stichprobenanteil $\hat{p}=X/n$ approximativ normalverteilt:
+
+$$
+\hat{p}=\frac{X}{n} \sim N\left(p,\sqrt{\frac{p(1-p)}{n}}\right),
+$$
+
+Dies dient als Referenzschätzer. Durch Standardisierung erhält man:
+
+$$
+\hat p\sim N\left(p,\sqrt{\frac{p(1-p)}{n}}\right)
+$$
+
+Nach der Standardisierung lassen sich – genauso wie zuvor – leicht die Werte $-z_{\alpha/2}$ und $z_{\alpha/2}$ finden, die erfüllen:
+
+$$
+P\left(-z_{\alpha/2}\leq \frac{\hat p-p}{\sqrt{p(1-p)/n}}\leq z_{\alpha/2} \right) = 1-\alpha.
+$$
+
+Somit erhält man, indem man die Standardisierung rückgängig macht und analog zum vorherigen Vorgehen argumentiert:
+
+$$
+\begin{aligned}
+1-\alpha 
+&= P\left(-z_{\alpha/2}\leq \frac{\hat p-p}{\sqrt{p(1-p)/n}}\leq z_{\alpha/2} \right) \\
+&= P\left(-z_{\alpha/2}\frac{\sqrt{p(1-p)}}{n}\leq \hat p-p\leq z_{\alpha/2}\frac{\sqrt{p(1-p)}}{n} \right) \\
+&= P\left(\hat{p}-z_{\alpha/2}\frac{\sqrt{p(1-p)}}{n}\leq p\leq \hat{p}+z_{\alpha/2}\frac{\sqrt{p(1-p)}}{n} \right)
+\end{aligned}
+$$
+
+Durch Umformung ergibt sich das Konfidenzintervall:
+
+::: {.callout-warning appearance="default"}
+## Konfidenzintervall für einen Anteilswert
+
+Für $X\sim B(n,p)$ mit  $np\geq 5$ und $n(1-p)\geq 5$ lautet das ($1-\alpha$)-Konfidenzintervall für $p$:
+
+$$
+\left[\hat{p}-z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}},\hat{p}+z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\right]
+$$
+
+oder alternativ:
+
+$$
+\hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+$$
+:::
+
+
+
+#### Berechnung des Stichprobenumfangs zur Schätzung eines Anteils
+
+Die Breite oder Ungenauigkeit des Konfidenzintervalls für einen Anteil in einer Population beträgt
+
+$$
+A= 2 z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+$$
+
+Daher lässt sich der erforderliche Stichprobenumfang leicht berechnen, um ein Intervall mit der Breite $A$ und einem Konfidenzniveau von $1-\alpha$ zu erhalten:
+
+$$
+A= 2 z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \Leftrightarrow A^2= 4 z_{\alpha/2}^2\frac{\hat{p}(1-\hat{p})}{n},
+$$
+
+woraus sich ableiten lässt:
+
+$$
+{n= 4 z_{\alpha/2}^2\frac{\hat{p}(1-\hat{p})}{A^2}}
+$$
+
+Für die Berechnung wird eine Schätzung des Anteils $\hat{p}$ benötigt. Daher wird üblicherweise eine kleine Vorstichprobe gezogen, um diesen Wert zu ermitteln.
+Im schlimmsten Fall, wenn keine Vorstichprobe verfügbar ist, kann $\hat{p}=0.5$ angenommen werden.
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Angenommen, es soll der Anteil der Raucher in einer bestimmten Population geschätzt werden.
+Dazu wird eine Stichprobe von 20 Personen gezogen, und es wird erfasst, ob sie rauchen $(1)$ oder nicht $(0)$:
+
+$$
+0 - 1 - 1 - 0 - 0 - 0 - 1 - 0 - 0 - 1 - 0 - 0 - 0 - 1 - 1- 0 - 1 - 1 - 0 - 0
+$$
+
+Daraus ergibt sich:
+
+- $\hat p=\frac{8}{20}=0.4$. Somit gilt $np=20\cdot 0.4 = 8\geq 5$ und $n(1-p)=20\cdot 0.6= 12\geq 5$.
+- $z_{\alpha/2}=z_{0.025}$ ist der Wert der Standardnormalverteilung, der eine obere kumulative Wahrscheinlichkeit von $0.025$ aufweist und ungefähr $1.96$ beträgt.
+
+Durch Einsetzen dieser Werte in die Formel für das Konfidenzintervall ergibt sich:
+
+$$
+\hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} = 0.4\pm 1.96\sqrt{\frac{0.4\cdot 0.6}{10}} = 0.4\pm  0.3 = \left[0.1,\,0.7\right].
+$$
+
+Das bedeutet, mit einer 95%igen Konfidenz liegt der wahre Anteil $p$ zwischen $0.1$ und $0.7$.
+
+:::
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Wie zu erkennen ist, beträgt die Ungenauigkeit des obigen Intervalls $\pm 0.215$, was angesichts eines Anteils sehr groß ist.
+
+Um präzise Konfidenzintervalle für Anteilsschätzungen zu erhalten, sind relativ große Stichprobenumfänge erforderlich.
+Wenn beispielsweise eine Genauigkeit von $\pm 0,05$ gewünscht wird, wäre der erforderliche Stichprobenumfang:
+
+$$
+n= 4 z_{\alpha/2}^2\frac{\hat{p}(1-\hat{p})}{A^2}=4\cdot 1.96^2\frac{0.4\cdot 0.6}{(2\cdot0.05)^2}= 368.79.
+$$
+Das heißt, es wären mindestens 369 Personen notwendig, um ein 95%-Konfidenzintervall für den Anteil mit einer Genauigkeit von $\pm 0,05$ zu erhalten.
+:::
+
+
+
+## Konfidenzintervalle für den Vergleich zweier Populationen
+
+In vielen Studien besteht das eigentliche Ziel nicht darin, den Wert eines Parameters zu ermitteln, sondern ihn mit dem einer anderen Population zu vergleichen.
+
+Beispielsweise könnte man untersuchen, ob ein bestimmter Parameter in der männlichen und der weiblichen Population denselben Wert aufweist.
+
+In solchen Fällen geht es nicht primär um die separate Schätzung der beiden Parameter, sondern um eine Schätzung, die ihren Vergleich ermöglicht.
+
+Es werden drei Fälle betrachtet:
+
+- Vergleich von Mittelwerten: Schätzung der Differenz der Mittelwerte $\mu_1-\mu_2$.
+- Vergleich von Varianzen: Schätzung des Verhältnisses der Varianzen $\displaystyle \frac{\sigma^2_1}{\sigma^2_2}$.
+- Vergleich von Anteilen: Schätzung der Differenz der Anteile $\hat p_1-\hat p_2$.
+
+Im Folgenden werden die folgenden Konfidenzintervalle für den Vergleich zweier Populationen vorgestellt:
+
+- Intervall für die Differenz der Mittelwerte zweier normalverteilter Populationen mit bekannten Varianzen.
+- Intervall für die Differenz der Mittelwerte zweier normalverteilter Populationen mit unbekannten, aber gleichen Varianzen.
+- Intervall für die Differenz der Mittelwerte zweier normalverteilter Populationen mit unbekannten und ungleichen Varianzen.
+- Intervall für das Verhältnis der Varianzen zweier normalverteilter Populationen.
+- Intervall für die Differenz der Anteile zweier Populationen.
+
+
+### Konfidenzintervall für die Differenz der Mittelwerte normalverteilter Populationen mit bekannten Varianzen
+
+Seien $X_1$ und $X_2$ zwei Zufallsvariablen, die folgende Annahmen erfüllen:
+
+- Sie sind normalverteilt: $X_1\sim N(\mu_1,\sigma_1)$ und $X_2\sim N(\mu_2,\sigma_2)$.
+- Ihre Mittelwerte $\mu_1$ und $\mu_2$ sind unbekannt, aber ihre Varianzen $\sigma^2_1$ und $\sigma^2_2$ sind bekannt.
+
+Unter diesen Annahmen folgt die Differenz der Stichprobenmittelwerte aus zwei unabhängigen Stichproben der Größen $n_1$ bzw. $n_2$ einer Normalverteilung:
+
+$$
+\left.
+\begin{array}{l}
+\bar{X}_1\sim N\left(\mu_1,\frac{\sigma_1}{\sqrt{n_1}} \right)\\
+\bar{X}_2\sim N\left(\mu_2,\frac{\sigma_2}{\sqrt{n_2}} \right)
+\end{array}
+\right\}
+\Rightarrow
+\bar{X}_1-\bar{X}_2 \sim N\left(\mu_1-\mu_2,\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}\right).
+$$
+
+Durch Standardisierung ergeben sich die Werte der Standardnormalverteilung $-z_{\alpha/2}$ und $z_{\alpha/2}$, die folgende Bedingung erfüllen:
+
+$$
+P\left(-z_{\alpha/2}\leq \frac{(\bar{X}_1-\bar{X}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}} \leq z_{\alpha/2}\right) = 1-\alpha.
+$$
+
+Durch Rückgängigmachen der Standardisierung erhält man:
+
+$$
+\begin{aligned}
+1-\alpha 
+&= P\left(-z_{\alpha/2}\leq \frac{(\bar{X}_1-\bar{X}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}} \leq z_{\alpha/2}\right) \\
+&= P\left(-z_{\alpha/2}\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}\leq (\bar{X}_1-\bar{X}_2)-(\mu_1-\mu_2)\leq z_{\alpha/2}\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}\right) \\
+&= P\left(\bar{X}_1-\bar{X}_2 - z_{\alpha/2}\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}\leq \mu_1-\mu_2\leq \bar{X}_1-\bar{X}_2 + z_{\alpha/2}\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}\right)
+\end{aligned}
+$$
+
+Somit lautet das Konfidenzintervall für die Differenz der Mittelwerte:
+
+::: {.callout-warning appearance="default"}
+## Konfidenzintervall für die Differenz der Mittelwerte normalverteilter Populationen mit bekannten Varianzen
+
+Falls $X_1\sim N(\mu_1,\sigma_1)$ und $X_2\sim N(\mu_2,\sigma_2)$ mit bekannten $\sigma_1$ und $\sigma_2$, dann ist das Konfidenzintervall für die Differenz der Mittelwerte $\mu_1-\mu_2$ zum Konfidenzniveau $1-\alpha$ gegeben durch:
+
+$$
+\left[\bar{X}_1-\bar{X}_2-z_{\alpha/2}\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}},\bar{X}_1-\bar{X}_2+z_{\alpha/2}\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}\right]
+$$
+
+oder alternativ:
+
+$$
+\bar{X}_1-\bar{X}_2\pm z_{\alpha/2}\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}
+$$
+
+:::
+
+
+
+
+
+### Konfidenzintervall für die Differenz der Mittelwerte zweier normalverteilter Populationen mit unbekannten, aber gleichen Varianzen
+
+Seien $X_1$ und $X_2$ zwei Zufallsvariablen, die folgende Annahmen erfüllen:
+
+- Sie sind normalverteilt: $X_1\sim N(\mu_1,\sigma_1)$ und $X_2\sim N(\mu_2,\sigma_2)$
+- Ihre Mittelwerte $\mu_1$ und $\mu_2$ sind unbekannt und ihre Varianzen ebenfalls, aber sie sind gleich: $\sigma^2_1=\sigma^2_2=\sigma^2$
+
+Wenn die Populationsvarianz unbekannt ist, kann sie aus Stichproben der Größen $n_1$ und $n_2$ beider Populationen mittels der gewichteten Stichprobenvarianz (gepoolte Varianz) geschätzt werden:
+
+$$
+\hat{S}^2_p = \frac{n_1S^2_1+n_2S^2_2}{n_1+n_2-2}.
+$$
+
+Die Teststatistik folgt in diesem Fall einer t-Verteilung:
+
+$$
+\left.
+\begin{array}{l}
+\bar{X}_1-\bar{X}_2\sim N\left(\mu_1-\mu_2,\sigma\sqrt{\frac{n_1+n_2}{n_1n_2}} \right)\\
+\displaystyle \frac{n_1S_1^2+n_2S_2^2}{\sigma^2} \sim \chi^2(n_1+n_2-2)
+\end{array}
+\right\}
+\Rightarrow
+\frac{(\bar{X}_1-\bar{X}_2)-(\mu_1-\mu_2)}{\hat{S}_p\sqrt{\frac{n_1+n_2}{n_1n_2}}} \sim T(n_1+n_2-2).
+$$
+
+Daraus lassen sich die kritischen Werte $-t^{n_1+n_2-2}{\alpha/2}$ und $t^{n_1+n_2-2}{\alpha/2}$ der t-Verteilung bestimmen, die folgende Bedingung erfüllen:
+
+$$
+P\left(-t^{n_1+n_2-2}_{\alpha/2}\leq \frac{(\bar{X}_1-\bar{X}_2)-(\mu_1-\mu_2)}{\hat{S}_p\sqrt{\frac{n_1+n_2}{n_1n_2}}}
+\leq t^{n_1+n_2-2}_{\alpha/2}\right) = 1-\alpha.
+$$
+
+
+Und durch Rücktransformation ergibt sich
+
+$$
+\begin{aligned}
+1-\alpha 
+&= P\left(-t^{n_1+n_2-2}_{\alpha/2}\leq \frac{(\bar{X}_1-\bar{X}_2)-(\mu_1-\mu_2)}{\hat{S}_p\sqrt{\frac{n_1+n_2}{n_1n_2}}} \leq t^{n_1+n_2-2}_{\alpha/2}\right) \\
+&= P\left(-t^{n_1+n_2-2}_{\alpha/2}\hat{S}_p\sqrt{\frac{n_1+n_2}{n_1n_2}}\leq (\bar{X}_1-\bar{X}_2)-(\mu_1-\mu_2) \leq t^{n_1+n_2-2}_{\alpha/2}\hat{S}_p\sqrt{\frac{n_1+n_2}{n_1n_2}}\right) \\
+&= P\left(\bar{X}_1-\bar{X}_2 - t^{n_1+n_2-2}_{\alpha/2}\hat{S}_p\sqrt{\frac{n_1+n_2}{n_1n_2}}\leq \mu_1-\mu_2 \leq \bar{X}_1-\bar{X}_2 + t^{n_1+n_2-2}_{\alpha/2}\hat{S}_p\sqrt{\frac{n_1+n_2}{n_1n_2}}\right).
+\end{aligned}
+$$
+
+Durch weitere Umformung erhält man das Konfidenzintervall:
+
+::: {.callout-warning appearance="default"}
+## Konfidenzintervall für die Differenz der Mittelwerte normalverteilter Populationen mit unbekannten, aber gleichen Varianzen
+
+Wenn $X_1\sim N(\mu_1,\sigma_1)$ und $X_2\sim N(\mu_2,\sigma_2)$ mit unbekannten, aber gleichen Varianzen $\sigma_1 = \sigma_2$, dann ist das Konfidenzintervall für die Mittelwertdifferenz $\mu_1-\mu_2$ zum Konfidenzniveau $1-\alpha$ gegeben durch:
+
+$$
+\left[\bar{X}_1-\bar{X}_2-t^{n_1+n_2-2}_{\alpha/2}\hat{S}_p\sqrt{\frac{n_1+n_2}{n_1n_2}},\bar{X}_1-\bar{X}_2+t^{n_1+n_2-2}_{\alpha/2}\hat{S}_p\sqrt{\frac{n_1+n_2}{n_1n_2}}\right]
+$$
+
+
+oder alternativ:
+
+$$
+\bar{X}_1-\bar{X}_2\pm t^{n_1+n_2-2}_{\alpha/2}\hat{S}_p\sqrt{\frac{n_1+n_2}{n_1n_2}}
+$$
+
+:::
+
+Wenn $[l_i,l_s]$ ein Konfidenzintervall mit dem Niveau $1-\alpha$ für die Differenz der Mittelwerte $\mu_1-\mu_2$ ist, dann gilt
+
+$$
+\mu_1-\mu_2 \in [l_i,l_s]
+$$
+
+
+Interpretation des Konfidenzintervalls $[l_i,l_s]$ für $\mu_1-\mu_2$:
+
+- Wenn das Intervall vollständig negativ ist ($l_s < 0$), dann gilt mit $(1-\alpha)%$ Konfidenz, dass $\mu_1 < \mu_2$
+- Wenn das Intervall vollständig positiv ist ($l_i > 0$), dann gilt mit $(1-\alpha)%$ Konfidenz, dass $\mu_1 > \mu_2$
+- Wenn das Intervall die Null enthält, gibt es keinen statistisch signifikanten Unterschied zwischen den Mittelwerten
+
+In den ersten beiden Fällen spricht man von statistisch signifikanten Unterschieden zwischen den Mittelwerten.
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Vergleich der akademischen Leistungen zweier Schülergruppen (10 bzw. 12 Schüler) mit unterschiedlichen Lehrmethoden:
+
+$$
+\begin{aligned}
+X_1 &: 4 - 6 - 8 - 7 - 7 - 6 - 5 - 2 - 5 - 3 \\
+X_2 &: 8 - 9 - 5 - 3 - 8 - 7 - 8 - 6 - 8 - 7 - 5 - 7
+\end{aligned}
+$$
+Unter der Annahme, dass beide Variablen dieselbe Varianz besitzen, ergibt sich
+
+- $\bar{X}_1 = \frac{4+\cdots +3}{10}=5.3$ und $\bar{X}_2=\frac{8+\cdots +7}{12}=6.75$ Punkte.
+- $S_1^2= \frac{4^2+\cdots + 3^2}{10}-5.3^2=3.21$ und $S_2^2= \frac{8^2+\cdots +3^2}{12}-6.75^2=2.6875$ Punkte$^2$.
+- $\hat{S}_p^2 = \frac{10\cdot 3.21+12\cdot 2.6875}{10+12-2}= 3.2175$ Punkte$^2$, und $\hat S_p=1.7937$.
+- $t^{n_1+n_2-2}_{\alpha/2}=t^{20}_{0.025}$ ist der Wert der Student-t-Verteilung mit 20 Freiheitsgraden, der eine obere kumulierte Wahrscheinlichkeit von $0,025$ abbildet, und beträgt ungefähr $2,09$.
+
+
+
+Das 95%-Konfidenzintervall für die Leistungsdifferenz beträgt:
+
+
+$$
+5.3-6.75 \pm 2.086\cdot 1.7937\sqrt{\frac{10+12}{10\cdot 12}} = -1.45\pm 1.6021 = [-3.0521,\,0.1521] \text{ Punkte}.
+$$
+
+:::
+
+Das heißt, die Differenz der durchschnittlichen Werte $\mu_1-\mu_2$ liegt mit einer Konfidenz von 95% zwischen $-3.0521$ und $0.1521$ Punkten.
+
+Angesichts dieses Intervalls kann man folgern, dass, da das Intervall sowohl positive als auch negative Werte enthält und somit auch die $0$ einschließt, nicht festgestellt werden kann, dass eine der Mittelwerte größer ist als die andere. Daher wird angenommen, dass sie gleich sind, und es kann nicht gesagt werden, dass es signifikante Unterschiede zwischen den Gruppen gibt.
+
+
+
+
+###   Konfidenzintervall für die Differenz der Mittelwerte zweier normalverteilter Populationen mit unbekannten und ungleichen Varianzen
+
+Seien $X_1$ und $X_2$ zwei Zufallsvariablen, die folgende Annahmen erfüllen:
+
+- Ihre Verteilung ist normal: $X_1\sim N(\mu_1,\sigma_1)$ und $X_2\sim N(\mu_2,\sigma_2)$.
+- Ihre Mittelwerte $\mu_1$, $\mu_2$ und Varianzen $\sigma_1^2$, $\sigma_2^2$ sind unbekannt, aber es gilt $\sigma^2_1\neq \sigma^2_2$.
+
+In diesem Fall folgt die Teststatistik einer t-Verteilung:
+
+$$
+\frac{(\bar{X}_1-\bar{X}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\hat{S}^2_1}{n_1}+\frac{\hat{S}^2_2}{n_2}}} \sim T(g),
+$$
+
+wobei die Anzahl der Freiheitsgrade $g=n_1+n_2-2-\Delta$ beträgt, mit
+
+$$
+\Delta =
+\frac{(\frac{n_2-1}{n_1}\hat{S}_1^2-\frac{n_1-1}{n_2}\hat{S}_2^2)^2}{\frac{n_2-1}{n_1^2}\hat{S}_1^4+\frac{n_1-1}{n_2^2}\hat{S}_2^4}.
+$$
+
+Daraus lassen sich die kritischen Werte der t-Verteilung $-t^{g}{\alpha/2}$ und $t^{g}{\alpha/2}$ bestimmen, die folgende Bedingung erfüllen:
+
+$$
+P\left(-t^{g}_{\alpha/2}\leq \frac{(\bar{X}_1-\bar{X}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\hat{S}^2_1}{n_1}+\frac{\hat{S}^2_2}{n_2}}} \leq t^{g}_{\alpha/2}\right) = 1-\alpha.
+$$
+
+Durch Umstellung erhält man:
+
+$$
+\begin{aligned}
+1-\alpha 
+&= P\left(-t^{g}_{\alpha/2}\leq \frac{(\bar{X}_1-\bar{X}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\hat{S}^2_1}{n_1}+\frac{\hat{S}^2_2}{n_2}}} \leq t^{g}_{\alpha/2}\right) \\
+&= P\left(-t^{g}_{\alpha/2}\sqrt{\frac{\hat{S}^2_1}{n_1}+\frac{\hat{S}^2_2}{n_2}}\leq (\bar{X}_1-\bar{X}_2)-(\mu_1-\mu_2) \leq t^{g}_{\alpha/2}\sqrt{\frac{\hat{S}^2_1}{n_1}+\frac{\hat{S}^2_2}{n_2}}\right) \\
+&= P\left(\bar{X}_1-\bar{X}_2 - t^{g}_{\alpha/2}\sqrt{\frac{\hat{S}^2_1}{n_1}+\frac{\hat{S}^2_2}{n_2}}\leq\mu_1-\mu_2 \leq \bar{X}_1-\bar{X}_2 + t^{g}_{\alpha/2}\sqrt{\frac{\hat{S}^2_1}{n_1}+\frac{\hat{S}^2_2}{n_2}}\right) \\
+\end{aligned}
+$$
+
+Somit ergibt sich das Konfidenzintervall für die Differenz der Mittelwerte:
+
+::: {.callout-warning appearance="default"}
+## Konfidenzintervall für die Differenz der Mittelwerte normalverteilter Populationen mit unbekannten und ungleichen Varianzen
+
+Wenn $X_1\sim N(\mu_1,\sigma_1)$ und $X_2\sim N(\mu_2,\sigma_2)$ mit unbekannten und ungleichen Varianzen $\sigma_1 \neq \sigma_2$, dann ist das Konfidenzintervall für die Mittelwertdifferenz $\mu_1-\mu_2$ zum Konfidenzniveau $1-\alpha$ gegeben durch:
+
+$$
+\left[\bar{X}_1-\bar{X}_2-t^{g}_{\alpha/2}\sqrt{\frac{\hat{S}^2_1}{n_1}+\frac{\hat{S}^2_2}{n_2}},\bar{X}_1-\bar{X}_2-t^{g}_{\alpha/2}\sqrt{\frac{\hat{S}^2_1}{n_1}+\frac{\hat{S}^2_2}{n_2}}\right]
+$$
+
+oder alternativ:
+
+$$
+\bar{X}_1-\bar{X}_2\pm t^{g}_{\alpha/2}\sqrt{\frac{\hat{S}^2_1}{n_1}+\frac{\hat{S}^2_2}{n_2}}
+$$
+:::
+
+Wie wir gesehen haben, gibt es zwei mögliche Konfidenzintervalle zur Schätzung der Mittelwertdifferenz: eines für den Fall gleicher Populationsvarianzen und eines für ungleiche Varianzen.
+
+Doch wenn die Populationsvarianzen unbekannt sind,
+
+> wie lässt sich entscheiden, welches Intervall verwendet werden soll?
+
+Die Antwort liefert das nächste Konfidenzintervall, das wir betrachten werden. Es ermöglicht die Schätzung des Varianzverhältnisses $\frac{\sigma_2^2}{\sigma_1^2}$ und somit deren Vergleich.
+
+Daher ist es notwendig, bevor man das Konfidenzintervall für den Mittelwertvergleich berechnet (wenn die Populationsvarianzen unbekannt sind), zuerst das Konfidenzintervall für das Varianzverhältnis zu bestimmen. Auf Grundlage dieses Intervalls kann dann die geeignete Methode für den Mittelwertvergleich ausgewählt werden.
+
+
+
+### Konfidenzintervall für das Verhältnis von Varianzen
+
+Seien $X_1$ und $X_2$ zwei Zufallsvariablen, die folgende Annahmen erfüllen:
+
+- Ihre Verteilung ist normal: $X_1\sim N(\mu_1,\sigma_1)$ und $X_2\sim N(\mu_2,\sigma_2)$.
+- Ihre Mittelwerte $\mu_1$, $\mu_2$ und Varianzen $\sigma_1^2$, $\sigma_2^2$ sind unbekannt.
+
+In diesem Fall folgt die Teststatistik für Stichproben der Größen $n_1$ und $n_2$ einer F-Verteilung nach Fisher-Snedecor:
+
+$$
+\left.
+\begin{array}{l}
+\displaystyle \frac{(n_1-1)\hat{S}_1^2}{\sigma_1^2}\sim \chi^2(n_1-1) \\
+\displaystyle \frac{(n_2-1)\hat{S}_2^2}{\sigma_2^2}\sim \chi^2(n_2-1)
+\end{array}
+\right\}
+\Rightarrow
+\frac{\frac{\frac{(n_2-1)\hat{S}_2^2}{\sigma_2^2}}{n_2-1}}{\frac{\frac{(n_1-1)\hat{S}_1^2}{\sigma_1^2}}{n_1-1}} =
+\frac{\sigma_1^2}{\sigma_2^2}\frac{\hat{S}_2^2}{\hat{S}_1^2}\sim F(n_2-1,n_1-1).
+$$
+
+Da die F-Verteilung nicht symmetrisch ist, werden zwei kritische Werte $f^{n_2-1,n_1-1}{\alpha/2}$ und $f^{n_2-1,n_1-1}{1-\alpha/2}$ verwendet, die jeweils untere Wahrscheinlichkeiten von $\alpha/2$ und $1-\alpha/2$ begrenzen.
+
+```{r}
+#| label: varianzunterschied
+x = seq(0, 5, length = 150)
+y = df(x, df1 = 12, df2 = 10)
+
+par(cex.lab = 1.2)
+plot(x, y, 
+     type = "l", 
+     xlab = expression(F), 
+     ylab = expression(paste("Dichtefunktion ", italic(f(x)))), 
+     main = expression(paste("Verteilung ", F, group("(", paste(n[1]-1, ",", n[2]-1), ")"))), 
+     xaxt = "n", yaxt = "n")
+abline(h = 0, col = "gray")
+
+# linker roter Bereich (x[1] bis x[10])
+polygon(c(x[1], x[1:10], x[10]), c(0, y[1:10], 0), col = "coral", lty = 0)
+
+# mittlerer blauer Bereich (x[10] bis x[109]) — direkt an den linken Bereich anschließen!
+polygon(c(x[10], x[10:109], x[109]), c(0, y[10:109], 0), col = "skyblue", lty = 0)
+
+# rechter roter Bereich (x[109] bis x[150]) — direkt an den mittleren Bereich anschließen!
+polygon(c(x[109], x[109:150], x[150]), c(0, y[109:150], 0), col = "coral", lty = 0)
+
+lines(x, y, type = "l")
+
+# Texte und Achsenbeschriftungen
+text(0.2, 0.015, expression(alpha / 2))
+axis(side = 1, x[10], labels = expression(italic(f[alpha/2]^paste(n[1] - 1, ",", n[2] - 1))))
+
+text(3.8, 0.015, expression(alpha / 2))
+axis(side = 1, x[109], labels = expression(italic(f[1 - alpha/2]^paste(n[1] - 1, ",", n[2] - 1))))
+
+text(1.5, 0.1, expression(1 - alpha))
+
+
+```
+
+Somit ergibt sich:
+
+$$
+\begin{aligned}
+1-\alpha &= P\left(f^{n_2-1,n_1-1}_{\alpha/2}\leq \frac{\sigma_1^2}{\sigma_2^2}\frac{\hat{S}_2^2}{\hat{S}_1^2}  \leq
+f^{n_2-1,n_1-1}_{1-\alpha/2}\right) = \\ &= P\left(f^{n_2-1,n_1-1}_{\alpha/2}\frac{\hat{S}_1^2}{\hat{S}_2^2} \leq
+\frac{\sigma_1^2}{\sigma_2^2}  \leq f^{n_2-1,n_1-1}_{1-\alpha/2}\frac{\hat{S}_1^2}{\hat{S}_2^2}\right)
+\end{aligned}
+$$
+
+Daher lautet das Konfidenzintervall für den Vergleich von Varianzen zweier normalverteilter Populationen:
+
+::: {.callout-warning appearance="default"}
+## Konfidenzintervall für das Verhältnis von Varianzen normalverteilter Populationen
+
+Wenn $X_1\sim N(\mu_1,\sigma_1)$ und $X_2\sim N(\mu_2,\sigma_2)$, dann ist das Konfidenzintervall für das Varianzverhältnis $\sigma_1/\sigma_2$ zum Konfidenzniveau $1-\alpha$ gegeben durch:
+
+$$
+\left[f^{n_2-1,n_1-1}_{\alpha/2}\frac{\hat{S}_1^2}{\hat{S}_2^2},f^{n_2-1,n_1-1}_{1-\alpha/2}\frac{\hat{S}_1^2}{\hat{S}_2^2}\right]
+$$
+
+:::
+
+Das Verhältnis der Varianzen $\frac{\sigma_1^2}{\sigma_2^2}$ liegt mit einer Konfidenz von $1-\alpha$ im Intervall $[l_i,l_s]$.
+
+$$
+\frac{\sigma_1^2}{\sigma_2^2} \in [l_i,l_s]
+$$
+
+Interpretation des Konfidenzintervalls $[l_i,l_s]$ für $\frac{\sigma_1^2}{\sigma_2^2}$:
+
+- Wenn alle Werte des Intervalls kleiner als 1 sind $(l_s<1)$, kann geschlossen werden, dass $\sigma_1^2<\sigma_2^2$
+- Wenn alle Werte des Intervalls größer als 1 sind $(l_i>1)$, kann geschlossen werden, dass $\sigma_1^2>\sigma_2^2$
+- Wenn das Intervall sowohl Werte unter als auch über $1$ enthält (also $1$ im Intervall liegt), kann keine Aussage über die Größenverhältnisse der Varianzen gemacht werden. In diesem Fall wird normalerweise die Hypothese gleicher Varianzen $\sigma_1^2=\sigma_2^2$ angenommen.
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Fortsetzung des Beispiels mit den Punktzahlen zweier Gruppen:
+
+$$
+\begin{aligned}
+X_1 &: 4 - 6 - 8 - 7 - 7 - 6 - 5 - 2 - 5 - 3 \\
+X_2 &: 8 - 9 - 5 - 3 - 8 - 7 - 8 - 6 - 8 - 7 - 5 - 7
+\end{aligned}
+$$
+
+Zur Berechnung des Konfidenzintervalls für das Varianzverhältnis bei einem Konfidenzniveau von 95% gilt:
+
+-  $\bar{X}_1 = 5.3$ Punkte und $\bar{X}_2=6.75$ Punkte
+-  $\hat{S}_1^2= 3.5667$ Punkte$^2$ und $\hat{S}_2^2= 2.9318$ Punkte$^2$
+-  $f^{11,9}_{0.025} \approx 0.2787$ (unterer kritischer F-Wert)
+-  $f^{11,9}_{0.975} \approx 3.9121$ (oberer kritischer F-Wert)
+
+Einsetzen in die Formel ergibt das Intervall:
+
+$$
+\left[0.2787\frac{3.5667}{2.9318},\, 3.9121\frac{3.5667}{2.9318}\right] = [0.3391,\, 4.7591] \text{ Punkte}^2.
+$$
+
+:::
+
+Das bedeutet, das Varianzverhältnis $\frac{\sigma_1^2}{\sigma_2^2}$ liegt mit 95% Konfidenz zwischen $0,3391$ und $4,7591$.
+
+Da das Intervall sowohl Werte unter als auch über $1$ enthält, kann keine signifikante Unterschiedlichkeit der Varianzen angenommen werden. Für den Mittelwertvergleich wäre daher das Verfahren mit der Annahme gleicher Varianzen zu verwenden - genau die Methode, die wir bereits zuvor angewendet haben.
+
+
+### f
+
+
+
+
+
+
+
 
