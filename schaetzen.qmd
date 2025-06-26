@@ -157,7 +157,7 @@ Somit hängt seine Wahrscheinlichkeitsverteilung ebenfalls von der Verteilung de
 
 Wird der Stichprobenmittelwert $\bar X$ aus Stichproben der Größe 2 (gemäß vorherigem Beispiel) berechnet, ergibt sich folgende Wahrscheinlichkeitsverteilung:
 
-
+$$
 \begin{array}{ccc}
 \text{Verteilung in den Stichproben} & & \text{Verteilung von}\ \overline x \\
 \begin{array}{|c|c|}\hline
@@ -172,10 +172,9 @@ Wird der Stichprobenmittelwert $\bar X$ aus Stichproben der Größe 2 (gemäß v
 (2,1) & 0,1250 \\\hline
 (2,2) & 0,0625 \\\hline
 \end{array}
-
-& 
+  & 
 \Large\xrightarrow{\overline x = \frac{X_1+X_2}{2}}
-&
+ &
 \begin{array}{|c|c|}\hline
 \overline{X} & P(x) \\\hline
 0   & 0,0625 \\\hline
@@ -184,9 +183,8 @@ Wird der Stichprobenmittelwert $\bar X$ aus Stichproben der Größe 2 (gemäß v
 1,5 & 0,2500 \\\hline
 2   & 0,0625 \\\hline
 \end{array}
-
 \end{array}
-
+$$
 
 
 :::{layout-ncol=2}
