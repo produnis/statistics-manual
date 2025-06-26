@@ -51,6 +51,8 @@ book:
     - diskret.qmd
     - kontinuierlich.qmd
     - schaetzen.qmd
+    - hypothesen.qmd
+    - varianz.qmd
     - literatur.qmd
     - credits.qmd
   page-footer:
