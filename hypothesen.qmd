@@ -2,3 +2,1237 @@
 title: Parametrische Hypothesentests
 ---
 
+## Statistische Hypothese und Arten von Tests
+
+In vielen statistischen Studien besteht das Ziel eher darin, die Richtigkeit einer über die untersuchte Population aufgestellten Hypothese zu überprüfen, als den Wert eines unbekannten Parameters in der Population zu schätzen.
+
+Der Forscher hat aufgrund seiner Erfahrung oder früherer Studien oft Vermutungen über die untersuchte Population, die er in Form von Hypothesen formuliert.
+
+::: {.callout-warning appearance="default"}
+## Definition "Statistische Hypothese"
+
+Eine *statistische* Hypothese ist jede Aussage oder Vermutung, die die Verteilung einer oder mehrerer Variablen in der Population ganz oder teilweise bestimmt.
+:::
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Um die akademische Leistung einer Studierendengruppe in einem bestimmten Fach zu überprüfen, könnten wir die Hypothese aufstellen, ob die Bestehensquote über 50% liegt.
+:::
+
+
+### Hypothesentest
+
+Im Allgemeinen wird man nie mit absoluter Sicherheit wissen, ob eine statistische Hypothese wahr oder falsch ist, da hierfür alle Individuen der Population untersucht werden müssten.
+
+Um die Richtigkeit oder Falschheit dieser Hypothesen zu überprüfen, müssen sie mit den empirischen Ergebnissen der Stichproben verglichen werden. Wenn die beobachteten Ergebnisse der Stichproben – innerhalb der durch den Zufall bedingten Fehlertoleranz – mit dem übereinstimmen, was bei Gültigkeit der Hypothese zu erwarten wäre, wird die Hypothese als wahr akzeptiert. Andernfalls wird sie als falsch verworfen, und es werden neue Hypothesen gesucht, die die beobachteten Daten erklären können.
+
+Da Stichproben zufällig gezogen werden, wird die *Entscheidung*, eine statistische Hypothese anzunehmen oder abzulehnen, auf probabilistischer Basis getroffen.
+
+Die Methodik, die sich mit der Überprüfung der Richtigkeit statistischer Hypothesen befasst, wird als *Hypothesentest* bezeichnet.
+
+
+
+### Arten von Hypothesentests
+
+- **Anpassungstests** (Goodness-of-Fit-Tests): Ziel ist die Überprüfung einer Hypothese über die Verteilungsform der Population. Beispiel: Testen, ob die Noten einer Schülergruppe einer Normalverteilung folgen.
+- **Verträglichkeitstests** (Konformitätstests): Ziel ist die Überprüfung einer Hypothese über einen Parameter der Population.  Beispiel: Testen, ob der Notendurchschnitt einer Schülergruppe gleich 2 ist.
+- **Homogenitätstests**: Ziel ist der Vergleich zweier Populationen hinsichtlich bestimmter Parameter. Beispiel: Testen, ob die Leistung zweier Schülergruppen gleich ist, indem ihre Durchschnittsnoten verglichen werden.
+- **Unabhängigkeitstests**: Ziel ist die Überprüfung, ob ein Zusammenhang zwischen zwei Variablen der Population besteht. Beispiel: Testen, ob ein Zusammenhang zwischen den Noten zweier unterschiedlicher Fächer besteht.
+
+Wenn Hypothesen über Parameter der Population aufgestellt werden, spricht man auch von **parametrischen** Tests.
+
+
+
+### Nullhypothese und Alternativhypothese
+
+In den meisten Fällen geht es bei einem Hypothesentest darum, eine Entscheidung zwischen zwei gegensätzlichen Hypothesen zu treffen:
+
+- **Nullhypothese**: Dies ist die konservative Hypothese, die beibehalten wird, solange die Stichprobendaten ihre Falschheit nicht eindeutig belegen. Sie wird als $H_0$ bezeichnet.
+- **Alternativhypothese**: Sie stellt die Verneinung der Nullhypothese dar und entspricht in der Regel der Aussage, die nachgewiesen werden soll. Sie wird als $H_1$ bezeichnet.
+
+Die Wahl beider Hypothesen folgt dem Prinzip der wissenschaftlichen Einfachheit (Ockhams Rasiermesser):
+
+> "Ein einfaches Modell sollte nur dann durch ein komplexeres ersetzt werden, wenn es starke Beweise für das komplexere Modell gibt."
+
+Ein Beispiel aus der Rechtsprechung: Wenn ein Richter entscheiden muss, ob ein Angeklagter schuldig oder unschuldig ist, sollten die Hypothesen wie folgt lauten: 
+
+$$
+\begin{aligned}
+H_0:\ & \text{ Unschuldig} \\
+H_1:\ & \text{ Schuldig}
+\end{aligned}
+$$
+
+Denn Unschuld wird angenommen, während Schuld bewiesen werden muss.
+
+Entsprechend würde der Richter die Alternativhypothese nur dann akzeptieren, wenn es signifikante Beweise für die Schuld des Angeklagten gibt.
+
+Der Forscher übernimmt in diesem Vergleich die Rolle des Anklägers, da sein Ziel darin besteht, die Nullhypothese zu widerlegen – also die Schuld des Angeklagten nachzuweisen.
+
+::: {.callout-caution appearance="default"}
+## Achtung
+Diese Methodik begünstigt immer die Nullhypothese!
+:::
+
+
+###  Parametrische Hypothesentests
+
+Bei vielen Tests, insbesondere bei Konformitäts- und Homogenitätstests, beziehen sich die Hypothesen auf unbekannte Parameter der Grundgesamtheit wie den Mittelwert, die Varianz oder einen Anteilswert.
+
+In diesem Fall weist die Nullhypothese dem Parameter stets einen konkreten Wert zu, während die Alternativhypothese meist eine offene Aussage darstellt, die zwar der Nullhypothese widerspricht, aber keinen festen Wert für den Parameter vorgibt.
+
+Daraus ergeben sich drei Arten von Tests:
+
+|           Zweiseitig          |      Einsitig (links)      | Einseitig (rechts)         |
+| :---------------------------: | :------------------------: | :------------------------- |
+|  $H_0:\ \theta = \theta_0$   | $H_0:\ \theta = \theta_0$ | $H_0:\ \theta = \theta_0$ |
+| $H_1:\ \theta \neq \theta_0$ | $H_1:\ \theta < \theta_0$ | $H_1:\ \theta > \theta_0$ |
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Angenommen, es besteht der Verdacht, dass in einer Population weniger Männer als Frauen vorhanden sind.
+
+Welche Art von Test sollte durchgeführt werden, um diesen Verdacht zu bestätigen oder zu widerlegen?
+
+- Der Verdacht bezieht sich auf den Anteilswert $p$ der Männer in der Population, es handelt sich also um einen parametrischen Test.
+- Das Ziel ist die Überprüfung des Werts von $p$, daher handelt es sich um einen Konformitätstest. In der Nullhypothese wird $p$ auf $0.5$ festgesetzt, da gemäß den Gesetzen der Genetik in der Population gleich viele Männer wie Frauen zu erwarten wären.
+- Schließlich besteht der Verdacht, dass der Männeranteil geringer ist als der Frauenanteil, daher lautet die Alternativhypothese $p<0.5$.
+
+Somit sollte folgender Test durchgeführt werden:
+
+$$
+\begin{aligned}
+H_0:\ & p=0,5 \\
+H_1:\ & p<0,5
+\end{aligned}
+$$
+:::
+
+
+## Methodik zur Durchführung eines Hypothesentests
+
+### Teststatistik
+
+Die Annahme oder Ablehnung der Nullhypothese hängt letztlich von den Beobachtungen in der Stichprobe ab.
+
+Die Entscheidung wird basierend auf dem Wert einer Stichprobenstatistik getroffen, die mit dem zu testenden Parameter oder Merkmal in Zusammenhang steht. Die Wahrscheinlichkeitsverteilung dieser Statistik muss unter der Annahme der Nullhypothese und bei festgelegtem Stichprobenumfang bekannt sein. Diese Statistik wird als **Teststatistik** bezeichnet.
+
+Für jede Stichprobe liefert die Teststatistik eine Schätzung, auf deren Grundlage die Entscheidung getroffen wird: Wenn die Schätzung zu stark vom unter $H_0$ erwarteten Wert abweicht, wird die Nullhypothese verworfen, andernfalls wird sie beibehalten.
+
+Die zugrundeliegende Logik folgt dem Prinzip, die Nullhypothese beizubehalten, es sei denn, die Stichprobe liefert eindeutige Beweise gegen sie. In Analogie zum Gerichtsverfahren würde dies bedeuten, die Unschuldsvermutung aufrechtzuerhalten, solange keine klaren Schuldbeweise vorliegen.
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Kehren wir zum Beispiel des Tests über den Männeranteil in einer Population zurück:
+
+$$
+\begin{aligned}
+H_0:\ & p=0,5 \\
+H_1:\ & p<0,5
+\end{aligned}
+$$
+
+Wenn für den Test eine Zufallsstichprobe von 10 Personen gezogen wird, könnte die Anzahl der Männer in der Stichprobe $X$ als Teststatistik gewählt werden.
+
+Unter der Annahme, dass die Nullhypothese zutrifft, folgt die Teststatistik einer Binomialverteilung $X\sim B(10,\,0.5)$, sodass die erwartete Anzahl von Männern in der Stichprobe 5 beträgt.
+
+Daher ist es logisch, die Nullhypothese zu akzeptieren, wenn die Stichprobe eine Anzahl von Männern in der Nähe von 5 ergibt, und sie zu verwerfen, wenn die Anzahl deutlich unter 5 liegt. 
+
+*Doch wo genau sollte die Grenze zwischen den X-Werten gezogen werden, die zur Annahme bzw. zur Ablehnung führen?*
+:::
+
+
+
+###  Annahme- und Ablehnungsbereich
+
+Nach Auswahl der Teststatistik gilt es festzulegen, für welche Werte dieser Statistik die Nullhypothese angenommen bzw. verworfen wird. Dadurch wird der Wertebereich der Statistik in zwei Regionen unterteilt:
+
+- **Annahmebereich**: Die Menge der Werte der Teststatistik, für die die Nullhypothese angenommen wird.
+- **Ablehnungsbereich**: Die Menge der Werte der Teststatistik, für die die Nullhypothese verworfen und folglich die Alternativhypothese angenommen wird.
+
+Abhängig von der Art des Tests (einseitig/zweiseitig) befindet sich der Ablehnungsbereich entweder links, rechts oder auf beiden Seiten des unter der Nullhypothese erwarteten Werts der Teststatistik.
+
+-  Zweiseitiger Hypothesentest 
+$$ 
+\begin{aligned}
+H_0:\ \theta=\theta_{0}\\
+H_1:\ \theta\neq\theta_0
+\end{aligned}
+$$
+
+```{r}
+#| label: bereiche1
+#| engine: tikz
+
+\begin{tikzpicture}
+
+  \draw[->, red, thick] (0,0) -- (2,0);
+  \draw[<-, red, thick] (8,0) -- (10,0);
+
+  \draw[<->, thick, green] (2,0) -- (8,0);
+
+  \draw[thick] (5,0.2) -- (5,-0.2);
+  \node[below] at (5,-0.2) {$\theta_0$};
+  \node[above] at (1,0.3) {Ablehnungsbereich};
+  \node[above] at (5,0.3) {Annahmebereich};
+  \node[above] at (9,0.3) {Ablehnungsbereich};
+\end{tikzpicture}
+```
+
+
+
+-  Einseitiger Test (linksseitig) 
+$$ 
+\begin{aligned}
+H_0:\ \theta = \theta_0\\
+H_1:\ \theta < \theta_0
+\end{aligned}
+$$
+
+```{r}
+#| label: bereiche2
+#| engine: tikz
+
+\begin{tikzpicture}
+
+  \draw[->, red, thick] (0,0) -- (2,0);
+
+  \draw[<-, thick, green] (2,0) -- (10,0);
+
+  \draw[thick] (5,0.2) -- (5,-0.2);
+  \node[below] at (5,-0.2) {$\theta_0$};
+
+  \node[above] at (1,0.3) {Ablehnungsbereich};
+  \node[above] at (5,0.3) {Annahmebereich};
+\end{tikzpicture}
+```
+
+-  Einseitiger Test (rechtsseitig)
+$$ 
+\begin{aligned}
+H_0:\ \theta=\theta_{0}\\
+H_1:\ \theta > \theta_{0}
+\end{aligned}
+$$
+
+```{r}
+#| label: bereiche3
+#| engine: tikz
+
+\begin{tikzpicture}
+
+  \draw[<-, red, thick] (8,0) -- (10,0);
+
+  \draw[->, thick, green] (0,0) -- (8,0);
+
+  \draw[thick] (5,0.2) -- (5,-0.2);
+  \node[below] at (5,-0.2) {$\theta_0$};
+
+  \node[above] at (5,0.3) {Annahmebereich};
+  \node[above] at (9,0.3) {Ablehnungsbereich};
+\end{tikzpicture}
+```
+
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Im fortgesetzten Beispiel des Hypothesentests zum Bevölkerungsanteil von Männern 
+
+$$
+\begin{aligned}
+H_0:\ & p=0,5 \\
+H_1:\ & p<0,5
+\end{aligned}
+$$
+
+folgt die Teststatistik bei gültiger Nullhypothese einer $B(10,0.5)$-Verteilung. Ihr Wertebereich reicht somit von 0 bis 10 bei einem Erwartungswert von 5. Da ein linksseitiger Test vorliegt ($H_1:\ p < 0,5$), konzentriert sich der Ablehnungsbereich auf die Werte deutlich unter 5. Die entscheidende Frage bleibt jedoch: 
+
+*An welchem kritischen Wert soll die Trennlinie zwischen Annahme und Verwerfung der Nullhypothese festgelegt werden?*
+
+
+```{r}
+#| label: bereiche4
+#| engine: tikz
+\begin{tikzpicture}
+
+  \draw (0,0.1) -- (0,-0.1); \node[below] at (0,-0.1) {0};
+  \draw (1,0.1) -- (1,-0.1); \node[below] at (1,-0.1) {1};
+  \draw (2,0.1) -- (2,-0.1); \node[below] at (2,-0.1) {\textbf{?}};
+  \draw (3,0.1) -- (3,-0.1); \node[below] at (3,-0.1) {3};
+  \draw (4,0.1) -- (4,-0.1); \node[below] at (4,-0.1) {4};
+  \draw (5,0.1) -- (5,-0.1); \node[below] at (5,-0.1) {5};
+  \draw (6,0.1) -- (6,-0.1); \node[below] at (6,-0.1) {6};
+  \draw (7,0.1) -- (7,-0.1); \node[below] at (7,-0.1) {7};
+  \draw (8,0.1) -- (8,-0.1); \node[below] at (8,-0.1) {8};
+  \draw (9,0.1) -- (9,-0.1); \node[below] at (9,-0.1) {9};
+  \draw (10,0.1) -- (10,-0.1); \node[below] at (10,-0.1) {10};
+
+  \draw[->, red, thick] (0,0) -- (1.95,0);
+  \draw[<-, thick, green] (2.05,0) -- (10,0);
+
+  \node[above] at (6,0.3) {Annahmebereich};
+  \node[above] at (1,0.3) {Ablehnungsbereich};
+
+\end{tikzpicture}
+```
+
+:::
+
+
+
+
+
+### Fehler bei einem Hypothesentest
+
+Wir haben gesehen, dass ein Hypothesentest auf einer Entscheidungsregel basiert, die je nach Wert der Teststatistik die Annahme oder Ablehnung der Nullhypothese ermöglicht.
+
+Letztlich führt der Test zu einer Entscheidung gemäß dieser Regel. Das Problem ist, dass man niemals mit absoluter Sicherheit weiß, ob eine Hypothese wahr oder falsch ist. Daher besteht bei jeder Entscheidung - ob Annahme oder Ablehnung - die Möglichkeit eines Fehlers.
+
+Bei einem Hypothesentest können zwei Arten von Fehlern auftreten:
+
+- **Fehler 1. Art** ($\alpha$-Fehler): Tritt auf, wenn die Nullhypothese abgelehnt wird, obwohl sie wahr ist.
+- **Fehler 2. Art** ($\beta$-Fehler): Tritt auf, wenn die Nullhypothese angenommen wird, obwohl sie falsch ist.
+
+
+$$
+\begin{array}{|c|c|c|}
+\hline
+\mbox{Entscheidung} & H_0 \mbox{ gilt} & H_1 \mbox{ gilt} \\
+\hline
+H_0 \mbox{ annehmen}  & \color{green}{\mbox{korrekte Entscheidung}} & \color{red}{\mbox{Fehler 2. Art } (\beta)} \\
+\hline
+H_0 \mbox{ ablehnen}& \color{red}{\mbox{Fehler 1. Art } (\alpha)} & \color{green}{\mbox{korrekte Entscheidung}} \\
+\hline
+\end{array}
+$$
+
+### Fehlerrisiko von Hypothesentests
+
+Die Risiken der beiden Fehlerarten werden durch Wahrscheinlichkeiten quantifiziert:
+
+::: {.callout-warning appearance="default"}
+## Definition "Alpha- und Betarisiko"
+Bei einem Hypothesentest wird das $\alpha$-Risiko definiert als die maximale Wahrscheinlichkeit, einen Fehler 1. Art zu begehen, d.h.
+
+$$
+P(\mbox{Ablehnung }H_0|H_0) \leq \alpha,
+$$
+
+und das $\beta$-Risiko als die maximale Wahrscheinlichkeit, einen Fehler 2. Art zu begehen, also
+
+$$
+P(\mbox{Annahme }H_0|H_1) \leq \beta.
+$$
+
+:::
+
+
+::: {.callout-caution appearance="default"}
+Da diese Methodik grundsätzlich die Nullhypothese begünstigt, gilt der Fehler 1. Art als gravierender als der Fehler 2. Art. Daher wird das $\alpha$-Risiko üblicherweise auf niedrige Werte von $0,1$, $0,05$ oder $0,01$ festgelegt, wobei $0,05$ der gebräuchlichste Wert ist.
+:::
+
+Bei der Interpretation des $\alpha$-Risikos ist Vorsicht geboten, da es sich um eine bedingte Wahrscheinlichkeit unter der Annahme handelt, dass die Nullhypothese wahr ist. Wenn man die Nullhypothese mit einem $\alpha$-Risiko von $0,05$ verwirft, ist die Aussage "in 5 von 100 Fällen liegen wir falsch" nur dann korrekt, wenn die Nullhypothese tatsächlich immer wahr wäre.
+
+Ebenso wenig sinnvoll ist es, nach einer konkreten Testentscheidung von der "Wahrscheinlichkeit eines Fehlers" zu sprechen - denn für die getroffene Entscheidung gilt: 
+
+- Entweder man hat richtig entschieden (Fehlerwahrscheinlichkeit 0) 
+- oder falsch (Fehlerwahrscheinlichkeit 1).
+
+
+### Festlegung von Annahme- und Ablehnungsbereich basierend auf dem $\alpha$-Risiko
+
+Nach Festlegung des tolerierbaren $\alpha$-Risikos können die Regionen für Annahme und Ablehnung der Nullhypothese so bestimmt werden, dass die kumulierte Wahrscheinlichkeit des Ablehnungsbereichs unter der Annahme der Nullhypothese genau $\alpha$ beträgt.
+
+
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: bereichDiagramm1
+
+
+x = seq(-3.48, 3.49, by=0.05)
+y = dnorm(x,mean=0,sd=1)
+par(cex.lab=1.2)
+plot(x, y, 
+     xlab=" " , 
+     ylab=" " , 
+     main="Regionen eines zweiseitigen Hypothesentests", 
+     type="l", 
+     xaxt="n", 
+     yaxt="n")
+abline(h=0, col="gray")
+polygon(c(x[33], 
+          x[33:108], 
+          x[108]), 
+        c(0, y[33:108], 0), 
+        col="lightgreen", lty=0)
+polygon(c(x[1],
+          x[1:33],
+          x[33]), 
+        c(0,y[1:33],0), 
+        col="coral", 
+        lty=0)
+lines (x, y, type="l")
+text(-2.15, 0.02, expression(alpha/2))
+axis(side = 1, at = x[33], labels = expression(-hat(theta)[alpha/2]))
+axis(side = 1, at = x[70], labels = expression(theta))
+
+polygon(c(x[108],
+          x[108:139],
+          x[139]), 
+        c(0,
+          y[108:139],
+          0), 
+        col="coral", 
+        lty=0)
+lines (x, y, type="l")
+text(2.15, 0.02, expression(alpha/2))
+axis(side=1, x[108], labels= expression(hat(theta)[alpha/2]))
+text(x[20], -0.1, "Ablehnung", xpd=TRUE)
+text(x[70], -0.1, "Annahme", xpd=TRUE)
+text(x[121], -0.1, "Ablehnung", xpd=TRUE)
+```
+
+
+
+
+
+```{r}
+#| label: bereichDiagramm2
+
+x = seq(-3.48, 3.49, by=0.05)
+y = dnorm(x, mean=0, sd=1)
+par(cex.lab=1.2)
+
+plot(x, y, 
+     xlab=" ", 
+     ylab=" ", 
+     main="Regionen eines rechtsseitigen Hypothesentests", 
+     type="l", 
+     xaxt="n", 
+     yaxt="n")
+
+abline(h=0, col="gray")
+
+# Annahmebereich (von -3.48 bis ca. 1.64 -> x[97])
+polygon(c(x[1], x[1:97], x[97]), 
+        c(0, y[1:97], 0), 
+        col="lightgreen", lty=0)
+
+# Ablehnungsbereich (ca. 1.64 bis 3.49)
+polygon(c(x[97], x[97:139], x[139]), 
+        c(0, y[97:139], 0), 
+        col="coral", lty=0)
+
+# Dichtekurve erneut drüberzeichnen
+lines(x, y, type="l")
+
+# Kritischer Schwellenwert markieren (x[97] ≈ 1.64)
+text(x[108], 0.03, expression(alpha))
+axis(side=1, at = x[70], labels = expression(theta))
+axis(side=1, at = x[97], labels = expression(hat(theta)[alpha]))
+
+# Beschriftung der Regionen unterhalb der Achsenticks
+text(x[70], -0.1, "Annahme", xpd=TRUE)
+text(x[117], -0.1, "Ablehnung", xpd=TRUE)
+
+```
+:::
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel: Fortsetzung des Tests zum Männeranteil in einer Population
+
+Wird die Nullhypothese verworfen, wenn höchstens 2 Männer in der Stichprobe sind, ergibt sich unter $X\sim B(10,0.5)$ eine Fehlerwahrscheinlichkeit 1. Art von:
+
+$$
+P(X\leq 2)= f(0)+f(1)+f(2)= 0.0010 + 0.0098 + 0.0439 = 0.0547.
+$$
+
+Wenn die maximal tolerierbare Wahrscheinlichkeit für einen Fehler 1. Art auf $\alpha=0,05$ festgelegt ist, für welche Werte der Teststatistik darf dann die Nullhypothese verworfen werden?
+
+$$
+P(X\leq 1)= f(0)+f(1) = 0.0010 + 0.0098 = 0.0107.
+$$
+
+Das bedeutet, die Nullhypothese könnte nur verworfen werden, wenn die Stichprobe 0 oder 1 Mann enthält.
+
+
+```{r}
+#| label: bereiche5
+#| engine: tikz
+\begin{tikzpicture}
+  \draw (0,0.1) -- (0,-0.1); \node[below] at (0,-0.1) {0};
+  \draw (1,0.1) -- (1,-0.1); \node[below] at (1,-0.1) {1};
+  \draw (2,0.1) -- (2,-0.1); \node[below] at (2,-0.1) {2};
+  \draw (3,0.1) -- (3,-0.1); \node[below] at (3,-0.1) {3};
+  \draw (4,0.1) -- (4,-0.1); \node[below] at (4,-0.1) {4};
+  \draw (5,0.1) -- (5,-0.1); \node[below] at (5,-0.1) {5};
+  \draw (6,0.1) -- (6,-0.1); \node[below] at (6,-0.1) {6};
+  \draw (7,0.1) -- (7,-0.1); \node[below] at (7,-0.1) {7};
+  \draw (8,0.1) -- (8,-0.1); \node[below] at (8,-0.1) {8};
+  \draw (9,0.1) -- (9,-0.1); \node[below] at (9,-0.1) {9};
+  \draw (10,0.1) -- (10,-0.1); \node[below] at (10,-0.1) {10};
+
+  \draw[->, red, thick] (0,0) -- (1.49,0);
+  \draw[<-, thick, green] (1.51,0) -- (10,0);
+
+  \node[above] at (6,0.3) {Annahmebereich};
+  \node[above] at (1,0.3) {Ablehnungsbereich};
+
+\end{tikzpicture}
+```
+
+:::
+
+
+
+
+
+### Betarisiko und Effektgröße
+Obwohl der Fehler 2. Art weniger gravierend erscheinen mag, ist es dennoch wünschenswert, das $\beta$-Risiko gering zu halten. Andernfalls wird es schwierig sein, die Nullhypothese zu verwerfen (was meist das Ziel ist), selbst wenn es deutliche Anzeichen für ihre Falschheit gibt.
+
+Das Problem bei parametrischen Tests besteht darin, dass die Alternativhypothese eine offene Hypothese ist, die keinen festen Wert für den zu testenden Parameter vorgibt. Um das $\beta$-Risiko berechnen zu können, muss daher ein spezifischer Parameterwert angenommen werden.
+
+Üblicherweise wird der Parameterwert auf die kleinste praktisch oder klinisch relevante Differenz festgelegt. Diese minimal als bedeutsam erachtete Differenz wird als **Effektgröße** bezeichnet und mit $\delta$ (Delta) symbolisiert.
+
+
+### Teststärke (Power) eines Hypothesentests
+
+Da das Forschungsziel meist in der Ablehnung der Nullhypothese besteht, ist oft besonders interessant, wie gut ein Test in der Lage ist, die Falschheit der Nullhypothese zu erkennen, wenn tatsächlich eine Differenz größer als $\delta$ zwischen dem wahren Parameterwert und dem unter der Nullhypothese angenommenen Wert besteht.
+
+::: {.callout-warning appearance="default"}
+## Definition "Teststärke (Power)"
+
+Die Teststärke (Power) eines Hypothesentests ist definiert als
+
+$$
+\mbox{Teststärke} = P(\mbox{Ablehnung }H_0|H_1) = 1 - P(\mbox{Annahme }H_0|H_1) = 1-\beta.
+$$
+:::
+
+Somit führt eine Verringerung des $\beta$-Risikos zu einer Erhöhung der Teststärke.
+
+Ein Test mit geringer Power ist meist wenig aussagekräftig, da er die Nullhypothese selbst dann nicht verwerfen kann, wenn es deutliche gegen sie sprechende Evidenzen gibt.
+
+
+### Berechnung des Betarisikos und der Teststärke $1-\beta$
+
+
+Angenommen, beim Test des Männeranteils wird eine Abweichung von weniger als 10% vom Wert der Nullhypothese als nicht signifikant betrachtet, d.h. $\delta=0.1$.
+
+Dies ermöglicht die Festlegung der Alternativhypothese:
+
+$$
+H_1:\ p=0,5-0,1=0,4.
+$$
+
+Unter der Annahme, dass diese Hypothese zutrifft, folgt die Teststatistik einer Binomialverteilung $X\sim B(10,,0.4)$.
+
+In diesem Fall beträgt das β-Risiko für die zuvor definierten Annahme- und Ablehnungsbereiche:
+
+$$
+\beta = P(\mbox{Annahme }H_0|H_1) = P(X\geq 2) = 1 - P(X<2) = 1-0,0464 = 0,9536.
+$$
+
+Wie zu erkennen ist, handelt es sich um ein sehr hohes $\beta$-Risiko, sodass die Teststärke nur:
+
+$$
+1-\beta = 1-0,9536 = 0,0464
+$$
+
+beträgt. Dies zeigt, dass dieser Test ungeeignet wäre, um Unterschiede von 10% im Parameterwert zu erkennen.
+
+### Zusammenhang zwischen $\beta$-Risiko und Effektgröße $\delta$
+
+Das $\beta$-Risiko hängt direkt von der minimalen Differenz $\delta$ ab, die im Vergleich zum unter der Nullhypothese angenommenen Parameterwert erkannt werden soll.
+
+
+```{r}
+#| label: betadelta1
+# Parameter
+mu_foo <- 0           
+mu_bar <- 2.7           
+sigma <- 1            
+x <- seq(-3, 6, by=0.01)
+
+# Dichtefunktionen
+y_foo <- dnorm(x, mean=mu_foo, sd=sigma)
+y_bar <- dnorm(x, mean=mu_bar, sd=sigma)
+
+# Kritischer Schwellenwert
+crit_val <- qnorm(0.95, mean=mu_foo, sd=sigma)  
+
+plot(x, y_foo, 
+     type="l", 
+     lwd=2, 
+     col="steelblue", 
+     ylim=c(-0.02, max(y_foo, y_bar)+0.05), 
+     xlab=expression(theta), 
+     ylab=" ",
+     yaxt="n",
+     xaxt="n",
+     main=expression("Zusammenhang zwischen " * beta * "-Risiko und Effektgröße " * delta))
+lines(x, y_bar, lwd=2, col="skyblue")
+
+# Fläche Alpha (rechte Seite von foo)
+x_alpha <- x[x >= crit_val]
+y_alpha <- dnorm(x_alpha, mean=mu_foo, sd=sigma)
+polygon(c(crit_val, 
+          x_alpha, 
+          max(x_alpha)), 
+        c(0, y_alpha, 0), 
+        col=rgb(1,0,0, alpha=0.3), border=NA)
+text(crit_val + 0.3, 0.02, expression(alpha), col="red", cex=1.2)
+
+# Fläche Beta (linke Seite von bar)
+x_beta <- x[x < crit_val]
+y_beta <- dnorm(x_beta, mean=mu_bar, sd=sigma)
+polygon(c(min(x_beta), 
+          x_beta, 
+          crit_val), 
+        c(0, y_beta, 0), 
+        col=rgb(0,1,0, alpha=0.3), border=NA)
+text(crit_val - 0.4, 0.02, expression(beta), col="darkgreen", cex=1.2)
+
+axis(side = 1, 
+     at = c(mu_foo, mu_bar), 
+     labels = expression(theta[0], theta[0] + delta))
+# Positionen der Scheitelpunkte (dichtehöchster Punkt)
+y_max <- dnorm(mu_foo, mean=mu_foo, sd=sigma)  # beide sind gleich
+
+# Text über der foo-Kurve (links)
+text(mu_foo, y_max + 0.035, expression(H[0]:~theta == theta[0]), cex=1)
+
+# Text über der bar-Kurve (rechts)
+text(mu_bar, y_max + 0.035, expression(H[1]:~theta == theta[0] + delta), cex=1)
+
+text(mu_foo, -0.02, "Annahmebereich")
+text(mu_bar+0.4, -0.02, "Ablehnungsbereich")
+```
+
+
+
+```{r}
+#| label: betadelta2
+mu_foo <- 0           
+mu_bar <- 3.3           
+sigma <- 1            
+x <- seq(-3, 6, by=0.01)
+
+# Dichtefunktionen
+y_foo <- dnorm(x, mean=mu_foo, sd=sigma)
+y_bar <- dnorm(x, mean=mu_bar, sd=sigma)
+
+# Kritischer Schwellenwert
+intersection <- function(x) dnorm(x, mean=mu_foo, sd=sigma) - dnorm(x, mean=mu_bar, sd=sigma)
+crit_val <- uniroot(intersection, c(0, 4))$root  # exakt dort, wo sich die Kurven schneiden
+
+
+plot(x, y_foo, 
+     type="l", 
+     lwd=2, 
+     col="steelblue", 
+     ylim=c(-0.02, max(y_foo, y_bar)+0.05), 
+     xlab=expression(theta),
+     ylab=" ",
+     yaxt="n",
+     xaxt="n",
+     main=expression("Zusammenhang zwischen " * beta * "-Risiko und Effektgröße " * delta))
+lines(x, y_bar, lwd=2, col="skyblue")
+
+# Fläche Alpha (rechte Seite von foo)
+x_alpha <- x[x >= crit_val]
+y_alpha <- dnorm(x_alpha, mean=mu_foo, sd=sigma)
+polygon(c(crit_val, 
+          x_alpha, 
+          max(x_alpha)), 
+        c(0, y_alpha, 0), 
+        col=rgb(1,0,0, alpha=0.3), border=NA)
+text(crit_val + 0.3, 0.02, expression(alpha), col="red", cex=1.2)
+
+# Fläche Beta (linke Seite von bar)
+x_beta <- x[x < crit_val]
+y_beta <- dnorm(x_beta, mean=mu_bar, sd=sigma)
+polygon(c(min(x_beta), 
+          x_beta, 
+          crit_val), 
+        c(0, y_beta, 0), 
+        col=rgb(0,1,0, alpha=0.3), border=NA)
+text(crit_val - 0.4, 0.02, expression(beta), col="darkgreen", cex=1.2)
+
+axis(side = 1, 
+     at = c(mu_foo,  mu_bar), 
+     labels = expression(theta[0], theta[0] + delta))
+
+# Positionen der Scheitelpunkte (dichtehöchster Punkt)
+y_max <- dnorm(mu_foo, mean=mu_foo, sd=sigma)  # beide sind gleich
+
+# Text über der foo-Kurve (links)
+text(mu_foo, y_max + 0.035, expression(H[0]:~theta == theta[0]), cex=1)
+
+# Text über der bar-Kurve (rechts)
+text(mu_bar, y_max + 0.035, expression(H[1]:~theta == theta[0] + delta), cex=1)
+
+text(mu_foo+0.1, -0.02, "Annahmebereich")
+text(mu_bar+0.1, -0.02, "Ablehnungsbereich")
+```
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Wenn beim Test des Männeranteils eine Abweichung von mindestens 20% vom Wert der Nullhypothese erkannt werden soll, also $\delta=0.2$, dann würde die Alternativhypothese auf
+
+
+$$
+H_1:\ p=0.5-0.2=0.3
+$$
+
+festgelegt werden.
+
+Unter dieser Annahme folgt die Teststatistik einer Binomialverteilung $X\sim B(10,,0.3)$.
+
+In diesem Fall beträgt das $\beta$-Risiko für die zuvor definierten Annahme- und Ablehnungsbereiche:
+
+$$
+\beta = P(\mbox{Annahme }H_0|H_1) = P(X\geq 2) = 1 - P(X<2) = 1-0,1493 = 0,8507
+$$
+
+sodass das $\beta$-Risiko sinkt und die Teststärke steigt:
+
+$$
+1-\beta = 1-0,8507 = 0,1493
+$$
+wobei der Test damit immer noch eine geringe Power aufweist.
+
+:::
+
+
+
+### Beziehung zwischen $\alpha$- und $\beta$-Fehlern 
+
+Die Fehlerwahrscheinlichkeiten $\alpha$ und $\beta$ stehen in einem Spannungsverhältnis: Wenn die eine steigt, sinkt in der Regel die andere – und umgekehrt.
+
+```{r}
+#| label: betadelta3
+# Parameter
+mu_foo <- 0           
+mu_bar <- 2.7           
+sigma <- 1            
+x <- seq(-3, 6, by=0.01)
+
+# Dichtefunktionen
+y_foo <- dnorm(x, mean=mu_foo, sd=sigma)
+y_bar <- dnorm(x, mean=mu_bar, sd=sigma)
+
+# Kritischer Schwellenwert
+crit_val <- qnorm(0.95, mean=mu_foo, sd=sigma)  
+
+plot(x, y_foo, 
+     type="l", 
+     lwd=2, 
+     col="steelblue", 
+     ylim=c(-0.02, max(y_foo, y_bar)+0.05), 
+     xlab=expression(theta),
+     ylab=" ",
+     yaxt="n",
+     xaxt="n",
+     main=expression("Zusammenhang zwischen " * alpha * " und " * beta * "-Fehlern "))
+lines(x, y_bar, lwd=2, col="skyblue")
+
+# Fläche Alpha (rechte Seite von foo)
+x_alpha <- x[x >= crit_val]
+y_alpha <- dnorm(x_alpha, mean=mu_foo, sd=sigma)
+polygon(c(crit_val, 
+          x_alpha, 
+          max(x_alpha)), 
+        c(0, y_alpha, 0), 
+        col=rgb(1,0,0, alpha=0.3), border=NA)
+text(crit_val + 0.3, 0.02, expression(alpha), col="red", cex=1.2)
+
+# Fläche Beta (linke Seite von bar)
+x_beta <- x[x < crit_val]
+y_beta <- dnorm(x_beta, mean=mu_bar, sd=sigma)
+polygon(c(min(x_beta), 
+          x_beta, 
+          crit_val), 
+        c(0, y_beta, 0), 
+        col=rgb(0,1,0, alpha=0.3), border=NA)
+text(crit_val - 0.4, 0.02, expression(beta), col="darkgreen", cex=1.2)
+
+axis(side = 1, 
+     at = c(mu_foo,  mu_bar), 
+     labels = expression(theta[0], theta[0] + delta))
+# Positionen der Scheitelpunkte (dichtehöchster Punkt)
+y_max <- dnorm(mu_foo, mean=mu_foo, sd=sigma)  # beide sind gleich
+
+# Text über der foo-Kurve (links)
+text(mu_foo, y_max + 0.035, expression(H[0]:~theta == theta[0]), cex=1)
+
+# Text über der bar-Kurve (rechts)
+text(mu_bar, y_max + 0.035, expression(H[1]:~theta == theta[0] + delta), cex=1)
+
+text(mu_foo, -0.02, "Annahmebereich")
+text(mu_bar+0.4, -0.02, "Ablehnungsbereich")
+```
+
+
+
+```{r}
+#| label: betadelta4
+# Parameter
+mu_foo <- 0           
+mu_bar <- -2.7            # nach links verschoben für den linksseitigen Test
+sigma <- 1            
+x <- seq(-6, 3, by=0.01)
+
+# Dichtefunktionen
+y_foo <- dnorm(x, mean=mu_foo, sd=sigma)
+y_bar <- dnorm(x, mean=mu_bar, sd=sigma)
+
+# Kritischer Schwellenwert (linksseitiger Test: 5%-Quantil der Nullverteilung)
+crit_val <- qnorm(0.05, mean=mu_foo, sd=sigma)  
+
+plot(x, y_foo, 
+     type="l", 
+     lwd=2, 
+     col="skyblue", 
+     ylim=c(-0.02, max(y_foo, y_bar)+0.05), 
+     xlab=expression(theta), 
+     ylab=" ",
+     yaxt="n",
+     xaxt="n",
+     main=expression("Zusammenhang zwischen " * alpha * " und " * beta * "-Fehlern "))
+lines(x, y_bar, lwd=2, col="steelblue")
+
+# Fläche Alpha (linke Seite von foo)
+x_alpha <- x[x <= crit_val]
+y_alpha <- dnorm(x_alpha, mean=mu_foo, sd=sigma)
+polygon(c(min(x_alpha), 
+          x_alpha, 
+          crit_val), 
+        c(0, y_alpha, 0), 
+        col=rgb(0,1,0, alpha=0.3), 
+        border=NA)
+text(crit_val - 0.5, 0.02, expression(beta), col="darkgreen", cex=1.2)
+
+# Fläche Beta (rechte Seite von bar)
+x_beta <- x[x > crit_val]
+y_beta <- dnorm(x_beta, mean=mu_bar, sd=sigma)
+polygon(c(crit_val, 
+          x_beta, 
+          max(x_beta)), 
+        c(0, y_beta, 0), 
+        col=rgb(1,0,0, alpha=0.3), 
+        border=NA)
+text(crit_val + 0.5, 0.02, expression(alpha), col="red", cex=1.2)
+
+# Achsenticks
+axis(side = 1, 
+     at = c(mu_bar,mu_foo), 
+     labels = expression(theta[0], theta[0]+ delta))
+
+# Beschriftung über den Verteilungen
+y_max <- dnorm(mu_foo, mean=mu_foo, sd=sigma)  # beide gleich hoch
+
+text(mu_foo, y_max + 0.035, expression(H[1]:~theta == theta[0] + delta), cex=1)
+text(mu_bar, y_max + 0.035, expression(H[0]:~theta == theta[0]), cex=1)
+
+# Bereiche
+text(mu_foo, -0.02, "Ablehnungsbereich")
+text(mu_bar - 0.7, -0.02, "Annahmebereich")
+
+```
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Wenn beim Test des Männeranteils ein Risiko von $\alpha=0.1$ festgelegt wird, dann wäre der Ablehnungsbereich $X\leq 2$, da unter der Annahme der Nullhypothese $X\sim B(10, 0.5)$ gilt und
+
+$$
+P(X\leq 2) = 0.0547 \leq 0.1=\alpha.
+$$
+
+Für eine minimale Differenz von $\delta=0.1$ und unter Annahme der Alternativhypothese $X\sim B(10, 0.4)$ beträgt das $\beta$-Risiko dann:
+
+$$
+\beta = P(\mbox{Annahme }H_0|H_1) = P(X\geq 3) = 1- P(X<3) = 1-0,1673 = 0,8327
+$$
+
+sodass die Teststärke nun auf
+
+$$
+1-\beta = 1-0,8327 = 0,1673
+$$
+
+angestiegen ist.
+:::
+
+
+
+
+### Zusammenhang zwischen Fehlerrisiken und Stichprobenumfang
+
+Die Fehlerrisiken hängen ebenfalls vom Stichprobenumfang ab, denn mit zunehmender Stichprobengröße verringert sich die Streuung der Teststatistik und damit auch die Fehlerrisiken.
+
+
+```{r}
+#| label: fehlerrisiko1
+mu_foo <- 0           
+mu_bar <- 3.2           
+sigma <- 1.1            
+x <- seq(-3, 6, by=0.01)
+
+# Dichtefunktionen
+y_foo <- dnorm(x, mean=mu_foo, sd=sigma)
+y_bar <- dnorm(x, mean=mu_bar, sd=sigma)
+
+# Kritischer Schwellenwert
+intersection <- function(x) dnorm(x, mean=mu_foo, sd=sigma) - dnorm(x, mean=mu_bar, sd=sigma)
+crit_val <- uniroot(intersection, c(0, 4))$root  # exakt dort, wo sich die Kurven schneiden
+
+
+plot(x, y_foo, 
+     type="l", 
+     lwd=2, 
+     col="steelblue", 
+     ylim=c(-0.02, max(y_foo, y_bar)+0.05), 
+     xlab=expression(theta),
+     ylab=" ",
+     yaxt="n",
+     xaxt="n",
+     main="Fehlerrisiken bei kleinen Stichproben")
+lines(x, y_bar, lwd=2, col="skyblue")
+
+# Fläche Alpha (rechte Seite von foo)
+x_alpha <- x[x >= crit_val]
+y_alpha <- dnorm(x_alpha, mean=mu_foo, sd=sigma)
+polygon(c(crit_val, 
+          x_alpha, 
+          max(x_alpha)), 
+        c(0, y_alpha, 0), 
+        col=rgb(1,0,0, alpha=0.3), border=NA)
+text(crit_val + 0.3, 0.02, expression(alpha), col="red", cex=1.2)
+
+# Fläche Beta (linke Seite von bar)
+x_beta <- x[x < crit_val]
+y_beta <- dnorm(x_beta, mean=mu_bar, sd=sigma)
+polygon(c(min(x_beta), 
+          x_beta, 
+          crit_val), 
+        c(0, y_beta, 0), 
+        col=rgb(0,1,0, alpha=0.3), border=NA)
+text(crit_val - 0.4, 0.02, expression(beta), col="darkgreen", cex=1.2)
+
+axis(side = 1, 
+     at = c(mu_foo,  mu_bar), 
+     labels = expression(theta[0], theta[0] + delta))
+
+# Positionen der Scheitelpunkte (dichtehöchster Punkt)
+y_max <- dnorm(mu_foo, mean=mu_foo, sd=sigma)  # beide sind gleich
+
+# Text über der foo-Kurve (links)
+text(mu_foo, y_max + 0.035, expression(H[0]:~theta == theta[0]), cex=1)
+
+# Text über der bar-Kurve (rechts)
+text(mu_bar, y_max + 0.035, expression(H[1]:~theta == theta[0] + delta), cex=1)
+
+text(mu_foo+0.1, -0.02, "Annahmebereich")
+text(mu_bar+0.1, -0.02, "Ablehnungsbereich")
+```
+
+
+
+
+
+```{r}
+#| label: fehlerrisiko2
+mu_foo <- 0           
+mu_bar <- 3.3           
+sigma <- 0.8            
+x <- seq(-3, 6, by=0.01)
+
+# Dichtefunktionen
+y_foo <- dnorm(x, mean=mu_foo, sd=sigma)
+y_bar <- dnorm(x, mean=mu_bar, sd=sigma)
+
+# Kritischer Schwellenwert
+intersection <- function(x) dnorm(x, mean=mu_foo, sd=sigma) - dnorm(x, mean=mu_bar, sd=sigma)
+crit_val <- uniroot(intersection, c(0, 4))$root  # exakt dort, wo sich die Kurven schneiden
+
+
+plot(x, y_foo, 
+     type="l", 
+     lwd=2, 
+     col="steelblue", 
+     ylim=c(-0.02, max(y_foo, y_bar)+0.05), 
+     xlab=expression(theta),
+     ylab=" ",
+     yaxt="n",
+     xaxt="n",
+     main="Fehlerrisiken bei großen Stichproben")
+lines(x, y_bar, lwd=2, col="skyblue")
+
+# Fläche Alpha (rechte Seite von foo)
+x_alpha <- x[x >= crit_val]
+y_alpha <- dnorm(x_alpha, mean=mu_foo, sd=sigma)
+polygon(c(crit_val, 
+          x_alpha, 
+          max(x_alpha)), 
+        c(0, y_alpha, 0), 
+        col=rgb(1,0,0, alpha=0.3), border=NA)
+text(crit_val + 0.3, 0.02, expression(alpha), col="red", cex=1.2)
+
+# Fläche Beta (linke Seite von bar)
+x_beta <- x[x < crit_val]
+y_beta <- dnorm(x_beta, mean=mu_bar, sd=sigma)
+polygon(c(min(x_beta), 
+          x_beta, 
+          crit_val), 
+        c(0, y_beta, 0), 
+        col=rgb(0,1,0, alpha=0.3), border=NA)
+text(crit_val - 0.4, 0.02, expression(beta), col="darkgreen", cex=1.2)
+
+axis(side = 1, 
+     at = c(mu_foo,  mu_bar), 
+     labels = expression(theta[0], theta[0] + delta))
+
+# Positionen der Scheitelpunkte (dichtehöchster Punkt)
+y_max <- dnorm(mu_foo, mean=mu_foo, sd=sigma)  # beide sind gleich
+
+# Text über der foo-Kurve (links)
+text(mu_foo, y_max + 0.035, expression(H[0]:~theta == theta[0]), cex=1)
+
+# Text über der bar-Kurve (rechts)
+text(mu_bar, y_max + 0.035, expression(H[1]:~theta == theta[0] + delta), cex=1)
+
+text(mu_foo+0.1, -0.02, "Annahmebereich")
+text(mu_bar+0.1, -0.02, "Ablehnungsbereich")
+```
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Wenn für den Test des Männeranteils eine Stichprobe des Umfangs 100 (statt 10) verwendet worden wäre, würde die Teststatistik unter Gültigkeit der Nullhypothese einer Binomialverteilung $B(100 ,0.5)$ folgen. In diesem Fall wäre der Ablehnungsbereich $X\leq 41$, da
+
+
+$$
+P(X\leq 41) = 0,0443 \leq 0,05 =\alpha.
+$$
+
+Für $\delta=0.1$ und unter Annahme der Alternativhypothese $X\sim B(100,,0.4)$ würde das $\beta$-Risiko dann
+
+$$
+\beta = P(\mbox{Annahme }H_0|H_1) = P(X\geq 42) = 0.3775
+$$
+
+betragen, und die Teststärke hätte sich deutlich erhöht auf
+
+$$
+1-\beta = 1-0,3775 = 0,6225.
+$$
+
+Dieser Test wäre wesentlich besser geeignet, um eine Abweichung von mindestens 10% vom unter der Nullhypothese angenommenen Parameterwert zu erkennen.
+
+:::
+
+
+
+## Power-Kurve
+
+Die Teststärke (Power) eines Hypothesentests hängt vom unter der Alternativhypothese angenommenen Parameterwert ab und ist somit eine Funktion dieses Parameters:
+
+$$
+\mbox{Power}(x)= P(\mbox{Ablehnung }H_0|\theta=x).
+$$
+
+Diese Funktion gibt die Wahrscheinlichkeit an, die Nullhypothese für jeden möglichen Parameterwert zu verwerfen und wird als **Power-Kurve** oder **Trennschärfekurve** bezeichnet.
+
+Wenn der genaue Parameterwert der Alternativhypothese nicht festgelegt werden kann, ist die Darstellung dieser Kurve besonders nützlich, um die Güte des Tests bei Nicht-Ablehnung der Nullhypothese zu beurteilen. Ebenso hilfreich ist sie, wenn nur eine begrenzte Stichprobengröße verfügbar ist, um die Sinnhaftigkeit der Untersuchung einzuschätzen.
+
+Die Qualität eines Tests ist umso höher, je größer die Fläche unter der Power-Kurve ist.
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Die zugehörige Power-Kurve des Tests zur Prüfung des Männeranteils in der Bevölkerung ist die folgende:
+
+```{r}
+#| label: powerkurve1
+# Parameter
+alpha <- 0.05
+p0 <- 0.5                           # Nullhypothese
+p_vals <- seq(0.01, 1, by = 0.01) # alternative p-Werte
+
+# Funktion zur Berechnung der Power für einen einseitigen Binomialtest (linksseitig)
+power_binom_left <- function(p_alt, p0, n, alpha) {
+  # Kritischer Wert: kleinste Anzahl x, bei der P(X ≤ x | p0) ≤ alpha
+  crit <- qbinom(alpha, size = n, prob = p0)
+  # Power = P(X ≤ kritischer Wert | p_alt)
+  power <- pbinom(crit, size = n, prob = p_alt)
+  return(power)
+}
+
+# Powerwerte für n = 10 und n = 100 berechnen
+power_n10 <- sapply(p_vals, power_binom_left, p0 = p0, n = 10, alpha = alpha)
+power_n100 <- sapply(p_vals, power_binom_left, p0 = p0, n = 100, alpha = alpha)
+
+# Plot
+plot(p_vals, power_n10, 
+     type = "l", 
+     lwd = 2, 
+     col = "skyblue", 
+     ylim = c(0, 1), 
+     xlim = c(0,1),
+     xlab = "tatsächlicher Anteil", 
+     ylab = "Power", 
+     xaxt = "n", 
+     yaxt = "n", 
+     main = expression("Power-Kurven für " * alpha * "= 0,05"))
+
+lines(p_vals, power_n100, lwd = 2, col = "salmon")
+
+
+# Legende
+legend("topright", 
+       legend = c("n = 10", "n = 100"), 
+       col = c("skyblue", "salmon"), 
+       lwd = 2, 
+       bty = "n")
+axis(1, at = seq(0, 1, by = 0.2))
+axis(2, at = seq(0, 1, by = 0.2), las = 1)
+```
+
+:::
+
+
+
+###   Der p-Wert eines Hypothesentests
+Grundsätzlich wird die Nullhypothese verworfen, wenn die Schätzung der Teststatistik in den Ablehnungsbereich fällt. Jedoch haben wir deutlich mehr Vertrauen in die Ablehnung, wenn die Schätzung weit vom Annahmebereich entfernt liegt, als wenn sie nahe an der Grenze zwischen Annahme- und Ablehnungsbereich liegt.
+
+Aus diesem Grund wird bei der Durchführung eines Tests zusätzlich die Wahrscheinlichkeit berechnet, mit der eine Abweichung auftritt, die mindestens so groß ist wie die beobachtete Differenz zwischen der Schätzung der Teststatistik und ihrem erwarteten Wert gemäß der Nullhypothese.
+
+::: {.callout-warning appearance="default"}
+## Definition "p-Wert"
+In einem Hypothesentest wird für jede Schätzung $x_0$ der Teststatistik $X$ - abhängig von der Art des Tests - der $p$-Wert definiert als:
+
+$$
+\begin{array}{lc}
+\mbox{zweiseitiger Test}: & 2P(X\geq x_0|H_0) \\
+\mbox{einseitiger Test (links)}: & P(X\leq x_0|H_0) \\
+\mbox{einseitiger Test (links)}: & P(X\geq x_0|H_0)
+\end{array}
+$$
+:::
+
+In gewisser Weise drückt der $p$-Wert das Vertrauen in die Entscheidung aus, die Nullhypothese abzulehnen. Je näher der $p$-Wert bei $1$ liegt, desto größer ist das Vertrauen in die Annahme der Nullhypothese, und je näher er bei $0$ liegt, desto größer ist das Vertrauen in ihre Ablehnung.
+
+
+### Entscheidungsregel eines Tests
+
+Nach Festlegung des Risikos $\alpha$ kann die Entscheidungsregel für einen Test auch wie folgt formuliert werden:
+
+::: {.callout-warning appearance="default"}
+## Entscheidungsregel
+
+$$
+\begin{array}{ccc}
+\mbox{Wenn } p\leq \alpha & \rightarrow & \mbox{Ablehnung von } H_0 \\
+\mbox{Wenn } p>\alpha & \rightarrow & \mbox{Annehmen von } H_0.
+\end{array}
+$$
+:::
+
+Somit gibt der $p$-Wert Auskunft darüber, bei welchen Signifikanzniveaus die Nullhypothese verworfen werden kann und bei welchen nicht.
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Wenn beim Test des Männeranteils eine Stichprobe der Größe 10 gezogen wird und 1 Mann beobachtet wird, dann beträgt der p-Wert unter Annahme der Nullhypothese $X\sim B(10,, 0.5)$:
+
+$$
+p = P(X\leq 1)= 0,0107
+$$
+
+während bei einer Beobachtung von 0 Männern der p-Wert:
+
+$$
+p = P(X\leq 0)= 0,001
+$$
+
+beträgt. Im ersten Fall würde die Nullhypothese für ein Risiko $\alpha=0.05$ verworfen werden, aber nicht für $\alpha=0.01$, während sie im zweiten Fall auch für $\alpha=0.01$ verworfen würde. Offensichtlich würde im zweiten Fall die Entscheidung zur Ablehnung der Nullhypothese mit größerer Sicherheit getroffen werden.
+:::
+
+
+
+### Vorgehensweise bei der Durchführung eines Hypothesentests
+
+1. Formulierung der Nullhypothese $H_0$ und Alternativhypothese $H_1$
+2. Festlegung der gewünschten Risiken $\alpha$ und $\beta$
+3. Auswahl der geeigneten Teststatistik
+4. Bestimmung der klinisch relevanten Mindestdifferenz (Effektgröße) $\delta$
+5. Berechnung des erforderlichen Stichprobenumfangs $n$
+6. Abgrenzung von Annahme- und Ablehnungsbereich
+7. Ziehung einer Stichprobe des Umfangs $n$
+8. Berechnung der Teststatistik für die Stichprobe
+9. Ablehnung der Nullhypothese, wenn der Schätzwert in den Ablehnungsbereich fällt oder der $p$-Wert kleiner als $\alpha$ ist; andernfalls Beibehaltung der Nullhypothese
+
+
+## Wichtigste parametrische Tests
+
+**Anpassungstests** (Goodness-of-Fit-Tests):
+
+- Test für den Mittelwert einer Normalverteilung mit bekannter Varianz
+- Test für den Mittelwert einer Normalverteilung mit unbekannter Varianz
+- Test für den Mittelwert einer Population mit unbekannter Varianz bei großen Stichproben
+- Test für die Varianz einer normalverteilten Population
+- Test für einen Anteilswert in einer Population
+
+**Homogenitätstests**:
+
+- Vergleichstest für Mittelwerte zweier Normalverteilungen mit bekannten Varianzen
+- Vergleichstest für Mittelwerte zweier Normalverteilungen mit unbekannten, aber gleichen Varianzen
+- Vergleichstest für Mittelwerte zweier Normalverteilungen mit unbekannten und ungleichen Varianzen
+- Vergleichstest für Varianzen zweier Normalverteilungen
+- Vergleichstest für Anteilswerte zweier Populationen
+
+
+## Test für den Mittelwert einer Normalverteilung mit bekannter Varianz
+
+Gegeben sei eine Zufallsvariable $X$ mit folgenden Eigenschaften:
+
+- Normalverteilung $X\sim N(\mu,\sigma)$
+- Unbekannter Mittelwert $\mu$, aber bekannte Varianz $\sigma^2$
+
+
+**Testproblem:**
+
+$$
+\begin{aligned}
+H_0 &: \mu=\mu_0 \\
+H_1 &: \mu\neq \mu_0
+\end{aligned}
+$$
+
+**Teststatistik:**
+
+$$
+\bar x\sim N\left(\mu_0,\frac{\sigma}{\sqrt{n}}\right) \Rightarrow Z=\frac{\bar x-\mu_0}{\sigma/\sqrt{n}}\sim N(0,1).
+$$
+
+**Annahmebereich:** $z_{\alpha/2}< Z < z_{1-\alpha/2}$
+
+**Ablehnungsbereich:** $Z\leq z_{\alpha/2}$ oder $Z\geq z_{1-\alpha/2}$
+
+
+
