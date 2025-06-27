@@ -1236,3 +1236,646 @@ $$
 
 
 
+
+
+
+
+
+## Test für den Mittelwert einer normalverteilten Grundgesamtheit mit unbekannter Varianz
+
+Sei $X$ eine Zufallsvariable, die die folgenden Bedingungen erfüllt:
+
+- Ihre Verteilung ist normal $X\sim N(\mu,\sigma)$.
+- Sowohl ihr Mittelwert $\mu$ als auch ihre Varianz $\sigma^2$ sind unbekannt.
+
+
+**Testproblem**:
+
+$$
+\begin{aligned}
+H_0 &: \mu=\mu_0 \\
+H_1 &: \mu\neq \mu_0
+\end{aligned}
+$$
+
+
+
+
+
+
+**Teststatistik:** Unter Verwendung der Stichprobenvarianz als Schätzer der Populationsvarianz ergibt sich
+
+$$
+\bar x\sim N\left(\mu_0,\frac{\sigma}{\sqrt{n}}\right) \Rightarrow T=\frac{\bar x-\mu_0}{\hat s/\sqrt{n}}\sim T(n-1).
+$$
+
+
+**Annahmebereich:** $t^{n-1}{\alpha/2} < T < t^{n-1}{1-\alpha/2}$.
+
+**Ablehnungsbereich**: $T\leq t^{n-1}{\alpha/2}$ und  $T\geq t^{n-1}{1-\alpha/2}$.
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+In einer Gruppe von Studierenden soll getestet werden, ob die durchschnittliche Note in Statistik höher als 5 Punkte ist. Dazu wird die folgende Stichprobe entnommen:
+
+$$
+6,3 - 5,4 - 4,1 - 5,0 - 8,2 - 7,6 - 6,4 - 5,6 - 4,3 - 5,2
+$$
+
+Der formulierte Test lautet:
+
+$$
+H_0:\ \mu=5 \quad H_1:\ \mu>5
+$$
+
+
+Für die Durchführung des Test ergibt sich:
+
+- $\bar x = \frac{6.3+\cdots+5.2}{10}=\frac{58.1}{10}=5.81$ Punkte.
+- $\hat s^2 = \frac{(6.3-5.81)^2+\cdots+(5.2-5.81)^2}{9} = \frac{15.949}{9}=1.7721$ Punkte$^2$, und $\hat s=1.3312$ Punkte.
+
+Die Teststatistik beträgt
+
+$$
+T=\frac{\bar x-\mu_0}{\hat s/\sqrt{n}} = \frac{5,81-5}{1,3312/\sqrt{10}}= 1,9246.
+$$
+
+Der $p$-Wert des Tests ist $P(T(9)\geq 1,9246) = 0,04323$, was bedeutet, dass die Nullhypothese für $\alpha=0.05$ abgelehnt würde.
+
+Der Ablehnungsbereich ist
+
+$$
+T=\frac{\bar x-5}{1,3312/\sqrt{10}} \geq t^9_{0,95} = 1,8331 \Leftrightarrow \bar x \geq 5+1,8331\frac{1,3312}{\sqrt
+10} = 5,7717
+$$
+sodass die Nullhypothese abgelehnt wird, wenn der Stichprobenmittelwert größer als $5,7717$ ist, andernfalls wird sie angenommen.
+
+Unter der Annahme, dass in der Praxis ein minimaler wichtiger Unterschied in der Durchschnittsnote ein Punkt $\delta=1$ wäre, dann unter der Alternativhypothese $H_1:\mu=6$, wenn die Nullhypothese abgelehnt würde, wäre das Risiko $\beta$
+
+$$
+\beta = P\left(T(9)\leq \frac{5,7717-6}{1,3312\sqrt 10}\right) = P(T(9)\leq -0,5424) = 0,3004
+$$
+
+
+sodass die Teststärke zur Erkennung einer Differenz von $\delta=1$ Punkt $1-\beta=1-0,3004 = 0,6996$ beträgt.
+
+:::
+
+
+### Bestimmung des Stichprobenumfangs für einen Test des Mittelwerts
+
+Es wurde gezeigt, dass für ein Risiko $\alpha$ der Ablehnungsbereich
+
+
+$$
+T=\frac{\bar x-\mu_0}{\hat s/\sqrt{n}} \geq t^{n-1}_{1-\alpha} \approx z_{1-\alpha}\quad \mbox{ für } n\geq 30.
+$$
+
+oder äquivalent
+
+$$
+\bar x \geq \mu_0+z_{1-\alpha}\frac{\hat s}{\sqrt n}.
+$$
+
+Wenn die Effektgröße $\delta$ beträgt, ergibt sich für eine Alternativhypothese $H_1:\mu=\mu_0+\delta$ das Risiko $\beta$ zu
+
+$$
+\beta = P\left(Z< \frac{\mu_0+z_{1-\alpha}\frac{\hat s}{\sqrt n}-(\mu_0+\delta)}{\frac{\hat s}{\sqrt n}} \right) = P\left(Z< \frac{z_{1-\alpha}\frac{\hat s}{\sqrt n}-\delta}{\frac{\hat s}{\sqrt n}} \right).
+$$
+
+sodass
+
+$$
+z_\beta = \frac{z_{1-\alpha}\frac{\hat s}{\sqrt n}-\delta}{\frac{\hat s}{\sqrt n}} \Leftrightarrow \delta = (z_{1-\alpha}-z_\beta)\frac{\hat s}{\sqrt n} \Leftrightarrow n = (z_{1-\alpha}-z_\beta)^2\frac{\hat s^2}{\delta^2} = (z_\alpha+z_\beta)^2\frac{\hat s^2}{\delta^2}.
+$$
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Im vorherigen Beispiel wurde gezeigt, dass die Teststärke zur Erkennung einer Differenz in der Durchschnittsnote von 1 Punkt bei $69,96%$ lag.
+
+Um die Teststärke auf $90%$ zu erhöhen, wie viele Schüler müssten in die Stichprobe aufgenommen werden?
+
+Da eine Teststärke von $1-\beta=0,9$ gewünscht ist, beträgt das Risiko $\beta=0.1$ und aus der Tabelle der Standardnormalverteilung ergibt sich $z_\beta = z_{0,1}=1,2816$.
+
+Unter Anwendung der obigen Formel zur Bestimmung des erforderlichen Stichprobenumfangs ergibt sich
+
+$$
+n = (z_\alpha+z_\beta)^2\frac{\hat s^2}{\delta^2} = (1,6449+1,2816)^2\frac{1,7721}{1^2} = 15,18,
+$$
+
+sodass mindestens 16 Schüler hätten untersucht werden müssen.
+:::
+
+
+
+
+
+
+## Test für den Mittelwert einer Grundgesamtheit mit unbekannter Varianz und großen Stichproben
+
+Sei $X$ eine Zufallsvariable, die die folgenden Bedingungen erfüllt:
+
+- Ihre Verteilung kann beliebig sein.
+- Sowohl ihr Mittelwert $\mu$ als auch ihre Varianz $\sigma^2$ sind unbekannt.
+
+**Testproblem:**
+
+$$
+\begin{aligned}
+H_0 &: \mu=\mu_0 \\
+H_1 &: \mu\neq \mu_0
+\end{aligned}
+$$
+
+
+**Teststatistik:** Unter Verwendung der Stichprobenvarianz als Schätzer der Populationsvarianz und dank des zentralen Grenzwertsatzes (da große Stichproben $n\geq 30$ vorliegen) gilt:
+
+$$
+\bar x\sim N\left(\mu_0,\frac{\sigma}{\sqrt{n}}\right) \Rightarrow Z=\frac{\bar x-\mu_0}{\hat s/\sqrt{n}}\sim N(0,1).
+$$
+
+**Annahmebereich:** $-z_{\alpha/2}< Z < z_{\alpha/2}$.  
+
+**Ablehnungsbereich:** $Z\leq -z_{\alpha/2}$ y $Z\geq z_{\alpha/2}$.
+
+
+
+
+
+
+
+## Test für die Varianz einer normalverteilten Grundgesamtheit
+
+Sei $X$ eine Zufallsvariable, die folgende Annahmen erfüllt:
+
+- Ihre Verteilung ist normal
+- Sowohl ihr Mittelwert $\mu$ als auch ihre Varianz $\sigma^2$ sind unbekannt
+
+**Testproblem**:
+
+$$
+\begin{aligned}
+H_0 &: \sigma^2 = \sigma_0^2 \\
+H_1 &: \sigma^2 \neq \sigma_0^2
+\end{aligned}
+$$
+
+**Teststatistik:** Ausgehend von der Stichprobenvarianz als Schätzer für die Populationsvarianz gilt:
+
+$$
+J=\frac{nS^2}{\sigma_0^2} = \frac{(n-1)\hat{S}^2}{\sigma_0^2}\sim \chi^2(n-1),
+$$
+
+die einer Chi-Quadrat-Verteilung mit $n-1$ Freiheitsgraden folgt.
+
+**Annahmebereich:** $\chi_{\alpha/2}^{n-1} < J < \chi_{1-\alpha/2}^{n-1}$
+
+**Ablehnungsbereich:** $J\leq \chi_{\alpha/2}^{n-1}$ oder $J\geq \chi_{1-\alpha/2}^{n-1}$
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+In einer Schülergruppe soll getestet werden, ob die Standardabweichung der Noten größer als 1 Punkt ist. Dazu wird folgende Stichprobe erhoben:
+
+$$
+6,3 - 5,4 - 4,1 - 5,0 - 8,2 - 7,6 - 6,4 - 5,6 - 4,3 - 5,2
+$$
+
+Es wird folgender Test durchgeführt:
+
+$$
+H_0: \sigma=1 \quad H_1: \sigma>1
+$$
+
+Für die Testdurchführung ergibt sich:
+
+- $\bar x = \frac{6.3+\cdots+5,2}{10}=\frac{58,1}{10}=5,81$ Punkte
+- $\hat s^2 = \frac{(6,3-5,81)^2+\cdots+(5,2-5,81)^2}{9} = \frac{15,949}{9}=1,7721$ Punkte$^2$
+
+Die Teststatistik beträgt:
+
+$$
+J= \frac{(n-1)\hat{S}^2}{\sigma_0^2} = \frac{9\cdot1,7721}{1^2} = 15,949,
+$$
+
+und der $p$-Wert des Tests ist $P(\chi(9)\geq 15,949) = 0,068$, sodass die Nullhypothese für $\alpha=0.05$ nicht verworfen werden kann.
+
+:::
+
+
+
+
+
+
+
+## Test für einen Anteilswert in einer Grundgesamtheit
+
+Sei $p$ der Anteil von Individuen in einer Population, die eine bestimmte Eigenschaft aufweisen.
+
+**Testproblem:**
+
+$$
+\begin{aligned}
+H_0 &: p=p_0 \\
+H_1 &: p\neq p_0
+\end{aligned}
+$$
+
+
+**Teststatistik:** Die Zufallsvariable, die die Anzahl der Individuen mit der Eigenschaft in einer Zufallsstichprobe des Umfangs $n$ zählt, folgt einer Binomialverteilung $X\sim B(n,p_0)$. Gemäß dem zentralen Grenzwertsatz gilt für große Stichproben ($np\geq 5$ und $n(1-p)\geq 5$) die Approximation $X\sim N(np_0,\sqrt{np_0(1-p_0)})$, und somit:
+
+$$
+\hat{p}=\frac{X}{n} \sim N\left(p_0,\sqrt{\frac{p_0(1-p_0)}{n}}\right) \Rightarrow Z = \frac{\hat
+p-p_0}{\sqrt{p_0(1-p_0)/n}}\sim N(0,1).
+$$
+
+**Annahmebereich:** $z_{\alpha/2}< Z < z_{1-\alpha/2}$.
+
+**Ablehnungsbereich:** $Z\leq z_{\alpha/2}$ oder $Z\geq z_{1-\alpha/2}$.
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+In einer Gruppe von Studierenden soll untersucht werden, ob die Durchfallquote über 50% liegt. Dazu wird eine Stichprobe von 80 Studierenden gezogen, von denen 50 bestanden haben.
+
+Das Testproblem lautet:
+
+$$
+\begin{aligned}
+H_0\ &: p=0.5 \\
+H_1\ &: p>0.5
+\end{aligned}
+$$
+
+Für die Testdurchführung ergibt sich $\hat p= 50/80 = 0,625$. Da die Approximationsbedingungen $n\hat p=80\cdot 0,625 = 50\geq 5$ und $n(1-\hat p)=80(1-0,625)=30\geq 5$ erfüllt sind, berechnet sich die Teststatistik zu:
+
+$$
+Z = \frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}} = \frac{0,625-0.5}{\sqrt{0,5(1-0,5)/80}} = 2,2361.
+$$
+
+Der p-Wert des Tests beträgt $P(Z\geq 2,2361)=0,0127$, sodass die Nullhypothese für $\alpha=0,05$ verworfen werden kann. Es lässt sich schließen, dass die Bestehensquote signifikant über 50% liegt.
+:::
+
+
+
+##  Vergleichstest für Mittelwerte zweier Normalverteilungen mit bekannten Varianzen
+
+Seien $X_1$ und $X_2$ zwei Zufallsvariablen, die folgende Bedingungen erfüllen:
+
+- Ihre Verteilung ist normal: $X_1\sim N(\mu_1,\sigma_1)$ und $X_2\sim N(\mu_2,\sigma_2)$
+- Ihre Mittelwerte $\mu_1$ und $\mu_2$ sind unbekannt, aber ihre Varianzen $\sigma^2_1$ und $\sigma^2_2$ sind bekannt.
+
+**Testproblem:**
+
+$$
+\begin{aligned}
+H_0 &:\ \mu_1=\mu_2 \\
+H_1 &:\ \mu_1\neq \mu_2
+\end{aligned}
+$$
+
+**Teststatistik:**
+
+$$
+\left.
+\begin{array}{l}
+\bar{X}_1\sim N\left(\mu_1,\frac{\sigma_1}{\sqrt{n_1}} \right) \\
+\bar{X}_2\sim N\left(\mu_2,\frac{\sigma_2}{\sqrt{n_2}} \right)
+\end{array}
+\right\}
+\Rightarrow
+$$
+
+$$
+\Rightarrow
+\bar{X}_1-\bar{X}_2 \sim N\left(\mu_1-\mu_2,\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}\right)
+\Rightarrow Z= \frac{\bar{X}_1-\bar{X}_2}{\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}}}\sim
+N(0,1).
+$$
+
+**Annahmebereich:** $-z_{\alpha/2}< Z < z_{\alpha/2}$
+
+**Ablehnungsbereich:** $Z\leq -z_{\alpha/2}$ oder $Z\geq z_{\alpha/2}$
+
+
+
+
+
+## Vergleichstest für Mittelwerte zweier Normalverteilungen mit unbekannten aber gleichen Varianzen
+
+Seien $X_1$ und $X_2$ zwei Zufallsvariablen, die folgende Bedingungen erfüllen:
+
+- Ihre Verteilung ist normal: $X_1\sim N(\mu_1,\sigma_1)$ und $X_2\sim N(\mu_2,\sigma_2)$
+- Ihre Mittelwerte $\mu_1$ und $\mu_2$ sind unbekannt und ihre Varianzen ebenfalls, aber sie sind gleich: $\sigma^2_1=\sigma^2_2=\sigma^2$
+
+**Testproblem:**
+
+$$
+\begin{aligned}
+H_0 &:\ \mu_1=\mu_2 \\
+H_1 &:\ \mu_1\neq \mu_2
+\end{aligned}
+$$
+
+**Teststatistik:**
+
+$$
+\left.
+\begin{array}{l}
+\bar{X}_1-\bar{X}_2\sim N\left(\mu_1-\mu_2,\sigma\sqrt{\frac{n_1+n_2}{n_1n_2}} \right) \\
+\displaystyle \frac{n_1S_1^2+n_2S_2^2}{\sigma^2} \sim \chi^2(n_1+n_2-2)
+\end{array}
+\right\}
+\Rightarrow
+T=\frac{\bar{X}_1-\bar{X}_2}{\hat{S}_p\sqrt{\frac{n_1+n_2}{n_1n_2}}} \sim T(n_1+n_2-2).
+$$
+
+
+**Annahmebereich:** $-t_{\alpha/2}^{n_1+n_2-2} < T < t_{\alpha/2}^{n_1+n_2-2}$
+
+**Ablehnungsbereich:** $T\leq -t_{\alpha/2}^{n_1+n_2-2}$ oder $T\geq t_{\alpha/2}^{n_1+n_2-2}$
+
+
+
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Es soll die akademische Leistung zweier Schülergruppen (10 bzw. 12 Schüler) mit unterschiedlichen Lehrmethoden verglichen werden. Dazu werden folgende Prüfungsergebnisse erzielt:
+
+$$
+\begin{aligned}
+X_1 &: 4 - 6 - 8 - 7 - 7 - 6 - 5 - 2 - 5 - 3 \\
+X_2 &: 8 - 9 - 5 - 3 - 8 - 7 - 8 - 6 - 8 - 7 - 5 - 7
+\end{aligned}
+$$
+
+Das Testproblem lautet:
+
+$$
+H_0: \mu_1=\mu_2\qquad H_1: \mu_1\neq \mu_2
+$$
+
+Für die Testdurchführung ergibt sich:
+
+- $\bar{X}_1 = \frac{4+\cdots +3}{10}=5.3$ Punkte und $\bar{X}_2=\frac{8+\cdots +7}{12}=6.75$ Punkte
+- $S_1^2= \frac{4^2+\cdots + 3^2}{10}-5.3^2=3.21$ Punkte$^2$ und $S_2^2= \frac{8^2+\cdots +3^2}{12}-6.75^2=2.69$ Punkte$^2$
+- $\hat{S}_p^2 = \frac{10\cdot 3.21+12\cdot 2.6875}{10+12-2}= 3.2175$ Punkte$^2$, und $\hat S_p=1.7937$
+
+Unter Annahme gleicher Varianzen beträgt die Teststatistik:
+
+$$
+T=\frac{\bar{X}_1-\bar{X}_2}{\hat{S}_p\sqrt{\frac{n_1+n_2}{n_1n_2}}} = \frac{5,3-6,75}{1,7937\sqrt{\frac{10+12}{10\cdot 12}}} = -1,8879
+$$
+
+Der $p$-Wert des Tests ist $2P(T(20)\leq -1,8879) = 0,0736$, sodass die Nullhypothese nicht verworfen werden kann. Es gibt keine signifikanten Unterschiede zwischen den Durchschnittsnoten der Gruppen.
+:::
+
+
+
+
+## Vergleichstest für Mittelwerte zweier Normalverteilungen mit unbekannten und ungleichen Varianzen
+
+Seien $X_1$ und $X_2$ zwei Zufallsvariablen, die folgende Bedingungen erfüllen:
+
+- Ihre Verteilung ist normal: $X_1\sim N(\mu_1,\sigma_1)$ und $X_2\sim N(\mu_2,\sigma_2)$
+- Ihre Mittelwerte $\mu_1$, $\mu_2$ und Varianzen $\sigma_1^2$, $\sigma_2^2$ sind unbekannt, wobei $\sigma^2_1 \neq \sigma^2_2$
+
+**Testproblem:**
+
+$$
+\begin{aligned}
+H_0 &:\ \mu_1=\mu_2 \\
+H_1 &:\ \mu_1\neq \mu_2
+\end{aligned}
+$$
+
+
+**Teststatistik:**
+
+$$
+T=\frac{(\bar{X}_1-\bar{X}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\hat{S}^2_1}{n_1}+\frac{\hat{S}^2_2}{n_2}}} \sim T(g),
+$$
+
+mit $g=n_1+n_2-2-\Delta$ und
+
+$$
+\Delta = \frac{(\frac{n_2-1}{n_1}\hat{S}_1^2-\frac{n_1-1}{n_2}\hat{S}_2^2)^2}{\frac{n_2-1}{n_1^2}\hat{S}_1^4+\frac{n_1-1}{n_2^2}\hat{S}_2^4}.
+$$
+
+**Annahmebereich:** $-t_{\alpha/2}^{g} < T < t_{\alpha/2}^{g}$
+
+**Ablehnungsbereich:** $T\leq -t_{\alpha/2}^{g}$ oder $T\geq t_{\alpha/2}^{g}$
+
+
+
+## Vergleichstest für Varianzen zweier Normalverteilungen
+
+Seien $X_1$ und $X_2$ zwei Zufallsvariablen mit:
+
+- Normalverteilung: $X_1\sim N(\mu_1,\sigma_1)$ und $X_2\sim N(\mu_2,\sigma_2)$
+- Unbekannten Mittelwerten $\mu_1$, $\mu_2$ und Varianzen $\sigma_1^2$, $\sigma_2^2$
+
+**Testproblem:**
+
+$$
+\begin{aligned}
+H_0 &: \sigma_1=\sigma_2 \\
+H_1 &: \sigma_1\neq \sigma_2
+\end{aligned}
+$$
+
+
+**Teststatistik:**
+
+$$
+\left.
+\begin{array}{l}
+\displaystyle \frac{(n_1-1)\hat{S}_1^2}{\sigma_1^2}\sim \chi^2(n_1-1) \\
+\displaystyle \frac{(n_2-1)\hat{S}_2^2}{\sigma_2^2}\sim \chi^2(n_2-1)
+\end{array}
+\right\}
+\Rightarrow
+F= \frac{\frac{\frac{(n_1-1)\hat{S}_1^2}{\sigma_1^2}}{n_1-1}}{\frac{\frac{(n_2-1)\hat{S}_2^2}{\sigma_2^2}}{n_2-1}} =
+\frac{\sigma_2^2}{\sigma_1^2}\frac{\hat{S}_1^2}{\hat{S}_2^2}\sim F(n_1-1,n_2-1).
+$$
+
+**Annahmebereich:** $F_{\alpha/2}^{n_1-1,n_2-1} < F < F_{1-\alpha/2}^{n_1-1,n_2-1}$
+
+**Ablehnungsbereich:** $F\leq F_{\alpha/2}^{n_1-1,n_2-1}$ oder $F\geq F_{1-\alpha/2}^{n_1-1,n_2-1}$
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+Fortsetzung des Beispiels mit den Punktzahlen zweier Gruppen:
+
+$$
+\begin{aligned}
+X_1 &: 4 - 6 - 8 - 7 - 7 - 6 - 5 - 2 - 5 - 3 \\
+X_2 &: 8 - 9 - 5 - 3 - 8 - 7 - 8 - 6 - 8 - 7 - 5 - 7
+\end{aligned}
+$$
+
+Für den Varianzvergleich lautet das Testproblem:
+
+$$
+H_0: \sigma_1=\sigma_2\qquad H_1: \sigma_1\neq \sigma_2
+$$
+
+**Berechnungen:**
+
+- $\bar{X}_1 = \frac{4+\cdots +3}{10}=5,3$ Punkte
+- $\bar{X}_2=\frac{8+\cdots +7}{12}=6,75$ Punkte
+- $\hat{S}_1^2= \frac{(4-5,3)^2+\cdots + (3-5,3)^2}{9}=3,5667$ Punkte$^2$
+- $\hat{S}_2^2= \frac{(8-6,75)^2+\cdots + (3-6,75)^2}{11}=2,9318$ Punkte$^2$
+
+**Teststatistik:**
+
+$$
+F = \frac{\hat{S}_1^2}{\hat{S}_2^2} = \frac{3,5667}{2,9318}=1,2165
+$$
+
+
+Der p-Wert beträgt $2P(F(9,11)\leq 1.2165)=0.7468$, sodass die Nullhypothese gleicher Varianzen beibehalten wird.
+:::
+
+
+
+
+##   Vergleichstest von Anteilen zweier Populationen
+
+Seien $p_1$ und $p_2$ die jeweiligen Anteile von Individuen, die ein bestimmtes Merkmal in zwei Populationen aufweisen.
+
+Testproblem:
+
+
+$$
+H_0: p_1=p_2\qquad H_1: p_1\neq p_2
+$$
+
+**Teststatistik:** Die Zufallsvariablen, die die Anzahl der Individuen mit dem Merkmal in zwei unabhängigen Stichproben der Größen $n_1$ und $n_2$ messen, folgen binomialverteilten Zufallsvariablen
+$X_1\sim B(n_1,p_1)$ und $X_2\sim B(n_2,p_2)$. Wenn die Stichproben groß sind ($n_ip_i\geq 5$ und $n_i(1-p_i)\geq 5$), folgt gemäß dem zentralen Grenzwertsatz:
+
+$$
+X_1\sim N(np_1,\sqrt{np_1(1-p_1)})\quad \text{und} \quad X_2\sim N(np_2,\sqrt{np_2(1-p_2)})
+$$
+
+und es gilt:
+
+$$
+\left.
+\begin{array}{l}
+\hat{p}_1=\frac{X_1}{n_1} \sim N\left(p_1,\sqrt{\frac{p_1(1-p_1)}{n_1}}\right) \\
+\hat{p}_2=\frac{X_2}{n_2} \sim N\left(p_2,\sqrt{\frac{p_2(1-p_2)}{n_2}}\right)
+\end{array}
+\right\}
+\Rightarrow Z = \frac{\hat{p}_1-\hat{p_2}}{\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}}\sim N(0,1)
+$$
+
+
+
+
+**Annahmebereich:** $z_{\alpha/2}< Z < z_{1-\alpha/2}$
+
+**Ablehnungsbereich:** $z\leq z_{\alpha/2}$ und $z\geq z_{1-\alpha/2}$
+
+::: {.callout-note appearance="default"}
+## Beispiel
+
+Es soll geprüft werden, ob sich die Bestehensquoten zweier Gruppen unterscheiden, die unterschiedliche Lehrmethoden durchlaufen haben. In der ersten Gruppe haben 24 von insgesamt 40 Schülern bestanden, in der zweiten Gruppe 48 von 60.
+
+Der formulierte Test lautet:
+
+$$
+H_0:\ p_1=p_2\qquad H_1:\ p_1\neq p_2
+$$
+
+Für den Test ergibt sich: $\hat{p}_1=24/40= 0.6$ und $\hat{p}_2=48/60=0.8$. Damit sind die Voraussetzungen erfüllt:
+
+- $n_1\hat{p}_1=40\cdot 0.6=24\geq 5$,
+- $n_1(1-\hat{p}_1)=40(1-0.6)=16\geq 5$,
+- $n_2\hat{p}_2=60\cdot 0.8=48\geq 5$ und
+- $n_2(1-\hat{p}_2)=60(1-0.8)=12\geq 5$.
+
+Die Teststatistik ergibt:
+
+$$
+Z = \frac{\hat{p}_1-\hat{p_2}}{\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}} = \frac{0,6-0,8}{\sqrt{\frac{0,6(1-0,6)}{40}+\frac{0,8(1-0,8)}{60}}} = -2,1483
+$$
+
+und der $p$-Wert des Tests ist $2P(Z\leq -2,1483)= 0,0317$, sodass die Nullhypothese bei einem Signifikanzniveau von $\alpha=0,05$ verworfen wird. Es wird also geschlossen, dass es einen Unterschied zwischen den Gruppen gibt.
+
+:::
+
+
+
+
+
+
+
+
+##  Durchführung von Tests mittels Konfidenzintervallen
+
+Eine interessante Alternative zur Durchführung eines Hypothesentests
+
+
+$$
+H_0:\ \theta=\theta_0\qquad H_1:\ \theta\neq \theta_0
+$$
+
+mit einem Signifikanzniveau $\alpha$ ist die Berechnung eines Konfidenzintervalls für $\theta$ mit einem Vertrauensniveau von $1-\alpha$. Dieses Intervall kann als die Menge akzeptabler Hypothesen für $\theta$ interpretiert werden. Befindet sich $\theta_0$ außerhalb des Intervalls, erscheint die Nullhypothese wenig glaubwürdig und kann verworfen werden. Befindet sich $\theta_0$ hingegen innerhalb des Intervalls, wird die Hypothese als plausibel betrachtet und beibehalten.
+
+Bei einem einseitigen Test mit der Alternativhypothese "kleiner" wird $\theta_0$ mit der oberen Grenze eines Konfidenzintervalls für $\theta$ mit einem Vertrauensniveau von $1-2\alpha$ verglichen.
+Ist der Test einseitig mit der Alternativhypothese "größer", so wird $\theta_0$ mit der unteren Grenze des Intervalls verglichen.
+
+
+| **Testart** |	**Konfidenzintervall** |	**Entscheidung** |
+|:---|:---|:---|
+| Zweiseitig |	$[l_i,l_s]$ mit Vertrauensniveau $1-\alpha$	| Verwerfe $H_0$ wenn $\theta_0\not \in [l_i,l_s]$ |
+| Einseitig (kleiner) |	$[-\infty,l_s]$ mit Vertrauensniveau $1-2\alpha$ |	Verwerfe $H_0$ wenn $\theta_0\geq l_s$ |
+| Einseitig (größer) |	$[l_i,\infty]$ mit Vertrauensniveau $1-2\alpha$	| Verwerfe $H_0$ wenn $\theta_0\leq l_i$ |
+
+
+::: {.callout-tip appearance="default"}
+## Beispiel
+
+Zurück zum Test, der den schulischen Erfolg zweier Schülergruppen vergleicht. Diese haben folgende Punktzahlen erreicht:
+
+$$
+\begin{aligned}
+X_1 &: 4 - 6 - 8 - 7 - 7 - 6 - 5 - 2 - 5 - 3 \\
+X_2 &: 8 - 9 - 5 - 3 - 8 - 7 - 8 - 6 - 8 - 7 - 5 - 7
+\end{aligned}
+$$
+
+Der getestete Hypothesensatz lautete:
+
+
+$$
+H_0:\ \mu_1=\mu_2\qquad H_1:\ \mu_1\neq \mu_2
+$$
+
+
+Da es sich um einen zweiseitigen Test handelt, ergibt sich das Konfidenzintervall für die Differenz der Mittelwerte $\mu_1-\mu_2$ bei einem Vertrauensniveau von $1-\alpha=0,95$ (unter der Annahme gleicher Varianzen) zu $[-3{,}0521\ |\ 0{,}1521]$ Punkten.
+
+Da unter der Nullhypothese $\mu_1 - \mu_2 = 0$ gilt und 0 innerhalb dieses Intervalls liegt, wird die Nullhypothese beibehalten.
+
+Der Vorteil eines Konfidenzintervalls besteht darin, dass es uns nicht nur erlaubt, einen Test durchzuführen, sondern auch eine Vorstellung von der Größenordnung der Differenz zwischen den Gruppenmittelwerten vermittelt.
+:::
+
+
+
+
+
+
+
+
+
+
+
