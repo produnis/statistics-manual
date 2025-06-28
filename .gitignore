@@ -1,3 +1,6 @@
+.RData
+.Rhistory
+
 ## Core xelatex files
 *.aux
 *.log
@@ -48,3 +51,21 @@
 *.sh
 /tmp/
 
+_src/*
+.Rproj.user
+
+BOOK
+/.quarto/
+_freeze
+haufigkeiten_files
+regression-korrelation_files
+stichprobenstatistik_files
+kontinuierlich_files
+diskret_files
+wahrscheinlichkeit_files
+intro_files
+credits_files
+schaetzen_files
+hypothesen_files
+varianz_files
+figure/

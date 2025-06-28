@@ -1,0 +1,93 @@
+project:
+  type: book
+  output-dir: BOOK
+
+citation:
+  type: book
+  title: "Grundlagen der Statistik"
+  publisher: "Hochschule Niederrhein"
+  publisher-place: "Krefeld"
+  language: de
+  status: "advance online publication"
+  license: "CC BY-NC-SA 4.0"
+  url: https://github.com/produnis/statistics-manual
+  public-url: https://www.produnis.de/manual
+  fulltext-url: https://www.produnis.de/manual
+  pdf-url: https://www.produnis.de/manual/manual.pdf
+  
+book:
+  title: "Grundlagen der Statistik"
+  subtitle: "Einführung in die deskriptive und inferentielle Statistik"
+  author:     
+    - name: Prof. Dr. Jörg große Schlarmann
+      url: https://www.produnis.de/R
+      affiliation: Hochschule Niederrhein
+      affiliation-url: https://www.hs-niederrhein.de
+      orcid: 0000-0002-3634-7722
+  date: "2025-06-19"
+  date-format: "DD.MM.YYYY"
+  favicon: images/favicon.ico
+  cover-image: images/Titelbild.jpg
+  output-file: manual
+  sidebar:
+    collapse-level: 5
+    background: "#f2ebe1"
+  downloads:
+    - pdf
+    - epub
+  open-graph:
+    image: "https://www.produnis.de/manual/images/Titelbild.jpg"
+    locale: de_DE
+  twitter-card:
+    image: "https://www.produnis.de/manual/images/Titelbild.jpg"
+    creator: "produnis"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - haufigkeiten.qmd
+    - stichprobenstatistik.qmd
+    - regression-korrelation.qmd
+    - wahrscheinlichkeit.qmd
+    - diskret.qmd
+    - kontinuierlich.qmd
+    - schaetzen.qmd
+    - hypothesen.qmd
+    - varianz.qmd
+    - literatur.qmd
+    - credits.qmd
+  page-footer:
+    background: "#f2ebe1"
+    left: "This Website was made with ❤️ and [Quarto](https://quarto.org)."
+    right:
+      - icon: github
+        href: https://github.com/produnis/statistics-manual
+      - icon: linkedin
+        href: https://www.linkedin.com/in/j%C3%B6rg-gro%C3%9Fe-schlarmann-32b3331b7/
+      - icon: mastodon
+        href: https://mastodon.social/@rbuch
+      - icon: file-earmark-pdf
+        href: manual.pdf
+      - icon: journal-richtext
+        href: manual.epub
+
+bibliography: literatur.bib
+nocite: |
+  @grabinger24, @koller17, @mueller11
+csl: apa-single-spaced.csl
+execute: 
+  warning: false
+  echo: false
+  #fig-height: 5
+lang: de
+cover-image: images/Titelbild.jpg
+#language:
+#  crossref-sec-prefix: "Abschnitt"
+#  crossref-chap-prefix: "Abschnitt"
+freeze: auto
+
+format:
+    buechlein-html: default
+    buechlein-epub: default
+    buechlein-pdf: default
+
+

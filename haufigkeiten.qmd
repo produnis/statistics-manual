@@ -1,0 +1,841 @@
+---
+title: "Häufigkeitsverteilungen"
+---
+
+## Deskriptive Statistik
+
+
+```{r}
+#| label: SETUPhaufig
+#| echo: false
+#| warning: false
+library(tidyverse)
+# Colors
+blueceu <- rgb(5,161,230,255,maxColorValue = 255) #0099CC
+blueceulight <- rgb(137,211,243,255,maxColorValue = 255) #89D3F3
+redceu <- rgb(238,50,36,255,maxColorValue = 255) #FF3333
+redceulight <- rgb(238,50,36,255,maxColorValue = 255, alpha = 125) #FF3333
+greenceu <- rgb(194,205,255,255,maxColorValue = 255) #CCCC33
+orangeceu <- rgb(248,131,121,255,maxColorValue = 255)#F88379
+purpleceu <- rgb(169,78,145,255,maxColorValue = 255) #996699
+greyceu <- rgb(117,117,97,255,maxColorValue = 255) #666666
+
+```
+
+
+Die **deskriptive Statistik** ist der Bereich innerhalb der Statistik, der sich mit dem Darstellen, Analysieren und Zusammenfassen von Informationen in einer Stichprobe beschäftigt. Nach dem Samplingprozess ist dies der nächste Schritt in jeder Studie und besteht meist aus folgenden Teilen:  
+
+1. Ordnen und Klassifizieren der Daten sowie Einteilung in Gruppen.
+2. Tabellarische und grafische Darstellung der Daten nach ihrer Häufigkeit.  
+3. Berechnung numerischer Maßzahlen, die die Informationen in der Stichprobe zusammenfassen (Stichprobenstatistiken).  
+
+::: {.callout-important appearance="default"}
+## Merke
+
+die Stichprobenstatistik hat kein Inferenzpotential, weshalb keine Verallgemeinerungen auf die Population angewendet werden sollten!
+:::
+
+
+## Häufigkeitsverteilung  
+### Stichprobenklassifizierung
+Das Studium einer statistischen Variablen beginnt mit der Messung der Variable bei den Individuen der Stichprobe und der Klassifizierung der Werte. Es gibt zwei Weisen, Daten zu klassifizieren:  
+
+- **Klassifizierung ohne Klassierung**: Sortieren der Werte vom kleinsten zum größten (wenn eine Reihenfolge existiert). Diese Methode wird bei qualitativen Variablen und diskreten Variablen mit wenigen eindeutigen Werten verwendet.  
+- **Klassifizierung mit Klassierung**: Gruppieren der Werte in Intervalle (Klassen) und Sortieren dieser Intervalle vom kleinsten  zum größsten. Diese Methode wird bei kontinuierlichen Variablen und diskreten Variablen mit vielen eindeutigen Werten verwendet.
+
+<center>
+
+![](images/Haufigkeit_ordnen_zaehlen.png){width=250}
+
+
+
+
+</center>
+
+\bigskip\ 
+
+### Häufigkeiten
+
+::: {.callout-warning appearance="default"}
+## Definition "Häufigkeiten"
+
+Bei einer Stichprobe mit $n$ Werten der Variable $X$ können wir für jedes $x_{i}$ bestimmen:
+
+1. **Absolute Häufigkeit ($n_{i}$):**  ist die Anzahl, mit der ein bestimmter Wert $x_{i}$ in der Stichprobe auftritt.
+2. **Relative Häufigkeit ($f_{i}$):** ist das Verhältnis der Anzahl eines bestimmten Wertes $x_{i}$ zur Gesamtanzahl der Beobachtungen in der Stichprobe.  
+$$
+f_{i} = \frac{n_{i}}{n}
+$$
+3. **Kumulative absolute Häufigkeit ($N_{i}$):** ist die Gesamtanzahl der Werte in der Stichprobe, die kleiner oder gleich $x_{i}$ sind
+
+$$
+N_{i} = n_{1} + \dots + n_{i}
+$$
+
+4. **Kumulative relativeHäufigkeit ($F_{i}$):**  ist das Verhältnis der kumulativen absoluten Häufigkeit zur Gesamtanzahl der Beobachtungen in der Stichprobe.  
+   
+$$
+F_{i} = \frac{N_{i}}{n}
+$$
+
+:::
+
+
+\bigskip\ 
+
+### Häufigkeitstabelle
+
+Die Menge der Werte einer Variablen mit ihren jeweiligen Häufigkeiten nennt man *Häufigkeitsverteilung*, und sie wird üblicherweise als *Häufigkeitstabelle* dargestellt.
+
+
+| **Variable X** | **absolute Häufigkeit** | **relative Häufigkeit** | **kumulierte absolute Häufigkeit** | **kumulierte relative Häufigkeit** |
+|:---:|:---:|:---:|:---:|:---:|
+| $x_{1}$| $n_{1}$| $f_{1}$| $N_{1}$| $F_{1}$ |
+| $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ |
+| $x_{i}$| $n_{i}$| $f_{i}$| $N_{i}$| $F_{i}$ |
+| $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ |
+| $x_{k}$| $n_{k}$| $f_{k}$| $N_{k}$| $F_{k}$ |
+
+: Häufigkeitstabelle {#tbl-haufigkeitstabelle}
+
+::: {.callout-tip appearance="default"}
+## Beispiel: Kinder in Familien
+
+Die Anzahl an Kindern wurde bei 25 Familien wie folgt erhoben:
+
+> 1, 2, 4, 2, 2, 2, 3, 2, 1, 1, 0, 2, 2, 0, 2, 2, 1, 2, 2, 3, 1, 2, 2, 1, 2
+
+:::
+
+
+Die Häufigkeitstabelle für die Anzahl an Kindern in der Stichprobe ist
+
+| $x_{i}$ | $n_{i}$ | $f_{i}$ | $N_{i}$ | $F_{i}$ |
+|--------:|--------:|--------:|--------:|--------:|
+| 0       | 2       | 0.08    | 2       | 0.08    |
+| 1       | 6       | 0.24    | 8       | 0.32    |
+| 2       | 14      | 0.56    | 22      | 0.88    |
+| 3       | 2       | 0.08    | 24      | 0.96    |
+| 4       | 1       | 0.04    | 25      | 1.00    |
+| **$\sum$**   | **25**  | **1.00**|        |        |
+
+: Kinder in Familien {#tbl-haufigkeitstabelle2}
+
+
+
+
+
+### Klassierung
+
+::: {.callout-tip appearance="default"}
+## Beispiel Körpergröße
+
+Von 30 Studierenden wurde die Körpergröße wie folgt gemessen:
+
+> 179, 173, 181, 170, 158, 174, 172, 166, 194, 185, 162, 187, 198, 177, 178, 165, 154, 188, 166, 171, 175, 182, 167, 169, 172, 186, 172, 176, 168, 187.
+:::
+
+Die dazugehörige Häufigkeitstabelle wäre sehr lang, da sich nur sehr wenige Werte wiederholen. Es ist daher üblich, Werte aus bestimmten Bereichen in so genannten "Klassen" zusammenzufassen.  
+
+::: {.callout-warning appearance="default"}
+## Definition "Klasse"
+Eine Klasse ist die Menge sämtlicher Messwerte, die innerhalb festgelegter Grenzen liegt. Diese festgelegten Klassen*grenzen* werden durch den kleinsten und den größten Messwert einer Klasse gebildet. Die Klassen*mitte* ist das arithmetische Mittel aus beiden Klassengrenzen. Die Klassen*breite* ist die Differenz der Klassengrenzen.
+:::
+
+Bei der Klassierung sollten grundsätzlich folgende Regeln beachtet werden:
+
+- die Anzahl der Klassen sollte nicht zu groß und nicht zu klein sein. Als Fausregel kann die Klassenanzahl auf $\sqrt n$ bzw. $log_{2}(n)$ gelegt werden. Für das Beispiel der Körpergrößen von 30 Studierenden gergeben sich $\sqrt{30} = 5,48 \approx \mathbf{5}$ Klassen.
+- die Klassen dürfen sich nicht überschneiden und müssen den gesamten Wertebereich abdecken. Ob die Intervalle links offen und rechts geschlossen sind oder umgekehrt, spielt keine Rolle.
+- Der kleinste Wert muss in der ersten Klasse liegen und der größte Wert in der letzten. 
+- Die Klassengrenzen werden mir runde und eckigen Klammer angegeben. Eine eckige Klammer bedeutet, dass der nachstehen Wert in die Klasse eingeschlossen wird, eine runde Klammer schließt die nebenstehende Zahl aus.
+
+::: {.callout-tip appearance="minimal"}
+
+- `(` oder `)` bedeutet größer  oder kleiner  **als**.
+- `[` oder `]` bedeutet größer-**gleich** oder kleiner-**gleich**.
+- bei `(` und `)` gehört der Wert **nicht** mehr zu der Klasse.
+- bei `[` und `]` **gehört** der Wert zu der Klasse.
+
+:::
+
+Eine Häufigkeitstabelle der klassierten Körpergrößen mit 5 Klassen sieht so aus:
+
+| $x_{i}$ | $n_{i}$ | $f_{i}$ | $N_{i}$ | $F_{i}$ |
+|--------:|--------:|--------:|--------:|--------:|
+| (150,160]      | 2       | 0.07    | 2       | 0.07    |
+| (160,170]      | 8       | 0.27    | 10      | 0.34    |
+| (170,180]      | 11      | 0.36    | 21      | 0.70    |
+| (180,190]      | 7       | 0.23    | 28      | 0.93    |
+| (190,200]      | 2       | 0.07    | 30      | 1.00    |
+| **∑**          | **30**  | **1.00**|         |         |
+
+
+### Häufigkeitstabellen qualitativer Daten
+
+::: {.callout-tip appearance="default"}
+## Beispiel Blutgruppen
+
+Bei 30 Studierenden wurden die Blutgruppen wie folgt bestimmt:
+
+> A, B, B, A, AB, 0, 0, A, B, B, A, A, A, A, AB, A, A, A, B, 0, B, B, B, A, A, A, 0, A, AB, 0
+:::
+
+Die Häufigkeitstabelle der Blutgruppen ist:
+
+| $x_{i}$  | $n_{i}$ | $f_{i}$   |
+|:----:|----:|----:|
+| 0   | 5  | 0.16 |
+| A   | 14 | 0.47 |
+| B   | 8  | 0.27 |
+| AB  | 3  | 0.10 |
+| $\sum$   | 30 | 1    |
+
+
+::: {.callout-caution appearance="default"}
+## Warum gibt es keine kumulativen Werte in der Tabelle?
+
+Da es sich um nominale Werte handelt, gibt es keine natürliche Reihenfolge. Theoretisch gäbe es 24 Kombinationsmöglichkeiten, um eine Reihenfolge zu erzwingen. Diese sind aber alle aussagelos.
+
+:::
+
+
+
+
+
+## Diagramme  
+
+Häufigkeitsverteilungen werden üblicherweise auch grafisch dargestellt. Abhängig von dem Typ der Variablen und ob die Daten klassiert wurden, gibt es verschiedene Arten von Diagrammen:  
+
+- Säulendiagramm  
+- Histogramm  
+- Liniendiagramm  
+- Kreisdiagramm  
+
+### Säulendiagramm  
+
+Ein Säulendiagramm besteht aus einer Reihe von Balken, einem für jeden Wert oder jede Kategorie der Variablen, die auf einem Koordinatensystem  dargestellt sind. Üblicherweise werden die Werte oder Kategorien der Variable auf der $x$-Achse und die Häufigkeiten auf der $y$-Achse dargestellt. Für jeden Wert oder jede Kategorie der Variablen wird ein Balken in der Höhe seiner Frequenz gezeichnet. Die Breite des Balkens ist nicht wichtig, aber die Balken sollten klar voneinander getrennt sein. 
+
+Abhängig von dem Typ der auf der $y$-Achse dargestellten Häufigkeit erhalten wir verschiedene Arten von Säulendiagrammen. Manchmal wird ein Polygon, bekannt als Frequenzpolygon, gezeichnet, indem die Spitzen jeder Bar durch gerade Linien verbunden  werden.
+
+:::{layout-ncol=2}
+
+
+```{r}
+#| label: haufig_sauelendiagramme
+#| echo: false
+#| warning: false
+#| fig-height: 5
+# Bar chart
+data <- read.table("data/children_cars_data.csv", header=TRUE, sep="\t", na.strings="NA", dec=".", strip.white=TRUE)
+tab <- table(data$children)
+
+# Absolute frequency bar chart of number of children
+par(cex.lab=1.2)
+barplot(tab, 
+        space=0.5, 
+        main="Absolute Häufigkeit der Anzahl an Kindern", 
+        xlab="Anzahl Kinder", 
+        ylab = expression("Absolute Häufigkeit " * h[i]),
+        col=blueceulight)
+
+```
+
+```{r}
+#| label: haufig_sauelendiagramme2
+#| echo: false
+#| warning: false
+#| fig-height: 5
+
+par(cex.lab=1.2)
+barplot(tab,
+        space=0.5, 
+        main="Absolute Häufigkeit der Anzahl an Kindern", 
+        xlab="Anzahl Kinder", 
+        ylab = expression("Absolute Häufigkeit " * h[i]),
+        col=blueceulight)
+lines(c(1,2.5,4,5.5,7),tab,col=redceu,lwd=3)
+
+```
+
+:::
+
+
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: haufig_sauelendiagramme3
+#| echo: false
+#| warning: false
+#| fig-height: 5
+tabcum <- cumsum(tab)
+par(cex.lab=1.2)
+barplot(tabcum, 
+        space=0.5, 
+        main="kumulative absolute Häufigkeit der Anzahl an Kindern", 
+        xlab="Anzahl Kinder", 
+        ylab = expression("kumulative absolute Häufigkeit " * H[i]),
+        col=blueceulight)
+
+```
+
+
+
+```{r}
+#| label: haufig_sauelendiagramme4
+#| echo: false
+#| warning: false
+#| fig-height: 5
+tabcum <- cumsum(tab)
+par(cex.lab=1.2)
+barplot(tabcum, 
+        space=0.5, 
+        main="kumulative absolute Häufigkeit der Anzahl an Kindern", 
+        xlab="Anzahl Kinder", 
+        ylab = expression("kumulative absolute Häufigkeit " * H[i]),
+        col=blueceulight)
+lines(c(0,1,1,2.5,2.5,4,4,5.5,5.5,7,7,8.5),c(0,0,2,2,8,8,22,22,24,24,25,25),
+      col=redceu, 
+      lwd=3)
+```
+
+
+
+:::
+
+
+
+
+### Histogramm  
+
+Ein Histogramm ist ähnlich wie ein Säulendiagramm, aber für klassierte Daten.  
+Die Klassen oder Gruppierungsintervalle werden üblicherweise auf der $x$-Achse dargestellt, und die Häufigkeiten auf der $y$-Achse. Für jede Klasse wird ein Balken in der Höhe seiner Frequenz gezeichnet. 
+
+Im Gegensatz zu Säulendiagrammen entspricht die Breite eines Balkens der Breite einer Klasse, und 
+es gibt keinen Platz zwischen zwei aufeinanderfolgenden Balken. Abhängig von dem Typ der auf der $y$-Achse dargestellten Häufigkeit erhalten wir verschiedene Arten von Histogrammen. Manchmal wird ein Polygon, bekannt als Frequenzpolygon, gezeichnet, indem die Spitzen jeder Bar verbunden werden.
+
+
+
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: haufig_histogram1
+#| echo: false
+#| warning: false
+#| fig-height: 5
+
+data <- read.table("data/height_weight_data.csv", 
+                   header=TRUE, sep="\t", 
+                   na.strings="NA", 
+                   dec=".", 
+                   strip.white=TRUE)
+par(cex.lab=1.2)
+hist(data$height, 
+     ylim=c(0,12), 
+     main="Absolute Häufigkeit der Körpergröße", 
+     xlab="Größe (cm)", 
+     ylab = expression("Absolute Häufigkeit " * h[i]),
+     col=blueceulight)
+```
+
+
+```{r}
+#| label: haufig_histogram2setup
+#| echo: false
+#| warning: false
+#| include: false
+par(cex.lab=1.2)
+(h <- hist(data$height, 
+     ylim=c(0,12), 
+     main="Absolute Häufigkeit der Körpergröße", 
+     xlab="Größe (cm)", 
+     ylab = expression("Absolute Häufigkeit " * h[i]),
+     col=blueceulight))
+```
+
+
+```{r}
+#| label: haufig_histogram2
+#| echo: false
+#| warning: false
+#| fig-height: 5
+library(agricolae)
+par(cex.lab=1.2)
+hist(data$height, 
+     ylim=c(0,12), 
+     main="Absolute Häufigkeit der Körpergröße", 
+     xlab="Größe (cm)", 
+     ylab = expression("Absolute Häufigkeit " * h[i]),
+     col=blueceulight)
+polygon.freq(h, frequency=1, col=redceu, lwd=3)
+
+```
+
+:::
+
+
+
+
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: haufig_histogram3
+#| echo: false
+#| warning: false
+#| fig-height: 5
+
+par(cex.lab=1.2)
+h <- hist(data$height, plot=FALSE)
+h$counts <- cumsum(h$counts)
+plot(h, 
+     main="kumulative absolute Häufigkeit der Körpergröße", 
+     xlab="GRöße (cm)", 
+     ylab = expression("kumulierte absolute Häufigkeit " * H[i]),
+     col=blueceulight)
+```
+
+```{r}
+#| label: haufig_histogram4
+#| echo: false
+#| warning: false
+#| fig-height: 5
+
+par(cex.lab=1.2)
+h <- hist(data$height, plot=FALSE)
+h$counts <- cumsum(h$counts)
+plot(h, 
+     main="kumulative absolute Häufigkeit der Körpergröße", 
+     xlab="GRöße (cm)", 
+     ylab = expression("kumulierte absolute Häufigkeit " * H[i]),
+     col=blueceulight)
+yy <- c(0, h$counts)
+lines(h$breaks, yy, lwd=3, col = redceu) 
+```
+
+:::
+
+
+Das kumulative Häufigkeitspolynom (für absolute oder relative Häufigkeiten) wird als **Ogive** bezeichnet. Beachten Sie, dass in der Ogive die rechte obere Ecke jeder Bar mit der Linien verbunden wird, anstatt des mittleren Punkts, weil wir die akkumulierte Häufigkeit einer Klasse nur am Ende des Intervalls erreichen.
+
+### Kreisdiagramm
+Ein Kreisdiagramm (auch *Tortendiagramm*) besteht aus einem Kreis, der in Scheiben geteilt ist, einer für jeden Wert oder jede Kategorie der Variablen. Jede Scheibe wird  als Sektion bezeichnet, und ihr Winkel oder Gebiet ist proportional zur Häufigkeit des entsprechenden Wertes. 
+
+Tortendiagramme können absolute oder relative Häufigkeiten darstellen, aber nicht kumulative Häufigkeiten, und sie werden bei nominalen Variablen verwendet. 
+
+Für ordinal  oder quantitative Variablen ist es besser, Säulendiagramme oder Histogramme zu verwenden, weil es einfacher ist, Unterschiede  in einer Dimension (Länge der Balken) wahrzunehmen als in zwei Dimensionen (Gebiete der Sektionen).
+
+
+
+```{r}
+#| label: haufig_Kreisdiagramm1
+#| echo: false
+#| warning: false
+data <- read.table("data/blood_types_data.csv", 
+                   header=TRUE, 
+                   sep="\t", 
+                   na.strings="NA", 
+                   dec=".", 
+                   strip.white=TRUE)
+
+par(cex.lab=1.2, 
+    mai=c(0,0,.5,0))
+tab <- table(data[["blood.type.child"]])
+labels <- labels(tab)[[1]]
+pctg <- round(tab/sum(tab)*100,2)
+labels <- paste(labels, pctg) # add percents to labels 
+labels <- paste(labels,"%",sep="") # ad % to labels 
+pie(tab, 
+    main="Relative Häufigkeit der Blutgruppen", 
+    labels=labels, 
+    col=c(greenceu, redceu, blueceu, "brown")
+    )
+
+```
+
+
+
+### Verteilungsformen
+
+Wenn wir metrische Daten erheben, wie z.B. die Anzahl der Krankenhausaufenthalte, dann
+stellen wir diese Daten als Häufigkeitstabelle oder Säulendiagramm dar.
+
+Dabei nehmen die Diagramme häufig *typische* Formen an.
+
+:::{layout-ncol=2}
+
+
+```{r}
+#| label: haufig_Verteilungsform1
+#| echo: false
+#| warning: false
+#| fig-height: 5
+#| fig-cap: linksgipflig (rechts-schief)
+
+par(cex.lab=1.2)
+income <- seq(2500,207500,5000)/1000
+counts <- c(4235, 4071, 6324, 6470, 6765, 6222, 6354, 5743, 5203, 5002, 5078, 4140, 4367, 3733, 3683, 3650, 3354, 2893, 2850, 2452, 2792, 2232, 2158, 1748, 1987, 1675, 1474, 1380, 1220, 1111, 1313, 1017, 993, 761, 822, 700, 677, 536, 561, 431, 314, 215)
+breaks <- seq(0,210000,5000)/1000
+data <- rep(income, counts)
+hist(data, 
+     main="Haushaltseinkommen in den USA", 
+     breaks=breaks, 
+     xaxt="n", 
+     xlab="Jahreseinkommen (1.000 $)", 
+     ylab = expression("relative Häufigkeit " * f[i]),
+     col=blueceulight, 
+     prob=T)
+axis(side=1, at=breaks, labels=breaks, las=2)
+
+```
+
+
+
+```{r}
+#| label: haufig_Verteilungsform2
+#| echo: false
+#| warning: false
+#| fig-height: 5
+#| fig-cap: rechtsgipflig (links-schief)
+
+par(cex.lab=1.2)
+counts <- c(65, 116, 69, 78, 319, 501, 633, 655, 848, 1226, 1633, 2459, 3375, 4669, 6152, 7436, 9526, 12619, 12455, 7113, 2104)
+breaks <- seq(0,100,5)
+data <- rep(breaks, counts)
+hist(data, 
+     main="Verteilung des Todesalters australiascher Männer",  
+     xlab="Todesalter", 
+     ylab = expression("relative Häufigkeit " * f[i]),
+     breaks = breaks, 
+     xaxt = "n", 
+     col = blueceulight, 
+     prob=T)
+axis(side=1, at=breaks, labels=breaks)
+
+```
+
+
+:::
+
+:::{layout-ncol=2}
+
+
+
+```{r}
+#| label: haufig_Verteilungsform3
+#| echo: false
+#| warning: false
+#| fig-height: 5
+#| fig-cap: gleichverteilt
+par(cex.lab=1.2)
+set.seed(123)
+time <- runif(1000, min = 0, max = 15)
+breaks <- seq(0, 15)
+hist(time, 
+     main="Wartezeit auf die U-Bahn", 
+     breaks=breaks, 
+     xaxt = "n", 
+     xlab = "Wartezeit (min)", 
+     ylab = expression("relative Häufigkeit " * f[i]),
+     col = blueceulight, 
+     prob = T)
+axis(side = 1, at = breaks, labels = breaks)
+
+```
+
+
+```{r}
+#| label: haufig_Verteilungsform4
+#| echo: false
+#| warning: false
+#| fig-height: 5
+#| fig-cap: mehrgipflig
+par(cex.lab=1.2)
+counts <- c(35, 20, 18, 48, 75, 67, 43, 22, 14, 21, 23, 47, 63, 44, 25, 15)
+breaks <- seq(8.5,23.5,1)
+data <- rep(breaks, counts)
+breaks <- seq(8,24)
+hist(data, 
+     main="Gäste pro Uhrzeit in einem Restaurant",  
+     xlab="Uhrzeit", 
+     ylab = expression("relative Häufigkeit " * f[i]),
+     breaks = breaks, 
+     xaxt="n", 
+     col=blueceulight, 
+     prob=T)
+axis(side=1, at=breaks, labels=breaks)
+
+```
+
+
+:::
+
+
+
+
+
+
+### Glockenkurven
+
+
+:::{layout-ncol=2}
+
+```{r}
+#| label: haufig_Glockenkurve1
+#| echo: false
+#| warning: false
+#| fig-height: 5
+#| fig-cap: normalverteilt
+par(cex.lab=1.2)
+set.seed(1234)
+data <- rnorm(10000, mean = 169, sd = 8)
+breaks <- seq(130, 200, 2)
+hist(data, 
+     main="Körpergröße Frauen", 
+     breaks=breaks, 
+     xaxt = "n", 
+     xlab = "Größe (cm)", 
+     ylab = expression("relative Häufigkeit " * f[i]),
+     col = blueceulight, 
+     prob = T)
+polygon(density(data), border = "blue")
+axis(side = 1, at = breaks, labels = breaks)
+
+
+```
+
+
+
+
+
+```{r}
+#| label: haufig_Glockenkurve2
+#| echo: false
+#| warning: false
+#| fig-height: 5
+#| fig-cap: normalverteilt
+par(cex.lab=1.2)
+set.seed(1234)
+data <- rnorm(10000, mean = 179, sd = 9)
+
+breaks <- seq(140, 212, 2)
+hist(data, 
+     main="Körpergröße Männer", 
+     breaks=breaks, 
+     xaxt = "n", 
+     xlab = "Größe (cm)", 
+     ylab = expression("relative Häufigkeit " * f[i]),
+     col = blueceulight, 
+     prob = T)
+polygon(density(data), border = "blue")
+axis(side = 1, at = breaks, labels = breaks)
+
+
+```
+
+
+:::
+
+
+```{r}
+#| label: haufig_Glockenkurve3
+#| echo: false
+#| warning: false
+#| fig-height: 5
+data.women <- rnorm(10000, mean = 169, sd = 8)
+data.men <- rnorm(10000, mean = 179, sd = 9)
+breaks <- seq(130, 214, 2)
+hist(data.women, 
+     main="Körpergröße nach Geschlecht", 
+     breaks=breaks, 
+     xaxt = "n", 
+     xlab = "Größe (cm)", 
+     ylab = expression("relative Häufigkeit " * f[i]),
+     col = blueceulight, 
+     prob = T)
+hist(data.men, 
+     breaks=breaks, 
+     xaxt = "n", 
+     col = redceulight, 
+     prob = T, 
+     add = T)
+polygon(density(data.women), border = "blue")
+polygon(density(data.men), border = "red")
+axis(side = 1, at = breaks, labels = breaks)
+legend("topright", 
+       legend=c("Frauen", "Männer"), 
+       fill=c(blueceulight, redceulight), 
+       cex=0.8)
+
+```
+Die Glockenkurvenverteilung tritt so häufig in der Natur auf, dass sie als **Normalverteilung** oder **Gaußsche Verteilung** bekannt ist.
+
+
+```{r}
+#| label: haufig_Glockenkurve4
+#| echo: false
+#| warning: false
+#| fig-height: 5
+
+par(cex.lab=1.2)
+x <- seq(-3.3, 3.3, by=0.05)
+plot(x, dnorm(x, mean=0, sd=1), 
+     ylim=c(0,0.45), 
+     main="Gauß'sche Glockenkurve", 
+     type="l", 
+     col=purpleceu, 
+     lwd=3, 
+     axes = F, 
+     xlab = "", ylab = "")
+
+```
+
+
+\newpage
+
+### Liniendiagramme
+
+Liniendiagramme (auch *Polygonzüge*) eignen sich, um zeitliche Verläufe
+darzustellen – und sollten auch nur dafür verwendet werden.
+
+```{r}
+#| label: haufig_Liniendiagramm1
+#| echo: false
+#| warning: false
+#| fig-height: 5
+Jahr <- 2011:2015
+Anteil <- c(17.5, 22.5, 30, 28, 32.5)
+df <- data.frame(Jahr, Anteil)
+
+# Plot
+plot(Jahr, Anteil,
+     type = "o",              # Punkte und Linie
+     col = "blue",            # Farbe
+     pch = 16,                # Punktcharakter (gefüllter Kreis)
+     ylim = c(0, 35),         # y-Achse: 0 bis 35
+     yaxt = "n",              # y-Achse manuell
+     xlab = "",               # Kein x-Achsentitel
+     ylab = "",               # Kein y-Achsentitel
+     main = "Anteil immobiler Bewohner"  # Titel
+)
+
+# y-Achse mit Prozent-Beschriftung
+axis(2, at = seq(0, 35, 5), labels = paste0(seq(0, 35, 5), "%"))
+```
+
+
+:::{layout-ncol=3}
+
+```{r}
+#| label: haufig_Liniendiagramm2a
+#| echo: false
+#| warning: false
+#| fig-height: 5
+
+# Plot
+plot(Jahr, Anteil,
+     type = "o",              # Punkte und Linie
+     col = "blue",            # Farbe
+     pch = 16,                # Punktcharakter (gefüllter Kreis)
+     ylim = c(0, 35),         # y-Achse: 0 bis 35
+     yaxt = "n",              # y-Achse manuell
+     xlab = "",               # Kein x-Achsentitel
+     ylab = "",               # Kein y-Achsentitel
+     main = "Anteil immobiler Bewohner",
+     cex.axis = 1.8,   # Schriftgröße der Achsenbeschriftung
+     cex.lab = 1.5,    # Schriftgröße der Achsentitel (xlab/ylab, falls verwendet)
+     cex.main = 1.6    # Schriftgröße des Haupttitels
+)
+# y-Achse mit Prozent-Beschriftung
+axis(2, at = seq(0, 35, 5), labels = paste0(seq(0, 35, 5), "%"), 
+     cex.axis = 1.8, las=2)
+
+
+```
+
+
+
+```{r}
+#| label: haufig_Liniendiagramm2b
+#| echo: false
+#| warning: false
+#| fig-height: 5
+
+# Plot
+plot(Jahr, Anteil,
+     type = "o",              # Punkte und Linie
+     col = "blue",            # Farbe
+     pch = 16,                # Punktcharakter (gefüllter Kreis)
+     ylim = c(0, 100),         # y-Achse: 0 bis 35
+     yaxt = "n",              # y-Achse manuell
+     xlab = "",               # Kein x-Achsentitel
+     ylab = "",               # Kein y-Achsentitel
+     main = "Anteil immobiler Bewohner",
+     cex.axis = 1.8,   # Schriftgröße der Achsenbeschriftung
+     cex.lab = 1.5,    # Schriftgröße der Achsentitel (xlab/ylab, falls verwendet)
+     cex.main = 1.6    # Schriftgröße des Haupttitels
+)
+# y-Achse mit Prozent-Beschriftung
+axis(2, at = c(seq(0, 80, 20),99), labels = paste0(c(seq(0, 80, 20),99), "%"), 
+     cex.axis = 1.8, las=2)
+
+
+```
+
+
+
+
+```{r}
+#| label: haufig_Liniendiagramm2c
+#| echo: false
+#| warning: false
+#| fig-height: 5
+
+# Plot
+plot(Jahr, Anteil,
+     type = "o",              # Punkte und Linie
+     col = "blue",            # Farbe
+     pch = 16,                # Punktcharakter (gefüllter Kreis)
+     ylim = c(17, 35),         # y-Achse: 0 bis 35
+     yaxt = "n",              # y-Achse manuell
+     xlab = "",               # Kein x-Achsentitel
+     ylab = "",               # Kein y-Achsentitel
+     main = "Anteil immobiler Bewohner",
+     cex.axis = 1.8,   # Schriftgröße der Achsenbeschriftung
+     cex.lab = 1.5,    # Schriftgröße der Achsentitel (xlab/ylab, falls verwendet)
+     cex.main = 1.6    # Schriftgröße des Haupttitels
+)
+# y-Achse mit Prozent-Beschriftung
+axis(2, at = c(17, 25, 32), 
+     labels = paste0(c(17, 25, 30), "%"), 
+     cex.axis = 1.8, 
+     las=2)
+
+```
+
+:::
+
+
+::: {.callout-caution appearance="simple"}
+In allen drei Diagrammen sind identische Werte abgetragen. Durch die unterschiedliche Skalierung der $y$-Achse entsteht aber ein sehr unterschiedlicher Eindruck.
+:::
+
+## Ausreißer  
+
+Eines der größten Probleme in Stichproben sind Ausreißer, also Werte, die sehr von den restlichen Werten der Stichprobe abweichen. Es ist wichtig, Ausreißer zu identifizieren, bevor man irgendwelche Analysen durchführt, denn Ausreißer verzerren meistens die Ergebnisse.
+
+
+![](images/Haufigkeit_outlier_de.png)
+
+Ausreißer tauchen immer am Ende der Verteilung auf und können mit einem Box-und-Whisker-Diagramm leicht identifiziert werden (wie später gezeigt wird).  
+
+### Ausreißerhandhabung  
+
+Bei großen Stichproben haben Ausreißer weniger Bedeutung und können unbeachtet gelassen werden.   Bei kleinen Stichproben gibt es mehrere Optionen:  
+
+- **Entferne die Ausreißer**, da es sich um *fehlerhafte* Werte handelt.  
+- **Ersetze die Ausreißer** durch den kleinsten oder größten Wert in der Verteilung, der selbst kein Ausreißer ist.
+- **Lasse die Ausreißer**, und ändere das theoretische Modell, so dass die Ausreißer erklärbar werden.
+
+

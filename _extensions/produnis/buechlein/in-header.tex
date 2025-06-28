@@ -1,0 +1,41 @@
+%% Packete laden und Einstellungen machen -----------------
+\usepackage[scale=1]{ccicons}
+\usepackage{lipsum}
+\usepackage{acronym}
+\usepackage[headsepline,footsepline]{scrlayer-scrpage}
+\usepackage{colortbl}
+\usepackage{lastpage} %fancy footer and header
+\usepackage{lipsum}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{rotating}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\usepackage{wrapfig}
+\automark[chapter]{chapter}
+\renewcommand*{\partmark}[1]{}
+\setkomafont{pageheadfoot}{\normalcolor\footnotesize\scshape}
+\setkomafont{pagenumber}{\normalfont\normalsize}
+\ModifyLayer[addvoffset=-.6ex]{scrheadings.foot.above.line}% Linie verschieben
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\newcommand{\R}[0]{\includegraphics[width=0.025\textwidth]{images/gnurlogo.png}\ }
+%----------------------------------------------------------
+% === HSNR colors ==============================
+\definecolor{linkblue}{RGB}{17, 40, 73}
+\definecolor{HSNRblue1}{RGB}{24,81,145}
+\definecolor{HSNRblue2}{RGB}{7,161,226}
+\definecolor{coral}{rgb}{1,0.5,0.31} % Orange color for graphics
+\definecolor{skyblue}{rgb}{0.529, 0.808, 0.922}
+\newcommand{\HSNRth}[1]{\cellcolor{HSNRblue1}\color{white}\large\textbf{#1}}
+\newcommand{\HSNRthb}[1]{\cellcolor{HSNRblue2}\color{white}\large\textbf{#1}}
+\newcommand{\REDth}[1]{\cellcolor{lightred}\color{black}#1}
+\addtokomafont{part}{\color{HSNRblue1}}
+\addtokomafont{chapter}{\color{HSNRblue1}}
+\addtokomafont{section}{\color{HSNRblue1}}
+\addtokomafont{subsection}{\color{HSNRblue2}}
+\addtokomafont{subsubsection}{\color{HSNRblue2}}
+\addtokomafont{paragraph}{\color{HSNRblue2}}
+%-----------------------------------------------------
+\setmainfont{Times New Roman}
+%-----------------------------------------------------

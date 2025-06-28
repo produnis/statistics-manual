@@ -1,0 +1,9 @@
+# Literatur {.unnumbered}
+
+::: {#refs}
+:::
+
+
+# Bildquellen {.unnumbered}
+
+- @fig-windmuehle1: [Alfredo Sánchez Alberca](https://aprendeconalf.es/en/teaching/statistics/manual/introduction/)

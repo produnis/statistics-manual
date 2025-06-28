@@ -1,0 +1,69 @@
+
+```{r}
+#| label: SETUP
+#| echo: false
+#| warning: false
+library(tidyverse)
+```
+
+Dies ist ein grundlegender Leitfaden der Statistik, der die deskriptive Statistik, Regression, Wahrscheinlichkeit und die Grundlagen der Inferenz abdeckt (Konfidenzintervalle und parametrische Hypothesentests). Grundlage bildet dabei das Werk von
+ @alberca_2023^[siehe <https://github.com/asalber/statistics-manual>], dessen Kapitel in der vorliegenden Version umfangreich ergänzt wurden.
+
+Der Quelltext des Buches steht unter <https://github.com/produnis/statistics-manual> zur Verfügung.
+
+\smallskip\ 
+
+## Lizenz {.unnumbered}
+
+![](images/ccbyncsa.png){width=2.2cm}
+
+Dieses Werk ist unter der `CC BY-NC-SA 4.0`^[siehe <https://creativecommons.org/licenses/by-nc-sa/4.0/>] lizensiert.
+
+\small
+
+Sie dürfen:
+
+- **Teilen** — das Material in jedwedem Format oder Medium vervielfältigen und weiterverbreiten.
+- **Bearbeiten** — das Material remixen, verändern und darauf aufbauen.
+
+Unter folgenden Bedingungen:
+
+- \ccAttribution\  **Namensnennung** — Sie müssen angemessene Urheber- und Rechteangaben machen , einen Link zur Lizenz beifügen und angeben, ob Änderungen vorgenommen wurden. Diese Angaben dürfen in jeder angemessenen Art und Weise gemacht werden, allerdings nicht so, dass der Eindruck entsteht, der Lizenzgeber unterstütze gerade Sie oder Ihre Nutzung besonders.
+- \ccNonCommercialEU\  **Nicht kommerziell** — Sie dürfen das Material nicht für kommerzielle Zwecke nutzen.
+- \ccShareAlike\     **Weitergabe unter gleichen Bedingungen** — Wenn Sie das Material remixen, verändern oder anderweitig direkt darauf aufbauen, dürfen Sie Ihre Beiträge nur unter derselben Lizenz wie das Original verbreiten. 
+- **Keine weiteren Einschränkungen** — Sie dürfen keine zusätzlichen Klauseln oder technische Verfahren einsetzen, die anderen rechtlich irgendetwas untersagen, was die Lizenz erlaubt.
+
+\vfill
+
+::: {.callout-tip}
+## **Zitationsvorschlag**
+große Schlarmann, J (2025): "Grundlagen der Statistik. Einführung in die deskriptive und inferentielle Statistik", Hochschule Niederrhein, <https://www.produnis.de/manual/>
+
+\scriptsize
+
+```bibtex
+@book{grSchl_exeRcise,
+	author = {{große Schlarmann}, Jörg},
+	title = {Grundlagen der Statistik. Einführung in die deskriptive und inferentielle Statistik},
+	year = {2025},
+	publisher = {Hochschule Niederrhein},
+	address = {Krefeld},
+	copyright = {CC BY-NC-SA 4.0},
+	url = {https://www.produnis.de/manual},
+	language = {de},
+}
+```
+
+:::
+
+\normalsize
+
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Inhaltsverzeichnis}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\renewcommand\pagemark{{\usekomafont{pagenumber}\thepage\ von \pageref{LastPage}}}
