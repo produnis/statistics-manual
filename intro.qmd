@@ -138,20 +138,72 @@ das Motiv zu kennen. Wenn es eine hohe Variabilität in den Farben gibt, wird ei
 
 Die unten stehende Abbildung enthält eine kleine Stichprobe von Pixeln eines Fotos. Können Sie das Motiv des Bildes erkennen?
 
-![Mit einem kleinen Stichprobenumfang ist es schwierig, das Bildmotiv zu ermitteln!](images/Einleitung_sample_windmill1.jpg)
+
+```{=latex}
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{images/Einleitung_sample_windmill1.jpg}
+\caption{Mit einem kleinen Stichprobenumfang ist es schwierig, das Bildmotiv zu ermitteln!}
+\end{figure}
+```
+
+```{=html}
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Einleitung_sample_windmill1.jpg" class="img-fluid figure-img"></p>
+<figcaption>Mit einem kleinen Stichprobenumfang ist es schwierig, das Bildmotiv zu ermitteln!</figcaption>
+</figure>
+</div>
+```
 
 Wahrscheinlich ist es Ihnen schwer gefallen das Motiv zu erkennen, weil die Anzahl der ausgewählten Pixel in der Stichprobe zu gering ist, um die Farbenvielfalt im Bild zu verstehen. 
 
 Die nächste Abbildung unten enthält eine größere Stichprobe. Könnten Sie das Motiv des Bildes jetzt erkennen? 
 
 
-![Mit einer großen Stichprobe ist es leichter, das Motiv des Bildes zu erkennen!](images/Einleitung_sample_windmill2.jpg)
+
+```{=latex}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{images/Einleitung_sample_windmill2.jpg}
+\caption{Mit einer großen Stichprobe ist es leichter, das Motiv des Bildes zu erkennen!}
+\end{figure}
+```
+
+```{=html}
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Einleitung_sample_windmill2.jpg" class="img-fluid figure-img"></p>
+<figcaption>Mit einer großen Stichprobe ist es leichter, das Motiv des Bildes zu erkennen!</figcaption>
+</figure>
+</div>
+```
 
 
 
-Der Vollständigkeit halber enthält nachfolgende @fig-windmuehle1 alle Pixeln der Grundgesamtheit.
 
-![Originalauflösung](images/Einleitung_sample_windmill3.jpg){#fig-windmuehle1}
+Der Vollständigkeit halber enthält nachfolgende Abbildung alle Pixeln der Grundgesamtheit.
+
+
+
+```{=latex}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{images/Einleitung_sample_windmill3.jpg}
+\caption{Originalauflösung}
+\label{fig-windmuehle1}
+\end{figure}
+```
+
+```{=html}
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure" id="fig-windmuehle1">
+<p><img src="images/Einleitung_sample_windmill3.jpg" class="img-fluid figure-img"></p>
+<figcaption>Originalauflösung</figcaption>
+</figure>
+</div>
+```
+
 
 Es ist häufig nicht erforderlich, alle Pixel eines Fotos zu verwenden, um das Motiv zu erkennen!
 
@@ -164,7 +216,24 @@ Es ist häufig nicht erforderlich, alle Pixel eines Fotos zu verwenden, um das M
 Die Statistik basiert grundlegend auf der induktiven Schlußweise, weil sie die Informationen, die von Stichproben gewonnen wurden, verwendet, um Rückschlüsse über die Grundgesamtheit zu ziehen.
 
 
-![](images/Einleitung_InduktionDeduktion.png)
+
+```{=latex}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{images/Einleitung_InduktionDeduktion.png}
+\end{figure}
+```
+
+```{=html}
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Einleitung_InduktionDeduktion.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+```
+
+
+
 
 
 
@@ -232,7 +301,24 @@ Eine statistische Variable ist eine Eigenschaft oder ein Merkmal, das bei den In
 :::
 
 
-![](images/Einleitung_statistical_variables.png)
+
+
+```{=latex}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{images/Einleitung_statistical_variables.png}
+\end{figure}
+```
+
+```{=html}
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Einleitung_statistical_variables.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+```
+
+
 
 
 
@@ -479,5 +565,22 @@ Eine statistische Untersuchung durchläuft meist die folgenden Phasen:
 
 
 
-![Der statistische Kreislauf](images/Einleitung_Statistikkreis.png)
+```{=latex}
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{images/Einleitung_Statistikkreis.png}
+\caption{Der statistische Kreislauf}
+\end{figure}
+```
+
+```{=html}
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Einleitung_Statistikkreis.png" class="img-fluid figure-img"></p>
+<figcaption>Der statistische Kreislauf</figcaption>
+</figure>
+</div>
+```
+
+
 

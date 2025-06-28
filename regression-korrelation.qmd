@@ -155,6 +155,8 @@ Die Form der Punktwolke gibt Aufschluss über die Art der Beziehung zwischen den
 
 ```{r}
 #| label: regression2
+#| fig-width: 7
+#| fig-height: 5
 par(mfrow=c(2,3))
 par(mar=c(1,1,1.4,1))
 x=runif(100,-10,10)
@@ -701,6 +703,8 @@ Beachten Sie, dass die Regressionsgeraden unterschiedlich sind!
 
 ```{r}
 #| label: regressionslinien1
+#| fig-width: 6
+#| fig-height: 4
 par(mar=c(2.9,2.9,2,1), 
     mgp=c(1.8,0.4,0), 
     cex.lab=1, 
@@ -712,7 +716,7 @@ plot(weight~height,
      main="Regressionsgeraden von Größe und Gewicht", 
      xlab="Größe (cm)", 
      ylab="Gewicht (Kg)", 
-     xlim=c(150,200), 
+     xlim=c(150,205), 
      pch=16, 
      data=data)
 abline(-108.49,1.02, lwd=2, col="darkgreen")
@@ -920,6 +924,8 @@ mean <- mean(data[["weight"]])
 
 ```{r}
 #| label: Rauschen
+#| fig-width: 7
+#| fig-height: 6
 par(mar = c(2.9, 2.9, 2,1), 
     mgp = c(1.8, 0.4, 0), 
     cex.lab = 1, 
@@ -1134,6 +1140,8 @@ Dies bedeutet, dass es eine relativ starke steigende lineare Beziehung zwischen 
 
 ```{r}
 #| label: diffCorrelation
+#| fig-width: 7
+#| fig-height: 6
 n = 100
 par(mfrow=c(3,3))
 

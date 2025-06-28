@@ -208,6 +208,8 @@ In einem Interaktionsplot wären die Linien für die Gruppen parallel (innerhalb
 
 ```{r}
 #| label: meddiät1
+#| fig-width: 6
+#| fig-height: 5
 # Daten definieren
 werte <- matrix(c(0, 5, 3, 8), nrow = 2, byrow = TRUE)
 colnames(werte) <- c("Medikament Nein", "Medikament Ja")
@@ -276,6 +278,8 @@ In einem Interaktionsplot wären die Linien nicht parallel, sondern würden sich
 
 ```{r}
 #| label: meddiät2
+#| fig-width: 6
+#| fig-height: 5
 # Daten definieren
 werte <- matrix(c(0, 5, 3, 12), nrow = 2, byrow = TRUE)
 colnames(werte) <- c("Medikament Nein", "Medikament Ja")
@@ -354,6 +358,8 @@ Der Interaktionsterm wäre in diesem Fall statistisch signifikant negativ. Grafi
 
 ```{r}
 #| label: meddiät3
+#| fig-width: 6
+#| fig-height: 5
 # Daten definieren
 werte <- matrix(c(0, 5, 3, 4), nrow = 2, byrow = TRUE)
 colnames(werte) <- c("Medikament Nein", "Medikament Ja")
@@ -657,6 +663,8 @@ Wenn bei einer ANOVA zur Überprüfung des Einflusses verschiedener Faktoren auf
 
 ```{r}
 #| label: ancova1
+#| fig-width: 7
+#| fig-height: 5
 set.seed(123)
 
 BMI_d1 <- runif(30, 20, 28)   # Diät 1: niedrigere BMI-Werte
@@ -677,7 +685,7 @@ plot(BMI, gewichtverlust1,
      ylab = "Gewichtsverlust (kg)",
      main = "Kovariable signifikant, Faktor nicht signifikant")
 
-legend("topright", 
+legend("topleft", 
        legend = c("Diät 1", "Diät 2"), 
        col = c("steelblue", "darkred"), 
        pch = 19)
@@ -694,6 +702,8 @@ abline(lm(gewichtverlust1 ~ BMI), col = "black", lwd = 2)
 
 ```{r}
 #| label: ancova2
+#| fig-width: 7
+#| fig-height: 5
 gewichtverlust2_d1 <- 10 + 0.3 * BMI[faktor=="Diät1"] + rnorm(30, 0, 1)
 
 gewichtverlust2_d2 <- 12 + 0.3 * BMI[faktor=="Diät2"] + rnorm(30, 0, 1)
@@ -708,7 +718,7 @@ plot(BMI, gewichtverlust2,
      ylab = "Gewichtsverlust (kg)",
      main = "Kovariable und Faktor signifikant")
 
-legend("topright", 
+legend("topleft", 
        legend = c("Diät 1", "Diät 2"), 
        col = c("steelblue", "darkred"), 
        pch = 19)

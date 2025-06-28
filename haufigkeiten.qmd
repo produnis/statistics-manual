@@ -432,7 +432,6 @@ Für ordinal  oder quantitative Variablen ist es besser, Säulendiagramme oder H
 #| label: haufig_Kreisdiagramm1
 #| echo: false
 #| warning: false
-#| fig-height: 5
 data <- read.table("data/blood_types_data.csv", 
                    header=TRUE, 
                    sep="\t", 

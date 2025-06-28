@@ -77,7 +77,7 @@ csl: apa-single-spaced.csl
 execute: 
   warning: false
   echo: false
-  fig-height: 5
+  #fig-height: 5
 lang: de
 cover-image: images/Titelbild.jpg
 #language:

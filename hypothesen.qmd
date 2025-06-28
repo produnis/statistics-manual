@@ -355,7 +355,8 @@ Nach Festlegung des tolerierbaren $\alpha$-Risikos können die Regionen für Ann
 
 ```{r}
 #| label: bereichDiagramm1
-
+#| fig-width: 6
+#| fig-height: 5
 
 x = seq(-3.48, 3.49, by=0.05)
 y = dnorm(x,mean=0,sd=1)
@@ -406,6 +407,8 @@ text(x[121], -0.1, "Ablehnung", xpd=TRUE)
 
 ```{r}
 #| label: bereichDiagramm2
+#| fig-width: 6
+#| fig-height: 5
 
 x = seq(-3.48, 3.49, by=0.05)
 y = dnorm(x, mean=0, sd=1)
@@ -555,9 +558,13 @@ beträgt. Dies zeigt, dass dieser Test ungeeignet wäre, um Unterschiede von 10%
 
 Das $\beta$-Risiko hängt direkt von der minimalen Differenz $\delta$ ab, die im Vergleich zum unter der Nullhypothese angenommenen Parameterwert erkannt werden soll.
 
+:::{layout-ncol=2}
 
 ```{r}
 #| label: betadelta1
+#| fig-width: 7
+#| fig-height: 5
+#| fig-pos: "h"
 # Parameter
 mu_foo <- 0           
 mu_bar <- 2.7           
@@ -623,6 +630,9 @@ text(mu_bar+0.4, -0.02, "Ablehnungsbereich")
 
 ```{r}
 #| label: betadelta2
+#| fig-width: 7
+#| fig-height: 5
+#| fig-pos: "h"
 mu_foo <- 0           
 mu_bar <- 3.3           
 sigma <- 1            
@@ -685,6 +695,8 @@ text(mu_bar, y_max + 0.035, expression(H[1]:~theta == theta[0] + delta), cex=1)
 text(mu_foo+0.1, -0.02, "Annahmebereich")
 text(mu_bar+0.1, -0.02, "Ablehnungsbereich")
 ```
+:::
+
 
 
 ::: {.callout-tip appearance="default"}
@@ -721,8 +733,13 @@ wobei der Test damit immer noch eine geringe Power aufweist.
 
 Die Fehlerwahrscheinlichkeiten $\alpha$ und $\beta$ stehen in einem Spannungsverhältnis: Wenn die eine steigt, sinkt in der Regel die andere – und umgekehrt.
 
+:::{layout-ncol=2}
+
 ```{r}
 #| label: betadelta3
+#| fig-width: 7
+#| fig-height: 5
+#| fig-pos: "h"
 # Parameter
 mu_foo <- 0           
 mu_bar <- 2.7           
@@ -788,6 +805,9 @@ text(mu_bar+0.4, -0.02, "Ablehnungsbereich")
 
 ```{r}
 #| label: betadelta4
+#| fig-width: 7
+#| fig-height: 5
+#| fig-pos: "h"
 # Parameter
 mu_foo <- 0           
 mu_bar <- -2.7            # nach links verschoben für den linksseitigen Test
@@ -851,6 +871,7 @@ text(mu_foo, -0.02, "Ablehnungsbereich")
 text(mu_bar - 0.7, -0.02, "Annahmebereich")
 
 ```
+:::
 
 
 ::: {.callout-tip appearance="default"}
@@ -884,8 +905,13 @@ angestiegen ist.
 Die Fehlerrisiken hängen ebenfalls vom Stichprobenumfang ab, denn mit zunehmender Stichprobengröße verringert sich die Streuung der Teststatistik und damit auch die Fehlerrisiken.
 
 
+:::{layout-ncol=2}
+
 ```{r}
 #| label: fehlerrisiko1
+#| fig-width: 7
+#| fig-height: 5
+#| fig-pos: "h"
 mu_foo <- 0           
 mu_bar <- 3.2           
 sigma <- 1.1            
@@ -955,6 +981,9 @@ text(mu_bar+0.1, -0.02, "Ablehnungsbereich")
 
 ```{r}
 #| label: fehlerrisiko2
+#| fig-width: 7
+#| fig-height: 5
+#| fig-pos: "h"
 mu_foo <- 0           
 mu_bar <- 3.3           
 sigma <- 0.8            
@@ -1017,6 +1046,8 @@ text(mu_bar, y_max + 0.035, expression(H[1]:~theta == theta[0] + delta), cex=1)
 text(mu_foo+0.1, -0.02, "Annahmebereich")
 text(mu_bar+0.1, -0.02, "Ablehnungsbereich")
 ```
+:::
+
 
 ::: {.callout-tip appearance="default"}
 ## Beispiel
@@ -1068,6 +1099,9 @@ Die zugehörige Power-Kurve des Tests zur Prüfung des Männeranteils in der Bev
 
 ```{r}
 #| label: powerkurve1
+#| fig-width: 7
+#| fig-height: 5
+#| fig-pos: "h"
 # Parameter
 alpha <- 0.05
 p0 <- 0.5                           # Nullhypothese
