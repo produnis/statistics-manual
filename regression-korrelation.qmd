@@ -1,5 +1,10 @@
 ---
 title: Regression und Korrelation
+format:
+  html:
+    include-in-header: 
+      text: |
+        <img src="https://vg08.met.vgwort.de/na/a3c9bc1e96f44c11ba86397e3e44bbf2" width="1" height="1" alt="">
 ---
 
 Im vorherigen Kapitel haben wir gelernt, wie man die Verteilung einer einzelnen Variable in einer Stichprobe beschreibt. Allerdings müssen in den  meisten Fällen mehrere Variablen beschrieben werden, die oft miteinander verbunden sind. Beispielsweise sollte eine Ernährungsstudie alle Variablen berücksichtigen, die mit dem Gewicht in Zusammenhang stehen könnten, wie z.B. Größe, Alter, Geschlecht, Rauchen, Ernährung und körperliche  Betätigung.

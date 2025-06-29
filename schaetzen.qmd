@@ -1,5 +1,10 @@
 ---
 title: Schätzen der Populationsparameter
+format:
+  html:
+    include-in-header: 
+      text: |
+        <img src="https://vg08.met.vgwort.de/na/fc0955c5d9af47bab0b7a96e0c8f0605" width="1" height="1" alt="">
 ---
 
 Die Wahrscheinlichkeitsverteilungsmodelle, die im vorherigen Abschnitt behandelt wurden, erklären das Verhalten von Zufallsvariablen. Hierfür muss bekannt sein,  welchem Verteilungsmodell eine bestimmte Variable folgt. Dies ist der erste Schritt der 

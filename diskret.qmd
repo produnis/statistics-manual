@@ -1,5 +1,10 @@
 ---
 title: Diskrete Zufallsvariablen
+format:
+  html:
+    include-in-header: 
+      text: |
+        <img src="https://vg08.met.vgwort.de/na/34d35430253740d6831474d73d022ff7" width="1" height="1" alt="">
 ---
 
 

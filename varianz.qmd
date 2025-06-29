@@ -1,5 +1,10 @@
 ---
 title: Varianzanalysen
+format:
+  html:
+    include-in-header: 
+      text: |
+        <img src="https://vg08.met.vgwort.de/na/d11328778a744ba898dacf73c72bd84a" width="1" height="1" alt="">
 ---
 
 

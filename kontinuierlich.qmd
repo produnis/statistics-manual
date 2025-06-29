@@ -1,5 +1,10 @@
 ---
 title: Kontinuierliche Zufallsvariablen
+format:
+  html:
+    include-in-header: 
+      text: |
+        <img src="https://vg08.met.vgwort.de/na/44998c724f144162ba4b49f3afbdc55e" width="1" height="1" alt="">
 ---
 
 Kontinuierliche Zufallsvariablen können im Gegensatz zu diskreten Zufallsvariablen jeden Wert in einem echten Intervall annehmen. Daher ist der Bereich einer kontinuierlichen Zufallsvariablen unendlich und nicht abzählbar. Diese Vielzahl von Werten macht es unmöglich, die Wahrscheinlichkeit für jeden einzelnen zu berechnen, wodurch es nicht möglich ist, ein Wahrscheinlichkeitsmodell über eine 

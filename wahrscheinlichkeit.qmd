@@ -1,5 +1,10 @@
 ---
 title: Wahrscheinlichkeit
+format:
+  html:
+    include-in-header: 
+      text: |
+        <img src="https://vg08.met.vgwort.de/na/488822d57f92491f886e46fbf6d962fb" width="1" height="1" alt="">
 ---
 
 Die deskriptive Statistik bietet Methoden zur Beschreibung der in der Probe gemessenen Variablen und ihrer Beziehungen, ermöglicht jedoch  keine Schlüsse aus dieser Probe auf die Grundgesamtheit.
@@ -1024,6 +1029,8 @@ $$
 
 ```{r}
 #| label: plotgesamtprob
+#| fig-width: 6
+#| fig-height: 5
 # Basis-Plot vorbereiten
 plot(NULL, 
      xlim = c(-0.5, 4), 
@@ -1611,6 +1618,8 @@ Die Odds Ratio überschätzt stets das Relative Risiko, wenn es größer als 1 i
 
 ```{r}
 #| label: ORvsRR
+#| fig-width: 7
+#| fig-height: 5
 r <- c(0.01, 0.05, 0.1, 0.2, 0.3, 0.5)
 # odds ratio
 or <- seq(0,10,0.1)
