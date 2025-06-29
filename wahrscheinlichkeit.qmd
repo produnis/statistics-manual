@@ -1,7 +1,7 @@
 ---
 title: Wahrscheinlichkeit
 format:
-  html:
+  buechlein-html:
     include-in-header: 
       text: |
         <img src="https://vg08.met.vgwort.de/na/488822d57f92491f886e46fbf6d962fb" width="1" height="1" alt="">

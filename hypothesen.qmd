@@ -1,7 +1,7 @@
 ---
 title: Parametrische Hypothesentests
 format:
-  html:
+  buechlein-html:
     include-in-header: 
       text: |
         <img src="https://vg08.met.vgwort.de/na/84969e4432aa4268a3b1441d4d0fa841" width="1" height="1" alt="">

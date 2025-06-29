@@ -1,7 +1,7 @@
 ---
 title: Kontinuierliche Zufallsvariablen
 format:
-  html:
+  buechlein-html:
     include-in-header: 
       text: |
         <img src="https://vg08.met.vgwort.de/na/44998c724f144162ba4b49f3afbdc55e" width="1" height="1" alt="">

@@ -1,7 +1,7 @@
 ---
 title: "Häufigkeitsverteilungen"
 format:
-  html:
+  buechlein-html:
     include-in-header: 
       text: |
         <img src="https://vg08.met.vgwort.de/na/d13a50b6a89b416b8ee81e97c6ddcf7b" width="1" height="1" alt="">

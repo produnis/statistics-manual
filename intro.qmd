@@ -1,7 +1,7 @@
 ---
 title: Einführung
 format:
-  html:
+  buechlein-html:
     include-in-header: 
       text: |
         <img src="https://vg08.met.vgwort.de/na/8520107dd82f498ab93b52ce105a6d2f" width="1" height="1" alt="">

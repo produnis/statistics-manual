@@ -1,7 +1,7 @@
 ---
 title: Regression und Korrelation
 format:
-  html:
+  buechlein-html:
     include-in-header: 
       text: |
         <img src="https://vg08.met.vgwort.de/na/a3c9bc1e96f44c11ba86397e3e44bbf2" width="1" height="1" alt="">
