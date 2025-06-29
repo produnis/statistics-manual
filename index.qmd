@@ -42,9 +42,9 @@ große Schlarmann, J (2025): "Grundlagen der Statistik. Einführung in die deskr
 \scriptsize
 
 ```bibtex
-@book{grSchl_exeRcise,
+@book{grSchl_manual,
 	author = {{große Schlarmann}, Jörg},
-	title = {Grundlagen der Statistik. Einführung in die deskriptive und inferentielle Statistik},
+	title = {Grundlagen der {Statistik}. {Einführung} in die deskriptive und inferentielle {Statistik}},
 	year = {2025},
 	publisher = {Hochschule Niederrhein},
 	address = {Krefeld},
